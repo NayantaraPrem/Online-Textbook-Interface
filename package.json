@@ -1,0 +1,22 @@
+{
+  "name": "online-textbook-reader",
+  "version": "1.0.0",
+  "description": "Online Textbook reader",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NayantaraPrem/Online-Textbook-Interface.git"
+  },
+  "keywords": [
+    "textbook"
+  ],
+  "author": "Nayantara Prem Geetika Saksena Saminah Amin Fateha Khan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NayantaraPrem/Online-Textbook-Interface/issues"
+  },
+  "homepage": "https://github.com/NayantaraPrem/Online-Textbook-Interface#readme"
+}
