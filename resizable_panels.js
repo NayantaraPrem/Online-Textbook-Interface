@@ -40,7 +40,7 @@ $(document).on('click', '#add_annotation', function () {
                             </span>\
                         </div>\
                         <div class="panel-body writable">\
-                                <textarea class="annt_body" type="text" placeholder="Enter Note" onkeypress="annt_submit(event)"/>\
+                                <textarea class="annt_body" type="text" placeholder="Enter Note"/>\
                         </div>\
                     </div>\
                 </div>\
