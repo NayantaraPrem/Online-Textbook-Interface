@@ -1,0 +1,41 @@
+.clickable
+{
+  cursor: pointer;
+}
+
+.panel-heading span
+{
+  margin-top: -23px;
+  font-size: 15px;
+  margin-right: -9px;
+}
+
+#container {
+  margin-left: 0px;
+  background-color: #ebebe0;
+  height:100%;
+  width: 20%;
+}
+
+h3 {
+  font-family: "Helvetica";
+  margin-bottom: 30px;
+}
+
+p {
+  background-color:transparent;
+  margin-bottom: 50px;
+}
+
+input {
+  background-color : rgba(0,0,0,0.1);
+  color: white;
+  border: none;
+}
+
+button .btn-primary, .btn-sm {
+  border: 0px solid transparent;
+}
+
+a.clickable { color: inherit; }
+a.clickable:hover { text-decoration:none; }
