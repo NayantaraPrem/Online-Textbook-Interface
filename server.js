@@ -28,16 +28,8 @@ app.get('/', function(req, res){
 // As explained above, usage of 'body-parser' means
 // that `req.body` will be filled in with the form elements
 app.post('/ajax', function(req, res){
- /* var title = req.body.title;
-  var body = req.body.note_body;
-  console.log("req received");*/
-  //console.log("req received:\ntitle: " + title +"\nbody: "+body);
-  //console.log(req.body);
-
 	var obj = {};
 	console.log('Received:');
-//	console.log('annotation title: ' + req.body[0].value);
-//	console.log('annotation contents: ' + req.body[1].value);
 	console.log(JSON.stringify(req.body));
 	console.log('------------------------------------------');
 
