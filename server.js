@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 // A browser's default method is 'GET', so this
 // is the route that express uses when we visit
 // our site initially.
-app.get('/', function(req, res){
+app.get('/annotations', function(req, res){
   // The form's action is '/' and its method is 'POST',
   // so the `app.post('/', ...` route will receive the
   // result of our form on the html page
@@ -36,7 +36,7 @@ app.get('/', function(req, res){
 
 
 //URL to localhost/book is called onclicking the 'get book' button in annotation_panels.html
-app.get('/book', function(req, res){
+app.get('/', function(req, res){
 
 
 	  converter.parse(epubfile, function (err, epubData) {
