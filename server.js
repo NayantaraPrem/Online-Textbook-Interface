@@ -4,7 +4,6 @@ var bodyParser = require('body-parser');
 var converter = require('epub2html');
 
 
-
 var epubfile = 'testbook.epub'
 // create our app
 var app = express();
@@ -42,7 +41,7 @@ app.get('/', function(req, res){
 	  converter.parse(epubfile, function (err, epubData) {
 		
 		var htmlData = converter.convertMetadata(epubData);
-		console.log(htmlData);
+		//console.log(htmlData);
 
 		//THESE METHODS DON'T WORK:
 		//document.write(htmlData);
@@ -59,9 +58,9 @@ app.get('/', function(req, res){
 
 			fs.writeFile(outputFilename, JSON.stringify(htmlData, null, 4), function(err) {
 	    	if(err) {
-	     	 console.log(err);
+	     	 //console.log(err);
 	    	} else {
-	      	console.log("JSON saved to " + outputFilename);
+	      	//console.log("JSON saved to " + outputFilename);
 	    	}
 		 }); 
 		});
@@ -91,9 +90,9 @@ app.post('/ajax', function(req, res){
 //For testing; Unused function
 app.post('/ajax2', function(req, res){
 	var obj = {};
-	console.log('Received:');
-	console.log(JSON.stringify(req.body));
-	console.log('------------------------------------------');
+	//console.log('Received:');
+	//console.log(JSON.stringify(req.body));
+	//console.log('------------------------------------------');
 
 	res.sendFile( __dirname + "/" + "output.html" );
 
@@ -101,4 +100,4 @@ app.post('/ajax2', function(req, res){
 });
 
 
-app.listen(84);
+app.listen(80);
