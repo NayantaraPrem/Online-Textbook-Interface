@@ -53,6 +53,11 @@ $(document).on('click', '#add_annotation', function () {
 	$('#container').append(new_annot);
 	i++;
 });
+
+function upload_img_prompt(e){
+	var myWindow = window.open("upload_img", "MsgWindow", "top=300, left=400, width=500, height=100");
+}
+
 $(document).on('click', 'input[type="submit"]', function(e) {
 		e.preventDefault();
 		var inputID = $(this).attr('id');

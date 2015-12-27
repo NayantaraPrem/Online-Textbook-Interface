@@ -2,12 +2,13 @@ var express = require('express');
 var fs = require('fs');
 var bodyParser = require('body-parser');
 var converter = require('epub2html');
-
+var multer = require('multer');
 
 var epubfile = 'testbook.epub'
 // create our app
 var app = express();
 app.use(express.static('public'));
+
 
 // instruct the app to use the `bodyParser()` middleware for all routes
 app.use(bodyParser.urlencoded({
@@ -16,6 +17,18 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
+var uploading = multer({ dest: __dirname + '/public/uploads/',
+    rename: function (fieldname, filename) {
+        return filename+"_"+Date.now();
+    },
+    onFileUploadStart: function (file) {
+        console.log(file.originalname + ' is starting ...')
+    },
+    onFileUploadComplete: function (file) {
+        console.log(file.fieldname + ' uploaded to  ' + file.path)
+        done=true;
+    }
+});
 
 // A browser's default method is 'GET', so this
 // is the route that express uses when we visit
@@ -29,7 +42,6 @@ app.get('/annotations', function(req, res){
 	
   res.sendFile( __dirname + "/" + "annotation_panels.html" );
 
-  //res.sendFile( __dirname + "/" + "book.html" );
 
 });
 
@@ -73,6 +85,10 @@ app.get('/', function(req, res){
 
 });
 
+app.get('/upload_img', function(req, res){
+	res.sendFile( __dirname + "/" + "upload_img.html" );
+});
+
 // This route receives the posted form.
 // As explained above, usage of 'body-parser' means
 // that `req.body` will be filled in with the form elements
@@ -87,6 +103,14 @@ app.post('/ajax', function(req, res){
 	res.send(req.body);
 });
 
+
+//Uploading images
+app.post('/api/photo', uploading.single('pic'), function(req, res){
+	
+	res.end("Image has uploaded.");
+
+});
+
 //For testing; Unused function
 app.post('/ajax2', function(req, res){
 	var obj = {};
@@ -98,6 +122,5 @@ app.post('/ajax2', function(req, res){
 
 	//res.send(req.body);
 });
-
 
 app.listen(80);
