@@ -37,12 +37,12 @@ p {
 
 input {
   background-color : rgba(0,0,0,0.1);
-  color: white;
+  color: black;
   border: none;
 }
 
 button .btn-primary, .btn-sm {
-  border: 0px solid transparent;
+  border: 0px;
 }
 
 a.clickable { color: inherit; }

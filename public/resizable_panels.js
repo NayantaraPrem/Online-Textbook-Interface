@@ -30,19 +30,21 @@ $(document).on('click', '#add_annotation', function () {
 	var new_annot = '\
 		<div class="row">\
 			<div class="col-md-12">\
-				<div class="panel panel-primary writable">\
+				<div class="panel panel-primary">\
 					<form id="ajaxform' + i +'" name="ajaxform" class="form">\
-						<div class="panel-heading clickable writable">\
+						<div id="panel-heading' + i + '" class="panel-heading clickable writable">\
 							<h3 class="panel-title">\
 								<input class="annt_title" name="title" id="texttitle'+i+'"type="text" placeholder="Enter Title"/>\
 							</h3>\
 							<span class="pull-right ">\
+								<button id="editButton' + i + '" class="btn btn-primary btn-sm" onclick="edit_annt(event)"> \
+									<span class="glyphicon glyphicon-pencil"></span> \
 								<button class="btn btn-primary btn-sm" onclick="delete_annt(event)"> \
 									<span class="glyphicon glyphicon-trash"></span> \
 								</button>\
 							</span>\
 						</div>\
-						<div class="panel-body writable">\
+						<div id="panel-body' + i + '" class="panel-body writable">\
 							<textarea class="annt_body" name="body" id="textbody'+i+'" type="text" placeholder="Enter Note"/>\
 						</div>\
 						<input type="submit" value="Submit" id="' + i +'" />\
@@ -60,7 +62,6 @@ $(document).on('click', 'input[type="submit"]', function(e) {
 		var data = {};
 		data.title = "title";
 		data.message = "message";
-		//var postData = $(this).serializeArray();
 		var formURL = $(this).attr("action");
 		$.ajax({
 			type: 'POST',
@@ -76,10 +77,6 @@ $(document).on('click', 'input[type="submit"]', function(e) {
 			}
 		});
 		
- 		//make text boxes read-only
-		//if(e.keyCode == 13) {
-		//alert("Enter pressed");
-		// enter pressed 
 		var text_box = document.getElementsByClassName('annt_title');
 		var text_area = document.getElementsByClassName('annt_body');
 		var arrayLength = text_box.length;
@@ -87,22 +84,31 @@ $(document).on('click', 'input[type="submit"]', function(e) {
 		if (arrayLength != arrayLength2) {
 			alert("number of textboxes and areas different!");
 		}
-		$('.writable').removeClass('writable');
-
-		for (var i = 0; i < arrayLength; i++) {
-			if(!text_box[i].hasAttribute('readonly')) {
-				text_box[i].setAttribute('readonly', 'readonly');
-				text_area[i].setAttribute('readonly', 'readonly');
-			}
-		}
-		//}
-	return false;
+		$("#panel-heading"+inputID).removeClass('writable');
+		$("#panel-body"+inputID).removeClass('writable');
+		$("#texttitle"+inputID).attr('readonly', 'readonly');
+		$("#textbody"+inputID).attr('readonly', 'readonly');
+	
+		return false;
 	});
 
 function delete_annt(e) {
+   e.preventDefault();
    alert("Deleting");
-   var parent = e.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
-   parent.remove();
+   var annotation_row = e.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement; // annotation div row
+   annotation_row.remove();
    e.stopPropagation();
    return false;
+}
+
+function edit_annt(e) {
+    e.preventDefault();
+	alert("Editing");
+	var id = e.currentTarget.id;
+	id = id.replace("editButton", "");
+	$("#panel-heading"+id).addClass('writable');
+	$("#panel-body"+id).addClass('writable');
+	$("#texttitle"+id).removeAttr('readonly');
+	$("#textbody"+id).removeAttr('readonly');
+	return false;
 }
