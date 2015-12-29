@@ -2,12 +2,9 @@ var express = require('express');
 var fs = require('fs');
 var bodyParser = require('body-parser');
 var converter = require('epub2html');
-var multer = require('multer');
-
 var replace = require("replace");
 var path = require('path');
-
-
+var multer = require('multer');
 var db_interface = require('./db_interface.js');
 
 
@@ -84,7 +81,6 @@ function replace_url(from, to) {
 
 
 
-
 // A browser's default method is 'GET', so this
 // is the route that express uses when we visit
 // our site initially.
@@ -92,11 +88,10 @@ app.get('/annotations', function(req, res){
   // The form's action is '/' and its method is 'POST',
   // so the `app.post('/', ...` route will receive the
   // result of our form on the html page
-
-	  
+  
 	
-  res.sendFile( __dirname + "/" + "annotation_panels.html" );
-
+ // res.sendFile( __dirname + "/" + "annotation_panels.html" );
+	res.render('index', { title: 'Notes', content: note_content, note_title: note_title, imgs: imgs});
 
 });
 
@@ -344,8 +339,13 @@ app.post('/ajax', function(req, res){
 	console.log(JSON.stringify(req.body));
 	console.log('------------------------------------------');
 
-
-
+	// add annotation to DB here
+	var id = "ANNT_" + Date.now();
+	var note_item = {
+		"id": id
+	}
+	//commented out for testing
+	//db_interface.addItem(note_item);
 	res.send(req.body);
 });
 
@@ -353,20 +353,16 @@ app.post('/ajax', function(req, res){
 //Uploading images
 app.post('/api/photo', uploading.single('pic'), function(req, res){
 	
+	// refresh the '/annotations' html page here
+	// ...
+	// add image to db
+	var img_item = {
+		"id": req.file.filename
+	}
+	//commented out for testing purposes
+	//db_interface.addItem(img_item);
+	console.log(img_item);
 	res.end("Image has uploaded.");
-
-});
-
-//For testing; Unused function
-app.post('/ajax2', function(req, res){
-	var obj = {};
-	//console.log('Received:');
-	//console.log(JSON.stringify(req.body));
-	//console.log('------------------------------------------');
-
-	res.sendFile( __dirname + "/" + "Home.html" );
-
-	//res.send(req.body);
 });
 
 app.listen(80);
