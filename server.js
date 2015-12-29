@@ -54,7 +54,7 @@ app.get('/annotations', function(req, res){
   
 	
  // res.sendFile( __dirname + "/" + "annotation_panels.html" );
-	res.render('index', { title: 'Notes', content: note_content, note_title: note_title, imgs imgs});
+	res.render('index', { title: 'Notes', content: note_content, note_title: note_title, imgs: imgs});
 
 });
 
