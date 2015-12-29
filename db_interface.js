@@ -11,8 +11,8 @@ AWS.config.update({
 });
 
 
-//Create a table with 1 or 2 primary keys
-//
+//Create annotations + images table
+// primary_key_hash and primary_key_range are the names of the primary key attributes and their 'type's are S, N, etc
 exports.createTable = function(table, primary_key_hash, hash_type, primary_key_range, range_type) {
 	var dynamodb = new AWS.DynamoDB();
 	
@@ -95,82 +95,44 @@ exports.scanTable = function(table, callback){
 }
 
 
-/* Create Table for users 
- 
-Table structure:
- 	User = { ID: ..,               <--- of type String because INT may be contrained by size of ID
-		 Info: { Name: ...,
-		 	Token: ...
-			}
-		}
-	Primary Key: ID (string)
-*/
-exports.createUserTable = function(){
-
-	var dynamodb = new AWS.DynamoDB();
-	
-	//Primary hash key = UserID
-	var params = {
-		TableName : config.amazondb.userTable,
-		KeySchema: [       
-			{ AttributeName: "ID", KeyType: "HASH"} 
-		],
-		AttributeDefinitions: [       
-			{ AttributeName: "ID", AttributeType: "S" }
-		],
-		ProvisionedThroughput: {       
-			ReadCapacityUnits: 1, 
-			WriteCapacityUnits: 1
-		}
-	};
-	console.dir(params);
-	dynamodb.createTable(params, function(err, data) {
-   	 if (err) {
-       	 	console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
-   	 } else {
-       		 console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
-   	 }
-	});
-}
-
 
 /* Store access token with user details in db table (assuming prior to this user has logged in, token received, permissions asked for, and identity verfied
  Parameters: 
- 	response <JSON string> 
+ 	item = 
        		This is generated with JSON.stringify(response) which returns, for example, 
 		{
 		  "id":"101540562372987329832845483",
-	    	  "email":"example@example.com",
-	          "first_name":"Bob",
-	          [ ... ]
+			...
+			..
+			.    <--- add any other info here
 		}
-	Primary key = ID so this required. Other info is optional.
+	Primary key = NoteID so this required. Other info is optional.
         token (long-lived? short-lived?) <string> (DO WE NEED THIS? Dont think so)
 
 */
 
-exports.addUser = function(response, token){
+exports.addItem = function(item){
 	var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
-	var UserID = response.id;
-	if(typeof UserID == 'undefined' || !UserID ){
-		var error = new Error("UserID undefined");
+	var ID = item.id;
+	if(typeof ID == 'undefined' || !ID ){
+		var error = new Error("ID undefined");
 		console.log(error);
 		console.log(error.stack);
 	}
 	else {
 	        var params = {
-		               TableName: config.amazondb.userTable,
+		               TableName: config.amazondb.annotationTable,
 		               Item: {
-		                       "ID": UserID,
-		                       "info": response
+		                       "NoteID": ID,
+		                       "info": item,
 			             }
 			     };
-
+			//console.log("Params:" + params.TableName + " " + params.Item.ID + " "+ params.Item.info);
         	dynamodbDoc.put(params, function(err, data) {	
 			if(err){
-				console.error("Unable to add User with ID " + UserID + " . Error JSON:", JSON.stringify(err, null, 2));
+				console.error("Unable to add Item with ID " + ID + " . Error JSON:", JSON.stringify(err, null, 2));
 			} else {
-				console.log("Added user " + UserID);
+				console.log("Added item " + ID);
 			}	
 		});
 	     }

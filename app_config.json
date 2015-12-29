@@ -1,6 +1,5 @@
 {
 	"amazondb": {
-		"table": "Book-info",
-		"userTable": "userTable"
+		"annotationTable": "Annotations"
 				}
 }

@@ -3,12 +3,28 @@ var fs = require('fs');
 var bodyParser = require('body-parser');
 var converter = require('epub2html');
 var multer = require('multer');
+var db_interface = require('./db_interface.js');
 
 var epubfile = 'testbook.epub'
 // create our app
 var app = express();
 app.use(express.static('public'));
 
+//Set template engine to jade
+app.set('view engine', 'jade');
+
+//set path to the views (template) directory
+app.set('views', __dirname + '/views');
+
+//for Jade testing - replace with data loaded from db
+var note_title = 
+	["Note1", "Note2", "Note2"];
+var note_content =
+	["Stuff1", "Stuff2", "Stuff3"];
+var imgs = ["img1", "img 2"];
+
+//Create table (only do this once, then comment it out)
+//db_interface.createTable(config.amazondb.annotationTable, "NoteID", "S");
 
 // instruct the app to use the `bodyParser()` middleware for all routes
 app.use(bodyParser.urlencoded({
@@ -16,18 +32,16 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-
-var uploading = multer({ dest: __dirname + '/public/uploads/',
-    rename: function (fieldname, filename) {
-        return filename+"_"+Date.now();
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/uploads/')
     },
-    onFileUploadStart: function (file) {
-        console.log(file.originalname + ' is starting ...')
-    },
-    onFileUploadComplete: function (file) {
-        console.log(file.fieldname + ' uploaded to  ' + file.path)
-        done=true;
-    }
+    filename: function (req, file, cb) {
+        cb(null, 'IMG_' + Date.now())
+  }
+});
+var uploading = multer({
+    storage:storage
 });
 
 // A browser's default method is 'GET', so this
@@ -37,11 +51,10 @@ app.get('/annotations', function(req, res){
   // The form's action is '/' and its method is 'POST',
   // so the `app.post('/', ...` route will receive the
   // result of our form on the html page
-
-	  
+  
 	
-  res.sendFile( __dirname + "/" + "annotation_panels.html" );
-
+ // res.sendFile( __dirname + "/" + "annotation_panels.html" );
+	res.render('index', { title: 'Notes', content: note_content, note_title: note_title, imgs imgs});
 
 });
 
@@ -98,8 +111,13 @@ app.post('/ajax', function(req, res){
 	console.log(JSON.stringify(req.body));
 	console.log('------------------------------------------');
 
-
-
+	// add annotation to DB here
+	var id = "ANNT_" + Date.now();
+	var note_item = {
+		"id": id
+	}
+	//commented out for testing
+	//db_interface.addItem(note_item);
 	res.send(req.body);
 });
 
@@ -107,20 +125,16 @@ app.post('/ajax', function(req, res){
 //Uploading images
 app.post('/api/photo', uploading.single('pic'), function(req, res){
 	
+	// refresh the '/annotations' html page here
+	// ...
+	// add image to db
+	var img_item = {
+		"id": req.file.filename
+	}
+	//commented out for testing purposes
+	//db_interface.addItem(img_item);
+	console.log(img_item);
 	res.end("Image has uploaded.");
-
-});
-
-//For testing; Unused function
-app.post('/ajax2', function(req, res){
-	var obj = {};
-	//console.log('Received:');
-	//console.log(JSON.stringify(req.body));
-	//console.log('------------------------------------------');
-
-	res.sendFile( __dirname + "/" + "output.html" );
-
-	//res.send(req.body);
 });
 
 app.listen(80);
