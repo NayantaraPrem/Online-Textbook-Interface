@@ -72,7 +72,7 @@ $(document).on('click', 'input[type="submit"]', function(e) {
 			type: 'POST',
 			data: JSON.stringify(postData),
 			contentType: 'application/json',
-			url: 'http://localhost:80/ajax',						
+			url: 'http://localhost:80/annotation_ajax',						
 			success: function(data) {
 				alert('success');
 				alert(JSON.stringify(postData));

@@ -6,7 +6,7 @@ var replace = require("replace");
 var path = require('path');
 var multer = require('multer');
 var db_interface = require('./db_interface.js');
-
+var config = require('./app_config');
 
 // create our app
 var app = express();
@@ -17,13 +17,6 @@ app.set('view engine', 'jade');
 
 //set path to the views (template) directory
 app.set('views', __dirname + '/views');
-
-//for Jade testing - replace with data loaded from db
-var note_title = 
-	["Note1", "Note2", "Note2"];
-var note_content =
-	["Stuff1", "Stuff2", "Stuff3"];
-var imgs = ["img1", "img 2"];
 
 //Create table (only do this once, then comment it out)
 //db_interface.createTable(config.amazondb.annotationTable, "NoteID", "S");
@@ -85,20 +78,20 @@ function replace_url(from, to) {
 // is the route that express uses when we visit
 // our site initially.
 app.get('/annotations', function(req, res){
-  // The form's action is '/' and its method is 'POST',
-  // so the `app.post('/', ...` route will receive the
-  // result of our form on the html page
-  
-	
- // res.sendFile( __dirname + "/" + "annotation_panels.html" );
-	res.render('index', { title: 'Notes', content: note_content, note_title: note_title, imgs: imgs});
+   console.log("Loading preloaded notes");
+   var preloaded_notes = [];
+   db_interface.scanTable(config.amazondb.annotationTable, function(err, preloaded_notes){
+		console.log(preloaded_notes);
+		// res.sendFile( __dirname + "/" + "annotation_panels.html" );
+		res.render('index', { title: 'Notes', notes: preloaded_notes});
+		});  
 
 });
 
 
 //THIS IS THE HOMEPAGE
 app.get('/', function(req, res){
-
+  
   res.sendFile( __dirname + "/" + "Home.html");
   //home.html has an on-click event that will invoke app.get/book<number> below, to redirect to appropriate table of contents.
 
@@ -330,22 +323,29 @@ app.get('/upload_img', function(req, res){
 	res.sendFile( __dirname + "/" + "upload_img.html" );
 });
 
-// This route receives the posted form.
-// As explained above, usage of 'body-parser' means
 // that `req.body` will be filled in with the form elements
-app.post('/ajax', function(req, res){
+app.post('/annotation_ajax', function(req, res){
 	var obj = {};
-	console.log('Received:');
+	console.log('Received note:');
 	console.log(JSON.stringify(req.body));
+	//eg. [{"name":"title","value":"qqq"},{"name":"body","value":"aad"}]
+	var title = req.body[0].value;
+	var body = req.body[1].value;
+	console.log("Title: " + title);
+	console.log("Body: " + body);
 	console.log('------------------------------------------');
 
 	// add annotation to DB here
 	var id = "ANNT_" + Date.now();
 	var note_item = {
-		"id": id
+		"id": id,
+		"type":"TXT",
+		"title":title,
+		"body":body
+		// add owner, pg number, timestamp etc.
 	}
 	//commented out for testing
-	//db_interface.addItem(note_item);
+	db_interface.addItem(note_item);
 	res.send(req.body);
 });
 
@@ -357,10 +357,13 @@ app.post('/api/photo', uploading.single('pic'), function(req, res){
 	// ...
 	// add image to db
 	var img_item = {
-		"id": req.file.filename
+		"id": req.file.filename,
+		"type": "IMG",
+		"img_dest": "./uploads/"+req.file.filename
+		//add owner, timestamp, etc here
 	}
 	//commented out for testing purposes
-	//db_interface.addItem(img_item);
+	db_interface.addItem(img_item);
 	console.log(img_item);
 	res.end("Image has uploaded.");
 });

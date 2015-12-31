@@ -138,3 +138,15 @@ exports.addItem = function(item){
 	     }
 }
 
+// delete entry(ies)
+exports.deleteItems = function(params){
+	var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
+	dynamodbDoc.delete(params, function(err, data) {
+		if (err) {
+			console.error("Unable to delete item. Error JSON:", JSON.stringify(err, null, 2));
+		} else {
+			console.log("DeleteItem succeeded:", JSON.stringify(data, null, 2));
+		}
+	});
+	
+}

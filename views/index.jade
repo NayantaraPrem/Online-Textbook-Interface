@@ -26,23 +26,28 @@ html(lang='en')
               // <span class="glyphicon glyphicon-picture">
               span.glyphicon.glyphicon-plus-sign
               |  Image
-      each noteval, index in content
-        .row
-          .col-md-12
-            .panel.panel-primary.writable
-              form.form(id="ajaxform", name='ajaxform')
-                .panel-heading.clickable.writable
-                  h3.panel-title
-                    input.annt_title(name='title', id="texttitle", type='text' value=note_title[index])
-                  span.pull-right
-                    button.btn.btn-primary.btn-sm(onclick='delete_annt(event)')
-                      span.glyphicon.glyphicon-trash
-                .panel-body.writable
-                  textarea.annt_body(name='body', id="textbody", type='text')=noteval
-                input(type='submit', value='Submit')
-      each img, index in imgs
-        //add icons or whatever for images here
-        p=img
+      each note, index in notes
+        if(note.info.type == "TXT")
+          .row
+            .col-md-12
+              .panel.panel-primary.writable
+                form.form(id="ajaxform", name='ajaxform')
+                  .panel-heading.clickable.writable
+                    h3.panel-title
+                      input.annt_title(name='title', id="texttitle", type='text' value=note.info.title)
+                    span.pull-right
+                      button.btn.btn-primary.btn-sm(onclick='delete_annt(event)')
+                        span.glyphicon.glyphicon-trash
+                  .panel-body.writable
+                    textarea.annt_body(name='body', id="textbody", type='text')=note.info.body
+                  input(type='submit', value='Submit')
+        if(note.info.type == "IMG")
+          //add icons or whatever for images here
+          .row
+            .col-md-12
+              img.img-thumbnail(src=note.info.img_dest width=100 height=80)
+              p
+ 
     #book_display
       h3.heading
         | Book Display
