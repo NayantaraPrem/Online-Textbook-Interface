@@ -45,7 +45,13 @@ html(lang='en')
           //add icons or whatever for images here
           .row
             .col-md-12
-              img.img-thumbnail(src=note.info.img_dest width=100 height=80)
+              img.img-thumbnail.thumbnail(src=note.info.img_dest width=100 height=80)
+              button.btn.btn-primary.btn-xs(type='button', data-toggle='modal', data-target='#myModal') View image
+              #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+                .modal-dialog
+                  .modal-content
+                    .modal-body
+                      img.img-responsive(src=note.info.img_dest)
               p
  
     #book_display
