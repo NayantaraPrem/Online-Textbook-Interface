@@ -106,6 +106,14 @@ function delete_annt(e) {
    return false;
 }
 
+function delete_img(e) {
+   e.preventDefault();
+   var annotation_row = e.currentTarget.parentElement.parentElement; // annotation div row
+   annotation_row.remove();
+   e.stopPropagation();
+   return false;
+}
+
 function edit_annt(e) {
     e.preventDefault();
 	alert("Editing");
