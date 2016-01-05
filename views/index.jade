@@ -47,10 +47,10 @@ html(lang='en')
             .col-md-9
               img.img-thumbnail.thumbnail(src=note.info.img_dest width=160 height=100)
             .col-md-3
-              button.btn.btn-primary.btn-sm(type='button', data-toggle='modal', data-target='#myModal')
+              button.btn.btn-primary.btn-sm(type='button', data-toggle='modal', data-target="#mymod#{index}")
                 span.glyphicon.glyphicon-zoom-in
                 //|  View
-              #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+              div(id='mymod#{index}' class="modal fade" tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true')
                 .modal-dialog
                   .modal-content
                     .modal-body
