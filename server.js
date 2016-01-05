@@ -364,7 +364,6 @@ app.post('/api/photo', uploading.single('pic'), function(req, res){
 	}
 	//commented out for testing purposes
 	db_interface.addItem(img_item);
-	console.log(img_item);
 	res.end("Image has uploaded.");
 });
 
