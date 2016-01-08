@@ -1,0 +1,132 @@
+.clickable
+{
+  cursor: pointer;
+}
+
+.panel-heading span
+{
+  margin-top: -23px;
+  font-size: 15px;
+  margin-right: -9px;
+}
+
+#header {
+	background-color:#330033;
+	color:white;
+	text-align:center;
+	padding:5px;
+}
+
+#section {
+	float:left;
+	padding:30px;
+	#background-color:#ebebe0;
+	width:67%
+}
+
+#aside {
+	width:20%;
+	float:right;
+	padding:10px;
+}
+
+#nav {
+    line-height:30px;
+	#background-color:#C0C0C0;
+    height:100%;
+    width:13%;
+    float:left;
+	text-align:right;
+	padding:0;
+}
+
+#footer {
+    background-color:#330033;
+    color:white;
+    text-align:center;
+	padding:5px;	 	 
+}
+
+#book_display {
+	width: 100%;
+}
+
+
+ul.page_nav_buttons {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+}
+
+
+ul.book_nav_buttons {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+	background-color: transparent;
+}
+
+
+li.page_nav {
+    float: left;
+}
+
+li.page_nav a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 120px;
+    text-decoration: none;
+}
+
+li.page_nav a:hover {
+	text-decoration: none;
+	color: white;
+}
+
+li.page_nav a:hover:not(.active) {
+    background-color: #000000;
+}
+
+.active {
+    background-color: #660066;
+}
+
+
+li.book_nav a {
+    display: block;
+    color: #333333;
+    text-align: right;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+li.book_nav a:hover:not(.active) {
+    background-color: #ffffe5;
+}
+
+
+h3 {
+  font-family: "Helvetica";
+  margin-bottom: 30px;
+}
+
+p {
+  background-color:transparent;
+  margin-bottom: 50px;
+}
+
+input {
+  background-color : rgba(0,0,0,0.1);
+  color: white;
+  border: none;
+}
+
+button .btn-primary, .btn-sm {
+  border: 0px solid transparent;
+}
+
+a.clickable { color: inherit; }
+a.clickable:hover { text-decoration:none; }

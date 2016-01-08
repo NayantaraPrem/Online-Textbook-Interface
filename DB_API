@@ -1,0 +1,15 @@
+Include the following line on the TOP of your file to use these methods:
+var var_name = require('./db_interface.js');
+			^change according to where your js file is located relative to this db_interface.js file eg. '../../db_interface.js'
+
+Methods defined:
+
+
+1. var_name.createTable( <required primary key 1 name> <required primary key 1 type> <optional primary key 2 name> <optional primary key 2 type>)
+
+	-names and types in " " or ' '
+	-type: "S" : string, "N" : number etc
+2. var_name.scanTable( <table_name>, <callback_function>);
+	-table_name in "" or ''
+	- follows general Node.js guidelines for callbacks
+
