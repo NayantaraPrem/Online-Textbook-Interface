@@ -13,9 +13,14 @@ var file = process.argv[2];
 var epub = new EPub(file, "/imagewebroot/", "/articlewebroot/");
 
 // Configures LOCAL amazonDB
+// AWS.config.update({
+//     region: "us-west-2",
+//     endpoint: "http://localhost:8000"
+// });
+
 AWS.config.update({
-    region: "us-west-2",
-    endpoint: "http://localhost:8000"
+    region: "us-east-1",
+    endpoint: "https://dynamodb.us-east-1.amazonaws.com"
 });
 
 var dynamodbDoc = new AWS.DynamoDB.DocumentClient();

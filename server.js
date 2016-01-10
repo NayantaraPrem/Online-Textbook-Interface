@@ -7,6 +7,7 @@ var path = require('path');
 var multer = require('multer');
 var db_interface = require('./db_interface.js');
 var config = require('./app_config');
+var AWS = require("aws-sdk");
 
 // create our app
 var app = express();
@@ -192,14 +193,52 @@ app.get('/annotations', function(req, res){
 });
 
 
-//THIS IS THE HOMEPAGE
-app.get('/', function(req, res){
-  
-  res.sendFile( __dirname + "/Home.html");
-  //home.html has an on-click event that will invoke app.get/book<number> below, to redirect to appropriate table of contents.
-
+//THIS IS THE LOGIN PAGE
+app.get(['/','/login'], function(req, res){
+  res.sendFile( __dirname + "/login.html");
 });
 
+// that `req.body` will be filled in with the form elements
+app.post('/login', function(req, res){
+	console.log('Received user id:');
+	var userid = req.body.userId;
+	console.log(userid);
+	var dynamodb = new AWS.DynamoDB();
+	var params = {
+		TableName: 'PrivacySettings',
+		Key: { 
+			"userId" : {
+				"S" : userid
+			}
+		}
+	};
+	dynamodb.getItem(params, function(err, data) {
+		if (err) console.log(err, err.stack);
+		else {
+			if (!Object.keys(data).length) {
+				console.log('Invalid user id!');
+				res.redirect('/login?e=usernameNotValid');
+			} else {
+				console.log(data);
+				res.writeHead(301,
+				  {Location: userid + '/home'}
+				);
+				res.end();
+			}
+		}
+	});
+	// search for userid in db, if present, redirect to home page
+	
+
+	//res.send(req.body);
+});
+
+app.get('/:userName/home', function(req,res) {
+	var username = req.params.userName;
+	console.log("Received username: " + username);
+	res.sendFile( __dirname + "/home.html");
+	//home.html has an on-click event that will invoke app.get/book<number> below, to redirect to appropriate table of contents.
+});
 
 //URLs to localhost/book<number> is called onclicking the 'get book' button on Home.html
 //Given a list of available books, get the chosen number from user

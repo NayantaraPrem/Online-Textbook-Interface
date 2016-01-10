@@ -3,9 +3,14 @@ var AWS = require("aws-sdk");
 // Loads configurations from app_config.json
 var config = require('./app_config');
 
+// AWS.config.update({
+//     region: "us-west-2",
+//     endpoint: "http://localhost:8000"
+// });
+
 AWS.config.update({
-    region: "us-west-2",
-    endpoint: "http://localhost:8000"
+    region: "us-east-1",
+    endpoint: "https://dynamodb.us-east-1.amazonaws.com"
 });
 
 var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
