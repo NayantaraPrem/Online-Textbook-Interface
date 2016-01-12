@@ -14,6 +14,7 @@ db_interface.createTable("car", "Manufacturer", "S", "Cost", "N");
 db_interface.storeTextbook('./testbook.epub', 
 */
 // arrayIt returns an array of all table entries
+
 var arrayIt = [];
 db_interface.scanTable(config.amazondb.annotationTable, function(err, arrayIt){
      //iterates through arrayIt after scanTable has finished executing (to prevent printing null values cuz of asynchronous execution
@@ -21,13 +22,7 @@ db_interface.scanTable(config.amazondb.annotationTable, function(err, arrayIt){
 				console.dir(item);
 				//delete entry
 				
-				var params = {
-					TableName:config.amazondb.annotationTable,
-					Key: {
-							"NoteID":item.NoteID
-					}
-				}
-				db_interface.deleteItems(params);
+			//	db_interface.deleteItems(item.NoteID);
 			});
 	});
 
@@ -45,5 +40,9 @@ db_interface.addUser(response, 0);
 */
 
 
+var noteid = "ANNT_1452198323126";
+var newTitle = "NoteXYZ";
+var newBody = "I'm the new updated value";
+//db_interface.deleteItem(params);
 
-//db_interface.deleteItems(params);
+//db_interface.updateItem(noteid, newTitle, newBody);

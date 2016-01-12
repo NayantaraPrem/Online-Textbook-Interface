@@ -5,15 +5,17 @@ var epub_file;
 var dynamodbDoc;
 var config = require('./app_config');
 // Configures LOCAL amazonDB
-// AWS.config.update({
-//     region: "us-west-2",
-//     endpoint: "http://localhost:8000"
-// });
-
+/*
+ AWS.config.update({
+     region: "us-west-2",
+     endpoint: "http://localhost:8000"
+ });
+*/
 AWS.config.update({
     region: "us-east-1",
     endpoint: "https://dynamodb.us-east-1.amazonaws.com"
 });
+
 
 
 //Create annotations + images table
@@ -143,9 +145,15 @@ exports.addItem = function(item){
 	     }
 }
 
-// delete entry(ies)
-exports.deleteItems = function(params){
+// delete an entry
+exports.deleteItem = function(id){
 	var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
+	var params = {
+		               TableName: config.amazondb.annotationTable,
+		               Key: {
+		                       "NoteID": id
+			             }
+			     };
 	dynamodbDoc.delete(params, function(err, data) {
 		if (err) {
 			console.error("Unable to delete item. Error JSON:", JSON.stringify(err, null, 2));
@@ -154,4 +162,30 @@ exports.deleteItems = function(params){
 		}
 	});
 	
+}
+
+
+// update an entry
+exports.updateItem = function(id, newtitle, newbody){
+	var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
+	var params = {
+		               TableName: config.amazondb.annotationTable,
+		               Key: {
+		                       "NoteID": id
+			             },
+						UpdateExpression: "set info.title = :t, info.body = :b",
+						ExpressionAttributeValues:{
+							":t":newtitle,
+							":b":newbody
+						},
+						ReturnValues:"UPDATED_NEW"
+				};
+					
+	dynamodbDoc.update(params, function(err, data) {
+		if (err) {
+			console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+		} else {
+			console.log("UpdateItem succeeded:", JSON.stringify(data, null, 2));
+		}
+	});	
 }
