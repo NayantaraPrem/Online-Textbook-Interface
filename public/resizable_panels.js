@@ -74,8 +74,6 @@ $(document).on('click', 'input[type="submit"]', function(e) {
 			contentType: 'application/json',
 			url: 'http://localhost:80/annotation_ajax',						
 			success: function(data) {
-				alert('success');
-				alert(JSON.stringify(postData));
 			},
 			error: function(data){
 				window.console.log(data);
@@ -99,7 +97,20 @@ $(document).on('click', 'input[type="submit"]', function(e) {
 
 function delete_annt(e) {
    e.preventDefault();
-   alert("Deleting");
+   alert('Deleting');
+   var postData = e.currentTarget.id;
+   $.ajax({
+		type: 'POST',
+		data: JSON.stringify({"id":postData}),
+		contentType: 'application/json',
+		url: 'http://localhost:80/delete_annt',						
+		success: function(data) {
+			//alert("Sent " + data);
+		},
+		error: function(data){
+			window.console.log(data);
+		}
+    });   
    var annotation_row = e.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement; // annotation div row
    annotation_row.remove();
    e.stopPropagation();
@@ -108,7 +119,21 @@ function delete_annt(e) {
 
 function delete_img(e) {
    e.preventDefault();
+   alert('Deleting');
    var annotation_row = e.currentTarget.parentElement.parentElement; // annotation div row
+   var postData = e.currentTarget.id;
+   $.ajax({
+		type: 'POST',
+		data: JSON.stringify({"id":postData}),
+		contentType: 'application/json',
+		url: 'http://localhost:80/delete_annt',						
+		success: function(data) {
+			//alert("Done " + data);
+		},
+		error: function(data){
+			window.console.log(data);
+		}
+    });
    annotation_row.remove();
    e.stopPropagation();
    return false;
@@ -123,6 +148,7 @@ function edit_annt(e) {
 	$("#panel-body"+id).addClass('writable');
 	$("#texttitle"+id).removeAttr('readonly');
 	$("#textbody"+id).removeAttr('readonly');
+	
 	return false;
 }
 

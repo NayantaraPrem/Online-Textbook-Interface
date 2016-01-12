@@ -8,7 +8,11 @@ var multer = require('multer');
 var db_interface = require('./db_interface.js');
 var config = require('./app_config');
 var AWS = require("aws-sdk");
-
+var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
+AWS.config.update({
+    region: "us-east-1",
+    endpoint: "https://dynamodb.us-east-1.amazonaws.com"
+});
 // create our app
 var app = express();
 app.use(express.static(__dirname + '/public'));
@@ -185,7 +189,7 @@ app.get('/annotations', function(req, res){
    console.log("Loading preloaded notes");
    var preloaded_notes = [];
    db_interface.scanTable(config.amazondb.annotationTable, function(err, preloaded_notes){
-		console.log(preloaded_notes);
+		//console.log(preloaded_notes);
 		// res.sendFile( __dirname + "/annotation_panels.html" );
 		res.render('index', { title: 'Notes', notes: preloaded_notes});
 		});  
@@ -465,7 +469,6 @@ app.get('/upload_img', function(req, res){
 
 // that `req.body` will be filled in with the form elements
 app.post('/annotation_ajax', function(req, res){
-	var obj = {};
 	console.log('Received note:');
 	console.log(JSON.stringify(req.body));
 	//eg. [{"name":"title","value":"qqq"},{"name":"body","value":"aad"}]
@@ -487,6 +490,20 @@ app.post('/annotation_ajax', function(req, res){
 	//commented out for testing
 	db_interface.addItem(note_item);
 	res.send(req.body);
+});
+
+// Deal with deleting annotations
+app.post('/delete_annt', function(req, res){
+	console.log("Received annt to delete @:");
+	console.log(req.body.id);
+	//eg. {"id":"IMG_1452462043143"}
+	var noteID = req.body.id;
+	
+	console.log('------------------------------------------');
+
+	db_interface.deleteItem(noteID);
+	res.send(req.body);
+
 });
 
 

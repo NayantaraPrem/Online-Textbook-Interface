@@ -36,7 +36,7 @@ html(lang='en')
                     h3.panel-title
                       input.annt_title(name='title', id="texttitle", type='text' value=note.info.title)
                     span.pull-right
-                      button.btn.btn-primary.btn-sm(onclick='delete_annt(event)')
+                      button.btn.btn-primary.btn-sm(id="#{note.NoteID}" onclick='delete_annt(event)')
                         span.glyphicon.glyphicon-trash
                   .panel-body.writable
                     textarea.annt_body(name='body', id="textbody", type='text')=note.info.body
@@ -56,7 +56,7 @@ html(lang='en')
                     .modal-body
                       img.img-responsive(src=note.info.img_dest)
               p
-              button.btn.btn-primary.btn-sm(onclick='delete_img(event)')
+              button.btn.btn-primary.btn-sm(id="#{note.NoteID}" onclick='delete_img(event)')
                 span.glyphicon.glyphicon-trash
               p
  
