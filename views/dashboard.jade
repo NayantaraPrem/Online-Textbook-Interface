@@ -27,16 +27,17 @@ html(lang='en')
             | Book Display
       .row
         each book, index in books
+          -var ind = index+1
           .col-md-4
             p
               .thumbnail
                 .caption
-                  h3=book
+                  h3=book.title
                   p
                     button#myBtn.glyphicon.glyphicon-cog.btn.btn-danger(data-toggle='modal', data-target="#mymod#{index}", rel='tooltip', title='View Privacy Settings') 
                 img(src=imgs, alt="Image not found", class="bookcover")
               // The below button needs to be deleted
-              input(type='button', value='#{book}', onclick="location.href = 'http://localhost:80/book#{index+1}'")
+              input(type='button', class="bookIcon", value="#{book.title}", name="#{book.epub}", id="book#{ind}")
               // Modal
               div(id='mymod#{index}' class="modal fade" tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true')
                 .modal-dialog.modal-sm
@@ -50,7 +51,7 @@ html(lang='en')
                     .modal-body(style='padding:40px 50px;')
                       .btn-group-vertical(role='group', aria-label='...')
                         h4
-                          | My notes for #{book} are visible to:
+                          | My notes for #{book.title} are visible to:
                         button.btn.btn-default.btn(type='button', id='None_#{index}', onclick="set_privacy(event)") No one
                         button.btn.btn-default.btn(type='button', id='Everyone_#{index}', onclick="set_privacy(event)") Everyone
                     .modal-footer
@@ -58,7 +59,7 @@ html(lang='en')
                         span.glyphicon.glyphicon-remove
                         |  Cancel
               // End of settings button
-      .row
-        .col-md-12
-          p
-            input(type='button', value='Test Combined', onclick="location.href = 'http://localhost:80/combined'")
+//      .row
+ //       .col-md-12
+  //        p
+   //         input(type='button', value)

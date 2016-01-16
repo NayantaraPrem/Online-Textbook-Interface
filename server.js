@@ -10,12 +10,12 @@ var config = require('./app_config');
 
 var AWS = require("aws-sdk");
 var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
-var books = ["Testbook", "The Einstein Theory of Relativity", "Computing"];
-/*
-AWS.config.update({
-    region: "us-east-1",
-    endpoint: "https://dynamodb.us-east-1.amazonaws.com"
-});*/
+var books = [ 
+				{title:'Testbook', epub:'testbook'},
+				{title:'The Einstein Theory of Relativity', epub:'relativity'},
+				{title:'Computing', epub:'SCMP'},
+				{title:'Test Combined', epub:'combined'}
+			];
 
 var Autolinker = require('autolinker');
 // create our app
@@ -25,7 +25,7 @@ var app = express();
 var isAuthenticated = false;
 var selfUserName;
 
-app.use(express.static(__dirname + '/public'));
+// app.use(express.static(__dirname + '/public'));
 
 //Set template engine to jade
 app.set('view engine', 'jade');
@@ -97,6 +97,7 @@ app.get('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', 
 app.get('/:userName/Books/:book/OPS/:xml', function(req, res){
 	authCheck(req.params.userName);
 	res.sendFile( __dirname + "/public/Books/" + req.params.book + "/OPS/" + req.params.xml);
+});
 
 app.get('/:userName/Books/:book/text/:xhtml', function(req, res){
 	authCheck(req.params.userName);
@@ -197,13 +198,20 @@ app.get('/:userName/annotations', function(req, res){
    
    db_interface.scanTable(config.amazondb.annotationTable, function(err, preloaded_notes){
 		console.log(preloaded_notes);
-		
-		// res.sendFile( __dirname + "/annotation_panels.html" );
 		res.render('index', { title: 'Notes', notes: preloaded_notes});
-		});  
+	});  
 
 });
+/*
+app.get('/get_annt_bodies', function(req, res){
+   console.log("get_annt_bodies");
+   var preloaded_notes = [];
+   
+   db_interface.scanTable(config.amazondb.annotationTable, function(err, preloaded_notes){
+		res.sendFile('index', { title: 'Annotations', notes: preloaded_notes});
+	});  
 
+}*/
 
 //THIS IS THE LOGIN PAGE
 app.get(['/','/login'], function(req, res){
@@ -301,33 +309,32 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
 
 	  converter.parse(epubfile, function (err, epubData) {
 		
+			var htmlData = converter.convertMetadata(epubData);
+			console.log(htmlData); //Debugging
 
-		var htmlData = converter.convertMetadata(epubData);
-		console.log(htmlData); //Debugging
+			//THIS METHOD DOESN'T WORK:
+			//document.write(htmlData);
 
-		//THIS METHOD DOESN'T WORK:
-		//document.write(htmlData);
+			//USE FILE WRITE INSTEAD
+			fs.writeFile('book.html', htmlData.htmlNav, function (err) {
+		 	 if (err) return console.log(err);
+		 	 console.log('htmlNav successfully sent to book.html!');
+			});
+			
+	/*
+			fs.appendFile('book.html', htmlData.htmlMetas, function (err) {
+		 	 if (err) return console.log(err);
+		 	 console.log('htmlMetas successfully sent to book.html!');
+			});
 
-		//USE FILE WRITE INSTEAD
-		fs.writeFile('book.html', htmlData.htmlNav, function (err) {
-	 	 if (err) return console.log(err);
-	 	 console.log('htmlNav successfully sent to book.html!');
-		});
-		
-/*
-		fs.appendFile('book.html', htmlData.htmlMetas, function (err) {
-	 	 if (err) return console.log(err);
-	 	 console.log('htmlMetas successfully sent to book.html!');
-		});
-
-		fs.appendFile('book.html', htmlData.htmlMetaList, function (err) {
-	 	 if (err) return console.log(err);
-	 	 console.log('htmlMetaList successfully sent to book.html!');
-		}); 
-*/
-			var find = "href=\"" ;
-			var rep = "href=\"Books/Book" + bookid + "/";
-			replace_url(find, rep);
+			fs.appendFile('book.html', htmlData.htmlMetaList, function (err) {
+		 	 if (err) return console.log(err);
+		 	 console.log('htmlMetaList successfully sent to book.html!');
+			}); 
+	*/
+				var find = "href=\"" ;
+				var rep = "href=\"Books/Book" + bookid + "/";
+				replace_url(find, rep);
 		});
 
 

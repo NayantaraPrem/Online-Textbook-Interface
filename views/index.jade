@@ -8,6 +8,8 @@ html(lang='en')
     link(rel='stylesheet', type='text/css', href='panels.css')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
     script(src='resizable_panels.js', type='text/javascript')
+    script.
+      var annotations= !{JSON.stringify(notes)};
     script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
   body
     #container.container-fluid
@@ -40,7 +42,7 @@ html(lang='en')
                       button.btn.btn-primary.btn-sm(id="deleteButton#{note.NoteID}" onclick='delete_annt(event)')
                         span.glyphicon.glyphicon-trash
                   .panel-body.writable(id="panel-body#{note.NoteID}")
-                    .annt_body(name='body', id="textbody#{note.NoteID}", contentEditable='false')=note.info.body
+                    .annt_body(name='body', id="textbody#{note.NoteID}", contentEditable='false')
                   input(type='submit', value='Submit', id="#{note.NoteID}")
         if(note.info.type == "IMG")
           //add icons or whatever for images here
@@ -67,3 +69,4 @@ html(lang='en')
         p
           input(type='button', value='Back to Book', onclick="location.href = 'http://localhost:80/'")
         div
+

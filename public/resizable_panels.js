@@ -19,6 +19,15 @@ $(document).on('click', '.panel div.clickable', function (e) {
     }
 });
 
+$( document ).ready(function() {
+
+	alert("Entered function");
+
+	$.each(annotations, function(i, item) {
+		$("#textbody" + item.NoteID).html(item.info.body);
+	});
+
+});
 $(function () {
     $('.panel-heading span.clickable').click();
     $('.panel div.clickable').click();
@@ -78,7 +87,6 @@ $(document).on('click', 'input[type="submit"]', function(e) {
 			url: 'http://localhost:80/annt_submit_or_edit',						
 			success: function(data) {
 				// verify you need this
-				alert('success');
 				alert('Returned data: ' + data);
 				$("#textbody"+inputID).html(data);
 				alert(JSON.stringify(postData));
@@ -106,7 +114,6 @@ $(document).on('click', 'input[type="submit"]', function(e) {
 
 function delete_annt(e) {
    e.preventDefault();
-   alert('Deleting');
    var postData = e.currentTarget.id;
    postData = postData.replace("deleteButton", "");
    $.ajax({
@@ -129,7 +136,6 @@ function delete_annt(e) {
 
 function delete_img(e) {
    e.preventDefault();
-   alert('Deleting');
    var annotation_row = e.currentTarget.parentElement.parentElement; // annotation div row
    var postData = e.currentTarget.id;
    postData = postData.replace("deleteButton", "");
@@ -153,7 +159,6 @@ function delete_img(e) {
 function edit_annt(e) {
     e.preventDefault();
 	var id = e.currentTarget.id;
-	alert("Editing" + id);
 	id = id.replace("editButton", "");
 	$("#panel-heading"+id).addClass('writable');
 	$("#panel-body"+id).addClass('writable');
