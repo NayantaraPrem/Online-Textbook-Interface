@@ -7,13 +7,16 @@ var path = require('path');
 var multer = require('multer');
 var db_interface = require('./db_interface.js');
 var config = require('./app_config');
-/*var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
+
+var AWS = require("aws-sdk");
+var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
+var books = ["Testbook", "The Einstein Theory of Relativity", "Computing"];
+/*
 AWS.config.update({
     region: "us-east-1",
     endpoint: "https://dynamodb.us-east-1.amazonaws.com"
 });*/
 
-var AWS = require('aws-sdk');
 var Autolinker = require('autolinker');
 // create our app
 var app = express();
@@ -94,7 +97,6 @@ app.get('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', 
 app.get('/:userName/Books/:book/OPS/:xml', function(req, res){
 	authCheck(req.params.userName);
 	res.sendFile( __dirname + "/public/Books/" + req.params.book + "/OPS/" + req.params.xml);
-});
 
 app.get('/:userName/Books/:book/text/:xhtml', function(req, res){
 	authCheck(req.params.userName);
@@ -141,6 +143,11 @@ app.get('/:userName/css/:css', function(req, res){
 	res.sendFile( __dirname + "/public/Books/Combined/OPS/css/" + req.params.css);
 });
 
+app.get('/:userName/dashboard.css', function(req, res){
+	authCheck(req.params.userName);
+	res.sendFile( __dirname + "/public/dashboard.css");
+});
+
 /* Get JS files */
 
 app.get('/:userName/resizable_panels.js', function(req, res){
@@ -153,6 +160,16 @@ app.get('/:userName/test.js', function(req, res){
 	res.sendFile( __dirname + "/public/test.js");
 });
 
+
+app.get('/:userName/dashboard.js', function(req, res){
+	res.sendFile( __dirname + "/public/dashboard.js");
+});
+
+app.get("/:userName/template.js", function(req, res){
+	res.sendFile(__dirname + "/public/template.js");
+});
+
+/* Get HTML files */
 app.get('/:userName/combined', function(req, res){
 	authCheck(req.params.userName);
 	res.sendFile( __dirname + "/public/Books/Combined/OPS/title.html" );
@@ -169,9 +186,6 @@ app.get('/:userName/about.html', function(req, res){
 	res.sendFile( __dirname + "/public/Books/Combined/OPS/about.html" );
 });
 
-app.get("/:userName/template.js", function(req, res){
-	res.sendFile(__dirname + "/public/template.js");
-});
 // A browser's default method is 'GET', so this
 // is the route that express uses when we visit
 // our site initially.
@@ -243,7 +257,6 @@ app.get('/:userName/home', function(req,res) {
 	//var path = "Books/Images/";
 	//var img_paths = [path +"testing", path +"relativity.jpg", path +"computing"];
 	var img_paths = ["https://bookshoptalk.files.wordpress.com/2011/10/generic-book-cover.jpg?w=190"]
-	books = ["Testbook", "The Einstein Theory of Relativity", "Computing"];
 	res.render('dashboard', { welcome_msg: welcome_msg, books: books, imgs:img_paths});
 });
 
@@ -397,6 +410,14 @@ app.post('/api/photo', uploading.single('pic'), function(req, res){
 	//commented out for testing purposes
 	db_interface.addItem(img_item);
 	res.end("Image has uploaded.");
+});
+
+app.post('/:userName/setprivacy', function(req, res){
+  var username = req.params.userName;
+  var textID = req.body.textbookid;
+  var privacy_val = req.body.privacy;
+  
+	console.log("SET PRIVACY " + privacy_val + " for " + books[textID] + " for user " + username);
 });
 
 app.listen(80);
