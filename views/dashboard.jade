@@ -10,11 +10,11 @@ html(lang='en')
     script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
     script(src='dashboard.js')
     style.
-      .modal-header, h4, .close {
+      .modal-header, .close {
       background-color: #5cb85c;
       color:white !important;
       text-align: center;
-      font-size: 30px;
+      font-size: 19px;
       }
       .modal-footer {
       background-color: #f9f9f9;
@@ -31,16 +31,15 @@ html(lang='en')
             p
               .thumbnail
                 .caption
-                  p Thumbnail description
+                  h3=book
                   p
-                    a.label.label-default(href='', rel='tooltip', title='View Privacy Settings') Hi
+                    button#myBtn.glyphicon.glyphicon-cog.btn.btn-danger(data-toggle='modal', data-target="#mymod#{index}", rel='tooltip', title='View Privacy Settings') 
                 img(src=imgs, alt="Image not found", class="bookcover")
+              // The below button needs to be deleted
               input(type='button', value='#{book}', onclick="location.href = 'http://localhost:80/book#{index+1}'")
-              // Trigger the modal with a button
-              button#myBtn.glyphicon.glyphicon-cog.btn.btn-primary.btn-xs(type='button', data-toggle='modal', data-target="#mymod#{index}")
               // Modal
               div(id='mymod#{index}' class="modal fade" tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true')
-                .modal-dialog
+                .modal-dialog.modal-sm
                   // Modal content
                   .modal-content
                     .modal-header(style='padding:35px 50px;')
@@ -50,10 +49,10 @@ html(lang='en')
                         |  Privacy Settings
                     .modal-body(style='padding:40px 50px;')
                       .btn-group-vertical(role='group', aria-label='...')
-                        h3
+                        h4
                           | My notes for #{book} are visible to:
-                        button.btn.btn-default.btn-lg(type='button', id='None_#{index}') No one
-                        button.btn.btn-default.btn-lg(type='button', id='All_#{index}') Everyone
+                        button.btn.btn-default.btn(type='button', id='None_#{index}', onclick="set_privacy(event)") No one
+                        button.btn.btn-default.btn(type='button', id='Everyone_#{index}', onclick="set_privacy(event)") Everyone
                     .modal-footer
                       button.btn.btn-danger.btn-default.pull-left(type='submit', data-dismiss='modal')
                         span.glyphicon.glyphicon-remove

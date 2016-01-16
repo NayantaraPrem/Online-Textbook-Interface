@@ -9,6 +9,7 @@ var db_interface = require('./db_interface.js');
 var config = require('./app_config');
 var AWS = require("aws-sdk");
 var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
+var books = ["Testbook", "The Einstein Theory of Relativity", "Computing"];
 AWS.config.update({
     region: "us-east-1",
     endpoint: "https://dynamodb.us-east-1.amazonaws.com"
@@ -255,7 +256,6 @@ app.get('/:userName/home', function(req,res) {
 	//var path = "Books/Images/";
 	//var img_paths = [path +"testing", path +"relativity.jpg", path +"computing"];
 	var img_paths = ["https://bookshoptalk.files.wordpress.com/2011/10/generic-book-cover.jpg?w=190"]
-	books = ["Testbook", "The Einstein Theory of Relativity", "Computing"];
 	res.render('dashboard', { welcome_msg: welcome_msg, books: books, imgs:img_paths});
 });
 
@@ -543,6 +543,19 @@ app.post('/api/photo', uploading.single('pic'), function(req, res){
 	//commented out for testing purposes
 	db_interface.addItem(img_item);
 	res.end("Image has uploaded.");
+});
+
+
+
+app.post('/:userName/setprivacy', function(req, res){
+  //var username = req.params.userName;
+  var username = "test_user1";
+  var textID = req.body.textbookid;
+  var privacy_val = req.body.privacy;
+  
+	console.log("SET PRIVACY " + privacy_val + " for " + books[textID] + " for user " + username);
+  
+  
 });
 
 app.listen(80);

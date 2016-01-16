@@ -1,7 +1,6 @@
 //for buttons on hovering on thumnail
 $( document ).ready(function() {
-    $("[rel='tooltip']").tooltip();    
-     alert("here");
+    $("[rel='tooltip']").tooltip(); 
     $('.thumbnail').hover(
         function(){
             $(this).find('.caption').slideDown(250); //.fadeIn(250)
@@ -17,3 +16,28 @@ $(document).ready(function(){
     $("#myModal").modal();
   });
 });
+
+function set_privacy(e) {
+   e.preventDefault();
+   var postData = e.currentTarget.id;
+   var arr = postData.split('_');
+   alert('Setting privacy settings to ' + arr[0]);
+   document.getElementById(postData).disabled = true;
+   if(arr[0] == "Everyone")
+     other = "None";
+   else other = "Everyone";
+   alert(other+'_'+arr[1]);
+   document.getElementById(other+'_'+arr[1]).disabled =  false;
+      $.ajax({
+		type: 'POST',
+		data: JSON.stringify({"textbookid":arr[1], "privacy":arr[0]}),
+		contentType: 'application/json',
+		url: 'http://localhost:80/:userName/setprivacy',						
+		success: function(data) {
+			//alert("Sent " + data);
+		},
+		error: function(data){
+			window.console.log(data);
+		}
+    });   
+}
