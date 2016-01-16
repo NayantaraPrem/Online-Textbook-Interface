@@ -9,7 +9,7 @@ var db_interface = require('./db_interface.js');
 var config = require('./app_config');
 var AWS = require("aws-sdk");
 var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
-var books = ["Testbook", "The Einstein Theory of Relativity", "Computing"];
+var books = ["The War of The Worlds", "The Einstein Theory of Relativity", "Structure and Interpretation of Computer Programs"];
 AWS.config.update({
     region: "us-east-1",
     endpoint: "https://dynamodb.us-east-1.amazonaws.com"
@@ -254,8 +254,10 @@ app.get('/:userName/home', function(req,res) {
 	var welcome_msg = "Hello " + username;
 	//res.sendFile( __dirname + "/home.html");
 	//var path = "Books/Images/";
-	//var img_paths = [path +"testing", path +"relativity.jpg", path +"computing"];
-	var img_paths = ["https://bookshoptalk.files.wordpress.com/2011/10/generic-book-cover.jpg?w=190"]
+	var img_paths = ["http://ecx.images-amazon.com/images/I/518k1D%2BJZHL._SX331_BO1,204,203,200_.jpg",
+    "http://ecx.images-amazon.com/images/I/51r9QQVSRNL._SX331_BO1,204,203,200_.jpg",
+    "http://ecx.images-amazon.com/images/I/71cWa92TMyL.jpg"];
+	//var img_paths = ["https://bookshoptalk.files.wordpress.com/2011/10/generic-book-cover.jpg?w=190"]
 	res.render('dashboard', { welcome_msg: welcome_msg, books: books, imgs:img_paths});
 });
 

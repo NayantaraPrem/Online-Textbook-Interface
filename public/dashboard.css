@@ -2,13 +2,14 @@
 .thumbnail {
     position:relative;
     overflow:hidden;
+    width:200px;
 }
  
 .caption {
     position:absolute;
     top:0;
     right:0;
-    background:rgba(66, 139, 202, 0.75);
+    background:rgba(199, 200, 204, 0.80);
     width:100%;
     height:100%;
     padding:2%;
@@ -16,4 +17,31 @@
     text-align:center;
     color:#fff !important;
     z-index:2;
+}
+#caption{
+  top:0;
+}
+
+#thumbimages{
+  width:200px;
+  height:300px;
+}
+
+.header {
+	background-color:#330033;
+	color:white;
+	text-align:center;
+	padding:5px;
+}
+
+.footer{
+  background-color: rgba(rgba(199, 200, 204, 0.50);
+  color:white !important;
+  text-align: center;
+  font-size: 10px;
+  position:fixed;
+ left:0px;
+ bottom:0px;
+ height:30px;
+ width:100%;
 }

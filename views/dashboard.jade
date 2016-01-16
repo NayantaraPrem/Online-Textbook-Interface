@@ -11,7 +11,7 @@ html(lang='en')
     script(src='dashboard.js')
     style.
       .modal-header, .close {
-      background-color: #5cb85c;
+      background-color: #c7c8cc;
       color:white !important;
       text-align: center;
       font-size: 19px;
@@ -20,21 +20,20 @@ html(lang='en')
       background-color: #f9f9f9;
       }
   body
+    nav.navbar.navbar-dark.bg-inverse
+      h3.header
+        | BookShelf
     .container
-      .row
-        .col-md-12
-          h3.heading
-            | Book Display
       .row
         each book, index in books
           .col-md-4
             p
               .thumbnail
                 .caption
-                  h3=book
+                  h3#caption=book
                   p
-                    button#myBtn.glyphicon.glyphicon-cog.btn.btn-danger(data-toggle='modal', data-target="#mymod#{index}", rel='tooltip', title='View Privacy Settings') 
-                img(src=imgs, alt="Image not found", class="bookcover")
+                    button#myBtn.glyphicon.glyphicon-cog.btn.btn-primary(data-toggle='modal', data-target="#mymod#{index}", rel='tooltip', title='View Privacy Settings') 
+                img#thumbimages(src=imgs[index], alt="Image not found", class="bookcover")
               // The below button needs to be deleted
               input(type='button', value='#{book}', onclick="location.href = 'http://localhost:80/book#{index+1}'")
               // Modal
