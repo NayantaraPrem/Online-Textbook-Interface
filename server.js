@@ -505,10 +505,10 @@ app.post('/annt_submit_or_edit', function(req, res){
 			"title":title,
 			"body":body
 		}
-		db_interface.addItem(note_item);
+		db_interface.addNote(note_item);
 	} else{
 		console.log("Editing");
-		db_interface.updateItem(id, title, body);
+		db_interface.updateNote(id, title, body);
 	}
 	res.send(req.body);
 });
@@ -541,7 +541,7 @@ app.post('/api/photo', uploading.single('pic'), function(req, res){
 		//add owner, timestamp, etc here
 	}
 	//commented out for testing purposes
-	db_interface.addItem(img_item);
+	db_interface.addNote(img_item);
 	res.end("Image has uploaded.");
 });
 
@@ -551,10 +551,13 @@ app.post('/:userName/setprivacy', function(req, res){
   //var username = req.params.userName;
   var username = "test_user1";
   var textID = req.body.textbookid;
+  var textname= books[textID].split(' ').join('_');
   var privacy_val = req.body.privacy;
   
-	console.log("SET PRIVACY " + privacy_val + " for " + books[textID] + " for user " + username);
-  
+	console.log("SET PRIVACY " + privacy_val + " for " + textname + " for user " + username);
+  var user = {  "userid":username, "textbook":textname, "privacy":privacy_val};
+  console.log("user text " + user.textbook);
+  db_interface.updateUser(user);
   
 });
 
