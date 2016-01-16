@@ -11,13 +11,17 @@ var config = require('./app_config');
 var AWS = require("aws-sdk");
 var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 var books = [ 
-				{title:'Testbook', epub:'testbook'},
+				{title:'The War of the Worlds', epub:'testbook'},
 				{title:'The Einstein Theory of Relativity', epub:'relativity'},
-				{title:'Computing', epub:'SCMP'},
+				{title:'Structure and Interpretation of Computer Programs', epub:'SCMP'},
 				{title:'Test Combined', epub:'combined'}
 			];
 
 var Autolinker = require('autolinker');
+AWS.config.update({
+    region: "us-east-1",
+    endpoint: "https://dynamodb.us-east-1.amazonaws.com"
+});
 // create our app
 var app = express();
 
@@ -129,10 +133,10 @@ app.get('/login.css', function(req, res){
 	res.sendFile( __dirname + "/public/login.css");
 });
 
-app.get('/:userName/', function(req, res){
+/*app.get('/:userName/', function(req, res){
 	authCheck(req.params.userName);
 	res.sendFile( __dirname + "/public/panels.css");
-});
+});*/
 
 app.get('/:userName/Books/:book/OPS/css/:css', function(req, res){
 	authCheck(req.params.userName);
@@ -150,10 +154,19 @@ app.get('/:userName/dashboard.css', function(req, res){
 });
 
 /* Get JS files */
+app.get('/resizable_panels.js', function(req, res){
+	/***** HACK!!!!! **** Combined needs to call with username in url! Need to change! BREACHES SECURITY*/
+	res.sendFile( __dirname + "/public/resizable_panels.js");
+});
+
 
 app.get('/:userName/resizable_panels.js', function(req, res){
+	/***** HACK!!!!! **** Combined needs to call with username in url! Need to change! BREACHES SECURITY*/
+	if (userName === undefined)
+		res.sendFile( __dirname + "/public/resizable_panels.js");
 	authCheck(req.params.userName);
-	res.sendFile( __dirname + "/public/resizable_panels.js");
+		res.sendFile( __dirname + "/public/resizable_panels.js");
+
 });
 
 app.get('/:userName/test.js', function(req, res){
@@ -263,8 +276,10 @@ app.get('/:userName/home', function(req,res) {
 	var welcome_msg = "Hello " + username;
 	//res.sendFile( __dirname + "/home.html");
 	//var path = "Books/Images/";
-	//var img_paths = [path +"testing", path +"relativity.jpg", path +"computing"];
-	var img_paths = ["https://bookshoptalk.files.wordpress.com/2011/10/generic-book-cover.jpg?w=190"]
+	var img_paths = ["http://ecx.images-amazon.com/images/I/518k1D%2BJZHL._SX331_BO1,204,203,200_.jpg",
+    "http://ecx.images-amazon.com/images/I/51r9QQVSRNL._SX331_BO1,204,203,200_.jpg",
+    "http://ecx.images-amazon.com/images/I/71cWa92TMyL.jpg"];
+	//var img_paths = ["https://bookshoptalk.files.wordpress.com/2011/10/generic-book-cover.jpg?w=190"]
 	res.render('dashboard', { welcome_msg: welcome_msg, books: books, imgs:img_paths});
 });
 
@@ -379,10 +394,10 @@ app.post('/annt_submit_or_edit', function(req, res){
 			"title":title,
 			"body":linkedBody
 		}
-		db_interface.addItem(note_item);
+		db_interface.addNote(note_item);
 	} else{
 		console.log("Editing");
-		db_interface.updateItem(id, title, body);
+		db_interface.updateNote(id, title, body);
 	}
 	res.send(linkedBody);
 });
@@ -415,16 +430,20 @@ app.post('/api/photo', uploading.single('pic'), function(req, res){
 		//add owner, timestamp, etc here
 	}
 	//commented out for testing purposes
-	db_interface.addItem(img_item);
+	db_interface.addNote(img_item);
 	res.end("Image has uploaded.");
 });
 
 app.post('/:userName/setprivacy', function(req, res){
   var username = req.params.userName;
   var textID = req.body.textbookid;
+  var textname= books[textID].title.split(' ').join('_');
   var privacy_val = req.body.privacy;
   
-	console.log("SET PRIVACY " + privacy_val + " for " + books[textID] + " for user " + username);
+  console.log("SET PRIVACY " + privacy_val + " for " + textname + " for user " + username);
+  var user = {  "userid":username, "textbook":textname, "privacy":privacy_val};
+  console.log("user text " + user.textbook);
+  db_interface.updateUser(user);
 });
 
 app.listen(80);

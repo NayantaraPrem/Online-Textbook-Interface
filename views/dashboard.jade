@@ -11,7 +11,7 @@ html(lang='en')
     script(src='dashboard.js')
     style.
       .modal-header, .close {
-      background-color: #5cb85c;
+      background-color: #c7c8cc;
       color:white !important;
       text-align: center;
       font-size: 19px;
@@ -20,11 +20,10 @@ html(lang='en')
       background-color: #f9f9f9;
       }
   body
+    nav.navbar.navbar-dark.bg-inverse
+      h3.header
+        | BookShelf
     .container
-      .row
-        .col-md-12
-          h3.heading
-            | Book Display
       .row
         each book, index in books
           -var ind = index+1
@@ -32,10 +31,10 @@ html(lang='en')
             p
               .thumbnail
                 .caption
-                  h3=book.title
+                  h3#caption=book.title
                   p
-                    button#myBtn.glyphicon.glyphicon-cog.btn.btn-danger(data-toggle='modal', data-target="#mymod#{index}", rel='tooltip', title='View Privacy Settings') 
-                img(src=imgs, alt="Image not found", class="bookcover")
+                    button#myBtn.glyphicon.glyphicon-cog.btn.btn-primary(data-toggle='modal', data-target="#mymod#{index}", rel='tooltip', title='View Privacy Settings') 
+                img#thumbimages(src=imgs[index], alt="Image not found", class="bookcover")
               // The below button needs to be deleted
               input(type='button', class="bookIcon", value="#{book.title}", name="#{book.epub}", id="book#{ind}")
               // Modal
@@ -50,7 +49,7 @@ html(lang='en')
                         |  Privacy Settings
                     .modal-body(style='padding:40px 50px;')
                       .btn-group-vertical(role='group', aria-label='...')
-                        h4
+                        h5
                           | My notes for #{book.title} are visible to:
                         button.btn.btn-default.btn(type='button', id='None_#{index}', onclick="set_privacy(event)") No one
                         button.btn.btn-default.btn(type='button', id='Everyone_#{index}', onclick="set_privacy(event)") Everyone
@@ -63,3 +62,4 @@ html(lang='en')
  //       .col-md-12
   //        p
    //         input(type='button', value)
+

@@ -32,6 +32,8 @@ $(document).ready(function(){
 
 function set_privacy(e) {
    e.preventDefault();
+   var pathname = window.location.pathname;
+   var username = pathname.replace('/home', '');
    var postData = e.currentTarget.id;
    var arr = postData.split('_');
    alert('Setting privacy settings to ' + arr[0]);
@@ -45,7 +47,7 @@ function set_privacy(e) {
 		type: 'POST',
 		data: JSON.stringify({"textbookid":arr[1], "privacy":arr[0]}),
 		contentType: 'application/json',
-		url: 'http://localhost:80/:userName/setprivacy',						
+		url: 'http://localhost:80' + username + '/setprivacy',						
 		success: function(data) {
 			//alert("Sent " + data);
 		},

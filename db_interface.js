@@ -118,7 +118,7 @@ exports.scanTable = function(table, callback){
 
 */
 
-exports.addItem = function(item){
+exports.addNote = function(item){
 	var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 	var ID = item.id;
 	if(typeof ID == 'undefined' || !ID ){
@@ -166,7 +166,7 @@ exports.deleteItem = function(id){
 
 
 // update an entry
-exports.updateItem = function(id, newtitle, newbody){
+exports.updateNote = function(id, newtitle, newbody){
 	var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 	var params = {
 		               TableName: config.amazondb.annotationTable,
@@ -185,7 +185,29 @@ exports.updateItem = function(id, newtitle, newbody){
 		if (err) {
 			console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
 		} else {
-			console.log("UpdateItem succeeded:", JSON.stringify(data, null, 2));
+			console.log("UpdateNote succeeded:", JSON.stringify(data, null, 2));
+		}
+	});	
+}
+
+exports.updateUser = function(editedUser){
+  var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
+	var params = {
+		TableName: 'PrivacySettings',
+		Key: { 
+			"userId" : editedUser.userid
+		}, 
+    UpdateExpression: "set " + editedUser.textbook +" = :p",
+		ExpressionAttributeValues:{
+      ":p":editedUser.privacy
+    },
+    ReturnValues:"UPDATED_NEW"
+	};
+  	dynamodbDoc.update(params, function(err, data) {
+		if (err) {
+			console.error("Unable to update user. Error JSON:", JSON.stringify(err, null, 2));
+		} else {
+			console.log("UpdateUser succeeded:", JSON.stringify(data, null, 2));
 		}
 	});	
 }
