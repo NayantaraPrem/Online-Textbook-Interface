@@ -37,7 +37,7 @@ $(document).on('click', '#add_annotation', function () {
 								<input class="annt_title" name="title" id="texttitle'+i+'"type="text" placeholder="Enter Title"/>\
 							</h3>\
 							<span class="pull-right ">\
-								<button id="editButton' + i + '" class="btn btn-primary btn-sm" onclick="edit_annt(event)"> \
+								<button class="btn btn-primary btn-sm" onclick="edit_annt(event)"> \
 									<span class="glyphicon glyphicon-pencil"></span> \
 								<button class="btn btn-primary btn-sm" onclick="delete_annt(event)"> \
 									<span class="glyphicon glyphicon-trash"></span> \
@@ -64,6 +64,7 @@ $(document).on('click', 'input[type="submit"]', function(e) {
 		e.preventDefault();
 		var inputID = $(this).attr('id');
 		var postData = $("#ajaxform"+inputID).serializeArray();
+		postData = [{"name":"title", "value":postData[0].value},{"name":"body", "value":postData[1].value} , {"name":"id", "value":inputID}];
 		var data = {};
 		data.title = "title";
 		data.message = "message";
@@ -72,7 +73,7 @@ $(document).on('click', 'input[type="submit"]', function(e) {
 			type: 'POST',
 			data: JSON.stringify(postData),
 			contentType: 'application/json',
-			url: 'http://localhost:80/annotation_ajax',						
+			url: 'http://localhost:80/annt_submit_or_edit',						
 			success: function(data) {
 			},
 			error: function(data){
@@ -91,7 +92,7 @@ $(document).on('click', 'input[type="submit"]', function(e) {
 		$("#panel-body"+inputID).removeClass('writable');
 		$("#texttitle"+inputID).attr('readonly', 'readonly');
 		$("#textbody"+inputID).attr('readonly', 'readonly');
-	
+	    
 		return false;
 	});
 
@@ -99,6 +100,7 @@ function delete_annt(e) {
    e.preventDefault();
    alert('Deleting');
    var postData = e.currentTarget.id;
+   postData = postData.replace("deleteButton", "");
    $.ajax({
 		type: 'POST',
 		data: JSON.stringify({"id":postData}),
@@ -122,6 +124,7 @@ function delete_img(e) {
    alert('Deleting');
    var annotation_row = e.currentTarget.parentElement.parentElement; // annotation div row
    var postData = e.currentTarget.id;
+   postData = postData.replace("deleteButton", "");
    $.ajax({
 		type: 'POST',
 		data: JSON.stringify({"id":postData}),
@@ -141,14 +144,15 @@ function delete_img(e) {
 
 function edit_annt(e) {
     e.preventDefault();
-	alert("Editing");
 	var id = e.currentTarget.id;
+	alert("Editing" + id);
 	id = id.replace("editButton", "");
 	$("#panel-heading"+id).addClass('writable');
 	$("#panel-body"+id).addClass('writable');
 	$("#texttitle"+id).removeAttr('readonly');
 	$("#textbody"+id).removeAttr('readonly');
 	
+    var postData = e.currentTarget.id;
 	return false;
 }
 

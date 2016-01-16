@@ -30,17 +30,19 @@ html(lang='en')
         if(note.info.type == "TXT")
           .row
             .col-md-12
-              .panel.panel-primary.writable
-                form.form(id="ajaxform", name='ajaxform')
-                  .panel-heading.clickable.writable
+              .panel.panel-primary
+                form.form(id="ajaxform#{note.NoteID}", name='ajaxform')
+                  .panel-heading.clickable(id="panel-heading#{note.NoteID}")
                     h3.panel-title
-                      input.annt_title(name='title', id="texttitle", type='text' value=note.info.title)
+                      input.annt_title(name='title', id="texttitle#{note.NoteID}", type='text', value=note.info.title, readonly)
                     span.pull-right
-                      button.btn.btn-primary.btn-sm(id="#{note.NoteID}" onclick='delete_annt(event)')
+                      button.btn.btn-primary.btn-sm(id="editButton#{note.NoteID}" onclick='edit_annt(event)')
+                        span.glyphicon.glyphicon-pencil
+                      button.btn.btn-primary.btn-sm(id="deleteButton#{note.NoteID}" onclick='delete_annt(event)')
                         span.glyphicon.glyphicon-trash
-                  .panel-body.writable
-                    textarea.annt_body(name='body', id="textbody", type='text')=note.info.body
-                  input(type='submit', value='Submit')
+                  .panel-body.writable(id="panel-body#{note.NoteID}")
+                    textarea.annt_body(name='body', id="textbody#{note.NoteID}", type='text', readonly)=note.info.body
+                  input(type='submit', value='Submit', id="#{note.NoteID}")
         if(note.info.type == "IMG")
           //add icons or whatever for images here
           .row
@@ -56,7 +58,7 @@ html(lang='en')
                     .modal-body
                       img.img-responsive(src=note.info.img_dest)
               p
-              button.btn.btn-primary.btn-sm(id="#{note.NoteID}" onclick='delete_img(event)')
+              button.btn.btn-primary.btn-sm(id="deleteButton#{note.NoteID}" onclick='delete_img(event)')
                 span.glyphicon.glyphicon-trash
               p
  

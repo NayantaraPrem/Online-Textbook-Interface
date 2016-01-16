@@ -188,8 +188,10 @@ app.get('/about.html', function(req, res){
 app.get('/annotations', function(req, res){
    console.log("Loading preloaded notes");
    var preloaded_notes = [];
+   
    db_interface.scanTable(config.amazondb.annotationTable, function(err, preloaded_notes){
-		//console.log(preloaded_notes);
+		console.log(preloaded_notes);
+		
 		// res.sendFile( __dirname + "/annotation_panels.html" );
 		res.render('index', { title: 'Notes', notes: preloaded_notes});
 		});  
@@ -468,27 +470,33 @@ app.get('/upload_img', function(req, res){
 });
 
 // that `req.body` will be filled in with the form elements
-app.post('/annotation_ajax', function(req, res){
+app.post('/annt_submit_or_edit', function(req, res){
 	console.log('Received note:');
 	console.log(JSON.stringify(req.body));
 	//eg. [{"name":"title","value":"qqq"},{"name":"body","value":"aad"}]
 	var title = req.body[0].value;
-	var body = req.body[1].value;
+	var body = req.body[1].value; 
+	var id = req.body[2].value;
 	console.log("Title: " + title);
 	console.log("Body: " + body);
 	console.log('------------------------------------------');
-
-	// add annotation to DB here
-	var id = "ANNT_" + Date.now();
-	var note_item = {
-		"id": id,
-		"type":"TXT",
-		"title":title,
-		"body":body
-		// add owner, pg number, timestamp etc.
+	var arr = id.split('_');
+	if(arr[1] === undefined){ 
+	//new submit (doesnt have a legit annotation id yet)
+		console.log("Submitting");
+		// add annotation to DB here
+		id = "ANNT_" + Date.now();
+		var note_item = {
+			"id": id,
+			"type":"TXT",
+			"title":title,
+			"body":body
+		}
+		db_interface.addItem(note_item);
+	} else{
+		console.log("Editing");
+		db_interface.updateItem(id, title, body);
 	}
-	//commented out for testing
-	db_interface.addItem(note_item);
 	res.send(req.body);
 });
 
