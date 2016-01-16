@@ -242,8 +242,13 @@ app.post('/login', function(req, res){
 app.get('/:userName/home', function(req,res) {
 	var username = req.params.userName;
 	console.log("Received username: " + username);
-	res.sendFile( __dirname + "/home.html");
-	//home.html has an on-click event that will invoke app.get/book<number> below, to redirect to appropriate table of contents.
+	var welcome_msg = "Hello " + username;
+	//res.sendFile( __dirname + "/home.html");
+	//var path = "Books/Images/";
+	//var img_paths = [path +"testing", path +"relativity.jpg", path +"computing"];
+	var img_paths = ["https://bookshoptalk.files.wordpress.com/2011/10/generic-book-cover.jpg?w=190"]
+	books = ["Testbook", "The Einstein Theory of Relativity", "Computing"];
+	res.render('dashboard', { welcome_msg: welcome_msg, books: books, imgs:img_paths});
 });
 
 //URLs to localhost/book<number> is called onclicking the 'get book' button on Home.html
