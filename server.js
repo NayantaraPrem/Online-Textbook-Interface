@@ -81,6 +81,14 @@ app.get('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', 
 	res.sendFile( "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
 });
 
+app.get('/:userName/dashboard.css', function(req, res){
+	res.sendFile( __dirname + "/public/dashboard.css");
+});
+
+app.get('/:userName/dashboard.js', function(req, res){
+	res.sendFile( __dirname + "/public/dashboard.js");
+});
+
 app.get('/panels.css', function(req, res){
 	res.sendFile( __dirname + "/public/panels.css");
 });

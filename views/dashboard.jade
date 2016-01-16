@@ -7,24 +7,8 @@ html(lang='en')
     link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
     link(rel='stylesheet', type='text/css', href='dashboard.css')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
-    script(src='Get_book.js', type='text/javascript')
     script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
-    script(src='dashboard.js', type='text/javascript')
-    script.
-      $(document).ready(function(){
-      $("#myBtn").click(function(){
-      $("#myModal").modal();
-      });
-      });
-    script.
-      $( document ).ready(function() {
-      $("[rel='tooltip']").tooltip();    
-      $('.thumbnail').hover(function(){
-      $(this).find('.caption').fadeIn(250);//slideDown(250); 
-      },function(){
-      $(this).find('.caption').fadeOut(205)//.slideUp(250);
-      }); 
-      });
+    script(src='dashboard.js')
     style.
       .modal-header, h4, .close {
       background-color: #5cb85c;
@@ -68,8 +52,8 @@ html(lang='en')
                       .btn-group-vertical(role='group', aria-label='...')
                         h3
                           | My notes for #{book} are visible to:
-                        button.btn.btn-default.btn-lg(type='button') No one
-                        button.btn.btn-default.btn-lg(type='button') Everyone
+                        button.btn.btn-default.btn-lg(type='button', id='None_#{index}') No one
+                        button.btn.btn-default.btn-lg(type='button', id='All_#{index}') Everyone
                     .modal-footer
                       button.btn.btn-danger.btn-default.pull-left(type='submit', data-dismiss='modal')
                         span.glyphicon.glyphicon-remove
