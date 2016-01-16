@@ -7,14 +7,21 @@ var path = require('path');
 var multer = require('multer');
 var db_interface = require('./db_interface.js');
 var config = require('./app_config');
-var AWS = require("aws-sdk");
-var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
+/*var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 AWS.config.update({
     region: "us-east-1",
     endpoint: "https://dynamodb.us-east-1.amazonaws.com"
-});
+});*/
+
+var AWS = require('aws-sdk');
+var Autolinker = require('autolinker');
 // create our app
 var app = express();
+
+// Authorization check variables
+var isAuthenticated = false;
+var selfUserName;
+
 app.use(express.static(__dirname + '/public'));
 
 //Set template engine to jade
@@ -23,14 +30,18 @@ app.set('view engine', 'jade');
 //set path to the views (template) directory
 app.set('views', __dirname + '/views');
 
-//Create table (only do this once, then comment it out)
-//db_interface.createTable(config.amazondb.annotationTable, "NoteID", "S");
-
 // instruct the app to use the `bodyParser()` middleware for all routes
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
 app.use(bodyParser.json());
+
+/* Authentication check */
+function authCheck (userName) {
+	if (!isAuthenticated || (selfUserName != userName)) {
+		res.status(401).end();
+	}
+}
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -47,8 +58,6 @@ var uploading = multer({
 
 
 function replace_url(from, to) {
-  //console.log(word);
-
 	console.log("Going to open file!");
 		fs.open('book.html', 'r+', function(err, fd) {
 		   if (err) {
@@ -81,111 +90,94 @@ app.get('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', 
 	res.sendFile( "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
 });
 
+/* Get XML files */
+app.get('/:userName/Books/:book/OPS/:xml', function(req, res){
+	authCheck(req.params.userName);
+	res.sendFile( __dirname + "/public/Books/" + req.params.book + "/OPS/" + req.params.xml);
+});
+
+app.get('/:userName/Books/:book/text/:xhtml', function(req, res){
+	authCheck(req.params.userName);
+	res.sendFile( __dirname + "/public/Books/" + req.params.book + "/text/" + req.params.xhtml);
+});
+
+/* Get image files */
+app.get('/:userName/images/:image', function(req, res){
+	authCheck(req.params.userName);
+	res.sendFile( __dirname + "/public/Books/Combined/OPS/images/" + req.params.image);
+});
+
+app.get('/:userName/uploads/:image', function(req, res){
+	authCheck(req.params.userName);
+	res.sendFile( __dirname + "/public/uploads/" + req.params.image);
+});
+
+/* Get CSS files */
+app.get('/:userName/panels.css', function(req, res){
+	authCheck(req.params.userName);
+	res.sendFile( __dirname + "/public/panels.css");
+});
+
 app.get('/panels.css', function(req, res){
 	res.sendFile( __dirname + "/public/panels.css");
 });
 
-app.get('/combined', function(req, res){
+app.get('/login.css', function(req, res){
+	res.sendFile( __dirname + "/public/login.css");
+});
+
+app.get('/:userName/', function(req, res){
+	authCheck(req.params.userName);
+	res.sendFile( __dirname + "/public/panels.css");
+});
+
+app.get('/:userName/Books/:book/OPS/css/:css', function(req, res){
+	authCheck(req.params.userName);
+	res.sendFile( __dirname + "/public/Books/" + req.params.book + "/OPS/css/" + req.params.css);
+});
+
+app.get('/:userName/css/:css', function(req, res){
+	authCheck(req.params.userName);
+	res.sendFile( __dirname + "/public/Books/Combined/OPS/css/" + req.params.css);
+});
+
+/* Get JS files */
+
+app.get('/:userName/resizable_panels.js', function(req, res){
+	authCheck(req.params.userName);
+	res.sendFile( __dirname + "/public/resizable_panels.js");
+});
+
+app.get('/:userName/test.js', function(req, res){
+	authCheck(req.params.userName);
+	res.sendFile( __dirname + "/public/test.js");
+});
+
+app.get('/:userName/combined', function(req, res){
+	authCheck(req.params.userName);
 	res.sendFile( __dirname + "/public/Books/Combined/OPS/title.html" );
 });
-app.get('/main1.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main1.html" );
+app.get('/:userName/:html.html', function(req, res){
+	authCheck(req.params.userName);
+	var id = req.params.html; 
+	res.sendFile( __dirname + "/public/Books/Combined/OPS/" + id + ".html" );
 });
-app.get('/main2.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main2.html" );
-});
-app.get('/main3.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main3.html" );
-});
-app.get('/main4.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main4.html" );
-});
-app.get('/main5.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main5.html" );
-});
-app.get('/main6.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main6.html" );
-});
-app.get('/main7.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main7.html" );
-});
-app.get('/main8.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main8.html" );
-});
-app.get('/main9.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main9.html" );
-});
-app.get('/main10.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main10.html" );
-});
-app.get('/main11.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main11.html" );
-});
-app.get('/main12.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main12.html" );
-});
-app.get('/main13.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main13.html" );
-});
-app.get('/main14.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main14.html" );
-});
-app.get('/main15.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main15.html" );
-});
-app.get('/main16.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main16.html" );
-});
-app.get('/main17.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main17.html" );
-});
-app.get('/main18.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main18.html" );
-});
-app.get('/main19.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main19.html" );
-});
-app.get('/main20.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main20.html" );
-});
-app.get('/main21.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main21.html" );
-});
-app.get('/main22.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main22.html" );
-});
-app.get('/main23.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main23.html" );
-});
-app.get('/main24.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main24.html" );
-});
-app.get('/main25.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main25.html" );
-});
-app.get('/main26.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main26.html" );
-});
-app.get('/main27.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main27.html" );
-});
-app.get('/main28.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main28.html" );
-});
-app.get('/main29.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/main29.html" );
-});
-app.get('/similar.html', function(req, res){
+app.get('/:userName/similar.html', function(req, res){
 	res.sendFile( __dirname + "/public/Books/Combined/OPS/similar.html" );
 });
-app.get('/about.html', function(req, res){
+app.get('/:userName/about.html', function(req, res){
 	res.sendFile( __dirname + "/public/Books/Combined/OPS/about.html" );
 });
 
+app.get("/:userName/template.js", function(req, res){
+	res.sendFile(__dirname + "/public/template.js");
+});
 // A browser's default method is 'GET', so this
 // is the route that express uses when we visit
 // our site initially.
-app.get('/annotations', function(req, res){
+app.get('/:userName/annotations', function(req, res){
+   var username = req.params.userName;
+   authCheck(username);
    console.log("Loading preloaded notes");
    var preloaded_notes = [];
    
@@ -225,9 +217,12 @@ app.post('/login', function(req, res){
 				console.log('Invalid user id!');
 				res.redirect('/login?e=usernameNotValid');
 			} else {
+				// Found username in database
+				selfUserName = userid;
+				isAuthenticated = true;
 				console.log(data);
 				res.writeHead(301,
-				  {Location: userid + '/home'}
+				  {Location: selfUserName + '/home'}
 				);
 				res.end();
 			}
@@ -241,6 +236,7 @@ app.post('/login', function(req, res){
 
 app.get('/:userName/home', function(req,res) {
 	var username = req.params.userName;
+	authCheck(username);
 	console.log("Received username: " + username);
 	var welcome_msg = "Hello " + username;
 	//res.sendFile( __dirname + "/home.html");
@@ -254,35 +250,32 @@ app.get('/:userName/home', function(req,res) {
 //URLs to localhost/book<number> is called onclicking the 'get book' button on Home.html
 //Given a list of available books, get the chosen number from user
 //Based on input, do path-replace logic to decide the correct parent folder path (Book1 or Book2 etc) to append to the href paths in output TOC (book.html). 
-//Ensure the parent folder contains the extracted epub and especially the META-INF/conatiner.xml. (Extraction is scripted but can be manual as well)
+//Ensure the parent folder contains the extracted epub and especially the META-INF/conatiner.xml. (Extraction is scripted but can be manual as well
 
-app.get('/book1', function(req, res){
-
-
-		
-		var epubfile = 'Public/Books/Book1/testbook.epub';
-
-		var check_xml = 'Public/Books/Book1/META-INF/container.xml';
+app.get('/:userName/book:bookId=:bookName', function(req, res){
+		var bookid = req.params.bookId;
+		var bookname = req.params.bookName;
+		var username = req.params.userName;
+		console.log("app.get book" + bookid + " " + bookname + " username " + username);
+		authCheck(username);
+		var epubfile = "Public/Books/Book" + bookid + "/" + bookname + ".epub";
+		var check_xml = "Public/Books/Book" + bookid + "/META-INF/container.xml";
 
 
 		fs.stat(check_xml, function(err, stat){
 
-			   
-
 		        if (err) { 
-			   
+			    
 				var extract = require('extract-zip');
-				var tar = 'Public/Books/Book1/';
+				var tar = "Public/Books/Book" + bookid + "/";
 				extract(epubfile, {dir: tar}, function (err) {
 						
 						if(err){
 							console.log('Error Extracting');
 						}
-
-						else 
+						else
 							console.log('Extracting');
-				 // extraction is complete. make sure to handle the err 
-					});
+				 	});
 				  }
 
 			   else {
@@ -290,12 +283,14 @@ app.get('/book1', function(req, res){
 		        } 
 
 		});
-		 
-
-		converter.parse(epubfile, function (err, epubData) {
 		
+
+
+	  converter.parse(epubfile, function (err, epubData) {
+		
+
 		var htmlData = converter.convertMetadata(epubData);
-		//console.log(htmlData); //Debugging
+		console.log(htmlData); //Debugging
 
 		//THIS METHOD DOESN'T WORK:
 		//document.write(htmlData);
@@ -305,8 +300,8 @@ app.get('/book1', function(req, res){
 	 	 if (err) return console.log(err);
 	 	 console.log('htmlNav successfully sent to book.html!');
 		});
-
-		/*
+		
+/*
 		fs.appendFile('book.html', htmlData.htmlMetas, function (err) {
 	 	 if (err) return console.log(err);
 	 	 console.log('htmlMetas successfully sent to book.html!');
@@ -315,82 +310,10 @@ app.get('/book1', function(req, res){
 		fs.appendFile('book.html', htmlData.htmlMetaList, function (err) {
 	 	 if (err) return console.log(err);
 	 	 console.log('htmlMetaList successfully sent to book.html!');
-		});*/
-
-
-		var find = "href=\"" ;
-		var rep = "href=\"Books/Book1/";
-		replace_url(find, rep);
-
-		});
-
-
-  res.sendFile( __dirname + "/" + "book.html" );
-
-
-});
-
-app.get('/book2', function(req, res){
-
-		var epubfile = 'Public/Books/Book2/Relativity.epub';
-
-		var check_xml = 'Public/Books/Book2/META-INF/container.xml';
-
-
-		fs.stat(check_xml, function(err, stat){
-
-			   
-
-		        if (err) { 
-			    
-				var extract = require('extract-zip');
-				var tar = 'Public/Books/Book2/';
-				extract(epubfile, {dir: tar}, function (err) {
-						
-						if(err){
-							console.log('Error Extracting');
-						}
-						else
-							console.log('Extracting');
-				 	});
-				  }
-
-			   else {
-       				console.log('Already Extracted');
-		        } 
-
-		});
-		
-
-
-	  converter.parse(epubfile, function (err, epubData) {
-		
-
-		var htmlData = converter.convertMetadata(epubData);
-		//console.log(htmlData); //Debugging
-
-		//THIS METHOD DOESN'T WORK:
-		//document.write(htmlData);
-
-		//USE FILE WRITE INSTEAD
-		fs.writeFile('book.html', htmlData.htmlNav, function (err) {
-	 	 if (err) return console.log(err);
-	 	 console.log('htmlNav successfully sent to book.html!');
-		});
-
-		/*fs.appendFile('book.html', htmlData.htmlMetas, function (err) {
-	 	 if (err) return console.log(err);
-	 	 console.log('htmlMetas successfully sent to book.html!');
-		});
-
-		fs.appendFile('book.html', htmlData.htmlMetaList, function (err) {
-	 	 if (err) return console.log(err);
-	 	 console.log('htmlMetaList successfully sent to book.html!');
-		}); */
-
-
+		}); 
+*/
 			var find = "href=\"" ;
-			var rep = "href=\"Books/Book2/";
+			var rep = "href=\"Books/Book" + bookid + "/";
 			replace_url(find, rep);
 		});
 
@@ -400,79 +323,15 @@ app.get('/book2', function(req, res){
 
 });
 
-
-
-app.get('/book3', function(req, res){
-
-		var epubfile = 'Public/Books/Book3/SCMP.epub';
-		var check_xml = 'Public/Books/Book3/META-INF/container.xml';
-
-
-		fs.stat(check_xml, function(err, stat){
-
-			   
-
-		        if (err) { 
-			    
-				var extract = require('extract-zip');
-				var tar = 'Public/Books/Book3/';
-				extract(epubfile, {dir: tar}, function (err) {
-						
-						if(err){
-							console.log('Error Extracting');
-						}
-						else
-							console.log('Extracting');
-				 	});
-				  }
-
-			   else {
-       				console.log('Already Extracted');
-		        } 
-
-		});
-		
-
-
-	  converter.parse(epubfile, function (err, epubData) {
-		
-
-		var htmlData = converter.convertMetadata(epubData);
-		//console.log(htmlData); //Debugging
-
-		//THIS METHOD DOESN'T WORK:
-		//document.write(htmlData);
-
-		//USE FILE WRITE INSTEAD
-		fs.writeFile('book.html', htmlData.htmlNav, function (err) {
-	 	 if (err) return console.log(err);
-	 	 console.log('htmlNav successfully sent to book.html!');
-		});
-
-		/*fs.appendFile('book.html', htmlData.htmlMetas, function (err) {
-	 	 if (err) return console.log(err);
-	 	 console.log('htmlMetas successfully sent to book.html!');
-		});
-
-		fs.appendFile('book.html', htmlData.htmlMetaList, function (err) {
-	 	 if (err) return console.log(err);
-	 	 console.log('htmlMetaList successfully sent to book.html!');
-		}); */
-
-			var find = "href=\"" ;
-			var rep = "href=\"Books/Book3/";
-			replace_url(find, rep);
-		});
-
-
-  res.sendFile( __dirname + "/" + "book.html" );
-
-
-});
-
-app.get('/upload_img', function(req, res){
+app.get('/:userName/upload_img', function(req, res){
 	res.sendFile( __dirname + "/" + "upload_img.html" );
 });
+
+/* DEFAULT APP.GET */
+// app.get('/:username/:restUrl', function(req,res) {
+// 	authCheck(req.params.userName);
+// 	res.sendFile( __dirname + "/" + restUrl);
+// });
 
 // that `req.body` will be filled in with the form elements
 app.post('/annt_submit_or_edit', function(req, res){
@@ -482,8 +341,11 @@ app.post('/annt_submit_or_edit', function(req, res){
 	var title = req.body[0].value;
 	var body = req.body[1].value; 
 	var id = req.body[2].value;
+	// hyperlink potential links in annotation
+	var linkedBody = Autolinker.link(body);
+	linkedBody = "<p>" + linkedBody + "</p>";
 	console.log("Title: " + title);
-	console.log("Body: " + body);
+	console.log("Body: " + linkedBody);
 	console.log('------------------------------------------');
 	var arr = id.split('_');
 	if(arr[1] === undefined){ 
@@ -495,14 +357,14 @@ app.post('/annt_submit_or_edit', function(req, res){
 			"id": id,
 			"type":"TXT",
 			"title":title,
-			"body":body
+			"body":linkedBody
 		}
 		db_interface.addItem(note_item);
 	} else{
 		console.log("Editing");
 		db_interface.updateItem(id, title, body);
 	}
-	res.send(req.body);
+	res.send(linkedBody);
 });
 
 // Deal with deleting annotations

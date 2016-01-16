@@ -6,33 +6,42 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="localhost:80/panels.css">
+  <link rel="stylesheet" type="text/css" href="panels.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="Get_book.js" type="text/javascript"></script>
-
-
-  </script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-</head>
+  <script>
+  $(document).ready(function(){
+	$(":button").click(function() {
+		var pathname = window.location.pathname;
+		var username = pathname.replace('/home', '');
+		var location =  "http://localhost" + username + "/" + this.id;
+		if (this.name != '') {
+			location += ("=" + this.name);
+		}
+		window.location.href = location;
+	});
+  });
+</script>
 
+</head>
 <body>
 	<div id = "book_display">
 		 <h3 class="heading">
 	        Book Display</h4>
  		<p>
-			<input type="button" value="Get Book1: Testbook" onclick="location.href = 'http://localhost:80/book1'" />
+			<input type="button" id="book1" name="testbook" value="Get Book1: Testbook" />
 		</p>
 
 		<p>
-			<input type="button" value="Get Book2: The Einstein Theory of Relativity" onclick="location.href = 'http://localhost:80/book2'" />
+			<input type="button" id="book2" name="Relativity" value="Get Book2: The Einstein Theory of Relativity"/>
 		</p>
 
 		<p>
-			<input type="button" value="Get Book3: Computing" onclick="location.href = 'http://localhost:80/book3'" />
+			<input type="button" id="book3" name="SCMP" value="Get Book3: Computing" />
 		</p>
 		
 		<p>
-			<input type="button" value="Test Combined" onclick="location.href = 'http://localhost:80/combined'" />
+			<input type="button" id="combined" value="Test Combined" />
 		</p>
  	 <div>
 </body>

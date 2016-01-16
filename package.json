@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/NayantaraPrem/Online-Textbook-Interface/issues"
   },
-  "homepage": "https://github.com/NayantaraPrem/Online-Textbook-Interface#readme"
+  "homepage": "https://github.com/NayantaraPrem/Online-Textbook-Interface#readme",
+  "dependencies": {
+    "autolinker": "^0.22.0"
+  }
 }

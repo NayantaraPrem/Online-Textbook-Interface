@@ -40,7 +40,7 @@ html(lang='en')
                       button.btn.btn-primary.btn-sm(id="deleteButton#{note.NoteID}" onclick='delete_annt(event)')
                         span.glyphicon.glyphicon-trash
                   .panel-body.writable(id="panel-body#{note.NoteID}")
-                    textarea.annt_body(name='body', id="textbody#{note.NoteID}", type='text', readonly)=note.info.body
+                    .annt_body(name='body', id="textbody#{note.NoteID}", contentEditable='false')=note.info.body
                   input(type='submit', value='Submit', id="#{note.NoteID}")
         if(note.info.type == "IMG")
           //add icons or whatever for images here

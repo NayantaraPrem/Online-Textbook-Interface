@@ -45,9 +45,9 @@ $(document).on('click', '#add_annotation', function () {
 							</span>\
 						</div>\
 						<div id="panel-body' + i + '" class="panel-body writable">\
-							<textarea class="annt_body" name="body" id="textbody'+i+'" type="text" placeholder="Enter Note"/>\
+							<div class="annt_body" name="body" id="textbody'+i+'" type="text" contentEditable></div> \
 						</div>\
-						<input type="submit" value="Submit" id="' + i +'" />\
+						<input type="submit" value="Submit" id="'+i+'"/> \
 					</form>\
 				</div>\
 			</div>\
@@ -64,7 +64,9 @@ $(document).on('click', 'input[type="submit"]', function(e) {
 		e.preventDefault();
 		var inputID = $(this).attr('id');
 		var postData = $("#ajaxform"+inputID).serializeArray();
-		postData = [{"name":"title", "value":postData[0].value},{"name":"body", "value":postData[1].value} , {"name":"id", "value":inputID}];
+		var textbody = $("#textbody"+inputID).html();
+		console.log(postData);
+		postData = [{"name":"title", "value":postData[0].value},{"name":"body", "value":textbody} , {"name":"id", "value":inputID}];
 		var data = {};
 		data.title = "title";
 		data.message = "message";
@@ -75,6 +77,11 @@ $(document).on('click', 'input[type="submit"]', function(e) {
 			contentType: 'application/json',
 			url: 'http://localhost:80/annt_submit_or_edit',						
 			success: function(data) {
+				// verify you need this
+				alert('success');
+				alert('Returned data: ' + data);
+				$("#textbody"+inputID).html(data);
+				alert(JSON.stringify(postData));
 			},
 			error: function(data){
 				window.console.log(data);
@@ -91,7 +98,8 @@ $(document).on('click', 'input[type="submit"]', function(e) {
 		$("#panel-heading"+inputID).removeClass('writable');
 		$("#panel-body"+inputID).removeClass('writable');
 		$("#texttitle"+inputID).attr('readonly', 'readonly');
-		$("#textbody"+inputID).attr('readonly', 'readonly');
+		$("#textbody"+inputID).attr('contentEditable', 'false');		
+		//$("#textbody"+inputID).attr('readonly', 'readonly');
 	    
 		return false;
 	});
@@ -150,7 +158,7 @@ function edit_annt(e) {
 	$("#panel-heading"+id).addClass('writable');
 	$("#panel-body"+id).addClass('writable');
 	$("#texttitle"+id).removeAttr('readonly');
-	$("#textbody"+id).removeAttr('readonly');
+	$("#textbody"+id).attr('contentEditable', 'true');
 	
     var postData = e.currentTarget.id;
 	return false;

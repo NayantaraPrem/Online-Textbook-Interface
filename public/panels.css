@@ -58,6 +58,18 @@
 	width: 100%;
 }
 
+div.annt_body {
+    -moz-appearance: textfield-multiline;
+    -webkit-appearance: textarea;
+    border: 1px solid gray;
+    font: medium -moz-fixed;
+    font: -webkit-small-control;
+    height: 28px;
+    overflow: auto;
+    padding: 2px;
+    resize: both;
+    width: 100%;
+}
 
 ul.page_nav_buttons {
     list-style-type: none;
@@ -127,7 +139,7 @@ p {
 
 input {
   background-color : rgba(0,0,0,0.1);
-  color: white;
+  color: black;
   border: none;
 }
 
