@@ -1,0 +1,59 @@
+doctype html
+html(lang='en')
+  include .includes/head.jade
+  body
+    include .includes/page-nav-bar.jade
+
+    include annotations.jade
+
+    include .includes/Book3TableOfContents.jade
+
+    if(pagetodisplay == "part1")
+      include ../Public/Books/Book3/text/part1.xhtml
+    else if(pagetodisplay == "part2")
+      include ../Public/Books/Book3/text/part2.xhtml
+    else if(pagetodisplay == "part3")
+      include ../Public/Books/Book3/text/part3.xhtml
+    else if(pagetodisplay == "part4")
+      include ../Public/Books/Book3/text/part4.xhtml
+    else if(pagetodisplay == "part5")
+      include ../Public/Books/Book3/text/part5.xhtml
+    else if(pagetodisplay == "part6")
+      include ../Public/Books/Book3/text/part6.xhtml
+    else if(pagetodisplay == "part7")
+      include ../Public/Books/Book3/text/part7.xhtml
+    else if(pagetodisplay == "part8")
+      include ../Public/Books/Book3/text/part8.xhtml
+    else if(pagetodisplay == "part9")
+      include ../Public/Books/Book3/text/part9.xhtml
+    else if(pagetodisplay == "part10")
+      include ../Public/Books/Book3/text/part10.xhtml
+    else if(pagetodisplay == "part11")
+      include ../Public/Books/Book3/text/part11.xhtml
+    else if(pagetodisplay == "part12")
+      include ../Public/Books/Book3/text/part12.xhtml
+    else if(pagetodisplay == "part13")
+      include ../Public/Books/Book3/text/part13.xhtml
+    else if(pagetodisplay == "part14")
+      include ../Public/Books/Book3/text/part14.xhtml
+    else if(pagetodisplay == "part15")
+      include ../Public/Books/Book3/text/part15.xhtml
+    else if(pagetodisplay == "part16")
+      include ../Public/Books/Book3/text/part16.xhtml
+    else if(pagetodisplay == "part17")
+      include ../Public/Books/Book3/text/part17.xhtml
+    else if(pagetodisplay == "part18")
+      include ../Public/Books/Book3/text/part18.xhtml
+    else if(pagetodisplay == "part19")
+      include ../Public/Books/Book3/text/part19.xhtml
+    else if(pagetodisplay == "part20")
+      include ../Public/Books/Book3/text/part20.xhtml
+    else if(pagetodisplay == "part21")
+      include ../Public/Books/Book3/text/part21.xhtml
+
+    //#book_display
+    //h3.heading
+    //    | Book Display
+    //    p
+    //     input(type='button', value='Back to Book', onclick="location.href = 'http://localhost:80/'")
+    //    div

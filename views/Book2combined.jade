@@ -1,0 +1,37 @@
+doctype html
+html(lang='en')
+  include .includes/head.jade
+  body
+    include .includes/page-nav-bar.jade
+
+    include annotations.jade
+
+    include .includes/Book2TableOfContents.jade
+
+    if(pagetodisplay == "title")
+      include ../Public/Books/Book2/OPS/title.xml
+    else if(pagetodisplay == "about")
+      include ../Public/Books/Book2/OPS/about.xml
+    else if(pagetodisplay == "main0")
+      include ../Public/Books/Book2/OPS/main0.xml
+    else if(pagetodisplay == "main1")
+      include ../Public/Books/Book2/OPS/main1.xml
+    else if(pagetodisplay == "main2")
+      include ../Public/Books/Book2/OPS/main2.xml
+    else if(pagetodisplay == "main3")
+      include ../Public/Books/Book2/OPS/main3.xml
+    else if(pagetodisplay == "main4")
+      include ../Public/Books/Book2/OPS/main4.xml
+    else if(pagetodisplay == "main5")
+      include ../Public/Books/Book2/OPS/main5.xml
+    else if(pagetodisplay == "main6")
+      include ../Public/Books/Book2/OPS/main6.xml
+    else if(pagetodisplay == "main7")
+      include ../Public/Books/Book2/OPS/main7.xml
+
+    //#book_display
+    //h3.heading
+    //    | Book Display
+    //    p
+    //     input(type='button', value='Back to Book', onclick="location.href = 'http://localhost:80/'")
+    //    div
