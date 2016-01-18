@@ -13,8 +13,7 @@ var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 var books = [ 
 				{title:'The War of the Worlds', epub:'testbook'},
 				{title:'The Einstein Theory of Relativity', epub:'relativity'},
-				{title:'Structure and Interpretation of Computer Programs', epub:'SCMP'},
-				{title:'Test Combined', epub:'combined'}
+				{title:'Structure and Interpretation of Computer Programs', epub:'SCMP'}
 			];
 
 var Autolinker = require('autolinker');
@@ -183,23 +182,6 @@ app.get("/:userName/template.js", function(req, res){
 	res.sendFile(__dirname + "/public/template.js");
 });
 
-/* Get HTML files */
-app.get('/:userName/combined', function(req, res){
-	authCheck(req.params.userName);
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/title.html" );
-});
-app.get('/:userName/:html.html', function(req, res){
-	authCheck(req.params.userName);
-	var id = req.params.html; 
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/" + id + ".html" );
-});
-app.get('/:userName/similar.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/similar.html" );
-});
-app.get('/:userName/about.html', function(req, res){
-	res.sendFile( __dirname + "/public/Books/Combined/OPS/about.html" );
-});
-
 // A browser's default method is 'GET', so this
 // is the route that express uses when we visit
 // our site initially.
@@ -211,7 +193,7 @@ app.get('/:userName/annotations', function(req, res){
    
    db_interface.scanTable(config.amazondb.annotationTable, function(err, preloaded_notes){
 		console.log(preloaded_notes);
-		res.render('index', { title: 'Notes', notes: preloaded_notes});
+		res.render('annotations', { title: 'Notes', notes: preloaded_notes});
 	});  
 
 });
@@ -283,15 +265,33 @@ app.get('/:userName/home', function(req,res) {
 	res.render('dashboard', { welcome_msg: welcome_msg, books: books, imgs:img_paths});
 });
 
+/* combined display pages */
+app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
+	var bookid = req.params.bookId;
+	var bookname = req.params.bookName;
+	var username = req.params.userName;
+	var display = req.params.Display;
+	console.log("app.get book" + bookid + " " + bookname + " page " + display + " username " + username);
+	authCheck(username);
+
+	console.log("Loading preloaded notes");
+   	var preloaded_notes = [];
+   
+   	db_interface.scanTable(config.amazondb.annotationTable, function(err, preloaded_notes){
+		console.log(preloaded_notes);
+		res.render('book' + bookid + 'combined', { title: bookname, notes: preloaded_notes, bookid: bookid, bookname: bookname, pagetodisplay: display, username: username});
+	}); 
+});
+
 //URLs to localhost/book<number> is called onclicking the 'get book' button on Home.html
 //Given a list of available books, get the chosen number from user
 //Based on input, do path-replace logic to decide the correct parent folder path (Book1 or Book2 etc) to append to the href paths in output TOC (book.html). 
 //Ensure the parent folder contains the extracted epub and especially the META-INF/conatiner.xml. (Extraction is scripted but can be manual as well
-
 app.get('/:userName/book:bookId=:bookName', function(req, res){
 		var bookid = req.params.bookId;
 		var bookname = req.params.bookName;
 		var username = req.params.userName;
+		//var display = req.params.Display;
 		console.log("app.get book" + bookid + " " + bookname + " username " + username);
 		authCheck(username);
 		var epubfile = "Public/Books/Book" + bookid + "/" + bookname + ".epub";
@@ -353,9 +353,14 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
 		});
 
 
-  res.sendFile( __dirname + "/" + "book.html" );
-
-
+  //res.sendFile( __dirname + "/" + "book.html" );
+   console.log("Loading preloaded notes");
+   var preloaded_notes = [];
+   
+   db_interface.scanTable(config.amazondb.annotationTable, function(err, preloaded_notes){
+		console.log(preloaded_notes);
+		res.render('book' + bookid + 'combined', { title: bookname, notes: preloaded_notes, bookid: bookid, bookname: bookname, pagetodisplay: "toADD", username: username});
+	});
 });
 
 app.get('/:userName/upload_img', function(req, res){

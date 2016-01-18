@@ -1,0 +1,68 @@
+doctype html
+html(lang='en')
+  head
+    title=title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
+    link(rel='stylesheet', type='text/css', href='panels.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+    script(src='resizable_panels.js', type='text/javascript')
+    script.
+      var annotations= !{JSON.stringify(notes)};
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+  body
+    #container.container-fluid
+      h3.heading
+        | My Annotations
+      .row
+        .col-sm-6
+          p
+            button#add_annotation.btn.btn-info.btn-md
+              span.glyphicon.glyphicon-plus-sign
+              |  Note
+        .col-sm-6
+          p
+            button#add_image.btn.btn-info.btn-md(onclick='upload_img_prompt(event)')
+              // <span class="glyphicon glyphicon-picture">
+              span.glyphicon.glyphicon-plus-sign
+              |  Image
+      each note, index in notes
+        if(note.info.type == "TXT")
+          .row
+            .col-md-12
+              .panel.panel-primary
+                form.form(id="ajaxform#{note.NoteID}", name='ajaxform')
+                  .panel-heading.clickable(id="panel-heading#{note.NoteID}")
+                    em
+                      span.ownerName(id="ownername#{note.NoteID}")="["+note.owner+"]"
+                    h3.panel-title
+                      input.annt_title(name='title', id="texttitle#{note.NoteID}", type='text', value=note.info.title, readonly)
+                    span.pull-right
+                      button.btn.btn-primary.btn-sm(id="editButton#{note.NoteID}" onclick='edit_annt(event)')
+                        span.glyphicon.glyphicon-pencil
+                      button.btn.btn-primary.btn-sm(id="deleteButton#{note.NoteID}" onclick='delete_annt(event)')
+                        span.glyphicon.glyphicon-trash
+                  .panel-body.writable(id="panel-body#{note.NoteID}")
+                    .annt_body(name='body', id="textbody#{note.NoteID}", contentEditable='false')
+                  input(type='submit', value='Submit', id="#{note.NoteID}")
+        if(note.info.type == "IMG")
+          //add icons or whatever for images here
+          .row
+            .col-md-9
+              em
+                span.ownerName="["+note.owner+"]"
+              img.img-thumbnail.thumbnail(src=note.info.img_dest width=160 height=100)
+            .col-md-3
+              button.btn.btn-primary.btn-sm(type='button', data-toggle='modal', data-target="#mymod#{index}")
+                span.glyphicon.glyphicon-zoom-in
+                //|  View
+              div(id='mymod#{index}' class="modal fade" tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true')
+                .modal-dialog
+                  .modal-content
+                    .modal-body
+                      img.img-responsive(src=note.info.img_dest)
+              p
+              button.btn.btn-primary.btn-sm(id="deleteButton#{note.NoteID}" onclick='delete_img(event)')
+                span.glyphicon.glyphicon-trash
+              p

@@ -1,0 +1,9 @@
+div
+  ul.page_nav_buttons
+    li.page_nav
+      a.active(href='/' + locals.username + '/book' + locals.bookid + '=' + locals.bookname) bookname
+    li.page_nav
+      a(href='/' + locals.username + '/home') Bookshelf
+    li.page_nav
+      //need to link to privacy settings for book
+      a(href='/settings') Settings
