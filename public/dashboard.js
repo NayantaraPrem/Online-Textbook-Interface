@@ -1,4 +1,4 @@
-//for buttons on hovering on thumnail
+//for buttons on hovering on thumbnail
 $( document ).ready(function() {
     $("[rel='tooltip']").tooltip(); 
     $('.thumbnail').hover(

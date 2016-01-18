@@ -84,7 +84,7 @@ exports.scanTable = function(table, callback){
 		} else {
 			console.log("Scan succeeded.");
 			//Appending item to Array of all scanned items
-			
+
 			data.Items.forEach(function(item) {
 				//console.dir(item);
 				itemArray.push(item);
@@ -118,7 +118,7 @@ exports.scanTable = function(table, callback){
 
 */
 
-exports.addNote = function(item){
+exports.addNote = function(item, username){
 	var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 	var ID = item.id;
 	if(typeof ID == 'undefined' || !ID ){
@@ -132,9 +132,10 @@ exports.addNote = function(item){
 		               Item: {
 		                       "NoteID": ID,
 		                       "info": item,
+		                       "owner": username
 			             }
 			     };
-			//console.log("Params:" + params.TableName + " " + params.Item.ID + " "+ params.Item.info);
+			console.log("Params:" + params.TableName + " " + params.Item.ID + " "+ params.Item.info);
         	dynamodbDoc.put(params, function(err, data) {	
 			if(err){
 				console.error("Unable to add Item with ID " + ID + " . Error JSON:", JSON.stringify(err, null, 2));
@@ -188,6 +189,28 @@ exports.updateNote = function(id, newtitle, newbody){
 			console.log("UpdateNote succeeded:", JSON.stringify(data, null, 2));
 		}
 	});	
+}
+
+exports.getNote = function(id){
+	var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
+	var params = {
+		               TableName: config.amazondb.annotationTable,
+		               Key: {
+		                       "NoteID": id
+			             },
+
+				};
+				
+	dynamodbDoc.get(params, function(err, data) {
+	    if (err) {
+	        console.error("Unable to get item. Error JSON:", JSON.stringify(err, null, 2));
+	    	callback(err, null);
+	    }
+	    else {
+	        console.log("Got item successfully:", JSON.stringify(data, null, 2));
+	        callback(null, data);
+	    }
+	});
 }
 
 exports.updateUser = function(editedUser){

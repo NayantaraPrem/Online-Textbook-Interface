@@ -20,9 +20,6 @@ $(document).on('click', '.panel div.clickable', function (e) {
 });
 
 $( document ).ready(function() {
-
-	alert("Entered function");
-
 	$.each(annotations, function(i, item) {
 		$("#textbody" + item.NoteID).html(item.info.body);
 	});
@@ -35,13 +32,18 @@ $(function () {
 
 var i = 0;
 $(document).on('click', '#add_annotation', function () {
-
+	var pathname = window.location.pathname;
+	var username = pathname.replace('/annotations', '');
+	username = username.replace('/', '');
 	var new_annot = '\
 		<div class="row">\
 			<div class="col-md-12">\
 				<div class="panel panel-primary">\
 					<form id="ajaxform' + i +'" name="ajaxform" class="form">\
 						<div id="panel-heading' + i + '" class="panel-heading clickable writable">\
+							<em> \
+								<span class="ownerName" id="ownername' + i + '">['+username+']</span>\
+							</em>\
 							<h3 class="panel-title">\
 								<input class="annt_title" name="title" id="texttitle'+i+'"type="text" placeholder="Enter Title"/>\
 							</h3>\
@@ -106,9 +108,10 @@ $(document).on('click', 'input[type="submit"]', function(e) {
 		$("#panel-heading"+inputID).removeClass('writable');
 		$("#panel-body"+inputID).removeClass('writable');
 		$("#texttitle"+inputID).attr('readonly', 'readonly');
-		$("#textbody"+inputID).attr('contentEditable', 'false');		
-		//$("#textbody"+inputID).attr('readonly', 'readonly');
-	    
+		$("#textbody"+inputID).attr('contentEditable', 'false');	
+		/* In the case we add concept of last edited time, will have to store in db for that. For now, not adding*/	
+		// var time = dateFormat(new Date(), "dddd, mmmm dS, yyyy, h:MM:ss TT");
+	 	//    $("#updatedTime"+inputID).text(now);
 		return false;
 	});
 

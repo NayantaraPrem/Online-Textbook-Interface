@@ -13,8 +13,7 @@ var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 var books = [ 
 				{title:'The War of the Worlds', epub:'testbook'},
 				{title:'The Einstein Theory of Relativity', epub:'relativity'},
-				{title:'Structure and Interpretation of Computer Programs', epub:'SCMP'},
-				{title:'Test Combined', epub:'combined'}
+				{title:'Structure and Interpretation of Computer Programs', epub:'SCMP'}
 			];
 
 var Autolinker = require('autolinker');
@@ -162,7 +161,7 @@ app.get('/resizable_panels.js', function(req, res){
 
 app.get('/:userName/resizable_panels.js', function(req, res){
 	/***** HACK!!!!! **** Combined needs to call with username in url! Need to change! BREACHES SECURITY*/
-	if (userName === undefined)
+	if (req.params.userName === undefined)
 		res.sendFile( __dirname + "/public/resizable_panels.js");
 	authCheck(req.params.userName);
 		res.sendFile( __dirname + "/public/resizable_panels.js");
@@ -385,6 +384,7 @@ app.post('/annt_submit_or_edit', function(req, res){
 	// hyperlink potential links in annotation
 	var linkedBody = Autolinker.link(body);
 	linkedBody = "<p>" + linkedBody + "</p>";
+	console.log("User: " + selfUserName);
 	console.log("Title: " + title);
 	console.log("Body: " + linkedBody);
 	console.log('------------------------------------------');
@@ -400,12 +400,25 @@ app.post('/annt_submit_or_edit', function(req, res){
 			"title":title,
 			"body":linkedBody
 		}
-		db_interface.addNote(note_item);
+		db_interface.addNote(note_item, selfUserName);
+		res.send(linkedBody);
 	} else{
 		console.log("Editing");
-		db_interface.updateNote(id, title, body);
+		var note;
+		/*Maybe hide the edit/delete button to begin with if not the owner of note*/
+		// db_interface.getNote(id, function(err, note){
+		// 	console.log("Received note: " + note);
+		// 	if (note.owner == selfUserName) {
+				db_interface.updateNote(id, title, body);
+				res.send(linkedBody);
+		// 	} else {
+		// 		console.log("Not authorized to edit note! note's owner is: ", note.owner);
+		// 		res.send("Not")
+		// 	}
+		// }); 
+
 	}
-	res.send(linkedBody);
+	
 });
 
 // Deal with deleting annotations
@@ -436,7 +449,7 @@ app.post('/api/photo', uploading.single('pic'), function(req, res){
 		//add owner, timestamp, etc here
 	}
 	//commented out for testing purposes
-	db_interface.addNote(img_item);
+	db_interface.addNote(img_item, selfUserName);
 	res.end("Image has uploaded.");
 });
 
