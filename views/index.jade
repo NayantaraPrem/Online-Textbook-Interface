@@ -34,6 +34,8 @@ html(lang='en')
               .panel.panel-primary
                 form.form(id="ajaxform#{note.NoteID}", name='ajaxform')
                   .panel-heading.clickable(id="panel-heading#{note.NoteID}")
+                    em
+                      span.ownerName(id="ownername#{note.NoteID}")="["+note.owner+"]"
                     h3.panel-title
                       input.annt_title(name='title', id="texttitle#{note.NoteID}", type='text', value=note.info.title, readonly)
                     span.pull-right
@@ -48,6 +50,8 @@ html(lang='en')
           //add icons or whatever for images here
           .row
             .col-md-9
+              em
+                span.ownerName="["+note.owner+"]"
               img.img-thumbnail.thumbnail(src=note.info.img_dest width=160 height=100)
             .col-md-3
               button.btn.btn-primary.btn-sm(type='button', data-toggle='modal', data-target="#mymod#{index}")
