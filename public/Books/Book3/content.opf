@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookID" version="2.0">
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+        <dc:title>Structure and Interpretation of Computer Programs</dc:title>
+        <dc:date opf:event="publication">2002-08-31</dc:date>
+        <dc:creator opf:role="aut" opf:file-as=", "></dc:creator>
+        <dc:language>en</dc:language>
+        <dc:publisher>ePub Bud (www.epubbud.com)</dc:publisher>
+        <dc:identifier id="BookID" opf:scheme="ePubBud">http://www.epubbud.com/epubs/U/S/USFKRZDS/Structure_and_Interpretation_of_Computer_Programs.epub</dc:identifier>
+        <meta name="cover" content="cover-image"/>
+    </metadata>
+    <manifest>
+        <item id="cover" href="cover.html" media-type="application/xhtml+xml"/>
+        <item id="cover-image" href="cover.jpg" media-type="image/jpeg"/>
+        <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
+<item id="part1.xhtml" href="text/part1.xhtml" media-type="application/xhtml+xml"/>
+<item id="part2.xhtml" href="text/part2.xhtml" media-type="application/xhtml+xml"/>
+<item id="part3.xhtml" href="text/part3.xhtml" media-type="application/xhtml+xml"/>
+<item id="part4.xhtml" href="text/part4.xhtml" media-type="application/xhtml+xml"/>
+<item id="part5.xhtml" href="text/part5.xhtml" media-type="application/xhtml+xml"/>
+<item id="part6.xhtml" href="text/part6.xhtml" media-type="application/xhtml+xml"/>
+<item id="part7.xhtml" href="text/part7.xhtml" media-type="application/xhtml+xml"/>
+<item id="part8.xhtml" href="text/part8.xhtml" media-type="application/xhtml+xml"/>
+<item id="part9.xhtml" href="text/part9.xhtml" media-type="application/xhtml+xml"/>
+<item id="part10.xhtml" href="text/part10.xhtml" media-type="application/xhtml+xml"/>
+<item id="part11.xhtml" href="text/part11.xhtml" media-type="application/xhtml+xml"/>
+<item id="part12.xhtml" href="text/part12.xhtml" media-type="application/xhtml+xml"/>
+<item id="part13.xhtml" href="text/part13.xhtml" media-type="application/xhtml+xml"/>
+<item id="part14.xhtml" href="text/part14.xhtml" media-type="application/xhtml+xml"/>
+<item id="part15.xhtml" href="text/part15.xhtml" media-type="application/xhtml+xml"/>
+<item id="part16.xhtml" href="text/part16.xhtml" media-type="application/xhtml+xml"/>
+<item id="part17.xhtml" href="text/part17.xhtml" media-type="application/xhtml+xml"/>
+<item id="part18.xhtml" href="text/part18.xhtml" media-type="application/xhtml+xml"/>
+<item id="part19.xhtml" href="text/part19.xhtml" media-type="application/xhtml+xml"/>
+<item id="part20.xhtml" href="text/part20.xhtml" media-type="application/xhtml+xml"/>
+<item id="part21.xhtml" href="text/part21.xhtml" media-type="application/xhtml+xml"/>
+
+    </manifest>
+    <spine toc="ncx">
+        <itemref idref="cover" linear="no"/>
+<itemref idref="part1.xhtml"/>
+<itemref idref="part2.xhtml"/>
+<itemref idref="part3.xhtml"/>
+<itemref idref="part4.xhtml"/>
+<itemref idref="part5.xhtml"/>
+<itemref idref="part6.xhtml"/>
+<itemref idref="part7.xhtml"/>
+<itemref idref="part8.xhtml"/>
+<itemref idref="part9.xhtml"/>
+<itemref idref="part10.xhtml"/>
+<itemref idref="part11.xhtml"/>
+<itemref idref="part12.xhtml"/>
+<itemref idref="part13.xhtml"/>
+<itemref idref="part14.xhtml"/>
+<itemref idref="part15.xhtml"/>
+<itemref idref="part16.xhtml"/>
+<itemref idref="part17.xhtml"/>
+<itemref idref="part18.xhtml"/>
+<itemref idref="part19.xhtml"/>
+<itemref idref="part20.xhtml"/>
+<itemref idref="part21.xhtml"/>
+
+    </spine>
+    <guide>
+        <reference href="cover.html" type="cover" title="Cover"/>
+    </guide>
+</package>

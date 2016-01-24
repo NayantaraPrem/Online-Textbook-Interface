@@ -28,7 +28,9 @@
 	float:left;
 	padding:30px;
 	#background-color:#ebebe0;
-	width:67%
+	background-color:#ffffe5;
+	width:67%;
+	height:100%;
 }
 
 #aside {
