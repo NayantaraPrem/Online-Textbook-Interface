@@ -1,0 +1,19 @@
+doctype html
+html(lang='en')
+  include .includes/head.jade
+  
+  body
+    .dropdown
+      button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+        | View Notes From: 
+        span.caret
+      ul.dropdown-menu
+        li
+          input(type='checkbox')
+          | Some User
+        li
+          input(type='checkbox')
+          | Another User
+        li
+          input(type='checkbox')
+          | Someone else here

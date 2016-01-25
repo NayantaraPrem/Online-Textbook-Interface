@@ -320,8 +320,6 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
 
 		});
 		
-
-
 	  converter.parse(epubfile, function (err, epubData) {
 		
 			var htmlData = converter.convertMetadata(epubData);
@@ -331,7 +329,7 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
 			//document.write(htmlData);
 
 			//USE FILE WRITE INSTEAD
-			fs.writeFile('book.html', htmlData.htmlNav, function (err) {
+			fs.writeFile('Public/Books/Book' + bookid + '/TableOfContents.html', htmlData.htmlNav, function (err) {
 		 	 if (err) return console.log(err);
 		 	 console.log('htmlNav successfully sent to book.html!');
 			});
@@ -352,8 +350,6 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
 				replace_url(find, rep);
 		});
 
-
-  //res.sendFile( __dirname + "/" + "book.html" );
    console.log("Loading preloaded notes");
    var preloaded_notes = [];
    
