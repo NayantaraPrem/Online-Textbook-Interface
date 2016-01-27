@@ -289,6 +289,7 @@ app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
 //Ensure the parent folder contains the extracted epub and especially the META-INF/conatiner.xml. (Extraction is scripted but can be manual as well
 app.get('/:userName/book:bookId=:bookName', function(req, res){
 		var bookid = req.params.bookId;
+		currBookID = bookid;
 		var bookname = req.params.bookName;
 		var username = req.params.userName;
 		//var display = req.params.Display;
@@ -396,7 +397,7 @@ app.post('/annt_submit_or_edit', function(req, res){
 			"title":title,
 			"body":linkedBody
 		}
-		db_interface.addNote(note_item, selfUserName);
+		db_interface.addNote(note_item, selfUserName, currBookID);
 		res.send(linkedBody);
 	} else{
 		console.log("Editing");
@@ -445,7 +446,7 @@ app.post('/api/photo', uploading.single('pic'), function(req, res){
 		//add owner, timestamp, etc here
 	}
 	//commented out for testing purposes
-	db_interface.addNote(img_item, selfUserName);
+	db_interface.addNote(img_item, selfUserName, currBookID);
 	res.end("Image has uploaded.");
 });
 

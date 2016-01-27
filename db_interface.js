@@ -118,7 +118,7 @@ exports.scanTable = function(table, callback){
 
 */
 
-exports.addNote = function(item, username){
+exports.addNote = function(item, username, bookid){
 	var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 	var ID = item.id;
 	if(typeof ID == 'undefined' || !ID ){
@@ -132,7 +132,8 @@ exports.addNote = function(item, username){
 		               Item: {
 		                       "NoteID": ID,
 		                       "info": item,
-		                       "owner": username
+		                       "owner": username,
+							   "bookID": bookid
 			             }
 			     };
 			console.log("Params:" + params.TableName + " " + params.Item.ID + " "+ params.Item.info);
