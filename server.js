@@ -185,7 +185,7 @@ app.get("/:userName/template.js", function(req, res){
 // A browser's default method is 'GET', so this
 // is the route that express uses when we visit
 // our site initially.
-app.get('/:userName/annotations', function(req, res){
+/*app.get('/:userName/annotations', function(req, res){
    var username = req.params.userName;
    authCheck(username);
    console.log("Loading preloaded notes");
@@ -196,7 +196,7 @@ app.get('/:userName/annotations', function(req, res){
 		res.render('annotations', { title: 'Notes', notes: preloaded_notes});
 	});  
 
-});
+});*/
 /*
 app.get('/get_annt_bodies', function(req, res){
    console.log("get_annt_bodies");
