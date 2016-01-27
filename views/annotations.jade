@@ -26,7 +26,7 @@ html(lang='en')
                 form.form(id="ajaxform#{note.NoteID}", name='ajaxform')
                   .panel-heading.clickable(id="panel-heading#{note.NoteID}")
                     em
-                      span.ownerName(id="ownername#{note.NoteID}")="["+note.owner+"][book:"+note.bookID+"]"
+                      span.ownerName(id="ownername#{note.NoteID}")="["+note.owner+"]"
                     h3.panel-title
                       input.annt_title(name='title', id="texttitle#{note.NoteID}", type='text', value=note.info.title, readonly)
                     span.pull-right

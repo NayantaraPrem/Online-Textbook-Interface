@@ -67,11 +67,18 @@ exports.createTable = function(table, primary_key_hash, hash_type, primary_key_r
 }
 
 //Iterating through the whole table, returning all items in table appended to array
-exports.scanTable = function(table, callback){
+exports.scanTable = function(table, bookid, callback){
 	var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 	// Can add more parameters here to filter results
 	var params = {
-		TableName: table
+		TableName: table,
+		FilterExpression: "#bkid = :i",
+		ExpressionAttributeNames: {
+			"#bkid": "bookID"
+		},
+		ExpressionAttributeValues: {
+			":i": bookid
+		}
 	};
      // Return this value
 	var itemArray = [];

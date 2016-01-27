@@ -277,7 +277,7 @@ app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
 	console.log("Loading preloaded notes");
    	var preloaded_notes = [];
    
-   	db_interface.scanTable(config.amazondb.annotationTable, function(err, preloaded_notes){
+   	db_interface.scanTable(config.amazondb.annotationTable, currBookID, function(err, preloaded_notes){
 		console.log(preloaded_notes);
 		res.render('book' + bookid + 'combined', { title: bookname, notes: preloaded_notes, bookid: bookid, bookname: bookname, pagetodisplay: display, username: username});
 	}); 
@@ -354,7 +354,7 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
    console.log("Loading preloaded notes");
    var preloaded_notes = [];
    
-   db_interface.scanTable(config.amazondb.annotationTable, function(err, preloaded_notes){
+   db_interface.scanTable(config.amazondb.annotationTable, currBookID, function(err, preloaded_notes){
 		console.log(preloaded_notes);
 		res.render('book' + bookid + 'combined', { title: bookname, notes: preloaded_notes, bookid: bookid, bookname: bookname, pagetodisplay: "toADD", username: username});
 	});
