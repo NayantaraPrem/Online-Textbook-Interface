@@ -28,15 +28,14 @@ html(lang='en')
         each book, index in books
           -var ind = index+1
           .col-md-4
-            p
-              .thumbnail
+            p(style="padding-top: 1.5cm")
+              .thumbnail(class="bookIcon", value="#{book.title}", name="#{book.epub}", id="book#{ind}")
                 .caption
                   h3#caption=book.title
                   p
                     button#myBtn.glyphicon.glyphicon-cog.btn.btn-primary(data-toggle='modal', data-target="#mymod#{index}", rel='tooltip', title='View Privacy Settings') 
                 img#thumbimages(src=imgs[index], alt="Image not found", class="bookcover")
               // The below button needs to be deleted
-              input(type='button', class="bookIcon", value="#{book.title}", name="#{book.epub}", id="book#{ind}")
               // Modal
               div(id='mymod#{index}' class="modal fade" tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true')
                 .modal-dialog.modal-sm

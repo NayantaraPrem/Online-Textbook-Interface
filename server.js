@@ -261,7 +261,6 @@ app.get('/:userName/home', function(req,res) {
 	var img_paths = ["http://ecx.images-amazon.com/images/I/518k1D%2BJZHL._SX331_BO1,204,203,200_.jpg",
     "http://ecx.images-amazon.com/images/I/51r9QQVSRNL._SX331_BO1,204,203,200_.jpg",
     "http://ecx.images-amazon.com/images/I/71cWa92TMyL.jpg"];
-	//var img_paths = ["https://bookshoptalk.files.wordpress.com/2011/10/generic-book-cover.jpg?w=190"]
 	res.render('dashboard', { welcome_msg: welcome_msg, books: books, imgs:img_paths});
 });
 
