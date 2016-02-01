@@ -275,10 +275,19 @@ app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
 
 	console.log("Loading preloaded notes");
    	var preloaded_notes = [];
-   
+   	var filtered_notes = [];
+   	var filtered_users = ["test_user1"];
    	db_interface.scanTable(config.amazondb.annotationTable, currBookID, function(err, preloaded_notes){
+   		// get notes which are filtered
+   		for (var i = 0; i < preloaded_notes.length; i++) {
+   			for (var j = 0; j < filtered_users.length; j++) {
+   				if (preloaded_notes[i].owner == filtered_users[j]) {
+   					filtered_notes.push(preloaded_notes[i]);
+   				}
+   			}
+   		}
 		console.log(preloaded_notes);
-		res.render('book' + bookid + 'combined', { title: bookname, notes: preloaded_notes, bookid: bookid, bookname: bookname, pagetodisplay: display, username: username});
+		res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: display, username: username});
 	}); 
 });
 
@@ -352,10 +361,19 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
 
    console.log("Loading preloaded notes");
    var preloaded_notes = [];
-   
+   var filtered_notes = [];
+   var filtered_users = ["test_user1"];
+
    db_interface.scanTable(config.amazondb.annotationTable, currBookID, function(err, preloaded_notes){
-		console.log(preloaded_notes);
-		res.render('book' + bookid + 'combined', { title: bookname, notes: preloaded_notes, bookid: bookid, bookname: bookname, pagetodisplay: "toADD", username: username});
+		// get notes which are filtered
+   		for (var i = 0; i < preloaded_notes.length; i++) {
+   			for (var j = 0; j < filtered_users.length; j++) {
+   				if (preloaded_notes[i].owner == filtered_users[j]) {
+   					filtered_notes.push(preloaded_notes[i]);
+   				}
+   			}
+   		}
+		res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: "toADD", username: username});
 	});
 });
 
