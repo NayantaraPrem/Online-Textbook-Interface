@@ -134,11 +134,6 @@ app.get('/login.css', function(req, res){
 	res.sendFile( __dirname + "/public/login.css");
 });
 
-/*app.get('/:userName/', function(req, res){
-	authCheck(req.params.userName,res);
-	res.sendFile( __dirname + "/public/panels.css");
-});*/
-
 app.get('/:userName/Books/:book/OPS/css/:css', function(req, res){
 	authCheck(req.params.userName,res);
 	res.sendFile( __dirname + "/public/Books/" + req.params.book + "/OPS/css/" + req.params.css);
@@ -185,32 +180,6 @@ app.get("/:userName/template.js", function(req, res){
 	authCheck(req.params.userName,res);
 	res.sendFile(__dirname + "/public/template.js");
 });
-
-// A browser's default method is 'GET', so this
-// is the route that express uses when we visit
-// our site initially.
-/*app.get('/:userName/annotations', function(req, res){
-   var username = req.params.userName;
-   authCheck(username,res);
-   console.log("Loading preloaded notes");
-   var preloaded_notes = [];
-   
-   db_interface.scanTable(config.amazondb.annotationTable, function(err, preloaded_notes){
-		console.log(preloaded_notes);
-		res.render('annotations', { title: 'Notes', notes: preloaded_notes});
-	});  
-
-});*/
-/*
-app.get('/get_annt_bodies', function(req, res){
-   console.log("get_annt_bodies");
-   var preloaded_notes = [];
-   
-   db_interface.scanTable(config.amazondb.annotationTable, function(err, preloaded_notes){
-		res.sendFile('index', { title: 'Annotations', notes: preloaded_notes});
-	});  
-
-}*/
 
 //THIS IS THE LOGIN PAGE
 app.get(['/','/login'], function(req, res){
@@ -273,17 +242,81 @@ app.get('/:userName/home', function(req,res) {
 /* combined display pages */
 app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
 	var bookid = req.params.bookId;
-	var bookname = req.params.bookName;
+	var bookname;
+		//var bookname = req.params.bookName;
+		  //TODO: once privacy settings are stored with corresponding bookid/bookname
+	      //remove this swtich-case
+			switch(bookid) {
+				case '1':
+					bookname = 'The_War_of_The_Worlds';
+					break;
+				case '2':
+					bookname = 'The_Einstein_Theory_of_Relativity';
+					break;
+				case '3':
+					bookname = 'Computing';
+					break;
+				default:
+					bookname = 'ERR_BOOK_NOT_FOUND';
+			}
 	var username = req.params.userName;
 	var display = req.params.Display;
+	currChapter = display;
 	console.log("app.get book" + bookid + " " + bookname + " page " + display + " username " + username);
 	authCheck(username,res);
 
 	console.log("Loading preloaded notes");
    	var preloaded_notes = [];
    	var filtered_notes = [];
-   	var filtered_users = ["test_user1"];
-   	db_interface.scanTable(config.amazondb.annotationTable, currBookID, function(err, preloaded_notes){
+	var users = [];
+   	var filtered_users = [selfUserName];
+	
+	// Can add more parameters here to filter results
+	var AnnotationsParams = {
+		TableName: 'Annotations',
+		FilterExpression: "#bkid = :i and #chid = :j",
+		ExpressionAttributeNames: {
+			"#bkid": "bookID",
+			"#chid": "chapter"
+		},
+		ExpressionAttributeValues: {
+			":i": currBookID,
+			":j": currChapter			
+		}
+	};
+   	
+	var UsersParams = {
+		TableName: 'PrivacySettings'
+	};
+	
+   db_interface.scanTable(UsersParams, function(err, users){
+		// get all users with public notes
+		//TODO: add this filter to scanTable params
+		for (var i = 0; i < users.length; i++) {
+			if (users[i].userId != selfUserName)
+			{			
+				switch (bookid) {
+					case '1':
+						if (users[i].The_War_of_The_Worlds == 'Everyone') {
+							filtered_users.push(users[i].userId);
+						}
+						break;
+					case '2':
+						if (users[i].The_Einstein_Theory_of_Relativity == 'Everyone') {
+							filtered_users.push(users[i].userId);
+						}
+						break;
+					case '3':
+						if (users[i].Computing == 'Everyone') {
+							filtered_users.push(users[i].userId);
+						}
+						break;
+				}
+			}
+   		}
+	});
+	
+	db_interface.scanTable(AnnotationsParams, function(err, preloaded_notes){
    		// get notes which are filtered
    		for (var i = 0; i < preloaded_notes.length; i++) {
    			for (var j = 0; j < filtered_users.length; j++) {
@@ -294,7 +327,7 @@ app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
    		}
 		console.log(preloaded_notes);
 		res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: display, username: username});
-	}); 
+	});
 });
 
 //URLs to localhost/book<number> is called onclicking the 'get book' button on Home.html
@@ -304,9 +337,28 @@ app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
 app.get('/:userName/book:bookId=:bookName', function(req, res){
 		var bookid = req.params.bookId;
 		currBookID = bookid;
-		var bookname = req.params.bookName;
+		var bookname;
+		//var bookname = req.params.bookName;
+		  //TODO: once privacy settings are stored with corresponding bookid/bookname
+	      //remove this swtich-case
+			switch(bookid) {
+				case '1':
+					bookname = 'The_War_of_The_Worlds';
+					break;
+				case '2':
+					bookname = 'The_Einstein_Theory_of_Relativity';
+					break;
+				case '3':
+					bookname = 'Computing';
+					break;
+				default:
+					bookname = 'ERR_BOOK_NOT_FOUND';
+			}
 		var username = req.params.userName;
 		//var display = req.params.Display;
+		//TODO: this is temporary for the main page
+		//need to change to correct chapter
+		currChapter = bookid + "_main";
 		console.log("app.get book" + bookid + " " + bookname + " username " + username);
 		authCheck(username,res);
 		var epubfile = "Public/Books/Book" + bookid + "/" + bookname + ".epub";
@@ -340,37 +392,69 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
 			var htmlData = converter.convertMetadata(epubData);
 			console.log(htmlData); //Debugging
 
-			//THIS METHOD DOESN'T WORK:
-			//document.write(htmlData);
-
 			//USE FILE WRITE INSTEAD
 			fs.writeFile('Public/Books/Book' + bookid + '/TableOfContents.html', htmlData.htmlNav, function (err) {
 		 	 if (err) return console.log(err);
 		 	 console.log('htmlNav successfully sent to book.html!');
 			});
 			
-	/*
-			fs.appendFile('book.html', htmlData.htmlMetas, function (err) {
-		 	 if (err) return console.log(err);
-		 	 console.log('htmlMetas successfully sent to book.html!');
-			});
-
-			fs.appendFile('book.html', htmlData.htmlMetaList, function (err) {
-		 	 if (err) return console.log(err);
-		 	 console.log('htmlMetaList successfully sent to book.html!');
-			}); 
-	*/
-				var find = "href=\"" ;
-				var rep = "href=\"Books/Book" + bookid + "/";
-				replace_url(find, rep);
+			var find = "href=\"" ;
+			var rep = "href=\"Books/Book" + bookid + "/";
+			replace_url(find, rep);
 		});
 
    console.log("Loading preloaded notes");
    var preloaded_notes = [];
    var filtered_notes = [];
-   var filtered_users = ["test_user1"];
-
-   db_interface.scanTable(config.amazondb.annotationTable, currBookID, function(err, preloaded_notes){
+   var users = [];
+   var filtered_users = [selfUserName];
+	
+	// Can add more parameters here to filter results
+	var AnnotationsParams = {
+		TableName: 'Annotations',
+		FilterExpression: "#bkid = :i and #chid = :j",
+		ExpressionAttributeNames: {
+			"#bkid": "bookID",
+			"#chid": "chapter"
+		},
+		ExpressionAttributeValues: {
+			":i": currBookID,
+			":j": currChapter			
+		}
+	};
+	
+	var UsersParams = {
+		TableName: 'PrivacySettings'
+	};
+	
+   db_interface.scanTable(UsersParams, function(err, users){
+		// get all users with public notes
+		//TODO: add this filter to scanTable params
+		for (var i = 0; i < users.length; i++) {
+			if (users[i].userId != selfUserName)
+			{			
+				switch (bookid) {
+					case '1':
+						if (users[i].The_War_of_The_Worlds == 'Everyone') {
+							filtered_users.push(users[i].userId);
+						}
+						break;
+					case '2':
+						if (users[i].The_Einstein_Theory_of_Relativity == 'Everyone') {
+							filtered_users.push(users[i].userId);
+						}
+						break;
+					case '3':
+						if (users[i].Computing == 'Everyone') {
+							filtered_users.push(users[i].userId);
+						}
+						break;
+				}
+			}
+   		}
+	});
+	
+   db_interface.scanTable(AnnotationsParams, function(err, preloaded_notes){
 		// get notes which are filtered
    		for (var i = 0; i < preloaded_notes.length; i++) {
    			for (var j = 0; j < filtered_users.length; j++) {
@@ -386,12 +470,6 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
 app.get('/:userName/upload_img', function(req, res){
 	res.sendFile( __dirname + "/" + "upload_img.html" );
 });
-
-/* DEFAULT APP.GET */
-// app.get('/:username/:restUrl', function(req,res) {
-// 	authCheck(req.params.userName,res);
-// 	res.sendFile( __dirname + "/" + restUrl);
-// });
 
 // that `req.body` will be filled in with the form elements
 app.post('/annt_submit_or_edit', function(req, res){
@@ -420,7 +498,7 @@ app.post('/annt_submit_or_edit', function(req, res){
 			"title":title,
 			"body":linkedBody
 		}
-		db_interface.addNote(note_item, selfUserName, currBookID);
+		db_interface.addNote(note_item, selfUserName, currBookID, currChapter);
 		res.send(linkedBody);
 	} else{
 		console.log("Editing");
@@ -469,7 +547,7 @@ app.post('/api/photo', uploading.single('pic'), function(req, res){
 		//add owner, timestamp, etc here
 	}
 	//commented out for testing purposes
-	db_interface.addNote(img_item, selfUserName, currBookID);
+	db_interface.addNote(img_item, selfUserName, currBookID, currChapter);
 	res.end("Image has uploaded.");
 });
 

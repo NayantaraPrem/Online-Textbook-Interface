@@ -67,23 +67,13 @@ exports.createTable = function(table, primary_key_hash, hash_type, primary_key_r
 }
 
 //Iterating through the whole table, returning all items in table appended to array
-exports.scanTable = function(table, bookid, callback){
+exports.scanTable = function(scanParams, callback){
 	var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
-	// Can add more parameters here to filter results
-	var params = {
-		TableName: table,
-		FilterExpression: "#bkid = :i",
-		ExpressionAttributeNames: {
-			"#bkid": "bookID"
-		},
-		ExpressionAttributeValues: {
-			":i": bookid
-		}
-	};
-     // Return this value
+
+    // Return this value
 	var itemArray = [];
-	console.log("Scanning %s table.", table);
-	dynamodbDoc.scan(params, onScan);
+	console.log("Scanning %s table.", scanParams.TableName);
+	dynamodbDoc.scan(scanParams, onScan);
 
 	function onScan(err, data) {
 		if (err) {
@@ -125,7 +115,7 @@ exports.scanTable = function(table, bookid, callback){
 
 */
 
-exports.addNote = function(item, username, bookid){
+exports.addNote = function(item, username, bookid, chapter){
 	var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 	var ID = item.id;
 	if(typeof ID == 'undefined' || !ID ){
@@ -140,7 +130,8 @@ exports.addNote = function(item, username, bookid){
 		                       "NoteID": ID,
 		                       "info": item,
 		                       "owner": username,
-							   "bookID": bookid
+							   "bookID": bookid,
+							   "chapter": chapter
 			             }
 			     };
 			console.log("Params:" + params.TableName + " " + params.Item.ID + " "+ params.Item.info);
