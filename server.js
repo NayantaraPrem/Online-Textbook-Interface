@@ -43,9 +43,11 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 /* Authentication check */
-function authCheck (userName) {
+function authCheck (userName, res) {
 	if (!isAuthenticated || (selfUserName != userName)) {
-		res.status(401).end();
+		selfUserName = '';
+		isAuthenticated = false;
+		res.redirect('/login');
 	}
 }
 
@@ -98,29 +100,29 @@ app.get('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', 
 
 /* Get XML files */
 app.get('/:userName/Books/:book/OPS/:xml', function(req, res){
-	authCheck(req.params.userName);
+	authCheck(req.params.userName,res);
 	res.sendFile( __dirname + "/public/Books/" + req.params.book + "/OPS/" + req.params.xml);
 });
 
 app.get('/:userName/Books/:book/text/:xhtml', function(req, res){
-	authCheck(req.params.userName);
+	authCheck(req.params.userName,res);
 	res.sendFile( __dirname + "/public/Books/" + req.params.book + "/text/" + req.params.xhtml);
 });
 
 /* Get image files */
 app.get('/:userName/images/:image', function(req, res){
-	authCheck(req.params.userName);
+	authCheck(req.params.userName,res);
 	res.sendFile( __dirname + "/public/Books/Combined/OPS/images/" + req.params.image);
 });
 
 app.get('/:userName/uploads/:image', function(req, res){
-	authCheck(req.params.userName);
+	authCheck(req.params.userName,res);
 	res.sendFile( __dirname + "/public/uploads/" + req.params.image);
 });
 
 /* Get CSS files */
 app.get('/:userName/panels.css', function(req, res){
-	authCheck(req.params.userName);
+	authCheck(req.params.userName,res);
 	res.sendFile( __dirname + "/public/panels.css");
 });
 
@@ -133,22 +135,22 @@ app.get('/login.css', function(req, res){
 });
 
 /*app.get('/:userName/', function(req, res){
-	authCheck(req.params.userName);
+	authCheck(req.params.userName,res);
 	res.sendFile( __dirname + "/public/panels.css");
 });*/
 
 app.get('/:userName/Books/:book/OPS/css/:css', function(req, res){
-	authCheck(req.params.userName);
+	authCheck(req.params.userName,res);
 	res.sendFile( __dirname + "/public/Books/" + req.params.book + "/OPS/css/" + req.params.css);
 });
 
 app.get('/:userName/css/:css', function(req, res){
-	authCheck(req.params.userName);
+	authCheck(req.params.userName,res);
 	res.sendFile( __dirname + "/public/Books/Combined/OPS/css/" + req.params.css);
 });
 
 app.get('/:userName/dashboard.css', function(req, res){
-	authCheck(req.params.userName);
+	authCheck(req.params.userName,res);
 	res.sendFile( __dirname + "/public/dashboard.css");
 });
 
@@ -163,22 +165,24 @@ app.get('/:userName/resizable_panels.js', function(req, res){
 	/***** HACK!!!!! **** Combined needs to call with username in url! Need to change! BREACHES SECURITY*/
 	if (req.params.userName === undefined)
 		res.sendFile( __dirname + "/public/resizable_panels.js");
-	authCheck(req.params.userName);
+	authCheck(req.params.userName,res);
 		res.sendFile( __dirname + "/public/resizable_panels.js");
 
 });
 
 app.get('/:userName/test.js', function(req, res){
-	authCheck(req.params.userName);
+	authCheck(req.params.userName,res);
 	res.sendFile( __dirname + "/public/test.js");
 });
 
 
 app.get('/:userName/dashboard.js', function(req, res){
+	authCheck(req.params.userName,res);
 	res.sendFile( __dirname + "/public/dashboard.js");
 });
 
 app.get("/:userName/template.js", function(req, res){
+	authCheck(req.params.userName,res);
 	res.sendFile(__dirname + "/public/template.js");
 });
 
@@ -187,7 +191,7 @@ app.get("/:userName/template.js", function(req, res){
 // our site initially.
 /*app.get('/:userName/annotations', function(req, res){
    var username = req.params.userName;
-   authCheck(username);
+   authCheck(username,res);
    console.log("Loading preloaded notes");
    var preloaded_notes = [];
    
@@ -213,11 +217,17 @@ app.get(['/','/login'], function(req, res){
   res.sendFile( __dirname + "/login.html");
 });
 
+app.get('/logout', function(req, res){
+  selfUserName = '';
+  isAuthenticated = false;
+  res.redirect('/login');
+});
 // that `req.body` will be filled in with the form elements
 app.post('/login', function(req, res){
-	console.log('Received user id:');
 	var userid = req.body.userId;
-	console.log(userid);
+	var password = req.body.password;
+	console.log('Received user id: ' + userid + 'and pw: ' + password);
+
 	var dynamodb = new AWS.DynamoDB();
 	var params = {
 		TableName: 'PrivacySettings',
@@ -230,11 +240,11 @@ app.post('/login', function(req, res){
 	dynamodb.getItem(params, function(err, data) {
 		if (err) console.log(err, err.stack);
 		else {
-			if (!Object.keys(data).length) {
-				console.log('Invalid user id!');
-				res.redirect('/login?e=usernameNotValid');
+			if (!Object.keys(data).length || (data.Item.password.S != password)) {
+				console.log('Invalid credentials!');
+				res.redirect('/login?e=InvalidCredentials');
 			} else {
-				// Found username in database
+				// Found username & password in database
 				selfUserName = userid;
 				isAuthenticated = true;
 				console.log(data);
@@ -245,15 +255,11 @@ app.post('/login', function(req, res){
 			}
 		}
 	});
-	// search for userid in db, if present, redirect to home page
-	
-
-	//res.send(req.body);
 });
 
 app.get('/:userName/home', function(req,res) {
 	var username = req.params.userName;
-	authCheck(username);
+	authCheck(username,res);
 	console.log("Received username: " + username);
 	var welcome_msg = "Hello " + username;
 	//res.sendFile( __dirname + "/home.html");
@@ -271,7 +277,7 @@ app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
 	var username = req.params.userName;
 	var display = req.params.Display;
 	console.log("app.get book" + bookid + " " + bookname + " page " + display + " username " + username);
-	authCheck(username);
+	authCheck(username,res);
 
 	console.log("Loading preloaded notes");
    	var preloaded_notes = [];
@@ -302,7 +308,7 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
 		var username = req.params.userName;
 		//var display = req.params.Display;
 		console.log("app.get book" + bookid + " " + bookname + " username " + username);
-		authCheck(username);
+		authCheck(username,res);
 		var epubfile = "Public/Books/Book" + bookid + "/" + bookname + ".epub";
 		var check_xml = "Public/Books/Book" + bookid + "/META-INF/container.xml";
 
@@ -383,7 +389,7 @@ app.get('/:userName/upload_img', function(req, res){
 
 /* DEFAULT APP.GET */
 // app.get('/:username/:restUrl', function(req,res) {
-// 	authCheck(req.params.userName);
+// 	authCheck(req.params.userName,res);
 // 	res.sendFile( __dirname + "/" + restUrl);
 // });
 

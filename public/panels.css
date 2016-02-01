@@ -119,6 +119,11 @@ li.page_nav a:hover:not(.active) {
     background-color: #000000;
 }
 
+li.right { 
+    float:right; 
+    width:20%;
+}
+
 .active {
     background-color: #660066;
 }
