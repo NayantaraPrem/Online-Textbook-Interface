@@ -314,21 +314,21 @@ app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
 				}
 			}
    		}
-	});
-	
-	db_interface.scanTable(AnnotationsParams, function(err, preloaded_notes){
-   		// get notes which are filtered
-   		for (var i = 0; i < preloaded_notes.length; i++) {
-   			console.log("Note owner: " + preloaded_notes[i].owner);
-   			for (var j = 0; j < filtered_users.length; j++) {
-   				console.log("Filtered User: " + filtered_users[j]);
-   				if (preloaded_notes[i].owner == filtered_users[j]) {
-   					filtered_notes.push(preloaded_notes[i]);
-   				}
-   			}
-   		}
-		console.log(preloaded_notes);
-		res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: display, username: username});
+
+   		db_interface.scanTable(AnnotationsParams, function(err, preloaded_notes){
+	   		// get notes which are filtered
+	   		for (var i = 0; i < preloaded_notes.length; i++) {
+	   			console.log("Note owner: " + preloaded_notes[i].owner);
+	   			for (var j = 0; j < filtered_users.length; j++) {
+	   				console.log("Filtered User: " + filtered_users[j]);
+	   				if (preloaded_notes[i].owner == filtered_users[j]) {
+	   					filtered_notes.push(preloaded_notes[i]);
+	   				}
+	   			}
+	   		}
+			console.log(preloaded_notes);
+			res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: display, username: username});
+		});
 	});
 });
 
@@ -457,21 +457,23 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
 				}
 			}
    		}
+
+   		db_interface.scanTable(AnnotationsParams, function(err, preloaded_notes){
+			// get notes which are filtered
+	   		for (var i = 0; i < preloaded_notes.length; i++) {
+	   			console.log("Note owner: " + preloaded_notes[i].owner);
+	   			for (var j = 0; j < filtered_users.length; j++) {
+	   				console.log("Filtered User: " + filtered_users[j]);
+	   				if (preloaded_notes[i].owner == filtered_users[j]) {
+	   					filtered_notes.push(preloaded_notes[i]);
+	   				}
+	   			}
+	   		}
+			res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: "toADD", username: username});
+		});
 	});
 	
-   db_interface.scanTable(AnnotationsParams, function(err, preloaded_notes){
-		// get notes which are filtered
-   		for (var i = 0; i < preloaded_notes.length; i++) {
-   			console.log("Note owner: " + preloaded_notes[i].owner);
-   			for (var j = 0; j < filtered_users.length; j++) {
-   				console.log("Filtered User: " + filtered_users[j]);
-   				if (preloaded_notes[i].owner == filtered_users[j]) {
-   					filtered_notes.push(preloaded_notes[i]);
-   				}
-   			}
-   		}
-		res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: "toADD", username: username});
-	});
+
 });
 
 app.get('/:userName/upload_img', function(req, res){
