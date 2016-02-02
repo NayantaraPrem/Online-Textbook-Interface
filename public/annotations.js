@@ -20,8 +20,19 @@ $(document).on('click', '.panel div.clickable', function (e) {
 });
 
 $( document ).ready(function() {
+	$(":button[name='edit']").hide();
+	$(":button[name='delete']").hide();
+	$(":submit[name='submit']").hide();
+
+	// Only show edit, delete & submit buttons for own annotations
 	$.each(annotations, function(i, item) {
 		$("#textbody" + item.NoteID).html(item.info.body);
+		console.log("************Note Owner: " + item.owner + " User: " + userId);
+		if(item.owner == userId) {
+			console.log("************Matched user!");
+			$("#editButton" + item.NoteID).show();
+			$("#deleteButton" + item.NoteID).show();
+		}
 	});
 
 });
@@ -32,9 +43,6 @@ $(function () {
 
 var i = 0;
 $(document).on('click', '#add_annotation', function () {
-	var pathname = window.location.pathname;
-	var username = pathname.replace('/annotations', '');
-	username = username.replace('/', '');
 	var new_annot = '\
 		<div class="row">\
 			<div class="col-md-12">\
@@ -42,7 +50,7 @@ $(document).on('click', '#add_annotation', function () {
 					<form id="ajaxform' + i +'" name="ajaxform" class="form">\
 						<div id="panel-heading' + i + '" class="panel-heading clickable writable">\
 							<em> \
-								<span class="ownerName" id="ownername' + i + '">['+username+']</span>\
+								<span class="ownerName" id="ownername' + i + '">'+userId+'</span>\
 							</em>\
 							<h3 class="panel-title">\
 								<input class="annt_title" name="title" id="texttitle'+i+'"type="text" placeholder="Enter Title"/>\
@@ -63,7 +71,7 @@ $(document).on('click', '#add_annotation', function () {
 				</div>\
 			</div>\
 		</div>';
-	$('#container').append(new_annot);
+	$('#annotation').append(new_annot);
 	i++;
 });
 
@@ -163,6 +171,7 @@ function edit_annt(e) {
     e.preventDefault();
 	var id = e.currentTarget.id;
 	id = id.replace("editButton", "");
+	$("#" + id).show();
 	$("#panel-heading"+id).addClass('writable');
 	$("#panel-body"+id).addClass('writable');
 	$("#texttitle"+id).removeAttr('readonly');

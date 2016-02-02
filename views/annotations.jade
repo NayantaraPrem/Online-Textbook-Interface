@@ -3,6 +3,7 @@
 //  include .includes/head.jade
 //  body
 #container.container-fluid
+  #annotation.div
       h3.heading
         | My Annotations
       .row
@@ -24,23 +25,23 @@
                 form.form(id="ajaxform#{note.NoteID}", name='ajaxform')
                   .panel-heading.clickable(id="panel-heading#{note.NoteID}")
                     em
-                      span.ownerName(id="ownername#{note.NoteID}")="["+note.owner+"]"
+                      span.ownerName(id="ownername#{note.NoteID}")=note.owner
                     h3.panel-title
                       input.annt_title(name='title', id="texttitle#{note.NoteID}", type='text', value=note.info.title, readonly)
                     span.pull-right
-                      button.btn.btn-primary.btn-sm(id="editButton#{note.NoteID}" onclick='edit_annt(event)')
+                      button.btn.btn-primary.btn-sm(name='edit' id="editButton#{note.NoteID}" onclick='edit_annt(event)')
                         span.glyphicon.glyphicon-pencil
-                      button.btn.btn-primary.btn-sm(id="deleteButton#{note.NoteID}" onclick='delete_annt(event)')
+                      button.btn.btn-primary.btn-sm(name='delete' id="deleteButton#{note.NoteID}" onclick='delete_annt(event)')
                         span.glyphicon.glyphicon-trash
                   .panel-body.writable(id="panel-body#{note.NoteID}")
                     .annt_body(name='body', id="textbody#{note.NoteID}", contentEditable='false')
-                  input(type='submit', value='Submit', id="#{note.NoteID}")
+                  input(type='submit' name='submit' value='Submit' id="#{note.NoteID}")
         if(note.info.type == "IMG")
           //add icons or whatever for images here
           .row
             .col-md-9
               em
-                span.ownerName="["+note.owner+"]"
+                span.ownerName=note.owner
               img.img-thumbnail.thumbnail(src=note.info.img_dest width=160 height=100)
             .col-md-3
               button.btn.btn-primary.btn-sm(type='button', data-toggle='modal', data-target="#mymod#{index}")
@@ -52,7 +53,8 @@
                     .modal-body
                       img.img-responsive(src=note.info.img_dest)
               p
-              button.btn.btn-primary.btn-sm(id="deleteButton#{note.NoteID}" onclick='delete_img(event)')
+              button.btn.btn-primary.btn-sm(name='delete' id="deleteButton#{note.NoteID}" onclick='delete_img(event)')
                 span.glyphicon.glyphicon-trash
               p
+  #filter.div
       include annotationsFilter.jade

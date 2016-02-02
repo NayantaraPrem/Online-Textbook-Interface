@@ -11,7 +11,7 @@ var config = require('./app_config');
 var AWS = require("aws-sdk");
 var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 var books = [ 
-				{title:'The War of the Worlds', epub:'testbook'},
+				{title:'The War of The Worlds', epub:'testbook'},
 				{title:'The Einstein Theory of Relativity', epub:'relativity'},
 				{title:'Structure and Interpretation of Computer Programs', epub:'SCMP'}
 			];
@@ -150,18 +150,18 @@ app.get('/:userName/dashboard.css', function(req, res){
 });
 
 /* Get JS files */
-app.get('/resizable_panels.js', function(req, res){
+app.get('/annotations.js', function(req, res){
 	/***** HACK!!!!! **** Combined needs to call with username in url! Need to change! BREACHES SECURITY*/
-	res.sendFile( __dirname + "/public/resizable_panels.js");
+	res.sendFile( __dirname + "/public/annotations.js");
 });
 
 
-app.get('/:userName/resizable_panels.js', function(req, res){
+app.get('/:userName/annotations.js', function(req, res){
 	/***** HACK!!!!! **** Combined needs to call with username in url! Need to change! BREACHES SECURITY*/
 	if (req.params.userName === undefined)
-		res.sendFile( __dirname + "/public/resizable_panels.js");
+		res.sendFile( __dirname + "/public/annotations.js");
 	authCheck(req.params.userName,res);
-		res.sendFile( __dirname + "/public/resizable_panels.js");
+		res.sendFile( __dirname + "/public/annotations.js");
 
 });
 
@@ -195,7 +195,6 @@ app.get('/logout', function(req, res){
 app.post('/login', function(req, res){
 	var userid = req.body.userId;
 	var password = req.body.password;
-	console.log('Received user id: ' + userid + 'and pw: ' + password);
 
 	var dynamodb = new AWS.DynamoDB();
 	var params = {
@@ -241,6 +240,7 @@ app.get('/:userName/home', function(req,res) {
 
 /* combined display pages */
 app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
+	console.log("****************With Display");
 	var bookid = req.params.bookId;
 	var bookname;
 		//var bookname = req.params.bookName;
@@ -269,7 +269,7 @@ app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
    	var preloaded_notes = [];
    	var filtered_notes = [];
 	var users = [];
-   	var filtered_users = [selfUserName];
+   	var filtered_users = [username];
 	
 	// Can add more parameters here to filter results
 	var AnnotationsParams = {
@@ -293,7 +293,7 @@ app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
 		// get all users with public notes
 		//TODO: add this filter to scanTable params
 		for (var i = 0; i < users.length; i++) {
-			if (users[i].userId != selfUserName)
+			if (users[i].userId != username)
 			{			
 				switch (bookid) {
 					case '1':
@@ -319,7 +319,9 @@ app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
 	db_interface.scanTable(AnnotationsParams, function(err, preloaded_notes){
    		// get notes which are filtered
    		for (var i = 0; i < preloaded_notes.length; i++) {
+   			console.log("Note owner: " + preloaded_notes[i].owner);
    			for (var j = 0; j < filtered_users.length; j++) {
+   				console.log("Filtered User: " + filtered_users[j]);
    				if (preloaded_notes[i].owner == filtered_users[j]) {
    					filtered_notes.push(preloaded_notes[i]);
    				}
@@ -335,7 +337,9 @@ app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
 //Based on input, do path-replace logic to decide the correct parent folder path (Book1 or Book2 etc) to append to the href paths in output TOC (book.html). 
 //Ensure the parent folder contains the extracted epub and especially the META-INF/conatiner.xml. (Extraction is scripted but can be manual as well
 app.get('/:userName/book:bookId=:bookName', function(req, res){
+		console.log("****************Without Display");
 		var bookid = req.params.bookId;
+		console.log("book id:" + bookid);
 		currBookID = bookid;
 		var bookname;
 		//var bookname = req.params.bookName;
@@ -407,7 +411,7 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
    var preloaded_notes = [];
    var filtered_notes = [];
    var users = [];
-   var filtered_users = [selfUserName];
+   var filtered_users = [username];
 	
 	// Can add more parameters here to filter results
 	var AnnotationsParams = {
@@ -428,10 +432,11 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
 	};
 	
    db_interface.scanTable(UsersParams, function(err, users){
+   		console.log("err " + err + "users " + users);
 		// get all users with public notes
 		//TODO: add this filter to scanTable params
 		for (var i = 0; i < users.length; i++) {
-			if (users[i].userId != selfUserName)
+			if (users[i].userId != username)
 			{			
 				switch (bookid) {
 					case '1':
@@ -457,7 +462,9 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
    db_interface.scanTable(AnnotationsParams, function(err, preloaded_notes){
 		// get notes which are filtered
    		for (var i = 0; i < preloaded_notes.length; i++) {
+   			console.log("Note owner: " + preloaded_notes[i].owner);
    			for (var j = 0; j < filtered_users.length; j++) {
+   				console.log("Filtered User: " + filtered_users[j]);
    				if (preloaded_notes[i].owner == filtered_users[j]) {
    					filtered_notes.push(preloaded_notes[i]);
    				}
@@ -503,18 +510,8 @@ app.post('/annt_submit_or_edit', function(req, res){
 	} else{
 		console.log("Editing");
 		var note;
-		/*Maybe hide the edit/delete button to begin with if not the owner of note*/
-		// db_interface.getNote(id, function(err, note){
-		// 	console.log("Received note: " + note);
-		// 	if (note.owner == selfUserName) {
-				db_interface.updateNote(id, title, body);
-				res.send(linkedBody);
-		// 	} else {
-		// 		console.log("Not authorized to edit note! note's owner is: ", note.owner);
-		// 		res.send("Not")
-		// 	}
-		// }); 
-
+		db_interface.updateNote(id, title, body);
+		res.send(linkedBody);
 	}
 	
 });
