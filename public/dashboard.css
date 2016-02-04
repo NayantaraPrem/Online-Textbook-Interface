@@ -7,6 +7,7 @@
 /*http://a4.mzstatic.com/us/r30/Purple/v4/9c/56/6f/9c566fdf-980d-d6c0-de39-016cae8f1757/screen1136x1136.jpeg
 http://i.imgur.com/r2gusz2.jpg
 http://i.imgur.com/6UNQ3PZ.jpg
+http://i.imgur.com/b4h7oAX.jpg
 */
 body{
   background: url('http://i.imgur.com/b4h7oAX.jpg') no-repeat center center fixed;
@@ -21,7 +22,7 @@ body{
     position:absolute;
     top:0;
     right:0;
-    background:rgba(199, 200, 204, 0.80);
+    background:rgba(41, 32, 40, 0.8);
     width:100%;
     height:100%;
     padding:2%;
@@ -58,3 +59,4 @@ body{
  height:30px;
  width:100%;
 }
+
