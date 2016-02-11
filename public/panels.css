@@ -164,3 +164,6 @@ button .btn-primary, .btn-sm {
 
 a.clickable { color: inherit; }
 a.clickable:hover { text-decoration:none; }
+.popover{
+    color: rgb(31, 31, 20);
+}

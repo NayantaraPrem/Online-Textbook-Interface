@@ -94,6 +94,14 @@ function replace_url(from, to) {
 	});
 }
 
+// Get the speedreading js - HACKY
+app.get('/:userName/:book/bookmarklet.js', function(req, res){
+ res.sendFile(__dirname +"/jetzt/bookmarklet.js");
+});
+app.get('/:userName/bookmarklet.js', function(req, res){
+ res.sendFile(__dirname +"/jetzt/bookmarklet.js");
+});
+
 app.get('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', function(req, res){
 	res.sendFile( "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
 });
@@ -556,9 +564,9 @@ app.post('/:userName/setprivacy', function(req, res){
   var textname= books[textID].title.split(' ').join('_');
   var privacy_val = req.body.privacy;
   
-  console.log("SET PRIVACY " + privacy_val + " for " + textname + " for user " + username);
+ // console.log("SET PRIVACY " + privacy_val + " for " + textname + " for user " + username);
   var user = {  "userid":username, "textbook":textname, "privacy":privacy_val};
-  console.log("user text " + user.textbook);
+  //console.log("user text " + user.textbook);
   db_interface.updateUser(user);
 });
 
