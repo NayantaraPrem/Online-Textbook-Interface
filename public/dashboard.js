@@ -9,19 +9,22 @@ $( document ).ready(function() {
             $(this).find('.caption').slideUp(250); //.fadeOut(205)
         }
     ); 
+    $(".bookIcon").click(function(e) {
+      if(e.target.tagName ==  "BUTTON")
+        return;
+      var pathname = window.location.pathname;
+      var username = pathname.replace('/home', '');
+      var location =  "http://localhost" + username + "/";
+      if (this.name == 'combined') {
+        location += ("Combined");
+      } else {
+        location += (this.id + "=" + this.name);
+      }
+      window.location.href = location;
+    });
 });
 
-$(".bookIcon").click(function() {
-  var pathname = window.location.pathname;
-  var username = pathname.replace('/home', '');
-  var location =  "http://localhost" + username + "/";
-  if (this.name == 'combined') {
-    location += ("Combined");
-  } else {
-    location += (this.id + "=" + this.name);
-  }
-  window.location.href = location;
-});
+
 
 $(document).ready(function(){
   $("#myBtn").click(function(){
