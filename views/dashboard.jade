@@ -29,7 +29,7 @@ html(lang='en')
           -var ind = index+1
           .col-md-4
             p(style="padding-top: 1.5cm")
-              .thumbnail(class="bookIcon", value="#{book.title}", name="#{book.epub}", id="book#{ind}")
+              .thumbnail(class="bookIcon", value="#{book.title}", name="#{book.epub}", id="book#{ind}", style="cursor:pointer")
                 .caption
                   .blur
                     h3(style="border-top:2px solid white; border-bottom:2px solid white; padding:10px;")=book.title
