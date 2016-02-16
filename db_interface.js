@@ -81,7 +81,6 @@ exports.scanTable = function(scanParams, callback){
 		} else {
 			console.log("Scan succeeded for " + scanParams.TableName);
 			//Appending item to Array of all scanned items
-			var x = 0;
 			data.Items.forEach(function(item) {
 				//console.dir(item);
 				itemArray.push(item);
@@ -238,33 +237,3 @@ exports.updateUser = function(editedUser){
 	});	
 }
 
-exports.annt_summary_book = function(info){
-	var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
-	var params = {
-		               TableName: config.amazondb.annotationTable,
-						Key: { 
-							"NoteID" : ANNT_1454567920004
-						},
-
-			            KeyConditionExpression: "#bookno = :id",
-					    ExpressionAttributeNames:{
-					        "#bookno": "bookID"
-					    },
-					    ExpressionAttributeValues: {
-					        ":id":2
-					    }
-
-				};
-
-				
-	dynamodbDoc.get(params, function(err, data) {
-	    if (err) {
-	        console.error("Unable to get item. Error JSON:", JSON.stringify(err, null, 2));
-	    	//callback(err, null);
-	    }
-	    else {
-	        console.log("Got SUMMARY item successfully:", JSON.stringify(data, null, 2));
-	        //function(null, data);
-	    }
-	});
-}
