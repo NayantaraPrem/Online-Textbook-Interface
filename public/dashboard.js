@@ -58,3 +58,28 @@ function set_privacy(e) {
 		}
     });   
 }
+
+function annt_sum(e) {
+   e.preventDefault();
+   var pathname = window.location.pathname;
+   var username = pathname.replace('/home', '');
+   var postData = e.currentTarget.id;
+   var arr = postData.split('_');
+   arr[1] = 1;
+   alert('Setting book id as ' + arr[1]);
+   document.getElementById(postData).disabled = true;
+
+
+      $.ajax({
+    type: 'POST',
+    data: JSON.stringify({"textbookid":arr[1]}),
+    contentType: 'application/json',
+    url: 'http://localhost:80' + username + '/summarize_annt',            
+    success: function(data) {
+      //alert("Sent " + data);
+    },
+    error: function(data){
+      window.console.log(data);
+    }
+    });   
+}

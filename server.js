@@ -42,6 +42,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+
+/*****************************************************************DEFINE CUSTOM FUNCTIONS*****************************************************************/
+
 /* Authentication check */
 function authCheck (userName, res) {
 	if (!isAuthenticated || (selfUserName != userName)) {
@@ -94,6 +97,10 @@ function replace_url(from, to) {
 	});
 }
 
+
+
+
+/******************************************************************GET FILES*****************************************************************************/
 // Get the speedreading js - HACKY
 app.get('/:userName/:book/bookmarklet.js', function(req, res){
  res.sendFile(__dirname +"/jetzt/bookmarklet.js");
@@ -189,6 +196,12 @@ app.get("/:userName/template.js", function(req, res){
 	res.sendFile(__dirname + "/public/template.js");
 });
 
+
+
+
+
+
+/**********************************************************************LOGIN and LOGOUT**********************************************************************/
 //THIS IS THE LOGIN PAGE
 app.get(['/','/login'], function(req, res){
   res.sendFile( __dirname + "/login.html");
@@ -233,6 +246,10 @@ app.post('/login', function(req, res){
 	});
 });
 
+
+
+
+/***********************************************************HOME PAGE/ DASHBOARD***************************************************************/
 app.get('/:userName/home', function(req,res) {
 	var username = req.params.userName;
 	authCheck(username,res);
@@ -246,6 +263,9 @@ app.get('/:userName/home', function(req,res) {
 	res.render('dashboard', { welcome_msg: welcome_msg, books: books, imgs:img_paths});
 });
 
+
+
+/**********************************************************************BOOK DISPLAY**************************************************************/
 /* combined display pages */
 app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
 	console.log("****************With Display");
@@ -339,6 +359,10 @@ app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
 		});
 	});
 });
+
+
+
+
 
 //URLs to localhost/book<number> is called onclicking the 'get book' button on Home.html
 //Given a list of available books, get the chosen number from user
@@ -480,9 +504,16 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
 			res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: "toADD", username: username});
 		});
 	});
+
 	
 
 });
+
+
+
+/*********************************************************************ANNOTATIONS**************************************************************/
+
+
 
 app.get('/:userName/upload_img', function(req, res){
 	res.sendFile( __dirname + "/" + "upload_img.html" );
@@ -540,6 +571,72 @@ app.post('/delete_annt', function(req, res){
 
 });
 
+//app.post('/:userName/book:bookId=:bookName', function(req, res)
+app.post('/:userName/summarize_annt', function(req, res){
+
+		console.log("****************Without Display");
+		//var bookid = req.params.bookId;
+		var bookid = 2;
+		//console.log("SUMMARIZE ANNOTATIONS for:" + bookid);
+		currBookID = "1";
+		console.log("SUMMARIZE ANNOTATIONS for currBookID " + currBookID);
+		// = bookid + "_main";
+
+		var bookname;
+		//var bookname = req.params.bookName;
+		  //TODO: once privacy settings are stored with corresponding bookid/bookname
+	      //remove this swtich-case
+			switch(bookid) {
+				case '1':
+					bookname = 'The_War_of_The_Worlds';
+					break;
+				case '2':
+					bookname = 'The_Einstein_Theory_of_Relativity';
+					break;
+				case '3':
+					bookname = 'Computing';
+					break;
+				default:
+					bookname = 'ERR_BOOK_NOT_FOUND';
+			}
+		   //var username = req.params.userName;
+		
+		   console.log("Loading all annotations for book2");
+		   var all_annts = [];
+		   //var filtered_notes = [];
+		   //var users = [];
+		   //var filtered_users = [username];
+	
+			// Can add more parameters here to filter results
+			var AnnotationsParams = {
+				TableName: 'Annotations',
+				FilterExpression: "#bkid = :i",
+				ExpressionAttributeNames: {
+					"#bkid": "bookID"
+				},
+				ExpressionAttributeValues: {
+					":i": currBookID			
+				}
+			};
+
+
+
+
+			   		db_interface.scanTable(AnnotationsParams, function(err, all_annts){
+			   			console.log("Received all annotations");
+			   			for (var j = 0; j < all_annts.length; j++) {
+		    			console.log("all annotations are: " + all_annts[j].info.title);
+		   				}
+						//res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: "toADD", username: username});
+					});
+
+		   
+
+
+			//res.send(req.body);
+});
+
+
 
 //Uploading images
 app.post('/api/photo', uploading.single('pic'), function(req, res){
@@ -558,6 +655,8 @@ app.post('/api/photo', uploading.single('pic'), function(req, res){
 	res.end("Image has uploaded.");
 });
 
+
+/*********************************************************************SET PRIVACY**************************************************************/
 app.post('/:userName/setprivacy', function(req, res){
   var username = req.params.userName;
   var textID = req.body.textbookid;
@@ -569,5 +668,8 @@ app.post('/:userName/setprivacy', function(req, res){
   //console.log("user text " + user.textbook);
   db_interface.updateUser(user);
 });
+
+
+/******************************************************************************START**********************************************************************/
 
 app.listen(80);
