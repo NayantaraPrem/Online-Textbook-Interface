@@ -97,7 +97,23 @@ function replace_url(from, to) {
 	});
 }
 
-
+function get_book_name(bookid) {
+	var bookname;
+	switch(bookid) {
+		case '1':
+			bookname = 'The_War_of_The_Worlds';
+			break;
+		case '2':
+			bookname = 'The_Einstein_Theory_of_Relativity';
+			break;
+		case '3':
+			bookname = 'Computing';
+			break;
+		default:
+			bookname = 'ERR_BOOK_NOT_FOUND';
+	}
+	return bookname;
+}
 
 
 /******************************************************************GET FILES*****************************************************************************/
@@ -267,30 +283,17 @@ app.get('/:userName/home', function(req,res) {
 
 /**********************************************************************BOOK DISPLAY**************************************************************/
 /* combined display pages */
-app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
-	console.log("****************With Display");
+app.get('/:userName/book:bookId-:bookName/:chapterName', function(req, res){
 	var bookid = req.params.bookId;
 	var bookname;
 		//var bookname = req.params.bookName;
 		  //TODO: once privacy settings are stored with corresponding bookid/bookname
 	      //remove this swtich-case
-			switch(bookid) {
-				case '1':
-					bookname = 'The_War_of_The_Worlds';
-					break;
-				case '2':
-					bookname = 'The_Einstein_Theory_of_Relativity';
-					break;
-				case '3':
-					bookname = 'Computing';
-					break;
-				default:
-					bookname = 'ERR_BOOK_NOT_FOUND';
-			}
+	bookname = get_book_name(bookid);
 	var username = req.params.userName;
-	var display = req.params.Display;
-	currChapter = display;
-	console.log("app.get book" + bookid + " " + bookname + " page " + display + " username " + username);
+	var chaptername = req.params.chapterName;
+	currChapter = chaptername;
+	console.log("app.get book" + bookid + " " + bookname + " page " + chaptername + " username " + username);
 	authCheck(username,res);
 
 	console.log("Loading preloaded notes");
@@ -355,7 +358,7 @@ app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
 	   			}
 	   		}
 			console.log(preloaded_notes);
-			res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: display, username: username});
+			res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: chaptername, username: username});
 		});
 	});
 });
@@ -369,7 +372,7 @@ app.get('/:userName/book:bookId-:bookName/:Display', function(req, res){
 //Based on input, do path-replace logic to decide the correct parent folder path (Book1 or Book2 etc) to append to the href paths in output TOC (book.html). 
 //Ensure the parent folder contains the extracted epub and especially the META-INF/conatiner.xml. (Extraction is scripted but can be manual as well
 app.get('/:userName/book:bookId=:bookName', function(req, res){
-		console.log("****************Without Display");
+		console.log("****************Without Chaptername");
 		var bookid = req.params.bookId;
 		console.log("book id:" + bookid);
 		currBookID = bookid;
@@ -377,19 +380,7 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
 		//var bookname = req.params.bookName;
 		  //TODO: once privacy settings are stored with corresponding bookid/bookname
 	      //remove this swtich-case
-			switch(bookid) {
-				case '1':
-					bookname = 'The_War_of_The_Worlds';
-					break;
-				case '2':
-					bookname = 'The_Einstein_Theory_of_Relativity';
-					break;
-				case '3':
-					bookname = 'Computing';
-					break;
-				default:
-					bookname = 'ERR_BOOK_NOT_FOUND';
-			}
+		bookname = get_book_name(bookid);
 		var username = req.params.userName;
 		//var display = req.params.Display;
 		//TODO: this is temporary for the main page
@@ -403,35 +394,35 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
 
 		fs.stat(check_xml, function(err, stat){
 
-		        if (err) { 
+			if (err) { 
 			    
 				var extract = require('extract-zip');
 				var tar = "Public/Books/Book" + bookid + "/";
 				extract(epubfile, {dir: tar}, function (err) {
 						
-						if(err){
-							console.log('Error Extracting');
-						}
-						else
-							console.log('Extracting');
-				 	});
-				  }
+					if(err){
+						console.log('Error Extracting');
+					}
+					else
+						console.log('Extracting');
+			 	});
+			}
 
-			   else {
-       				console.log('Already Extracted');
-		        } 
+		   else {
+   				console.log('Already Extracted');
+			} 
 
 		});
 		
-	  converter.parse(epubfile, function (err, epubData) {
+		converter.parse(epubfile, function (err, epubData) {
 		
 			var htmlData = converter.convertMetadata(epubData);
 			console.log(htmlData); //Debugging
 
 			//USE FILE WRITE INSTEAD
 			fs.writeFile('Public/Books/Book' + bookid + '/TableOfContents.html', htmlData.htmlNav, function (err) {
-		 	 if (err) return console.log(err);
-		 	 console.log('htmlNav successfully sent to book.html!');
+				if (err) return console.log(err);
+				console.log('htmlNav successfully sent to book.html!');
 			});
 			
 			var find = "href=\"" ;
@@ -458,7 +449,7 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
 			":j": currChapter			
 		}
 	};
-	
+		
 	var UsersParams = {
 		TableName: 'PrivacySettings'
 	};
@@ -492,6 +483,7 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
 
    		db_interface.scanTable(AnnotationsParams, function(err, preloaded_notes){
 			// get notes which are filtered
+			console.log("PRINTING ALL NOTES!!!!" + JSON.stringify(preloaded_notes));
 	   		for (var i = 0; i < preloaded_notes.length; i++) {
 	   			console.log("Note owner: " + preloaded_notes[i].owner);
 	   			for (var j = 0; j < filtered_users.length; j++) {
@@ -509,7 +501,95 @@ app.get('/:userName/book:bookId=:bookName', function(req, res){
 
 });
 
+app.get('/:userName/book:bookId=:bookName/:chapterName/summary', function(req, res){
+		//var bookid = req.params.bookId;
+		var currBookID = req.params.bookId;
+		var currChapter = req.params.chapterName;
+		//console.log("SUMMARIZE ANNOTATIONS for:" + bookid);
+		console.log("SUMMARIZE ANNOTATIONS for currBookID " + currBookID);
+		// = bookid + "_main";
 
+		var bookname;
+		//var bookname = req.params.bookName;
+		//TODO: once privacy settings are stored with corresponding bookid/bookname
+		//remove this swtich-case
+		bookname = get_book_name(currBookID);
+		//var username = req.params.userName;
+
+		console.log("Loading all annotations for book2");
+		var all_annts = [];
+		//var filtered_notes = [];
+		//var users = [];
+		//var filtered_users = [username];
+
+		// Can add more parameters here to filter results
+		var AnnotationsParams = {
+			TableName: 'Annotations',
+			FilterExpression: "#bkid = :i and #chid = :j",
+			ExpressionAttributeNames: {
+				"#bkid": "bookID",
+				"#chid": "chapter"
+			},
+			ExpressionAttributeValues: {
+				":i": currBookID,
+				":j": currChapter			
+			}
+		};
+
+		db_interface.scanTable(AnnotationsParams, function(err, all_annts){
+			console.log("Received all annotations");
+			for (var j = 0; j < all_annts.length; j++) {
+				console.log("all annotations are: " + all_annts[j].info.title);
+			}
+			res.render('Summary', { title: bookname, chapter: currChapter, notes: all_annts});
+		//res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: "toADD", username: username});
+		});
+
+		//res.send(req.body);
+});
+
+app.get('/:userName/book:bookId=:bookName/summary', function(req, res){
+		//var bookid = req.params.bookId;
+		var currBookID = req.params.bookId;
+		var currChapter = currBookID + "_main";
+		console.log("SUMMARIZE ANNOTATIONS for currBookID " + currBookID + " chapter " + currChapter);
+
+		var bookname;
+		//var bookname = req.params.bookName;
+		//TODO: once privacy settings are stored with corresponding bookid/bookname
+		//remove this swtich-case
+		bookname = get_book_name(currBookID);
+		//var username = req.params.userName;
+
+		console.log("Loading all annotations for book2");
+		var all_annts = [];
+		//var filtered_notes = [];
+		//var users = [];
+		//var filtered_users = [username];
+
+		// Can add more parameters here to filter results
+		var AnnotationsParams = {
+			TableName: 'Annotations',
+			FilterExpression: "#bkid = :i and #chid = :j",
+			ExpressionAttributeNames: {
+				"#bkid": "bookID",
+				"#chid": "chapter"
+			},
+			ExpressionAttributeValues: {
+				":i": currBookID,
+				":j": currChapter			
+			}
+		};
+
+		db_interface.scanTable(AnnotationsParams, function(err, all_annts){
+			console.log("Received all annotations");
+			for (var j = 0; j < all_annts.length; j++) {
+				console.log("all annotations are: " + all_annts[j].info.title);
+			}
+			res.render('Summary', { title: bookname, chapter: currChapter, notes: all_annts});
+		});
+
+});
 
 /*********************************************************************ANNOTATIONS**************************************************************/
 
@@ -557,6 +637,7 @@ app.post('/annt_submit_or_edit', function(req, res){
 	
 });
 
+
 // Deal with deleting annotations
 app.post('/delete_annt', function(req, res){
 	console.log("Received annt to delete @:");
@@ -572,7 +653,7 @@ app.post('/delete_annt', function(req, res){
 });
 
 //app.post('/:userName/book:bookId=:bookName', function(req, res)
-app.post('/:userName/summarize_annt', function(req, res){
+/*app.post('/:userName/summarize_annt', function(req, res){
 
 		console.log("****************Without Display");
 		//var bookid = req.params.bookId;
@@ -584,58 +665,41 @@ app.post('/:userName/summarize_annt', function(req, res){
 
 		var bookname;
 		//var bookname = req.params.bookName;
-		  //TODO: once privacy settings are stored with corresponding bookid/bookname
-	      //remove this swtich-case
-			switch(bookid) {
-				case '1':
-					bookname = 'The_War_of_The_Worlds';
-					break;
-				case '2':
-					bookname = 'The_Einstein_Theory_of_Relativity';
-					break;
-				case '3':
-					bookname = 'Computing';
-					break;
-				default:
-					bookname = 'ERR_BOOK_NOT_FOUND';
+		//TODO: once privacy settings are stored with corresponding bookid/bookname
+		//remove this swtich-case
+		bookname = get_book_name(bookid);
+		//var username = req.params.userName;
+
+		console.log("Loading all annotations for book2");
+		var all_annts = [];
+		//var filtered_notes = [];
+		//var users = [];
+		//var filtered_users = [username];
+
+		// Can add more parameters here to filter results
+		var AnnotationsParams = {
+			TableName: 'Annotations',
+			FilterExpression: "#bkid = :i",
+			ExpressionAttributeNames: {
+				"#bkid": "bookID"
+			},
+			ExpressionAttributeValues: {
+				":i": currBookID			
 			}
-		   //var username = req.params.userName;
-		
-		   console.log("Loading all annotations for book2");
-		   var all_annts = [];
-		   //var filtered_notes = [];
-		   //var users = [];
-		   //var filtered_users = [username];
-	
-			// Can add more parameters here to filter results
-			var AnnotationsParams = {
-				TableName: 'Annotations',
-				FilterExpression: "#bkid = :i",
-				ExpressionAttributeNames: {
-					"#bkid": "bookID"
-				},
-				ExpressionAttributeValues: {
-					":i": currBookID			
-				}
-			};
+		};
 
+		db_interface.scanTable(AnnotationsParams, function(err, all_annts){
+			console.log("Received all annotations");
+			for (var j = 0; j < all_annts.length; j++) {
+				console.log("all annotations are: " + all_annts[j].info.title);
+			}
+			res.send(all_annts);
+		//res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: "toADD", username: username});
+		});
 
-
-
-			   		db_interface.scanTable(AnnotationsParams, function(err, all_annts){
-			   			console.log("Received all annotations");
-			   			for (var j = 0; j < all_annts.length; j++) {
-		    			console.log("all annotations are: " + all_annts[j].info.title);
-		   				}
-						//res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: "toADD", username: username});
-					});
-
-		   
-
-
-			//res.send(req.body);
+		//res.send(req.body);
 });
-
+*/
 
 
 //Uploading images

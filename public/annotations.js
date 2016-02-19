@@ -19,26 +19,22 @@ $(document).on('click', '.panel div.clickable', function (e) {
     }
 });
 
-$( document ).ready(function() {
-	$(":button[name='edit']").hide();
+$(document).ready(function() {
+    $('.panel-heading span.clickable').click();
+    $('.panel div.clickable').click();
+
+    $(":button[name='edit']").hide();
 	$(":button[name='delete']").hide();
 	$(":submit[name='submit']").hide();
 
 	// Only show edit, delete & submit buttons for own annotations
 	$.each(annotations, function(i, item) {
 		$("#textbody" + item.NoteID).html(item.info.body);
-		console.log("************Note Owner: " + item.owner + " User: " + userId);
 		if(item.owner == userId) {
-			console.log("************Matched user!");
 			$("#editButton" + item.NoteID).show();
 			$("#deleteButton" + item.NoteID).show();
 		}
 	});
-
-});
-$(function () {
-    $('.panel-heading span.clickable').click();
-    $('.panel div.clickable').click();
 });
 
 var i = 0;
@@ -180,6 +176,32 @@ function edit_annt(e) {
     var postData = e.currentTarget.id;
 	return false;
 }
+
+function generate_summary(e) {
+   e.preventDefault();
+   // var pathname = window.location.pathname;
+   window.location.href = window.location.href + '/summary';
+/*   var username = pathname.replace('/home', '');
+   var postData = e.currentTarget.id;
+   var arr = postData.split('_');
+   arr[1] = 1;
+   alert('Setting book id as ' + arr[1]);
+   document.getElementById(postData).disabled = true;
+
+
+      $.ajax({
+    type: 'POST',
+    data: JSON.stringify({"textbookid":arr[1]}),
+    contentType: 'application/json',
+    url: 'http://localhost:80' + username + '/summarize_annt',            
+    success: function(data) {
+      //alert("Sent " + data);
+    },
+    error: function(data){
+      window.console.log(data);
+    }
+    });   
+*/}
 
 function centerModal() {
     $(this).css('display', 'block');

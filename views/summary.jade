@@ -1,0 +1,29 @@
+doctype html
+html(lang='en')
+ head
+    title Summary Page
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
+    link(rel='stylesheet', type='text/css', href='dashboard.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+ body
+  h1.heading 
+      | Summary Notes
+  h1.heading
+      | #{title}
+  h1.heading
+      | Chapter #{chapter}
+  .row
+    ul.list-group
+      each note, index in notes
+        if(note.info.type == "TXT")
+          h2 
+            | #{note.info.title}
+          li.list-group-item 
+            span
+              | #{note.info.body}
+        if(note.info.type == "IMG")
+          li.list-group-item 
+            img.img-thumbnail.thumbnail(src=note.info.img_dest width=160 height=100)

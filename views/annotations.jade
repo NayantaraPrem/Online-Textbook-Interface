@@ -5,7 +5,7 @@
 #container.container-fluid
   #annotation.div
       h3.heading
-        | My Annotations
+        | Annotations
       .row
         .col-sm-6
           p
@@ -58,3 +58,9 @@
               p
   #filter.div
       include annotationsFilter.jade
+      .row
+        .col-sm-6
+          p
+            button#summarize.btn.btn-info.btn-md(type='submit' onclick='generate_summary(event)')
+              span.glyphicon.glyphicon-list-alt
+              |  Summarize Chapter Notes
