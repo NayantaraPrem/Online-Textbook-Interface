@@ -82,22 +82,20 @@ var uploading = multer({
 
 function replace_url(from, to) {
 	console.log("Going to open file!");
-		fs.open('book.html', 'r+', function(err, fd) {
-		   if (err) {
-		       return console.error(err);
-		   }
-		  console.log("File opened successfully!");     
+	fs.open('book.html', 'r+', function(err, fd) {
+		if (err) {
+			return console.error(err);
+		}
+		console.log("File opened successfully!");     
 		
-
 		replace({
 			    regex: from ,
 			    replacement: to,
 			    paths: ['book.html'],
 			    recursive: true,
-			    silent: true,
-			});
-		 console.log('Replace successful!');
-
+			    silent: true
+		});
+		console.log('Replace successful!');
 
 		fs.close(fd, function(err){
 			if (err){
