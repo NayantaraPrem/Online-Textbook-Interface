@@ -15,7 +15,8 @@ $( document ).ready(function() {
       var pathname = window.location.pathname;
       var username = pathname.replace('/home', '');
       var location =  "http://localhost" + username + "/";
-      location += (this.id + "=" + this.name);
+      location += (this.id + "-" + this.name);
+	  location += "/main";
       window.location.href = location;
     });
 });

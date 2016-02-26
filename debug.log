@@ -1,0 +1,74 @@
+{ Item: 
+   { password: { S: 'pw1' },
+     userId: { S: 'test_user1' },
+     The_War_of_The_Worlds: { S: 'None' },
+     The_Einstein_Theory_of_Relativity: { S: 'Everyone' },
+     Structure_and_Interpretation_of_Computer_Programs: { S: 'Everyone' },
+     Computing: { S: 'Everyone' } } }
+Received username: test_user1
+****************With Chaptername
+Displaying book: 1 - The_War_of_The_Worlds - main
+Scanning %s table.
+Already Extracted
+{ htmlNav: '', htmlMetas: '', htmlMetaList: '' }
+Going to open file!
+htmlNav successfully sent to book.html!
+Scan succeeded for PrivacySettings
+Display itemarray:
+Scanning %s table.
+Scan succeeded for AnnotationsFilter
+Display itemarray:
+Scanning %s table.
+Scan succeeded for Annotations
+Display itemarray:
+[ { NoteID: 'ANNT_1456458058688',
+    chapter: 'main',
+    info: 
+     { id: 'ANNT_1456458058688',
+       body: '<p>hellp</p>',
+       title: 'test',
+       type: 'TXT' },
+    owner: 'test_user1',
+    bookID: '1' } ]
+****************With Chaptername
+Displaying book: 1 - The_War_of_The_Worlds - panels.css
+Scanning %s table.
+Scan succeeded for PrivacySettings
+Display itemarray:
+Scanning %s table.
+Scan succeeded for AnnotationsFilter
+Display itemarray:
+Scanning %s table.
+Scan succeeded for Annotations
+Display itemarray:
+[]
+Received annt to delete @:
+
+------------------------------------------
+Received annt to delete @:
+
+------------------------------------------
+****************With Chaptername
+Displaying book: 1 - The_War_of_The_Worlds - main1
+Scanning %s table.
+Scan succeeded for PrivacySettings
+Display itemarray:
+Scanning %s table.
+Scan succeeded for AnnotationsFilter
+Display itemarray:
+Scanning %s table.
+Scan succeeded for Annotations
+Display itemarray:
+[]
+****************With Chaptername
+Displaying book: 1 - The_War_of_The_Worlds - panels.css
+Scanning %s table.
+Scan succeeded for PrivacySettings
+Display itemarray:
+Scanning %s table.
+Scan succeeded for AnnotationsFilter
+Display itemarray:
+Scanning %s table.
+Scan succeeded for Annotations
+Display itemarray:
+[]

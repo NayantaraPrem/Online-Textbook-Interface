@@ -78,14 +78,17 @@ exports.scanTable = function(scanParams, callback){
 	function onScan(err, data) {
 		if (err) {
 			console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
-		} else {
+		} 
+		
+		else {
 			console.log("Scan succeeded for " + scanParams.TableName);
+			
 			//Appending item to Array of all scanned items
 			data.Items.forEach(function(item) {
 				//console.dir(item);
 				itemArray.push(item);
-
 			});
+			
 			// continue scanning if we have more books
 			if (typeof data.LastEvaluatedKey != "undefined") {
 				console.log("Scanning for more.");
@@ -96,11 +99,50 @@ exports.scanTable = function(scanParams, callback){
 			console.log("Display itemarray:", JSON.stringify(itemArray, null, 2));
 			
 			callback(null, itemArray);
-		}
-		
+		}		
 	}
 }
 
+exports.updateAnntFilterParams = function(username, bookid, bookname, filter_settings){
+	var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
+	
+	var params = {
+		TableName: 'AnnotationsFilter',
+		Item: {
+			"userID": username,
+			"bookID": bookid,
+			"bookName": bookname,
+			"filterParams": filter_settings
+		}
+	};
+	//TODO: use 'update' fcn
+	dynamodbDoc.put(params, function(err, data) {	
+		if(err){
+			console.log("Unable to add/update filter settings");
+		} else {
+			console.log("Added/Updated filter settings for user:" + username + ", book:" + bookid);
+		}	
+	});
+}
+
+	/*var params = {
+		TableName: 'PrivacySettings',
+		Key: { 
+			"userId" : editedUser.userid
+		}, 
+    UpdateExpression: "set " + editedUser.textbook +" = :p",
+		ExpressionAttributeValues:{
+      ":p":editedUser.privacy
+    },
+    ReturnValues:"UPDATED_NEW"
+	};
+  	dynamodbDoc.update(params, function(err, data) {
+		if (err) {
+			console.error("Unable to update user. Error JSON:", JSON.stringify(err, null, 2));
+		} else {
+			console.log("UpdateUser succeeded:", JSON.stringify(data, null, 2));
+		}
+	});*/
 
 
 /* Store access token with user details in db table (assuming prior to this user has logged in, token received, permissions asked for, and identity verfied

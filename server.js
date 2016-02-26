@@ -121,7 +121,7 @@ function get_bookname(bookid) {
 		default:
 			bookname = 'ERR_BOOK_NOT_FOUND';
 	}
-	ret(bookname);
+	return bookname;
 }
 
 function generate_filtered_notes(username, bookid, bookname, chapter, filterparams, ret) {
@@ -227,11 +227,7 @@ function get_annt_filter_params(username, bookid, bookname, ret) {
 		// add this user to "new_filter_settings"
 		// (3) Save the "new_filter_settings" in the DB
 		db_interface.scanTable(FilterParams, function(err, last_filter_settings){
-			console.log("last filter settings:");
-			console.log(last_filter_settings);
 			filterParams = last_filter_settings.filterParams;
-			console.log("last filter params:");
-			console.log(filterParams);
 			/****** NEED TO DO THIS BY BOOK ******/
 			//TODO: combine this with above check
 			for (var i = 0; i < visible_users.length; i++) {
@@ -242,10 +238,6 @@ function get_annt_filter_params(username, bookid, bookname, ret) {
 					//}
 				//}
 			}
-			console.log("visible users:");
-			console.log(visible_users);
-			console.log("new filter settings:");
-			console.log(new_filter_settings);
 			ret(visible_users, new_filter_settings);
 		});
 	});	
@@ -321,14 +313,20 @@ app.get('/annotations.js', function(req, res){
 	res.sendFile( __dirname + "/public/annotations.js");
 });
 
-
 app.get('/:userName/annotations.js', function(req, res){
 	/***** HACK!!!!! **** Combined needs to call with username in url! Need to change! BREACHES SECURITY*/
 	if (req.params.userName === undefined)
 		res.sendFile( __dirname + "/public/annotations.js");
 	authCheck(req.params.userName,res);
 		res.sendFile( __dirname + "/public/annotations.js");
+});
 
+app.get('/:userName/book:bookId-:bookName/annotations.js', function(req, res){
+	/***** HACK!!!!! **** Combined needs to call with username in url! Need to change! BREACHES SECURITY*/
+	if (req.params.userName === undefined)
+		res.sendFile( __dirname + "/public/annotations.js");
+	authCheck(req.params.userName,res);
+		res.sendFile( __dirname + "/public/annotations.js");
 });
 
 app.get('/:userName/test.js', function(req, res){
@@ -420,24 +418,67 @@ app.get('/:userName/home', function(req,res) {
 /**********************************************************************BOOK DISPLAY**************************************************************/
 /* combined display pages */
 app.get('/:userName/book:bookId-:bookName/:chapterName', function(req, res){
-console.log("****************With Chaptername");
+	console.log("****************With Chaptername");
 	var bookid = req.params.bookId;
 	var username = req.params.userName;
-	var display = req.params.chapterName;
 
 	//var bookname = req.params.bookName;
 	//TODO: CORRECTLY extract bookname from EPUB and place in URL
 	//until then, call the following function to get hardcoded bookname from bookid
-	var bookname = 'undefined';
-	get_bookname(bookid, function(name){
-		bookname = name;
-	});
+	var bookname = get_bookname(bookid);
 	
-	currChapter = display;
-
-	console.log("Displaying book: " + bookid + " - " + bookname + " - " + display);
+	currChapter = req.params.chapterName;
 
 	authCheck(username,res);
+	
+	if(bookid != currBookID){
+		//this is a new book
+		//need to extract the EPUB
+		
+		//Given a list of available books, get the chosen number from user
+		//Based on input, do path-replace logic to decide the correct parent folder path (Book1 or Book2 etc) to append to the href paths in output TOC (book.html). 
+		//Ensure the parent folder contains the extracted epub and especially the META-INF/conatiner.xml. (Extraction is scripted but can be manual as well
+		
+		var epubfile = "Public/Books/Book" + bookid + "/" + bookname + ".epub";
+		var check_xml = "Public/Books/Book" + bookid + "/META-INF/container.xml";
+
+		fs.stat(check_xml, function(err, stat){
+			if (err) { 
+				var extract = require('extract-zip');
+				var tar = "Public/Books/Book" + bookid + "/";
+				extract(epubfile, {dir: tar}, function (err) {
+						
+				if(err){
+					console.log('Error Extracting');
+				}
+				else
+					console.log('Extracting');
+				});
+			}
+			else {
+				console.log('Already Extracted');
+			} 
+		});
+		
+		converter.parse(epubfile, function (err, epubData) {		
+			var htmlData = converter.convertMetadata(epubData);
+			console.log(htmlData); //Debugging
+
+			//USE FILE WRITE INSTEAD
+			fs.writeFile('Public/Books/Book' + bookid + '/TableOfContents.html', htmlData.htmlNav, function (err) {
+				if (err) return console.log(err);
+				console.log('htmlNav successfully sent to book.html!');
+			});
+			
+			var find = "href=\"" ;
+			var rep = "href=\"Books/Book" + bookid + "/";
+			replace_url(find, rep);
+		});
+		
+		currBookID = bookid;
+	}
+	
+	console.log("Displaying book: " + bookid + " - " + bookname + " - " + currChapter);
 
 	var visible_users = [];
 	var filter_settings = [];
@@ -445,93 +486,10 @@ console.log("****************With Chaptername");
 
 	//TODO: is get/update annt filter settings really needed on these pages? can probably only do once when book first opens
 	get_annt_filter_params(username, bookid, bookname, function(visible_users, filter_settings){
-		generate_filtered_notes(username, bookid, bookname, display, filter_settings, function(filtered_notes){
+		generate_filtered_notes(username, bookid, bookname, currChapter, filter_settings, function(filtered_notes){
 			//TODO: now save new_filter_settings
 			//TODO: pass "visible_users" and "new_filter_settings" to res.render to populate the annotation filter in the UI
-			res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: display, username: username});
-		});
-	});
-});
-
-
-
-
-
-//URLs to localhost/book<number> is called onclicking the 'get book' button on Home.html
-//Given a list of available books, get the chosen number from user
-//Based on input, do path-replace logic to decide the correct parent folder path (Book1 or Book2 etc) to append to the href paths in output TOC (book.html). 
-//Ensure the parent folder contains the extracted epub and especially the META-INF/conatiner.xml. (Extraction is scripted but can be manual as well
-app.get('/:userName/book:bookId=:bookName', function(req, res){
-	console.log("****************Without Chaptername");
-	var bookid = req.params.bookId;
-	var username = req.params.userName;
-				
-	//var bookname = req.params.bookName;
-	//TODO: CORRECTLY extract bookname from EPUB and place in URL
-	//until then, call the following function to get hardcoded bookname from bookid
-	var bookname = 'undefined';
-	get_bookname(bookid, function(name){
-		bookname = name;
-	});
-
-	currBookID = bookid;
-
-	//var display = req.params.Display;
-	//TODO: this is temporary for the main page
-	//need to change to correct chapter
-	display = bookid + "_main";
-	currChapter = display;
-		
-	console.log("Displaying book: " + bookid + " - " + bookname);
-
-	authCheck(username,res);
-
-	var epubfile = "Public/Books/Book" + bookid + "/" + bookname + ".epub";
-	var check_xml = "Public/Books/Book" + bookid + "/META-INF/container.xml";
-
-	fs.stat(check_xml, function(err, stat){
-        if (err) { 
-			var extract = require('extract-zip');
-			var tar = "Public/Books/Book" + bookid + "/";
-			extract(epubfile, {dir: tar}, function (err) {
-						
-			if(err){
-				console.log('Error Extracting');
-			}
-			else
-				console.log('Extracting');
-		 	});
-		}
-		else {
-			console.log('Already Extracted');
-        } 
-	});
-		
-	converter.parse(epubfile, function (err, epubData) {		
-		var htmlData = converter.convertMetadata(epubData);
-		console.log(htmlData); //Debugging
-
-		//USE FILE WRITE INSTEAD
-		fs.writeFile('Public/Books/Book' + bookid + '/TableOfContents.html', htmlData.htmlNav, function (err) {
-			if (err) return console.log(err);
-			console.log('htmlNav successfully sent to book.html!');
-		});
-			
-		var find = "href=\"" ;
-		var rep = "href=\"Books/Book" + bookid + "/";
-		replace_url(find, rep);
-	});
-
-	var visible_users = [];
-	var filter_settings = [];
-	var filtered_notes = [];
-
-	get_annt_filter_params(username, bookid, bookname, function(visible_users, filter_settings){
-		//db_interface.updateAnntFilterParams(username, bookid, bookname, filter_settings);
-		generate_filtered_notes(username, bookid, bookname, display, filter_settings, function(filtered_notes){
-			//TODO: now save new_filter_settings
-			//TODO: pass "visible_users" and "new_filter_settings" to res.render to populate the annotation filter in the UI
-			res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: display, username: username});
+			res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: currChapter, username: username});
 		});
 	});
 });
@@ -684,7 +642,6 @@ app.post('/delete_annt', function(req, res){
 
 	db_interface.deleteItem(noteID);
 	res.send(req.body);
-
 });
 
 //app.post('/:userName/book:bookId=:bookName', function(req, res)
