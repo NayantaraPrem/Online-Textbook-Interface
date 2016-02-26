@@ -18,15 +18,29 @@ var books = [
 
 var Autolinker = require('autolinker');
 AWS.config.update({
-    region: "us-east-1",
-    endpoint: "https://dynamodb.us-east-1.amazonaws.com"
+	region: "us-east-1",
+	endpoint: "https://dynamodb.us-east-1.amazonaws.com"
 });
+
+var util = require('util');
+var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
+var log_stdout = process.stdout;
+
+console.log = function(d) { //
+  log_file.write(util.format(d) + '\n');
+  log_stdout.write(util.format(d) + '\n');
+};
+
 // create our app
 var app = express();
 
 // Authorization check variables
 var isAuthenticated = false;
 var selfUserName;
+
+// Book Display variables
+var currBookID = '';
+var currChapter = '';
 
 // app.use(express.static(__dirname + '/public'));
 
@@ -55,18 +69,16 @@ function authCheck (userName, res) {
 }
 
 var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './public/uploads/')
-    },
-    filename: function (req, file, cb) {
-        cb(null, 'IMG_' + Date.now())
-  }
+	destination: function (req, file, cb) {
+		cb(null, './public/uploads/')
+	},
+	filename: function (req, file, cb) {
+		cb(null, 'IMG_' + Date.now())
+	}
 });
 var uploading = multer({
-    storage:storage
+	storage:storage
 });
-
-
 
 function replace_url(from, to) {
 	console.log("Going to open file!");
@@ -77,7 +89,7 @@ function replace_url(from, to) {
 		  console.log("File opened successfully!");     
 		
 
-  		replace({
+		replace({
 			    regex: from ,
 			    replacement: to,
 			    paths: ['book.html'],
@@ -88,17 +100,16 @@ function replace_url(from, to) {
 
 
 		fs.close(fd, function(err){
-         if (err){
-            console.log(err);
-         } 
-         console.log("File closed successfully.");
+			if (err){
+				console.log(err);
+			}
+			console.log("File closed successfully.");
         });
-
 	});
 }
 
-function get_book_name(bookid) {
-	var bookname;
+function get_bookname(bookid) {
+	var bookname = 'UNINIT';
 	switch(bookid) {
 		case '1':
 			bookname = 'The_War_of_The_Worlds';
@@ -112,9 +123,135 @@ function get_book_name(bookid) {
 		default:
 			bookname = 'ERR_BOOK_NOT_FOUND';
 	}
-	return bookname;
+	ret(bookname);
 }
 
+function generate_filtered_notes(username, bookid, bookname, chapter, filterparams, ret) {
+	var preloaded_notes = [];
+	var filtered_notes = [];
+	
+	// Can add more parameters here to filter results
+	var AnnotationsParams = {
+		TableName: 'Annotations',
+		FilterExpression: "#bkid = :i and #chid = :j",
+		ExpressionAttributeNames: {
+			"#bkid": "bookID",
+			"#chid": "chapter"
+		},
+		ExpressionAttributeValues: {
+			":i": bookid,
+			":j": chapter			
+		}
+	};
+	
+	// Here we compile a subset of "preloaded_notes" to display to the user
+	// based on "filterparams"
+	// (1) For each note in "preloaded_notes", if the owner is the current user or 
+	// the owner is in the "filterparams" list, 
+	// add this note to "filtered_notes"
+	db_interface.scanTable(AnnotationsParams, function(err, preloaded_notes){
+		for (var i = 0; i < preloaded_notes.length; i++) {
+			for (var j = 0; j < filterparams.length; j++) {
+				if (preloaded_notes[i].owner == username ||
+					preloaded_notes[i].owner == filterparams[j]) {
+					filtered_notes.push(preloaded_notes[i]);
+					//TODO: can break out of inner for loop here
+				}
+			}
+		}
+		console.log(preloaded_notes);
+		
+		ret(filtered_notes);
+	});
+}
+
+function get_annt_filter_params(username, bookid, bookname, ret) {
+	var all_users = [];
+	var visible_users = [];
+	var last_filter_settings = [];
+	var filterParams = [];
+	var new_filter_settings = [];
+
+	var UsersParams = {
+		TableName: 'PrivacySettings'
+	};
+
+	var FilterParams = {
+		TableName: 'AnnotationsFilter',
+		FilterExpression: "#userid = :i and #bkid = :j",
+		ExpressionAttributeNames: {
+			"#userid" : "userID",
+			"#bkid": "bookID"
+		},
+		ExpressionAttributeValues: {
+			":i": username,
+			":j": bookid		
+		}
+	};
+
+	// Here we compare Privacy Settings for all registered users
+	// Users with "Public" notes are added to the "visble_users" list
+	// (1) Get list of all users
+	// (2) For each user, check saved Privacy Setting for current book 
+	// (3) If user has set notes to "Public", add this user to "visible_users"	
+	db_interface.scanTable(UsersParams, function(err, all_users){
+
+		// now determine which users have public notes
+		//TODO: add this filter to scanTable params later
+
+		for (var i = 0; i < all_users.length; i++) {
+			if (all_users[i].userId != username) {			
+				switch (bookid) {
+					case '1':
+						if (all_users[i].The_War_of_The_Worlds == 'Everyone') {
+							visible_users.push(all_users[i].userId);
+						}
+						break;
+					case '2':
+						if (all_users[i].The_Einstein_Theory_of_Relativity == 'Everyone') {
+							visible_users.push(all_users[i].userId);
+						}
+						break;
+					case '3':
+						if (all_users[i].Computing == 'Everyone') {
+							visible_users.push(all_users[i].userId);
+						}
+						break;
+				}
+			}
+		}
+
+		// Now we must compare the current set of visible users to the last saved 
+		// filter settings in case a user's notes is no longer visible (newly "Private")
+		// (1) Get the "last_filter_settings" for the current user
+		// (2) For each "visible_users", check if this user is in the 
+		// "last_filter_settings" list for the current book; if they are, 
+		// add this user to "new_filter_settings"
+		// (3) Save the "new_filter_settings" in the DB
+		db_interface.scanTable(FilterParams, function(err, last_filter_settings){
+			console.log("last filter settings:");
+			console.log(last_filter_settings);
+			filterParams = last_filter_settings.filterParams;
+			console.log("last filter params:");
+			console.log(filterParams);
+			/****** NEED TO DO THIS BY BOOK ******/
+			//TODO: combine this with above check
+			for (var i = 0; i < visible_users.length; i++) {
+				//for (var j = 0; j < filterParams.length; j++) {
+				//	if (visible_users[i] == filterParams[j]) {
+						new_filter_settings.push(visible_users[i]);
+						//TODO: can break out of inner for loop here
+					//}
+				//}
+			}
+			console.log("visible users:");
+			console.log(visible_users);
+			console.log("new filter settings:");
+			console.log(new_filter_settings);
+			ret(visible_users, new_filter_settings);
+		});
+	});	
+}
 
 /******************************************************************GET FILES*****************************************************************************/
 // Get the speedreading js - HACKY
@@ -228,6 +365,7 @@ app.get('/logout', function(req, res){
   isAuthenticated = false;
   res.redirect('/login');
 });
+
 // that `req.body` will be filled in with the form elements
 app.post('/login', function(req, res){
 	var userid = req.body.userId;
@@ -284,81 +422,35 @@ app.get('/:userName/home', function(req,res) {
 /**********************************************************************BOOK DISPLAY**************************************************************/
 /* combined display pages */
 app.get('/:userName/book:bookId-:bookName/:chapterName', function(req, res){
+console.log("****************With Chaptername");
 	var bookid = req.params.bookId;
-	var bookname;
-		//var bookname = req.params.bookName;
-		  //TODO: once privacy settings are stored with corresponding bookid/bookname
-	      //remove this swtich-case
-	bookname = get_book_name(bookid);
 	var username = req.params.userName;
-	var chaptername = req.params.chapterName;
-	currChapter = chaptername;
-	console.log("app.get book" + bookid + " " + bookname + " page " + chaptername + " username " + username);
+	var display = req.params.chapterName;
+
+	//var bookname = req.params.bookName;
+	//TODO: CORRECTLY extract bookname from EPUB and place in URL
+	//until then, call the following function to get hardcoded bookname from bookid
+	var bookname = 'undefined';
+	get_bookname(bookid, function(name){
+		bookname = name;
+	});
+	
+	currChapter = display;
+
+	console.log("Displaying book: " + bookid + " - " + bookname + " - " + display);
+
 	authCheck(username,res);
 
-	console.log("Loading preloaded notes");
-   	var preloaded_notes = [];
-   	var filtered_notes = [];
-	var users = [];
-   	var filtered_users = [username];
-	
-	// Can add more parameters here to filter results
-	var AnnotationsParams = {
-		TableName: 'Annotations',
-		FilterExpression: "#bkid = :i and #chid = :j",
-		ExpressionAttributeNames: {
-			"#bkid": "bookID",
-			"#chid": "chapter"
-		},
-		ExpressionAttributeValues: {
-			":i": currBookID,
-			":j": currChapter			
-		}
-	};
-   	
-	var UsersParams = {
-		TableName: 'PrivacySettings'
-	};
-	
-   db_interface.scanTable(UsersParams, function(err, users){
-		// get all users with public notes
-		//TODO: add this filter to scanTable params
-		for (var i = 0; i < users.length; i++) {
-			if (users[i].userId != username)
-			{			
-				switch (bookid) {
-					case '1':
-						if (users[i].The_War_of_The_Worlds == 'Everyone') {
-							filtered_users.push(users[i].userId);
-						}
-						break;
-					case '2':
-						if (users[i].The_Einstein_Theory_of_Relativity == 'Everyone') {
-							filtered_users.push(users[i].userId);
-						}
-						break;
-					case '3':
-						if (users[i].Computing == 'Everyone') {
-							filtered_users.push(users[i].userId);
-						}
-						break;
-				}
-			}
-   		}
+	var visible_users = [];
+	var filter_settings = [];
+	var filtered_notes = [];
 
-   		db_interface.scanTable(AnnotationsParams, function(err, preloaded_notes){
-	   		// get notes which are filtered
-	   		for (var i = 0; i < preloaded_notes.length; i++) {
-	   			console.log("Note owner: " + preloaded_notes[i].owner);
-	   			for (var j = 0; j < filtered_users.length; j++) {
-	   				console.log("Filtered User: " + filtered_users[j]);
-	   				if (preloaded_notes[i].owner == filtered_users[j]) {
-	   					filtered_notes.push(preloaded_notes[i]);
-	   				}
-	   			}
-	   		}
-			console.log(preloaded_notes);
-			res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: chaptername, username: username});
+	//TODO: is get/update annt filter settings really needed on these pages? can probably only do once when book first opens
+	get_annt_filter_params(username, bookid, bookname, function(visible_users, filter_settings){
+		generate_filtered_notes(username, bookid, bookname, display, filter_settings, function(filtered_notes){
+			//TODO: now save new_filter_settings
+			//TODO: pass "visible_users" and "new_filter_settings" to res.render to populate the annotation filter in the UI
+			res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: display, username: username});
 		});
 	});
 });
@@ -372,133 +464,78 @@ app.get('/:userName/book:bookId-:bookName/:chapterName', function(req, res){
 //Based on input, do path-replace logic to decide the correct parent folder path (Book1 or Book2 etc) to append to the href paths in output TOC (book.html). 
 //Ensure the parent folder contains the extracted epub and especially the META-INF/conatiner.xml. (Extraction is scripted but can be manual as well
 app.get('/:userName/book:bookId=:bookName', function(req, res){
-		console.log("****************Without Chaptername");
-		var bookid = req.params.bookId;
-		console.log("book id:" + bookid);
-		currBookID = bookid;
-		var bookname;
-		//var bookname = req.params.bookName;
-		  //TODO: once privacy settings are stored with corresponding bookid/bookname
-	      //remove this swtich-case
-		bookname = get_book_name(bookid);
-		var username = req.params.userName;
-		//var display = req.params.Display;
-		//TODO: this is temporary for the main page
-		//need to change to correct chapter
-		currChapter = bookid + "_main";
-		console.log("app.get book" + bookid + " " + bookname + " username " + username);
-		authCheck(username,res);
-		var epubfile = "Public/Books/Book" + bookid + "/" + bookname + ".epub";
-		var check_xml = "Public/Books/Book" + bookid + "/META-INF/container.xml";
-
-
-		fs.stat(check_xml, function(err, stat){
-
-			if (err) { 
-			    
-				var extract = require('extract-zip');
-				var tar = "Public/Books/Book" + bookid + "/";
-				extract(epubfile, {dir: tar}, function (err) {
-						
-					if(err){
-						console.log('Error Extracting');
-					}
-					else
-						console.log('Extracting');
-			 	});
-			}
-
-		   else {
-   				console.log('Already Extracted');
-			} 
-
-		});
-		
-		converter.parse(epubfile, function (err, epubData) {
-		
-			var htmlData = converter.convertMetadata(epubData);
-			console.log(htmlData); //Debugging
-
-			//USE FILE WRITE INSTEAD
-			fs.writeFile('Public/Books/Book' + bookid + '/TableOfContents.html', htmlData.htmlNav, function (err) {
-				if (err) return console.log(err);
-				console.log('htmlNav successfully sent to book.html!');
-			});
-			
-			var find = "href=\"" ;
-			var rep = "href=\"Books/Book" + bookid + "/";
-			replace_url(find, rep);
-		});
-
-   console.log("Loading preloaded notes");
-   var preloaded_notes = [];
-   var filtered_notes = [];
-   var users = [];
-   var filtered_users = [username];
-	
-	// Can add more parameters here to filter results
-	var AnnotationsParams = {
-		TableName: 'Annotations',
-		FilterExpression: "#bkid = :i and #chid = :j",
-		ExpressionAttributeNames: {
-			"#bkid": "bookID",
-			"#chid": "chapter"
-		},
-		ExpressionAttributeValues: {
-			":i": currBookID,
-			":j": currChapter			
-		}
-	};
-		
-	var UsersParams = {
-		TableName: 'PrivacySettings'
-	};
-	
-   db_interface.scanTable(UsersParams, function(err, users){
-   		console.log("err " + err + "users " + users);
-		// get all users with public notes
-		//TODO: add this filter to scanTable params
-		for (var i = 0; i < users.length; i++) {
-			if (users[i].userId != username)
-			{			
-				switch (bookid) {
-					case '1':
-						if (users[i].The_War_of_The_Worlds == 'Everyone') {
-							filtered_users.push(users[i].userId);
-						}
-						break;
-					case '2':
-						if (users[i].The_Einstein_Theory_of_Relativity == 'Everyone') {
-							filtered_users.push(users[i].userId);
-						}
-						break;
-					case '3':
-						if (users[i].Computing == 'Everyone') {
-							filtered_users.push(users[i].userId);
-						}
-						break;
-				}
-			}
-   		}
-
-   		db_interface.scanTable(AnnotationsParams, function(err, preloaded_notes){
-			// get notes which are filtered
-			console.log("PRINTING ALL NOTES!!!!" + JSON.stringify(preloaded_notes));
-	   		for (var i = 0; i < preloaded_notes.length; i++) {
-	   			console.log("Note owner: " + preloaded_notes[i].owner);
-	   			for (var j = 0; j < filtered_users.length; j++) {
-	   				console.log("Filtered User: " + filtered_users[j]);
-	   				if (preloaded_notes[i].owner == filtered_users[j]) {
-	   					filtered_notes.push(preloaded_notes[i]);
-	   				}
-	   			}
-	   		}
-			res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: "toADD", username: username});
-		});
+	console.log("****************Without Chaptername");
+	var bookid = req.params.bookId;
+	var username = req.params.userName;
+				
+	//var bookname = req.params.bookName;
+	//TODO: CORRECTLY extract bookname from EPUB and place in URL
+	//until then, call the following function to get hardcoded bookname from bookid
+	var bookname = 'undefined';
+	get_bookname(bookid, function(name){
+		bookname = name;
 	});
 
-	
+	currBookID = bookid;
 
+	//var display = req.params.Display;
+	//TODO: this is temporary for the main page
+	//need to change to correct chapter
+	display = bookid + "_main";
+	currChapter = display;
+		
+	console.log("Displaying book: " + bookid + " - " + bookname);
+
+	authCheck(username,res);
+
+	var epubfile = "Public/Books/Book" + bookid + "/" + bookname + ".epub";
+	var check_xml = "Public/Books/Book" + bookid + "/META-INF/container.xml";
+
+	fs.stat(check_xml, function(err, stat){
+        if (err) { 
+			var extract = require('extract-zip');
+			var tar = "Public/Books/Book" + bookid + "/";
+			extract(epubfile, {dir: tar}, function (err) {
+						
+			if(err){
+				console.log('Error Extracting');
+			}
+			else
+				console.log('Extracting');
+		 	});
+		}
+		else {
+			console.log('Already Extracted');
+        } 
+	});
+		
+	converter.parse(epubfile, function (err, epubData) {		
+		var htmlData = converter.convertMetadata(epubData);
+		console.log(htmlData); //Debugging
+
+		//USE FILE WRITE INSTEAD
+		fs.writeFile('Public/Books/Book' + bookid + '/TableOfContents.html', htmlData.htmlNav, function (err) {
+			if (err) return console.log(err);
+			console.log('htmlNav successfully sent to book.html!');
+		});
+			
+		var find = "href=\"" ;
+		var rep = "href=\"Books/Book" + bookid + "/";
+		replace_url(find, rep);
+	});
+
+	var visible_users = [];
+	var filter_settings = [];
+	var filtered_notes = [];
+
+	get_annt_filter_params(username, bookid, bookname, function(visible_users, filter_settings){
+		//db_interface.updateAnntFilterParams(username, bookid, bookname, filter_settings);
+		generate_filtered_notes(username, bookid, bookname, display, filter_settings, function(filtered_notes){
+			//TODO: now save new_filter_settings
+			//TODO: pass "visible_users" and "new_filter_settings" to res.render to populate the annotation filter in the UI
+			res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: display, username: username});
+		});
+	});
 });
 
 app.get('/:userName/book:bookId=:bookName/:chapterName/summary', function(req, res){
