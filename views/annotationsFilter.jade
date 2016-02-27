@@ -3,17 +3,27 @@
 //  include .includes/head.jade
   
 //  body
+//.dropdown
+//      button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+//        | View Notes From: 
+//        span.caret
+//      ul.dropdown-menu
+//        li
+//          input(type='checkbox')
+//          | Some User
+//        li
+//          input(type='checkbox')
+//          | Another User
+//        li
+//          input(type='checkbox')
+//          | Someone else here
+
 .dropdown
-      button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-        | View Notes From: 
-        span.caret
-      ul.dropdown-menu
-        li
-          input(type='checkbox')
-          | Some User
-        li
-          input(type='checkbox')
-          | Another User
-        li
-          input(type='checkbox')
-          | Someone else here
+    a(data-toggle="dropdown").dropdown-toggle View Annotations From:
+    ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
+        each user in visible_users
+          li
+            input(type='checkbox')
+            = user
+script.
+    $('.dropdown-toggle').dropdown()

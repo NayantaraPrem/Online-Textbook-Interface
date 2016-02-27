@@ -39,7 +39,6 @@ $(document).ready(function() {
 
 var i = 0;
 $(document).on('click', '#add_annotation', function () {
-	console.log("enter add_annotation js");
 	var new_annot = '\
 		<div class="row">\
 			<div class="col-md-12">\

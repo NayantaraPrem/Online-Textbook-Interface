@@ -4,8 +4,6 @@ html(lang='en')
   body
     include .includes/page-nav-bar.jade
 
-    include annotations.jade
-
     #nav
       include .includes/Book3TableOfContents.jade
 
@@ -32,6 +30,8 @@ html(lang='en')
         when  "part19": include ../Public/Books/Book3/text/part19.xhtml
         when  "part20": include ../Public/Books/Book3/text/part20.xhtml
         when  "part21": include ../Public/Books/Book3/text/part21.xhtml
+
+    include annotations.jade
 
     //#book_display
     //h3.heading

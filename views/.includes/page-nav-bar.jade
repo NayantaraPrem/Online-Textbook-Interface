@@ -14,7 +14,7 @@ html(lang='en')
     -use_content+= "<li>Click outside the window to close.</li>"
     -use_content+= "<li>Switch between light/dark themes with 0.</li>"
     -use_content+= "<li>View/toggle summary stats with / or ? at the end of a run</li></ul>"
-    div
+    div.page_nav
       ul.page_nav_buttons
         li.page_nav
           a.active(href='/' + locals.username + '/book' + locals.bookid + '-' + locals.bookname + '/main') #{locals.bookname}
@@ -26,6 +26,8 @@ html(lang='en')
         li.page_nav
           a#bm-adder Speed Read      
             #pop1.glyphicon.glyphicon-question-sign(style="padding-left: 10px;" data-html="true" title="Use" data-toggle="popover" data-trigger="hover" data-content=use_content)
+        li.page_nav
+          include ../annotationsFilter.jade
         li.right.page_nav
           a.btn.btn-info.btn-lg(href="/logout")
             span.glyphicon.glyphicon-log-out   Logout

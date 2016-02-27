@@ -153,11 +153,11 @@ function generate_filtered_notes(username, bookid, bookname, chapter, filterpara
 				if (preloaded_notes[i].owner == username ||
 					preloaded_notes[i].owner == filterparams[j]) {
 					filtered_notes.push(preloaded_notes[i]);
-					//TODO: can break out of inner for loop here
+					break;
 				}
 			}
 		}
-		console.log(preloaded_notes);
+		//console.log(preloaded_notes);
 		
 		ret(filtered_notes);
 	});
@@ -227,17 +227,27 @@ function get_annt_filter_params(username, bookid, bookname, ret) {
 		// add this user to "new_filter_settings"
 		// (3) Save the "new_filter_settings" in the DB
 		db_interface.scanTable(FilterParams, function(err, last_filter_settings){
-			filterParams = last_filter_settings.filterParams;
+			if (last_filter_settings.length != 1)
+				console.log("multiple --last_filter_settings-- found for user:" + username + ", bookid:" + bookid);
+			lastFilterParams = last_filter_settings[0].filterParams;
 			/****** NEED TO DO THIS BY BOOK ******/
 			//TODO: combine this with above check
 			for (var i = 0; i < visible_users.length; i++) {
-				//for (var j = 0; j < filterParams.length; j++) {
-				//	if (visible_users[i] == filterParams[j]) {
+				for (var j = 0; j < lastFilterParams.length; j++) {
+					if (visible_users[i] == lastFilterParams[j]) {
 						new_filter_settings.push(visible_users[i]);
-						//TODO: can break out of inner for loop here
-					//}
-				//}
+						break;
+					}
+				}
 			}
+			//console.log("********** Visible Users **********");
+			//console.log(visible_users);
+			//console.log("********** Last Filter Settings **********");
+			//console.log(last_filter_settings);
+			//console.log("********** New Filter Settings **********");
+			//console.log(new_filter_settings);
+			//console.log("********** END **********");
+			
 			ret(visible_users, new_filter_settings);
 		});
 	});	
@@ -386,7 +396,7 @@ app.post('/login', function(req, res){
 				// Found username & password in database
 				selfUserName = userid;
 				isAuthenticated = true;
-				console.log(data);
+				//console.log(data);
 				res.writeHead(301,
 				  {Location: selfUserName + '/home'}
 				);
@@ -403,7 +413,7 @@ app.post('/login', function(req, res){
 app.get('/:userName/home', function(req,res) {
 	var username = req.params.userName;
 	authCheck(username,res);
-	console.log("Received username: " + username);
+	//console.log("Received username: " + username);
 	var welcome_msg = "Hello " + username;
 	//res.sendFile( __dirname + "/home.html");
 	//var path = "Books/Images/";
@@ -418,7 +428,6 @@ app.get('/:userName/home', function(req,res) {
 /**********************************************************************BOOK DISPLAY**************************************************************/
 /* combined display pages */
 app.get('/:userName/book:bookId-:bookName/:chapterName', function(req, res){
-	console.log("****************With Chaptername");
 	var bookid = req.params.bookId;
 	var username = req.params.userName;
 
@@ -432,6 +441,7 @@ app.get('/:userName/book:bookId-:bookName/:chapterName', function(req, res){
 	authCheck(username,res);
 	
 	if(bookid != currBookID){
+		console.log("new book");
 		//this is a new book
 		//need to extract the EPUB
 		
@@ -440,39 +450,41 @@ app.get('/:userName/book:bookId-:bookName/:chapterName', function(req, res){
 		//Ensure the parent folder contains the extracted epub and especially the META-INF/conatiner.xml. (Extraction is scripted but can be manual as well
 		
 		var epubfile = "Public/Books/Book" + bookid + "/" + bookname + ".epub";
-		var check_xml = "Public/Books/Book" + bookid + "/META-INF/container.xml";
+		var check_ToC = "Public/Books/Book" + bookid + "/TableOfContents.html";
 
-		fs.stat(check_xml, function(err, stat){
+		fs.stat(check_ToC, function(err, stat){
 			if (err) { 
 				var extract = require('extract-zip');
 				var tar = "Public/Books/Book" + bookid + "/";
-				extract(epubfile, {dir: tar}, function (err) {
+				
+				extract(epubfile, {dir: tar}, function (err) {	
+					if(err){
+						console.log('Error Extracting');
+					}
+					else{
+						console.log('Extracting');
 						
-				if(err){
-					console.log('Error Extracting');
-				}
-				else
-					console.log('Extracting');
+						//now generate Table of Contents
+						converter.parse(epubfile, function (err, epubData) {		
+							var htmlData = converter.convertMetadata(epubData);
+							console.log(htmlData); //Debugging
+
+							//USE FILE WRITE INSTEAD
+							fs.writeFile('Public/Books/Book' + bookid + '/TableOfContents.html', htmlData.htmlNav, function (err) {
+								if (err) return console.log(err);
+								console.log('htmlNav successfully sent to book.html!');
+							});
+			
+							var find = "href=\"" ;
+							var rep = "href=\"Books/Book" + bookid + "/";
+							replace_url(find, rep);
+						});
+					}
 				});
 			}
 			else {
 				console.log('Already Extracted');
 			} 
-		});
-		
-		converter.parse(epubfile, function (err, epubData) {		
-			var htmlData = converter.convertMetadata(epubData);
-			console.log(htmlData); //Debugging
-
-			//USE FILE WRITE INSTEAD
-			fs.writeFile('Public/Books/Book' + bookid + '/TableOfContents.html', htmlData.htmlNav, function (err) {
-				if (err) return console.log(err);
-				console.log('htmlNav successfully sent to book.html!');
-			});
-			
-			var find = "href=\"" ;
-			var rep = "href=\"Books/Book" + bookid + "/";
-			replace_url(find, rep);
 		});
 		
 		currBookID = bookid;
@@ -489,7 +501,7 @@ app.get('/:userName/book:bookId-:bookName/:chapterName', function(req, res){
 		generate_filtered_notes(username, bookid, bookname, currChapter, filter_settings, function(filtered_notes){
 			//TODO: now save new_filter_settings
 			//TODO: pass "visible_users" and "new_filter_settings" to res.render to populate the annotation filter in the UI
-			res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: currChapter, username: username});
+			res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: currChapter, username: username, visible_users: visible_users, filter_settings: filter_settings });
 		});
 	});
 });

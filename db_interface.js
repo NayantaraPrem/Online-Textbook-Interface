@@ -96,7 +96,7 @@ exports.scanTable = function(scanParams, callback){
 				dynamodbDoc.scan(params, onScan);
 			}
 
-			console.log("Display itemarray:", JSON.stringify(itemArray, null, 2));
+			//console.log("Display itemarray:", JSON.stringify(itemArray, null, 2));
 			
 			callback(null, itemArray);
 		}		

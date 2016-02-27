@@ -4,8 +4,6 @@ html(lang='en')
   body
     include .includes/page-nav-bar.jade
 
-    include annotations.jade
-
     #nav
       include .includes/Book2TableOfContents.jade
 
@@ -22,6 +20,8 @@ html(lang='en')
         when  "main6": include ../Public/Books/Book2/OPS/main6.xml
         when  "main7": include ../Public/Books/Book2/OPS/main7.xml
         default: include ../Public/Books/Book2/OPS/title.xml
+
+    include annotations.jade
 
     //#book_display
     //h3.heading

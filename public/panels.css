@@ -1,8 +1,7 @@
 html, body {
    margin: 0px;
-   #min-height: 100%;
-   height: 100%;
    width: 100%;
+   height: 100%;
 }
 
 .clickable
@@ -22,7 +21,7 @@ html, body {
   background-color: #ebebe0;
   height:100%;
   width: 20%;
-  float:right;
+  float:left;
 }
 
 #header {
@@ -39,6 +38,7 @@ html, body {
 	background-color:#ffffe5;
 	width:67%;
 	height:100%;
+	display: table-cell;
 }
 
 #aside {
@@ -64,10 +64,6 @@ html, body {
 	padding:5px;	 	 
 }
 
-#book_display {
-	width: 100%;
-}
-
 div.annt_body {
     -moz-appearance: textfield-multiline;
     -webkit-appearance: textarea;
@@ -85,8 +81,9 @@ ul.page_nav_buttons {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    background-color: #333333;
+    #overflow: hidden;
+    #background-color: #333333;
+	height: 100%;
 }
 
 
@@ -97,17 +94,19 @@ ul.book_nav_buttons {
 	background-color: transparent;
 }
 
-
 li.page_nav {
     float: left;
+	width: 16%;
+	height: 100%;
 }
 
 li.page_nav a {
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 120px;
+    padding: 16px 0px;
     text-decoration: none;
+	height: 100%;
 }
 
 li.page_nav a:hover {
@@ -121,13 +120,16 @@ li.page_nav a:hover:not(.active) {
 
 li.right { 
     float:right; 
-    width:20%;
 }
 
 .active {
     background-color: #660066;
 }
 
+div.page_nav {
+	background-color: #333333;
+	height: 7%;
+}
 
 li.book_nav a {
     display: block;
@@ -141,6 +143,9 @@ li.book_nav a:hover:not(.active) {
     background-color: #ffffe5;
 }
 
+ul.white-txt {
+	color: white;
+}
 
 h3 {
   font-family: "Helvetica";

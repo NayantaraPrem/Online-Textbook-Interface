@@ -3,8 +3,6 @@ html(lang='en')
   include .includes/head.jade
   body
     include .includes/page-nav-bar.jade
-    
-    include annotations.jade
 
     #nav
       include .includes/Book1TableOfContents.jade
@@ -44,6 +42,8 @@ html(lang='en')
         when "main29": include ../Public/Books/Book1/OPS/main29.xml
         when "similar": include ../Public/Books/Book1/OPS/similar.xml
         default: include ../Public/Books/Book1/OPS/title.xml
+
+    include annotations.jade
    
     //#book_display
     //h3.heading
