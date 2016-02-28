@@ -22,8 +22,22 @@
     a(data-toggle="dropdown").dropdown-toggle View Annotations From:
     ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
         each user in visible_users
-          li
-            input(type='checkbox')
-            = user
+          if (filter_settings.indexOf(user) > -1)
+            li
+              input(
+			    type='checkbox' 
+			    name=user
+			    checked
+                onchange='update_annt_filter(event)'
+              )
+              = user
+          else
+            li
+              input(
+			    type='checkbox' 
+			    name=user
+                onchange='update_annt_filter(event)'
+              )
+              = user
 script.
     $('.dropdown-toggle').dropdown()

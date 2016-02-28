@@ -72,7 +72,7 @@ exports.scanTable = function(scanParams, callback){
 
     // Return this value
 	var itemArray = [];
-	console.log("Scanning %s table.", scanParams.TableName);
+	//console.log("Scanning %s table.", scanParams.TableName);
 	dynamodbDoc.scan(scanParams, onScan);
 
 	function onScan(err, data) {
@@ -81,7 +81,7 @@ exports.scanTable = function(scanParams, callback){
 		} 
 		
 		else {
-			console.log("Scan succeeded for " + scanParams.TableName);
+			//console.log("Scan succeeded for " + scanParams.TableName);
 			
 			//Appending item to Array of all scanned items
 			data.Items.forEach(function(item) {
@@ -91,7 +91,7 @@ exports.scanTable = function(scanParams, callback){
 			
 			// continue scanning if we have more books
 			if (typeof data.LastEvaluatedKey != "undefined") {
-				console.log("Scanning for more.");
+				//console.log("Scanning for more.");
 				params.ExclusiveStartKey = data.LastEvaluatedKey;
 				dynamodbDoc.scan(params, onScan);
 			}
@@ -103,7 +103,7 @@ exports.scanTable = function(scanParams, callback){
 	}
 }
 
-exports.updateAnntFilterParams = function(username, bookid, bookname, filter_settings){
+exports.updateAnntFilterParams = function(username, bookid, filter_settings){
 	var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 	
 	var params = {
@@ -111,7 +111,6 @@ exports.updateAnntFilterParams = function(username, bookid, bookname, filter_set
 		Item: {
 			"userID": username,
 			"bookID": bookid,
-			"bookName": bookname,
 			"filterParams": filter_settings
 		}
 	};
@@ -124,26 +123,6 @@ exports.updateAnntFilterParams = function(username, bookid, bookname, filter_set
 		}	
 	});
 }
-
-	/*var params = {
-		TableName: 'PrivacySettings',
-		Key: { 
-			"userId" : editedUser.userid
-		}, 
-    UpdateExpression: "set " + editedUser.textbook +" = :p",
-		ExpressionAttributeValues:{
-      ":p":editedUser.privacy
-    },
-    ReturnValues:"UPDATED_NEW"
-	};
-  	dynamodbDoc.update(params, function(err, data) {
-		if (err) {
-			console.error("Unable to update user. Error JSON:", JSON.stringify(err, null, 2));
-		} else {
-			console.log("UpdateUser succeeded:", JSON.stringify(data, null, 2));
-		}
-	});*/
-
 
 /* Store access token with user details in db table (assuming prior to this user has logged in, token received, permissions asked for, and identity verfied
  Parameters: 

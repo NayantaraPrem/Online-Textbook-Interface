@@ -124,7 +124,7 @@ function get_bookname(bookid) {
 	return bookname;
 }
 
-function generate_filtered_notes(username, bookid, bookname, chapter, filterparams, ret) {
+function generate_filtered_notes(username, bookid, chapter, filterparams, ret) {
 	var preloaded_notes = [];
 	var filtered_notes = [];
 	
@@ -163,7 +163,7 @@ function generate_filtered_notes(username, bookid, bookname, chapter, filterpara
 	});
 }
 
-function get_annt_filter_params(username, bookid, bookname, ret) {
+function get_annt_filter_params(username, bookid, ret) {
 	var all_users = [];
 	var visible_users = [];
 	var last_filter_settings = [];
@@ -497,10 +497,9 @@ app.get('/:userName/book:bookId-:bookName/:chapterName', function(req, res){
 	var filtered_notes = [];
 
 	//TODO: is get/update annt filter settings really needed on these pages? can probably only do once when book first opens
-	get_annt_filter_params(username, bookid, bookname, function(visible_users, filter_settings){
-		generate_filtered_notes(username, bookid, bookname, currChapter, filter_settings, function(filtered_notes){
+	get_annt_filter_params(username, bookid, function(visible_users, filter_settings){
+		generate_filtered_notes(username, bookid, currChapter, filter_settings, function(filtered_notes){
 			//TODO: now save new_filter_settings
-			//TODO: pass "visible_users" and "new_filter_settings" to res.render to populate the annotation filter in the UI
 			res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: currChapter, username: username, visible_users: visible_users, filter_settings: filter_settings });
 		});
 	});
@@ -638,8 +637,7 @@ app.post('/annt_submit_or_edit', function(req, res){
 		var note;
 		db_interface.updateNote(id, title, body);
 		res.send(linkedBody);
-	}
-	
+	}	
 });
 
 
@@ -721,6 +719,41 @@ app.post('/api/photo', uploading.single('pic'), function(req, res){
 	//commented out for testing purposes
 	db_interface.addNote(img_item, selfUserName, currBookID, currChapter);
 	res.end("Image has uploaded.");
+});
+
+
+//Update annotation filter settings
+app.post('/update_annt_filter', function(req, res){
+	var action = req.body.action;
+	var user = req.body.user;
+	//console.log("update_annt_filter req: [" + action + ", " + user + "]");
+	
+	//TODO: currently using get_annt_filter_params() b/c already available
+	//can probably use less costly fcn instead or 
+	//store the filter settings and eliminate db reads here
+	get_annt_filter_params(selfUserName, currBookID, function(visible_users, filter_settings){
+		//console.log("old: " + filter_settings);
+		
+		if (action == "add") {
+			filter_settings.push(user);
+		}
+		else if (action == "remove") {
+			var index = filter_settings.indexOf(user);
+			if (index > -1) {
+				filter_settings.splice(index, 1);
+			}
+			else
+				console.log("updating annt filter settings: removing user already removed");
+		}
+		else
+			console.log("updating annt filter settings: unknown action");
+		
+		//console.log("new: " + filter_settings);
+		db_interface.updateAnntFilterParams(selfUserName, currBookID, filter_settings);
+	});
+	
+	//TODO(fix): updating annt filter settings require page refresh by user to take effect
+	res.send(req.body);
 });
 
 

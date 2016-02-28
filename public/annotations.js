@@ -203,6 +203,31 @@ function generate_summary(e) {
     });   
 */}
 
+function update_annt_filter(e) {
+	e.preventDefault();
+    var postData = e.currentTarget.name;
+	var action = "";
+	if (e.currentTarget.checked)
+		action = "add";
+	else
+		action = "remove";
+
+	$.ajax({
+		type: 'POST',
+		data: JSON.stringify({"user":postData, "action":action}),
+		contentType: 'application/json',
+		url: 'http://localhost:80/update_annt_filter',						
+		success: function(data) {
+			//alert("Done " + data);
+		},
+		error: function(data){
+			window.console.log(data);
+		}
+    });
+	e.stopPropagation();
+	return false;
+}
+
 function centerModal() {
     $(this).css('display', 'block');
     var $dialog = $(this).find(".modal-dialog");
