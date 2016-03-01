@@ -109,8 +109,7 @@ exports.updateAnntFilterParams = function(username, bookid, filter_settings){
 	var params = {
 		TableName: 'AnnotationsFilter',
 		Item: {
-			"userID": username,
-			"bookID": bookid,
+			"user:book": username + ":book" + bookid,
 			"filterParams": filter_settings
 		}
 	};

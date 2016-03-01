@@ -176,14 +176,12 @@ function get_annt_filter_params(username, bookid, ret) {
 
 	var FilterParams = {
 		TableName: 'AnnotationsFilter',
-		FilterExpression: "#userid = :i and #bkid = :j",
+		FilterExpression: "#key = :i",
 		ExpressionAttributeNames: {
-			"#userid" : "userID",
-			"#bkid": "bookID"
+			"#key": "user:book"
 		},
 		ExpressionAttributeValues: {
-			":i": username,
-			":j": bookid		
+			":i": username + ":book" + bookid			
 		}
 	};
 
