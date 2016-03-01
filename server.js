@@ -227,9 +227,12 @@ function get_annt_filter_params(username, bookid, ret) {
 		// add this user to "new_filter_settings"
 		// (3) Save the "new_filter_settings" in the DB
 		db_interface.scanTable(FilterParams, function(err, last_filter_settings){
-			if (last_filter_settings.length != 1)
+			if (last_filter_settings.length > 1)
 				console.log("multiple --last_filter_settings-- found for user:" + username + ", bookid:" + bookid);
-			lastFilterParams = last_filter_settings[0].filterParams;
+			else if (last_filter_settings.length == 1)
+				lastFilterParams = last_filter_settings[0].filterParams;
+			else
+				lastFilterParams = [];
 			/****** NEED TO DO THIS BY BOOK ******/
 			//TODO: combine this with above check
 			for (var i = 0; i < visible_users.length; i++) {

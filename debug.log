@@ -1,39 +1,8 @@
 new book
-Displaying book: 1 - The_War_of_The_Worlds - main
+Displaying book: 2 - The_Einstein_Theory_of_Relativity - main
 Already Extracted
-Displaying book: 1 - The_War_of_The_Worlds - panels.css
-update_annt_filter req: [add, test_user3]
-old: test_user4,test_user2
-new: test_user4,test_user2,test_user3
-Added/Updated filter settings for user:test_user1, book:1
-update_annt_filter req: [remove, test_user4]
-old: test_user3,test_user4,test_user2
-new: test_user3,test_user2
-Added/Updated filter settings for user:test_user1, book:1
-update_annt_filter req: [remove, test_user2]
-old: test_user3,test_user2
-new: test_user3
-Added/Updated filter settings for user:test_user1, book:1
-Displaying book: 1 - The_War_of_The_Worlds - main1
-Displaying book: 1 - The_War_of_The_Worlds - panels.css
-update_annt_filter req: [add, test_user4]
-old: test_user3
-new: test_user3,test_user4
-Added/Updated filter settings for user:test_user1, book:1
-update_annt_filter req: [add, test_user2]
-old: test_user3,test_user4
-new: test_user3,test_user4,test_user2
-Added/Updated filter settings for user:test_user1, book:1
-update_annt_filter req: [remove, test_user3]
-old: test_user3,test_user4,test_user2
-new: test_user4,test_user2
-Added/Updated filter settings for user:test_user1, book:1
-Displaying book: 1 - The_War_of_The_Worlds - main1
-Displaying book: 1 - The_War_of_The_Worlds - panels.css
-Displaying book: 1 - The_War_of_The_Worlds - panels.css
-update_annt_filter req: [add, test_user3]
-old: test_user4,test_user2
-new: test_user4,test_user2,test_user3
-Added/Updated filter settings for user:test_user1, book:1
-Displaying book: 1 - The_War_of_The_Worlds - main1
-Displaying book: 1 - The_War_of_The_Worlds - panels.css
+Displaying book: 2 - The_Einstein_Theory_of_Relativity - panels.css
+Added/Updated filter settings for user:test_user1, book:2
+Added/Updated filter settings for user:test_user1, book:2
+Displaying book: 2 - The_Einstein_Theory_of_Relativity - main
+Displaying book: 2 - The_Einstein_Theory_of_Relativity - panels.css
