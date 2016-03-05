@@ -38,7 +38,7 @@ html, body {
 	background-color:#ffffe5;
 	width:67%;
 	height:93%;
-	overflow: scroll;
+	overflow: auto;
 }
 
 #aside {
@@ -55,7 +55,7 @@ html, body {
     float:left;
 	text-align:right;
 	padding:0;
-	overflow: scroll;
+	overflow: auto;
 }
 
 #footer {
