@@ -437,7 +437,8 @@ app.get('/:userName/book:bookId-:bookName/:chapterName', function(req, res){
 	//until then, call the following function to get hardcoded bookname from bookid
 	var bookname = get_bookname(bookid);
 	
-	currChapter = req.params.chapterName;
+	if(req.params.chapterName != "panels.css")
+		currChapter = req.params.chapterName;
 
 	authCheck(username,res);
 	
