@@ -1,4 +1,6 @@
 var express = require('express');
+var session = require('express-session');
+var cookie_parser = require('cookie-parser');
 var fs = require('fs');
 var bodyParser = require('body-parser');
 var converter = require('epub2html');
@@ -34,10 +36,6 @@ console.log = function(d) { //
 // create our app
 var app = express();
 
-// Authorization check variables
-var isAuthenticated = false;
-var selfUserName;
-
 // Book Display variables
 var currBookID = '';
 var currChapter = '';
@@ -54,19 +52,48 @@ app.set('views', __dirname + '/views');
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
+
 app.use(bodyParser.json());
 
+// required for session authorization and saving
+app.use(cookie_parser());
+app.use(session({secret : 'cdw3382sd@q1!oj0odfsidoj2032W?', saveUninitialized : false, resave : true}));
 
 /*****************************************************************DEFINE CUSTOM FUNCTIONS*****************************************************************/
 
-/* Authentication check */
-function authCheck (userName, res) {
-	if (!isAuthenticated || (selfUserName != userName)) {
-		selfUserName = '';
-		isAuthenticated = false;
-		res.redirect('/login');
-	}
-}
+app.use(function(req, res, next) {
+    if (req.session && req.session.user) {
+    	console.log("session exists for user " + req.session.user);
+    	var dynamodb = new AWS.DynamoDB();
+		var params = {
+			TableName: 'PrivacySettings',
+			Key: { 
+				"userId" : {
+					"S" : req.session.user
+				}	
+			}
+		};
+		dynamodb.getItem(params, function(err, data) {
+			if (!err && Object.keys(data).length) {
+				req.user = data.Item.userId.S;
+		        req.session.user = data.Item.userId.S;  //refresh the session value
+			}
+			// finishing processing the middleware and run the route
+      		next();
+		});
+  	} else {
+   		next();
+   	}
+});
+
+function requireLogin(req, res, next) {
+  if (!req.user) {
+    res.redirect('/login');
+  } else {
+    next();
+  }
+};
+
 
 var storage = multer.diskStorage({
 	destination: function (req, file, cb) {
@@ -256,10 +283,10 @@ function get_annt_filter_params(username, bookid, ret) {
 
 /******************************************************************GET FILES*****************************************************************************/
 // Get the speedreading js - HACKY
-app.get('/:userName/:book/bookmarklet.js', function(req, res){
+app.get('/:book/bookmarklet.js', function(req, res){
  res.sendFile(__dirname +"/jetzt/bookmarklet.js");
 });
-app.get('/:userName/bookmarklet.js', function(req, res){
+app.get('/bookmarklet.js', function(req, res){
  res.sendFile(__dirname +"/jetzt/bookmarklet.js");
 });
 
@@ -268,34 +295,29 @@ app.get('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', 
 });
 
 /* Get XML files */
-app.get('/:userName/Books/:book/OPS/:xml', function(req, res){
-	authCheck(req.params.userName,res);
+app.get('/Books/:book/OPS/:xml', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/Books/" + req.params.book + "/OPS/" + req.params.xml);
 });
 
-app.get('/:userName/Books/:book/text/:xhtml', function(req, res){
-	authCheck(req.params.userName,res);
+app.get('/Books/:book/text/:xhtml', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/Books/" + req.params.book + "/text/" + req.params.xhtml);
 });
 
 /* Get image files */
-app.get('/:userName/images/:image', function(req, res){
-	authCheck(req.params.userName,res);
+app.get('/images/:image', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/Books/Combined/OPS/images/" + req.params.image);
 });
 
-app.get('/:userName/uploads/:image', function(req, res){
-	authCheck(req.params.userName,res);
+app.get('/uploads/:image', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/uploads/" + req.params.image);
 });
 
 /* Get CSS files */
-app.get('/:userName/panels.css', function(req, res){
-	authCheck(req.params.userName,res);
+app.get('/panels.css', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/panels.css");
 });
 
-app.get('/panels.css', function(req, res){
+app.get('/panels.css', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/panels.css");
 });
 
@@ -303,56 +325,37 @@ app.get('/login.css', function(req, res){
 	res.sendFile( __dirname + "/public/login.css");
 });
 
-app.get('/:userName/Books/:book/OPS/css/:css', function(req, res){
-	authCheck(req.params.userName,res);
+app.get('/Books/:book/OPS/css/:css', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/Books/" + req.params.book + "/OPS/css/" + req.params.css);
 });
 
-app.get('/:userName/css/:css', function(req, res){
-	authCheck(req.params.userName,res);
+app.get('/css/:css', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/Books/Combined/OPS/css/" + req.params.css);
 });
 
-app.get('/:userName/dashboard.css', function(req, res){
-	authCheck(req.params.userName,res);
+app.get('/dashboard.css', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/dashboard.css");
 });
 
 /* Get JS files */
-app.get('/annotations.js', function(req, res){
-	/***** HACK!!!!! **** Combined needs to call with username in url! Need to change! BREACHES SECURITY*/
+app.get('/annotations.js', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/annotations.js");
 });
 
-app.get('/:userName/annotations.js', function(req, res){
-	/***** HACK!!!!! **** Combined needs to call with username in url! Need to change! BREACHES SECURITY*/
-	if (req.params.userName === undefined)
-		res.sendFile( __dirname + "/public/annotations.js");
-	authCheck(req.params.userName,res);
+app.get('/book:bookId-:bookName/annotations.js', requireLogin, function(req, res){
 		res.sendFile( __dirname + "/public/annotations.js");
 });
 
-app.get('/:userName/book:bookId-:bookName/annotations.js', function(req, res){
-	/***** HACK!!!!! **** Combined needs to call with username in url! Need to change! BREACHES SECURITY*/
-	if (req.params.userName === undefined)
-		res.sendFile( __dirname + "/public/annotations.js");
-	authCheck(req.params.userName,res);
-		res.sendFile( __dirname + "/public/annotations.js");
-});
-
-app.get('/:userName/test.js', function(req, res){
-	authCheck(req.params.userName,res);
+app.get('/test.js', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/test.js");
 });
 
 
-app.get('/:userName/dashboard.js', function(req, res){
-	authCheck(req.params.userName,res);
+app.get('/dashboard.js', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/dashboard.js");
 });
 
-app.get("/:userName/template.js", function(req, res){
-	authCheck(req.params.userName,res);
+app.get("/template.js", requireLogin, function(req, res){
 	res.sendFile(__dirname + "/public/template.js");
 });
 
@@ -368,8 +371,7 @@ app.get(['/','/login'], function(req, res){
 });
 
 app.get('/logout', function(req, res){
-  selfUserName = '';
-  isAuthenticated = false;
+  req.session.destroy();
   res.redirect('/login');
 });
 
@@ -384,7 +386,7 @@ app.post('/login', function(req, res){
 		Key: { 
 			"userId" : {
 				"S" : userid
-			}
+			}	
 		}
 	};
 	dynamodb.getItem(params, function(err, data) {
@@ -395,11 +397,11 @@ app.post('/login', function(req, res){
 				res.redirect('/login?e=InvalidCredentials');
 			} else {
 				// Found username & password in database
-				selfUserName = userid;
-				isAuthenticated = true;
-				//console.log(data);
+				// set cookie with user's info
+				req.session.user = userid;
+				console.log("user id in session is " + req.session.user);
 				res.writeHead(301,
-				  {Location: selfUserName + '/home'}
+				  {Location:'/home'}
 				);
 				res.end();
 			}
@@ -411,12 +413,11 @@ app.post('/login', function(req, res){
 
 
 /***********************************************************HOME PAGE/ DASHBOARD***************************************************************/
-app.get('/:userName/home', function(req,res) {
-	var username = req.params.userName;
-	authCheck(username,res);
+app.get('/home', requireLogin, function(req,res) {
+	var username = req.session.user;
 	//console.log("Received username: " + username);
 	var welcome_msg = "Hello " + username;
-	//res.sendFile( __dirname + "/home.html");
+	//res.sendF/ile( __dirname + "/home.html");
 	//var path = "Books/Images/";
 	var img_paths = ["http://ecx.images-amazon.com/images/I/518k1D%2BJZHL._SX331_BO1,204,203,200_.jpg",
     "http://ecx.images-amazon.com/images/I/51r9QQVSRNL._SX331_BO1,204,203,200_.jpg",
@@ -428,9 +429,9 @@ app.get('/:userName/home', function(req,res) {
 
 /**********************************************************************BOOK DISPLAY**************************************************************/
 /* combined display pages */
-app.get('/:userName/book:bookId-:bookName/:chapterName', function(req, res){
+app.get('/book:bookId-:bookName/:chapterName', requireLogin, function(req, res){
 	var bookid = req.params.bookId;
-	var username = req.params.userName;
+	var username = req.session.user;
 
 	//var bookname = req.params.bookName;
 	//TODO: CORRECTLY extract bookname from EPUB and place in URL
@@ -438,8 +439,6 @@ app.get('/:userName/book:bookId-:bookName/:chapterName', function(req, res){
 	var bookname = get_bookname(bookid);
 	
 	currChapter = req.params.chapterName;
-
-	authCheck(username,res);
 	
 	if(bookid != currBookID){
 		console.log("new book");
@@ -506,7 +505,7 @@ app.get('/:userName/book:bookId-:bookName/:chapterName', function(req, res){
 	});
 });
 
-app.get('/:userName/book:bookId=:bookName/:chapterName/summary', function(req, res){
+app.get('/book:bookId-:bookName/:chapterName/summary', requireLogin, function(req, res){
 		//var bookid = req.params.bookId;
 		var currBookID = req.params.bookId;
 		var currChapter = req.params.chapterName;
@@ -518,8 +517,8 @@ app.get('/:userName/book:bookId=:bookName/:chapterName/summary', function(req, r
 		//var bookname = req.params.bookName;
 		//TODO: once privacy settings are stored with corresponding bookid/bookname
 		//remove this swtich-case
-		bookname = get_book_name(currBookID);
-		//var username = req.params.userName;
+		bookname = get_bookname(currBookID);
+		//var username = req.session.user;
 
 		console.log("Loading all annotations for book2");
 		var all_annts = [];
@@ -553,7 +552,7 @@ app.get('/:userName/book:bookId=:bookName/:chapterName/summary', function(req, r
 		//res.send(req.body);
 });
 
-app.get('/:userName/book:bookId=:bookName/summary', function(req, res){
+app.get('/book:bookId=:bookName/summary', requireLogin, function(req, res){
 		//var bookid = req.params.bookId;
 		var currBookID = req.params.bookId;
 		var currChapter = currBookID + "_main";
@@ -563,8 +562,8 @@ app.get('/:userName/book:bookId=:bookName/summary', function(req, res){
 		//var bookname = req.params.bookName;
 		//TODO: once privacy settings are stored with corresponding bookid/bookname
 		//remove this swtich-case
-		bookname = get_book_name(currBookID);
-		//var username = req.params.userName;
+		bookname = get_bookname(currBookID);
+		//var username = req.session.user;
 
 		console.log("Loading all annotations for book2");
 		var all_annts = [];
@@ -600,7 +599,7 @@ app.get('/:userName/book:bookId=:bookName/summary', function(req, res){
 
 
 
-app.get('/:userName/upload_img', function(req, res){
+app.get('/upload_img', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/" + "upload_img.html" );
 });
 
@@ -615,7 +614,6 @@ app.post('/annt_submit_or_edit', function(req, res){
 	// hyperlink potential links in annotation
 	var linkedBody = Autolinker.link(body);
 	linkedBody = "<p>" + linkedBody + "</p>";
-	console.log("User: " + selfUserName);
 	console.log("Title: " + title);
 	console.log("Body: " + linkedBody);
 	console.log('------------------------------------------');
@@ -631,7 +629,7 @@ app.post('/annt_submit_or_edit', function(req, res){
 			"title":title,
 			"body":linkedBody
 		}
-		db_interface.addNote(note_item, selfUserName, currBookID, currChapter);
+		db_interface.addNote(note_item, req.session.user, currBookID, currChapter);
 		res.send(linkedBody);
 	} else{
 		console.log("Editing");
@@ -655,8 +653,8 @@ app.post('/delete_annt', function(req, res){
 	res.send(req.body);
 });
 
-//app.post('/:userName/book:bookId=:bookName', function(req, res)
-/*app.post('/:userName/summarize_annt', function(req, res){
+//app.post('/book:bookId=:bookName', function(req, res)
+/*app.post('/summarize_annt', function(req, res){
 
 		console.log("****************Without Display");
 		//var bookid = req.params.bookId;
@@ -670,8 +668,8 @@ app.post('/delete_annt', function(req, res){
 		//var bookname = req.params.bookName;
 		//TODO: once privacy settings are stored with corresponding bookid/bookname
 		//remove this swtich-case
-		bookname = get_book_name(bookid);
-		//var username = req.params.userName;
+		bookname = get_bookname(bookid);
+		//var username = req.session.user;
 
 		console.log("Loading all annotations for book2");
 		var all_annts = [];
@@ -718,7 +716,7 @@ app.post('/api/photo', uploading.single('pic'), function(req, res){
 		//add owner, timestamp, etc here
 	}
 	//commented out for testing purposes
-	db_interface.addNote(img_item, selfUserName, currBookID, currChapter);
+	db_interface.addNote(img_item, req.session.user, currBookID, currChapter);
 	res.end("Image has uploaded.");
 });
 
@@ -732,7 +730,7 @@ app.post('/update_annt_filter', function(req, res){
 	//TODO: currently using get_annt_filter_params() b/c already available
 	//can probably use less costly fcn instead or 
 	//store the filter settings and eliminate db reads here
-	get_annt_filter_params(selfUserName, currBookID, function(visible_users, filter_settings){
+	get_annt_filter_params(req.session.user, currBookID, function(visible_users, filter_settings){
 		//console.log("old: " + filter_settings);
 		
 		if (action == "add") {
@@ -750,7 +748,7 @@ app.post('/update_annt_filter', function(req, res){
 			console.log("updating annt filter settings: unknown action");
 		
 		//console.log("new: " + filter_settings);
-		db_interface.updateAnntFilterParams(selfUserName, currBookID, filter_settings);
+		db_interface.updateAnntFilterParams(req.session.user, currBookID, filter_settings);
 	});
 	
 	//TODO(fix): updating annt filter settings require page refresh by user to take effect
@@ -759,8 +757,8 @@ app.post('/update_annt_filter', function(req, res){
 
 
 /*********************************************************************SET PRIVACY**************************************************************/
-app.post('/:userName/setprivacy', function(req, res){
-  var username = req.params.userName;
+app.post('/setprivacy', function(req, res){
+  var username = req.session.user;
   var textID = req.body.textbookid;
   var textname= books[textID].title.split(' ').join('_');
   var privacy_val = req.body.privacy;

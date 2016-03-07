@@ -17,9 +17,9 @@ html(lang='en')
     div.page_nav
       ul.page_nav_buttons
         li.page_nav
-          a.active(href='/' + locals.username + '/book' + locals.bookid + '-' + locals.bookname + '/main') #{locals.bookname}
+          a.active(href='/book' + locals.bookid + '-' + locals.bookname + '/main') #{locals.bookname}
         li.page_nav
-          a(href='/' + locals.username + '/home') Bookshelf
+          a(href='/home') Bookshelf
         li.page_nav
           //need to link to privacy settings for book
           a(href='/settings') Settings

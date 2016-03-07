@@ -12,11 +12,7 @@ $( document ).ready(function() {
     $(".bookIcon").click(function(e) {
       if(e.target.tagName ==  "BUTTON")
         return;
-      var pathname = window.location.pathname;
-      var username = pathname.replace('/home', '');
-      var location =  "http://localhost" + username + "/";
-      location += (this.id + "-" + this.name);
-	  location += "/main";
+      var location = "/" + this.id + "-" + this.name + "/main";
       window.location.href = location;
     });
 });
@@ -31,8 +27,6 @@ $(document).ready(function(){
 
 function set_privacy(e) {
    e.preventDefault();
-   var pathname = window.location.pathname;
-   var username = pathname.replace('/home', '');
    var postData = e.currentTarget.id;
    var arr = postData.split('_');
    alert('Setting privacy settings to ' + arr[0]);
@@ -46,7 +40,7 @@ function set_privacy(e) {
 		type: 'POST',
 		data: JSON.stringify({"textbookid":arr[1], "privacy":arr[0]}),
 		contentType: 'application/json',
-		url: 'http://localhost:80' + username + '/setprivacy',						
+		url: 'http://localhost:80/setprivacy',						
 		success: function(data) {
 			//alert("Sent " + data);
 		},

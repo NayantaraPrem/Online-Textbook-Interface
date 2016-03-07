@@ -179,7 +179,6 @@ function edit_annt(e) {
 
 function generate_summary(e) {
    e.preventDefault();
-   // var pathname = window.location.pathname;
    window.location.href = window.location.href + '/summary';
 /*   var username = pathname.replace('/home', '');
    var postData = e.currentTarget.id;
