@@ -317,8 +317,8 @@ app.get('/panels.css', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/panels.css");
 });
 
-app.get('/panels.css', requireLogin, function(req, res){
-	res.sendFile( __dirname + "/public/panels.css");
+app.get('/book:bookId-:bookName/:chid/summary.css', requireLogin, function(req, res){
+	res.sendFile( __dirname + "/public/summary.css");
 });
 
 app.get('/login.css', function(req, res){
@@ -340,6 +340,10 @@ app.get('/dashboard.css', requireLogin, function(req, res){
 /* Get JS files */
 app.get('/annotations.js', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/annotations.js");
+});
+
+app.get('/book:bookId-:bookName/:chid/summary.js', requireLogin, function(req, res){
+	res.sendFile( __dirname + "/public/summary.js");
 });
 
 app.get('/book:bookId-:bookName/annotations.js', requireLogin, function(req, res){

@@ -29,6 +29,7 @@ $(document).ready(function() {
 
 	// Only show edit, delete & submit buttons for own annotations
 	$.each(annotations, function(i, item) {
+		// make HTML code display in webpage eg: <p>abc</p> displayed as abc
 		$("#textbody" + item.NoteID).html(item.info.body);
 		if(item.owner == userId) {
 			$("#editButton" + item.NoteID).show();
