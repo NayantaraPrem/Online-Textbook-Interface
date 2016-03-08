@@ -181,3 +181,56 @@ a.clickable:hover { text-decoration:none; }
 .popover{
     color: rgb(31, 31, 20);
 }
+
+
+############### Pagination ###############
+.custom-pages {
+list-style: none;
+}
+.textarea {
+font-size: 14px;
+height: 85%;
+line-height: 18px;
+margin: 18px 0;
+}
+.tp-control-arrows {
+height: 10%;
+float: left;
+}
+.tp-control-pages {
+height: 10%;
+}
+.tp-control-arrow-left {
+background: #777777;
+color: #FFFFFF;
+cursor: pointer;
+float: left;
+margin: 0 5px;
+padding: 10px;
+}
+.tp-control-arrow-right {
+background: #777777;
+color: #FFFFFF;
+cursor: pointer;
+float: left;
+margin: 0 5px;
+padding: 10px;
+}
+.tp-control-arrow-left.unactive {
+background: #eee;
+}
+.tp-control-arrow-right.unactive {
+background: #eee;
+}
+.tp-page {
+background: #777777;
+color: #FFFFFF;
+cursor: pointer;
+float: left;
+margin: 0 5px;
+padding: 10px;
+}
+.tp-page.active {
+background: #ff0000;
+color: #FFFFFF;
+}

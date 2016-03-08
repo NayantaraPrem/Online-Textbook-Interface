@@ -338,6 +338,10 @@ app.get('/dashboard.css', requireLogin, function(req, res){
 });
 
 /* Get JS files */
+app.get('/jquery.textpager.js', function(req, res){
+	res.sendFile( __dirname + "/public/jQuery-Plugin-Pagination/jquery.textpager.js");
+});
+
 app.get('/annotations.js', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/annotations.js");
 });
@@ -504,7 +508,7 @@ app.get('/book:bookId-:bookName/:chapterName', requireLogin, function(req, res){
 	get_annt_filter_params(username, bookid, function(visible_users, filter_settings){
 		generate_filtered_notes(username, bookid, currChapter, filter_settings, function(filtered_notes){
 			//TODO: now save new_filter_settings
-			res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: currChapter, username: username, visible_users: visible_users, filter_settings: filter_settings });
+			res.render('combinedDisplay', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: currChapter, username: username, visible_users: visible_users, filter_settings: filter_settings });
 		});
 	});
 });

@@ -1,0 +1,28 @@
+html(lang='en')
+  head
+    link(rel='stylesheet', type='text/css', href='//localhost:80/panels.css')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+    script(src='//localhost:80/jquery.textpager.js')
+
+  body
+    #section
+      #text-pager.demo
+        #textarea.textarea
+          div
+            case bookid
+              when "1": include .includes/Book1Sections.jade
+              when "2": include .includes/Book2Sections.jade
+              when "3": include .includes/Book3Sections.jade
+        .control
+          a.tp-control-arrow-left.unactive
+            span <
+          a.tp-control-arrow-right
+            span >
+          ul.custom-pages
+
+    script.
+      $('#textarea').textpager({
+      controlArrows: ".control",
+      controlPages: ".control .custom-pages",
+      controlPagesContent: "li"
+      });

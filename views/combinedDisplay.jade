@@ -1,0 +1,14 @@
+html(lang='en')
+  include .includes/head.jade
+  body
+    include .includes/page-nav-bar.jade
+
+    #nav
+      case bookid
+        when "1": include .includes/Book1TableOfContents.jade
+        when "2": include .includes/Book2TableOfContents.jade
+        when "3": include .includes/Book3TableOfContents.jade
+
+    include paginate.jade
+
+    include annotations.jade
