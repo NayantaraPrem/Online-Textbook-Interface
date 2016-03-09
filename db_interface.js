@@ -138,7 +138,7 @@ exports.updateAnntFilterParams = function(username, bookid, filter_settings){
 
 */
 
-exports.addNote = function(item, username, bookid, chapter){
+exports.addNote = function(item, username, bookid, chapter, page){
 	var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 	var ID = item.id;
 	if(typeof ID == 'undefined' || !ID ){
@@ -154,7 +154,8 @@ exports.addNote = function(item, username, bookid, chapter){
 		                       "info": item,
 		                       "owner": username,
 							   "bookID": bookid,
-							   "chapter": chapter
+							   "chapter": chapter,
+							   "page": page
 			             }
 			     };
 			console.log("Params:" + params.TableName + " " + params.Item.ID + " "+ params.Item.info);

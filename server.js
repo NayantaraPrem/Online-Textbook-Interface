@@ -63,7 +63,7 @@ app.use(session({secret : 'cdw3382sd@q1!oj0odfsidoj2032W?', saveUninitialized : 
 
 app.use(function(req, res, next) {
     if (req.session && req.session.user) {
-    	console.log("session exists for user " + req.session.user);
+    	//console.log("session exists for user " + req.session.user);
     	var dynamodb = new AWS.DynamoDB();
 		var params = {
 			TableName: 'PrivacySettings',
@@ -176,11 +176,14 @@ function generate_filtered_notes(username, bookid, chapter, filterparams, ret) {
 	// add this note to "filtered_notes"
 	db_interface.scanTable(AnnotationsParams, function(err, preloaded_notes){
 		for (var i = 0; i < preloaded_notes.length; i++) {
-			for (var j = 0; j < filterparams.length; j++) {
-				if (preloaded_notes[i].owner == username ||
-					preloaded_notes[i].owner == filterparams[j]) {
-					filtered_notes.push(preloaded_notes[i]);
-					break;
+			if(preloaded_notes[i].owner == username)
+				filtered_notes.push(preloaded_notes[i]);
+			else {
+				for (var j = 0; j < filterparams.length; j++) {
+					if (preloaded_notes[i].owner == filterparams[j]) {
+						filtered_notes.push(preloaded_notes[i]);
+						break;
+					}
 				}
 			}
 		}
@@ -619,6 +622,7 @@ app.post('/annt_submit_or_edit', function(req, res){
 	var title = req.body[0].value;
 	var body = req.body[1].value; 
 	var id = req.body[2].value;
+	var page = req.body[3].value;
 	// hyperlink potential links in annotation
 	var linkedBody = Autolinker.link(body);
 	linkedBody = "<p>" + linkedBody + "</p>";
@@ -637,7 +641,7 @@ app.post('/annt_submit_or_edit', function(req, res){
 			"title":title,
 			"body":linkedBody
 		}
-		db_interface.addNote(note_item, req.session.user, currBookID, currChapter);
+		db_interface.addNote(note_item, req.session.user, currBookID, currChapter, page);
 		res.send(linkedBody);
 	} else{
 		console.log("Editing");

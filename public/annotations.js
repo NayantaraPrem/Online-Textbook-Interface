@@ -82,11 +82,18 @@ $(document).on('click', 'input[type="submit"]', function(e) {
 		var postData = $("#ajaxform"+inputID).serializeArray();
 		var textbody = $("#textbody"+inputID).html();
 		console.log(postData);
-		postData = [{"name":"title", "value":postData[0].value},{"name":"body", "value":textbody} , {"name":"id", "value":inputID}];
+		
+		var page = 0;
+		if ( $('ul.custom-pages li').length != 0 )		
+			page = $('ul.custom-pages').find('li.active').attr('data-page');
+		//alert("test "+page);
+		
+		postData = [{"name":"title", "value":postData[0].value},{"name":"body", "value":textbody} , {"name":"id", "value":inputID}, {"name":"page", "value":page}];
 		var data = {};
 		data.title = "title";
 		data.message = "message";
 		var formURL = $(this).attr("action");
+		
 		$.ajax({
 			type: 'POST',
 			data: JSON.stringify(postData),

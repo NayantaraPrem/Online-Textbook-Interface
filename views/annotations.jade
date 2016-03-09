@@ -18,10 +18,10 @@
             button#add_image.btn.btn-info.btn-md(onclick='upload_img_prompt(event)')
               span.glyphicon.glyphicon-plus-sign
               |  Image
-      each note, index in notes
-        if(note.info.type == "TXT")
-          .row
-            .col-md-12
+      ul.annt-list
+        each note, index in notes
+          if(note.info.type == "TXT")
+            li(data-owner="#{note.owner}", data-page="#{note.page}")
               .panel.panel-primary
                 form.form(id="ajaxform#{note.NoteID}", name='ajaxform')
                   .panel-heading.clickable(id="panel-heading#{note.NoteID}")
@@ -37,9 +37,9 @@
                   .panel-body.writable(id="panel-body#{note.NoteID}")
                     .annt_body(name='body', id="textbody#{note.NoteID}", contentEditable='false')
                   input(type='submit' name='submit' value='Submit' id="#{note.NoteID}")
-        if(note.info.type == "IMG")
+          if(note.info.type == "IMG")
           //add icons or whatever for images here
-          .row
+           li(data-owner="#{note.owner}", data-page="#{note.page}")
             .col-md-9
               em
                 span.ownerName=note.owner
@@ -57,6 +57,7 @@
               button.btn.btn-primary.btn-sm(name='delete' id="deleteButton#{note.NoteID}" onclick='delete_img(event)')
                 span.glyphicon.glyphicon-trash
               p
+
   #ChSummary.div
       .row
         .col-sm-6

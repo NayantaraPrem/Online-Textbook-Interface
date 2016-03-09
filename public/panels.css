@@ -38,7 +38,7 @@ html, body {
 	background-color:#ffffe5;
 	width:67%;
 	height:93%;
-	overflow: auto;
+	overflow: hidden;
 }
 
 #aside {
@@ -182,6 +182,12 @@ a.clickable:hover { text-decoration:none; }
     color: rgb(31, 31, 20);
 }
 
+ul.annt-list {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+
 
 ############### Pagination ###############
 .custom-pages {
@@ -199,6 +205,14 @@ float: left;
 }
 .tp-control-pages {
 height: 10%;
+}
+.tp-control-arrow-left:hover { 
+text-decoration:none;
+color: white;
+}
+.tp-control-arrow-right:hover { 
+text-decoration:none;
+color: white;
 }
 .tp-control-arrow-left {
 background: #777777;
@@ -218,9 +232,11 @@ padding: 10px;
 }
 .tp-control-arrow-left.unactive {
 background: #eee;
+cursor: default;
 }
 .tp-control-arrow-right.unactive {
 background: #eee;
+cursor: default;
 }
 .tp-page {
 background: #777777;
