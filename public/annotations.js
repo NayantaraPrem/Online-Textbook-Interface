@@ -232,6 +232,9 @@ function update_annt_filter(e) {
 		}
     });
 	e.stopPropagation();
+	
+	update_visible_annt_list();
+	
 	return false;
 }
 

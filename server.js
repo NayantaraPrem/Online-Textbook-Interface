@@ -187,7 +187,7 @@ function generate_filtered_notes(username, bookid, chapter, filterparams, ret) {
 				}
 			}
 		}
-		//console.log(preloaded_notes);
+		//console.log(filtered_notes.length);
 		
 		ret(filtered_notes);
 	});
@@ -509,7 +509,7 @@ app.get('/book:bookId-:bookName/:chapterName', requireLogin, function(req, res){
 
 	//TODO: is get/update annt filter settings really needed on these pages? can probably only do once when book first opens
 	get_annt_filter_params(username, bookid, function(visible_users, filter_settings){
-		generate_filtered_notes(username, bookid, currChapter, filter_settings, function(filtered_notes){
+		generate_filtered_notes(username, bookid, currChapter, visible_users, function(filtered_notes){
 			//TODO: now save new_filter_settings
 			res.render('combinedDisplay', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: currChapter, username: username, visible_users: visible_users, filter_settings: filter_settings });
 		});
