@@ -174,11 +174,13 @@ function generate_filtered_notes(username, bookid, chapter, filterparams, ret) {
 	// (1) For each note in "preloaded_notes", if the owner is the current user or 
 	// the owner is in the "filterparams" list, 
 	// add this note to "filtered_notes"
+	console.log("Filtered annotations");
 	db_interface.scanTable(AnnotationsParams, function(err, preloaded_notes){
 		for (var i = 0; i < preloaded_notes.length; i++) {
-			if(preloaded_notes[i].owner == username)
+			if(preloaded_notes[i].owner == username){
 				filtered_notes.push(preloaded_notes[i]);
-			else {
+				console.log(preloaded_notes[i].NoteID);
+			}else {
 				for (var j = 0; j < filterparams.length; j++) {
 					if (preloaded_notes[i].owner == filterparams[j]) {
 						filtered_notes.push(preloaded_notes[i]);
@@ -450,7 +452,6 @@ app.get('/book:bookId-:bookName/:chapterName', requireLogin, function(req, res){
 	var bookname = get_bookname(bookid);
 	
 	currChapter = req.params.chapterName;
-	
 	if(bookid != currBookID){
 		console.log("new book");
 		//this is a new book
@@ -608,10 +609,12 @@ app.get('/book:bookId=:bookName/summary', requireLogin, function(req, res){
 
 /*********************************************************************ANNOTATIONS**************************************************************/
 
-
-
-app.get('/upload_img', requireLogin, function(req, res){
-	res.sendFile( __dirname + "/" + "upload_img.html" );
+//send image upload file
+app.get('/upload_img/page=:page', requireLogin, function(req, res){
+		var page = req.params.page;
+		console.log("Going to upload");
+	//	res.sendFile( __dirname + "/" + "upload_img.html" );
+	        res.render('upload_img', { page:page});
 });
 
 // that `req.body` will be filled in with the form elements
@@ -716,19 +719,22 @@ app.post('/delete_annt', function(req, res){
 
 
 //Uploading images
-app.post('/api/photo', uploading.single('pic'), function(req, res){
+app.post('/api/photo/:page', uploading.single('pic'), function(req, res){
 	
 	// refresh the '/annotations' html page here
 	// ...
 	// add image to db
+	var page = req.params.page;
+	console.log("Uploading " + req.file.filename + 'to page#' + page);
 	var img_item = {
 		"id": req.file.filename,
 		"type": "IMG",
 		"img_dest": "./uploads/"+req.file.filename
 		//add owner, timestamp, etc here
 	}
+	//db_interface.addNote(note_item, req.session.user, currBookID, currChapter, page);
 	//commented out for testing purposes
-	db_interface.addNote(img_item, req.session.user, currBookID, currChapter);
+	db_interface.addNote(img_item, req.session.user, currBookID, currChapter, page);
 	res.end("Image has uploaded.");
 });
 

@@ -73,7 +73,12 @@ $(document).on('click', '#add_annotation', function () {
 });
 
 function upload_img_prompt(e){
-	var myWindow = window.open("upload_img", "MsgWindow", "top=300, left=400, width=500, height=100");
+	var page = 0;
+	if ( $('ul.custom-pages li').length != 0 )
+	        page = $('ul.custom-pages').find('li.active').attr('data-page');
+	//alert("test "+page);
+	var url = "http://localhost:80/upload_img/page="+page;
+	var myWindow = window.open(url, "MsgWindow", "top=300, left=400, width=500, height=100");
 }
 
 $(document).on('click', 'input[type="submit"]', function(e) {
