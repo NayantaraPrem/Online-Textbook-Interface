@@ -38,25 +38,23 @@
                     .annt_body(name='body', id="textbody#{note.NoteID}", contentEditable='false')
                   input(type='submit' name='submit' value='Submit' id="#{note.NoteID}")
           if(note.info.type == "IMG")
-          //add icons or whatever for images here
-           li(data-owner="#{note.owner}", data-page="#{note.page}")
-            .col-md-9
-              em
-                span.ownerName=note.owner
-              img.img-thumbnail.thumbnail(src=note.info.img_dest width=160 height=100)
-            .col-md-3
-              button.btn.btn-primary.btn-sm(type='button', data-toggle='modal', data-target="#mymod#{index}")
-                span.glyphicon.glyphicon-zoom-in
-                //|  View
-              div(id='mymod#{index}' class="modal fade" tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true')
-                .modal-dialog
-                  .modal-content
-                    .modal-body
-                      img.img-responsive(src=note.info.img_dest)
-              p
-              button.btn.btn-primary.btn-sm(name='delete' id="deleteButton#{note.NoteID}" onclick='delete_img(event)')
-                span.glyphicon.glyphicon-trash
-              p
+            li(data-owner="#{note.owner}", data-page="#{note.page}")
+              .col-md-9
+                em
+                  span.ownerName=note.owner
+                img.img-thumbnail.thumbnail(src=note.info.img_dest width=160 height=100)
+              .col-md-3
+                button.btn.btn-primary.btn-sm(type='button', data-toggle='modal', data-target="#mymod#{index}")
+                  span.glyphicon.glyphicon-zoom-in
+                div(id='mymod#{index}' class="modal fade" tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true')
+                  .modal-dialog
+                    .modal-content
+                      .modal-body
+                        img.img-responsive(src=note.info.img_dest)
+                p
+                button.btn.btn-primary.btn-sm(name='delete' id="deleteButton#{note.NoteID}" onclick='delete_img(event)')
+                  span.glyphicon.glyphicon-trash
+                p
 
   #ChSummary.div
       .row

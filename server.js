@@ -313,7 +313,7 @@ app.get('/images/:image', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/Books/Combined/OPS/images/" + req.params.image);
 });
 
-app.get('/uploads/:image', requireLogin, function(req, res){
+app.get('/book:bookId-:bookName/uploads/:image', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/uploads/" + req.params.image);
 });
 
