@@ -9,6 +9,10 @@ var path = require('path');
 var multer = require('multer');
 var db_interface = require('./db_interface.js');
 var config = require('./app_config');
+var fs = require('fs');
+// var screenshot = require('url-to-screenshot');
+var webpage = require('webpage');
+var phantom = require('phantom');
 
 var AWS = require("aws-sdk");
 var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
@@ -220,7 +224,7 @@ function get_annt_filter_params(username, bookid, ret) {
 	// Here we compare Privacy Settings for all registered users
 	// Users with "Public" notes are added to the "visble_users" list
 	// (1) Get list of all users
-	// (2) For each user, check saved Privacy Setting for current book 
+	// (2) For each aaaauser, check saved Privacy Setting for current book 
 	// (3) If user has set notes to "Public", add this user to "visible_users"	
 	db_interface.scanTable(UsersParams, function(err, all_users){
 
@@ -353,6 +357,10 @@ app.get('/annotations.js', requireLogin, function(req, res){
 
 app.get('/book:bookId-:bookName/:chid/summary.js', requireLogin, function(req, res){
 	res.sendFile( __dirname + "/public/summary.js");
+});
+
+app.get('/book:bookId-:bookName/:chid/require.js', requireLogin, function(req, res){
+	res.sendFile( __dirname + "/public/require.js");
 });
 
 app.get('/book:bookId-:bookName/annotations.js', requireLogin, function(req, res){
@@ -517,95 +525,76 @@ app.get('/book:bookId-:bookName/:chapterName', requireLogin, function(req, res){
 	});
 });
 
-app.get('/book:bookId-:bookName/:chapterName/summary', requireLogin, function(req, res){
-		//var bookid = req.params.bookId;
-		var currBookID = req.params.bookId;
-		var currChapter = req.params.chapterName;
-		//console.log("SUMMARIZE ANNOTATIONS for:" + bookid);
+app.get(['/book:bookId-:bookName/:chapterName/summary', '/book:bookId-:bookName/summary'], requireLogin, function(req, res){
+		var bookid = req.params.bookId;
+
+		if (req.params.chapterName)
+			var currChapter = req.params.chapterName;
+
 		console.log("SUMMARIZE ANNOTATIONS for currBookID " + currBookID);
-		// = bookid + "_main";
-
-		var bookname;
-		//var bookname = req.params.bookName;
-		//TODO: once privacy settings are stored with corresponding bookid/bookname
-		//remove this swtich-case
-		bookname = get_bookname(currBookID);
-		//var username = req.session.user;
+		
+		var bookname = get_bookname(currBookID);
+		var username = req.session.user;
 
 		console.log("Loading all annotations for book2");
-		var all_annts = [];
-		//var filtered_notes = [];
-		//var users = [];
-		//var filtered_users = [username];
+		var filter_settings = [];
+		var visible_users = [];
+		var filtered_notes = [];
+			
 
-		// Can add more parameters here to filter results
-		var AnnotationsParams = {
-			TableName: 'Annotations',
-			FilterExpression: "#bkid = :i and #chid = :j",
-			ExpressionAttributeNames: {
-				"#bkid": "bookID",
-				"#chid": "chapter"
-			},
-			ExpressionAttributeValues: {
-				":i": currBookID,
-				":j": currChapter			
-			}
-		};
-
-		db_interface.scanTable(AnnotationsParams, function(err, all_annts){
-			console.log("Received all annotations");
-			for (var j = 0; j < all_annts.length; j++) {
-				console.log("all annotations are: " + all_annts[j].info.title);
-			}
-			res.render('Summary', { title: bookname, chapter: currChapter, notes: all_annts});
-		//res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: "toADD", username: username});
+		get_annt_filter_params(username, bookid, function(visible_users, filter_settings){
+				generate_filtered_notes(username, bookid, currChapter, visible_users, function(filtered_notes){
+					res.render('Summary', { title: bookname, chapter: currChapter, notes: filtered_notes});
+			});
 		});
-
-		//res.send(req.body);
 });
 
-app.get('/book:bookId=:bookName/summary', requireLogin, function(req, res){
-		//var bookid = req.params.bookId;
-		var currBookID = req.params.bookId;
-		var currChapter = currBookID + "_main";
-		console.log("SUMMARIZE ANNOTATIONS for currBookID " + currBookID + " chapter " + currChapter);
+/*app.get(['/book:bookId-:bookName/summary/download','/book:bookId-:bookName/:chapterName/summary/download'], requireLogin, function(req, res){  
+	var summaryPath = '/summary_' + req.params.bookName;
+	if (req.params.chapterName) {
+		summaryPath += ('_' + req.params.chapterName);
+	}
+	summaryPath += '.pdf';
+	var url = req.protocol + '://' + req.get('host') + req.originalUrl;
+	url = url.replace('/download','');
+	
+	// pdf.create(html, options).toFile(summaryPath, function(err, res) {
+	//   if (err) return console.log(err);
+	//   console.log(res); // { filename: '/app/businesscard.pdf' } 
+	// });
+	console.log('PDF: ' + summaryPath);
+	console.log('url: ' + url);
+	var page = webpage.create();
+	page.open(url, function() {
+	  page.render(summaryPath);
+	  phantom.exit();
+	});
+	// phantom.create(function(ph){
+	//   ph.createPage(function(page) {
+	//     page.open('google.com', function(status) {
+	//       page.render(summaryPath, function(){
 
-		var bookname;
-		//var bookname = req.params.bookName;
-		//TODO: once privacy settings are stored with corresponding bookid/bookname
-		//remove this swtich-case
-		bookname = get_bookname(currBookID);
-		//var username = req.session.user;
+	//         console.log('Page Rendered');
+	//         ph.exit();
 
-		console.log("Loading all annotations for book2");
-		var all_annts = [];
-		//var filtered_notes = [];
-		//var users = [];
-		//var filtered_users = [username];
+	//       });
+	//     });
+	//   });
+	// });
+	 
+	// screenshot(url)
+	//   .width(800)
+	//   .height(600)
+	//   .capture(function(err, img) {
+	//     if (err) throw err;
+	//     fs.writeFileSync(__dirname + summaryPath, img);
+	//     console.log('downloaded screenshot');
+	//     res.redirect(url);
+	//   });
 
-		// Can add more parameters here to filter results
-		var AnnotationsParams = {
-			TableName: 'Annotations',
-			FilterExpression: "#bkid = :i and #chid = :j",
-			ExpressionAttributeNames: {
-				"#bkid": "bookID",
-				"#chid": "chapter"
-			},
-			ExpressionAttributeValues: {
-				":i": currBookID,
-				":j": currChapter			
-			}
-		};
 
-		db_interface.scanTable(AnnotationsParams, function(err, all_annts){
-			console.log("Received all annotations");
-			for (var j = 0; j < all_annts.length; j++) {
-				console.log("all annotations are: " + all_annts[j].info.title);
-			}
-			res.render('Summary', { title: bookname, chapter: currChapter, notes: all_annts});
-		});
-
-});
+});*/
+ 
 
 /*********************************************************************ANNOTATIONS**************************************************************/
 
@@ -667,55 +656,6 @@ app.post('/delete_annt', function(req, res){
 	db_interface.deleteItem(noteID);
 	res.send(req.body);
 });
-
-//app.post('/book:bookId=:bookName', function(req, res)
-/*app.post('/summarize_annt', function(req, res){
-
-		console.log("****************Without Display");
-		//var bookid = req.params.bookId;
-		var bookid = 2;
-		//console.log("SUMMARIZE ANNOTATIONS for:" + bookid);
-		currBookID = "1";
-		console.log("SUMMARIZE ANNOTATIONS for currBookID " + currBookID);
-		// = bookid + "_main";
-
-		var bookname;
-		//var bookname = req.params.bookName;
-		//TODO: once privacy settings are stored with corresponding bookid/bookname
-		//remove this swtich-case
-		bookname = get_bookname(bookid);
-		//var username = req.session.user;
-
-		console.log("Loading all annotations for book2");
-		var all_annts = [];
-		//var filtered_notes = [];
-		//var users = [];
-		//var filtered_users = [username];
-
-		// Can add more parameters here to filter results
-		var AnnotationsParams = {
-			TableName: 'Annotations',
-			FilterExpression: "#bkid = :i",
-			ExpressionAttributeNames: {
-				"#bkid": "bookID"
-			},
-			ExpressionAttributeValues: {
-				":i": currBookID			
-			}
-		};
-
-		db_interface.scanTable(AnnotationsParams, function(err, all_annts){
-			console.log("Received all annotations");
-			for (var j = 0; j < all_annts.length; j++) {
-				console.log("all annotations are: " + all_annts[j].info.title);
-			}
-			res.send(all_annts);
-		//res.render('book' + bookid + 'combined', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: "toADD", username: username});
-		});
-
-		//res.send(req.body);
-});
-*/
 
 
 //Uploading images
