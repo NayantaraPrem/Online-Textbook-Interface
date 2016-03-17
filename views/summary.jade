@@ -14,11 +14,14 @@ html(lang='en')
     script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
  body
   h1.text-center.heading 
-      | Summary Notes
+      | Chapter Summary 
   h1.text-center.heading
       | #{title}
   h2.text-center.heading
-      | Chapter: #{chapter}
+      | #{chapter}
+  // button#summarize.btn.btn-info.btn-md(type='submit' onclick='download_summary(event)')
+  //  span.text-right.glyphicon.glyphicon-download-alt
+  //    | Download
   ul.list-group
     each note, index in notes
       li.list-group-item#sortable
@@ -34,3 +37,4 @@ html(lang='en')
               li.list-group-item 
                 img.img-thumbnail.thumbnail(src=note.info.img_dest width=160 height=100)
    
+    

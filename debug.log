@@ -1,15 +1,58 @@
-user id in session is test_user2
+user id in session is test_user1
 new book
 Displaying book: 1 - The_War_of_The_Worlds - main
 Already Extracted
+Received note:
+[{"name":"title","value":""},{"name":"body","value":""},{"name":"id","value":"0"},{"name":"page","value":0}]
+Title: 
+Body: <p></p>
+------------------------------------------
+Submitting
+Params:Annotations undefined [object Object]
+Received note:
+[{"name":"title","value":""},{"name":"body","value":"<p></p>"},{"name":"id","value":"0"},{"name":"page","value":0}]
+Title: 
+Body: <p><p></p></p>
+------------------------------------------
+Submitting
+Params:Annotations undefined [object Object]
+Displaying book: 1 - The_War_of_The_Worlds - main
+Received note:
+[{"name":"title","value":""},{"name":"body","value":"werwewrerw"},{"name":"id","value":"0"},{"name":"page","value":0}]
+Title: 
+Body: <p>werwewrerw</p>
+------------------------------------------
+Submitting
+Params:Annotations undefined [object Object]
+Received note:
+[{"name":"title","value":""},{"name":"body","value":"<p>werwewrerw</p>"},{"name":"id","value":"0"},{"name":"page","value":0}]
+Title: 
+Body: <p><p>werwewrerw</p></p>
+------------------------------------------
+Submitting
+Params:Annotations undefined [object Object]
+Displaying book: 1 - The_War_of_The_Worlds - main
+Displaying book: 1 - The_War_of_The_Worlds - upload_img
+Received note:
+[{"name":"title","value":"Geetika"},{"name":"body","value":"persistance"},{"name":"id","value":"1"},{"name":"page","value":0}]
+Title: Geetika
+Body: <p>persistance</p>
+------------------------------------------
+Submitting
+Params:Annotations undefined [object Object]
+Added item ANNT_1457798175933
+Displaying book: 1 - The_War_of_The_Worlds - main
 Displaying book: 1 - The_War_of_The_Worlds - main3
-Added/Updated filter settings for user:test_user2, book:1
-Added/Updated filter settings for user:test_user2, book:1
-Added/Updated filter settings for user:test_user2, book:1
-Added/Updated filter settings for user:test_user2, book:1
-Displaying book: 1 - The_War_of_The_Worlds - main3
-Displaying book: 1 - The_War_of_The_Worlds - main3
-Displaying book: 1 - The_War_of_The_Worlds - main3
-Displaying book: 1 - The_War_of_The_Worlds - main3
-Displaying book: 1 - The_War_of_The_Worlds - main3
-Displaying book: 1 - The_War_of_The_Worlds - main3
+Displaying book: 1 - The_War_of_The_Worlds - main5
+Displaying book: 1 - The_War_of_The_Worlds - main1
+Added/Updated filter settings for user:test_user1, book:1
+Added/Updated filter settings for user:test_user1, book:1
+Added/Updated filter settings for user:test_user1, book:1
+Added/Updated filter settings for user:test_user1, book:1
+Added/Updated filter settings for user:test_user1, book:1
+Added/Updated filter settings for user:test_user1, book:1
+Added/Updated filter settings for user:test_user1, book:1
+Added/Updated filter settings for user:test_user1, book:1
+Added/Updated filter settings for user:test_user1, book:1
+SUMMARIZE ANNOTATIONS for currBookID 1
+Loading all annotations for book2

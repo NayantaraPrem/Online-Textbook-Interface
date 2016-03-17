@@ -119,9 +119,7 @@ $(document).on('click', 'input[type="submit"]', function(e) {
 		var text_area = document.getElementsByClassName('annt_body');
 		var arrayLength = text_box.length;
 		var arrayLength2 = text_area.length;
-		if (arrayLength != arrayLength2) {
-			alert("number of textboxes and areas different!");
-		}
+
 		$("#panel-heading"+inputID).removeClass('writable');
 		$("#panel-body"+inputID).removeClass('writable');
 		$("#texttitle"+inputID).attr('readonly', 'readonly');

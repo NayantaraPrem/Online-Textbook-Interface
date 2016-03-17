@@ -37,6 +37,12 @@ function note_delete(e) {
    return false;
 }
 
+/*function download_summary(e) {
+    e.preventDefault();
+    window.location.href += '/download';   
+}
+*/
+
 function centerModal() {
     $(this).css('display', 'block');
     var $dialog = $(this).find(".modal-dialog");
