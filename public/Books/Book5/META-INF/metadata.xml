@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns:dcterms="http://purl.org/dc/terms/" xmlns="http://www.w3.org/2005/Atom" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<title>A Midsummer Night's Dream</title>
+<id>http://www.feedbooks.com/book/2990</id>
+<author>
+  <name>William Shakespeare</name>
+  <uri>http://www.feedbooks.com/author/494</uri>
+</author>
+<published>2008-09-24T12:11:40Z</published>
+<updated>2016-01-20T04:41:53Z</updated>
+<dcterms:language>en</dcterms:language>
+<dcterms:issued>1596</dcterms:issued>
+<category term="FBFIC000000" label="Fiction" scheme="http://www.feedbooks.com/categories"/>
+<category term="FBDRA000000" label="Drama" scheme="http://www.feedbooks.com/categories"/>
+<category term="FBFIC027000" label="Romance" scheme="http://www.feedbooks.com/categories"/>
+<summary>A Midsummer Night's Dream is a romantic comedy by William Shakespeare, suggested by &quot;The Knight's Tale&quot; from Geoffrey Chaucer's The Canterbury Tales, written around 1594 to 1596. It portrays the adventures of four young Athenian lovers and a group...</summary>
+<dcterms:extent>16,964 words</dcterms:extent>
+<dcterms:source>http://shakespeare.mit.edu/</dcterms:source>
+<link type="text/html" rel="alternate" href="http://generation.feedbooks.com/book/2990" title="View on Feedbooks"/>
+<link type="application/epub+zip" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/2990.epub"/>
+<link type="application/x-mobipocket-ebook" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/2990.mobi"/>
+<link type="application/pdf" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/2990.pdf"/>
+<link type="image/jpeg" rel="http://opds-spec.org/image" href="http://covers.feedbooks.net/book/2990.jpg?size=large&amp;t=1453264913"/>
+<link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="http://covers.feedbooks.net/book/2990.jpg?t=1453264913"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=acquisition" rel="http://www.feedbooks.com/opds/same_author" href="http://generation.feedbooks.com/author/494/books/top.atom?lang=en" title="From the same author"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=navigation" rel="related" href="http://generation.feedbooks.com/book/2990/categories.atom" title="Categories for this book"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=navigation" rel="related" href="http://generation.feedbooks.com/book/2990/lists.atom" title="Reading lists for this book"/>
+<link type="application/atom+xml" thr:count="0" thr:updated="2009-08-18T01:17:57Z" rel="replies" href="http://generation.feedbooks.com/book/2990/comments.atom" title="Comments for this book (0)"/>
+<content type="html">&lt;p&gt;A Midsummer Night's Dream is a romantic comedy by William Shakespeare, suggested by &quot;The Knight's Tale&quot; from Geoffrey Chaucer's The Canterbury Tales, written around 1594 to 1596. It portrays the adventures of four young Athenian lovers and a group of amateur actors, their interactions with the Duke and Duchess of Athens, Theseus and Hippolyta, and with the fairies who inhabit a moonlit forest. The play is one of Shakespeare's most popular works for the stage and is widely performed across the world.&lt;/p&gt;</content>
+<link type="application/atom+xml;type=entry;profile=opds-catalog" rel="self" href="http://generation.feedbooks.com/book/2990.atom"/>
+  <link type="application/atom+xml" rel="contents" href="http://generation.feedbooks.com/book/2990/contents.atom"/>
+</entry>
