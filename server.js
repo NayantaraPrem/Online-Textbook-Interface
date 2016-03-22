@@ -43,6 +43,7 @@ var app = express();
 // Book Display variables
 var currBookID = '';
 var currChapter = '';
+var currTOC = [];
 
 // app.use(express.static(__dirname + '/public'));
 
@@ -149,6 +150,21 @@ function get_bookname(bookid) {
 		case '3':
 			bookname = 'Computing';
 			break;
+		case '4':
+			bookname = 'On_The_Origin_Of_Species';
+			break;
+		case '5':
+			bookname = 'A_Midsummer_Nights_Dream';
+			break;
+		case '6':
+			bookname = 'Jane_Eyre';
+			break;
+		case '7':
+			bookname = 'Dream_Psychology';
+			break;
+		case '8':
+			bookname = 'Macbeth';
+			break;
 		default:
 			bookname = 'ERR_BOOK_NOT_FOUND';
 	}
@@ -184,7 +200,8 @@ function generate_filtered_notes(username, bookid, chapter, filterparams, ret) {
 			if(preloaded_notes[i].owner == username){
 				filtered_notes.push(preloaded_notes[i]);
 				console.log(preloaded_notes[i].NoteID);
-			}else {
+			}
+			else {
 				for (var j = 0; j < filterparams.length; j++) {
 					if (preloaded_notes[i].owner == filterparams[j]) {
 						filtered_notes.push(preloaded_notes[i]);
@@ -224,7 +241,7 @@ function get_annt_filter_params(username, bookid, ret) {
 	// Here we compare Privacy Settings for all registered users
 	// Users with "Public" notes are added to the "visble_users" list
 	// (1) Get list of all users
-	// (2) For each aaaauser, check saved Privacy Setting for current book 
+	// (2) For each user, check saved Privacy Setting for current book 
 	// (3) If user has set notes to "Public", add this user to "visible_users"	
 	db_interface.scanTable(UsersParams, function(err, all_users){
 
@@ -508,6 +525,28 @@ app.get('/book:bookId-:bookName/:chapterName', requireLogin, function(req, res){
 		});
 		
 		currBookID = bookid;
+		currTOC = [];
+
+		fs.readFile("Public/Books/Book" + bookid + "/TableOfContents.html", 'utf8', function(err, html){
+			var titles = html.match(/">.*?</g); //parse all >##chapterTitle##<
+			var links = html.match(/href=".*?"/g); //parse all href="##chapterLink##"
+			
+			if (titles.length < 1 || links.length < 1 || titles.length != links.length)
+				console.log("ERR: parsing TOC");
+			
+			for (var i = 0; i < titles.length; i++) {
+				var t = titles[i];
+				t = t.replace("\">","");
+				t = t.replace("<","");
+				var l = links[i];
+				l = l.replace("href=\"OPS","");
+				l = l.replace("\.xml\"","");
+						
+				currTOC.push([t, l]);
+			}
+			
+			//console.log("TOC("+currTOC.length+"): "+currTOC);
+		});
 	}
 	
 	console.log("Displaying book: " + bookid + " - " + bookname + " - " + currChapter);
@@ -520,7 +559,7 @@ app.get('/book:bookId-:bookName/:chapterName', requireLogin, function(req, res){
 	get_annt_filter_params(username, bookid, function(visible_users, filter_settings){
 		generate_filtered_notes(username, bookid, currChapter, visible_users, function(filtered_notes){
 			//TODO: now save new_filter_settings
-			res.render('combinedDisplay', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: currChapter, username: username, visible_users: visible_users, filter_settings: filter_settings });
+			res.render('combinedDisplay', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: currChapter, TOC: currTOC, username: username, visible_users: visible_users, filter_settings: filter_settings });
 		});
 	});
 });
