@@ -13,9 +13,9 @@
         NCX documents, including those conforming to the relaxed
         constraints of OPS 2.0 -->
 
-    <meta name="dtb:uid" content="3b1180e6-c487-11e5-ab52-4c72b9252ec6"/>
+    <meta name="dtb:uid" content="7e7ababa-dea3-11e5-8ad5-4c72b9252ec6"/>
 
-    <meta name="dtb:depth" content="1"/>
+    <meta name="dtb:depth" content="2"/>
 
     <meta name="dtb:totalPageCount" content="0"/>
 
@@ -23,11 +23,11 @@
   </head>
 
  <docTitle>
-   <text>Jane Eyre</text>
+   <text>Macbeth</text>
  </docTitle>
 
  <docAuthor>
-   <text>Brontë, Charlotte</text>
+   <text>Shakespeare, William</text>
  </docAuthor>
 
     <navMap>
@@ -49,212 +49,185 @@
 
 
 
-<navPoint class="section" id="sec325719" playOrder="3">
-  <navLabel><text>PREFACE</text></navLabel>
+<navPoint class="section" id="sec77244" playOrder="3">
+  <navLabel><text>Act I</text></navLabel>
   
     <content src="main0.xml"/>
   
     
     
     
+      
+
+
+
+
   
-</navPoint>
-
-        
 
 
 
 
-
-
-
-<navPoint class="section" id="sec325721" playOrder="4">
-  <navLabel><text>NOTE TO THE THIRD EDITION</text></navLabel>
+<navPoint class="section" id="sec77245" playOrder="4">
+  <navLabel><text>SCENE I. A desert place.</text></navLabel>
   
-    <content src="main1.xml"/>
+    <content src="main0.xml#section_77245"/>
   
     
-    
-    
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325723" playOrder="5">
-  <navLabel><text>Chapter 1</text></navLabel> 
-  <content src="main2.xml"/>
-    
-  
     
     
   
 </navPoint>
 
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325725" playOrder="6">
-  <navLabel><text>Chapter 2</text></navLabel> 
-  <content src="main3.xml"/>
     
   
     
+      
     
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325727" playOrder="7">
-  <navLabel><text>Chapter 3</text></navLabel> 
-  <content src="main4.xml"/>
     
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77247" playOrder="5">
+  <navLabel><text>SCENE II. A camp near Forres.</text></navLabel>
   
+    <content src="main1.xml#section_77247"/>
+  
+    
     
     
   
 </navPoint>
 
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325729" playOrder="8">
-  <navLabel><text>Chapter 4</text></navLabel> 
-  <content src="main5.xml"/>
     
   
     
+      
     
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325731" playOrder="9">
-  <navLabel><text>Chapter 5</text></navLabel> 
-  <content src="main6.xml"/>
     
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77249" playOrder="6">
+  <navLabel><text>SCENE III. A heath near Forres.</text></navLabel>
   
+    <content src="main2.xml#section_77249"/>
+  
+    
     
     
   
 </navPoint>
 
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325733" playOrder="10">
-  <navLabel><text>Chapter 6</text></navLabel> 
-  <content src="main7.xml"/>
     
   
     
+      
     
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325735" playOrder="11">
-  <navLabel><text>Chapter 7</text></navLabel> 
-  <content src="main8.xml"/>
     
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77251" playOrder="7">
+  <navLabel><text>SCENE IV. Forres. The palace.</text></navLabel>
   
+    <content src="main3.xml#section_77251"/>
+  
+    
     
     
   
 </navPoint>
 
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325737" playOrder="12">
-  <navLabel><text>Chapter 8</text></navLabel> 
-  <content src="main9.xml"/>
     
   
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77253" playOrder="8">
+  <navLabel><text>SCENE V. Inverness. Macbeth&#39;s castle.</text></navLabel>
+  
+    <content src="main4.xml#section_77253"/>
+  
+    
     
     
   
 </navPoint>
 
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325739" playOrder="13">
-  <navLabel><text>Chapter 9</text></navLabel> 
-  <content src="main10.xml"/>
     
   
     
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77255" playOrder="9">
+  <navLabel><text>SCENE VI. Before Macbeth&#39;s castle.</text></navLabel>
+  
+    <content src="main5.xml#section_77255"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77257" playOrder="10">
+  <navLabel><text>SCENE VII. Macbeth&#39;s castle.</text></navLabel>
+  
+    <content src="main6.xml#section_77257"/>
+  
+    
+    
+    
+  
+</navPoint>
+
     
   
 </navPoint>
@@ -267,14 +240,108 @@
 
 
 
+<navPoint class="section" id="sec77259" playOrder="11">
+  <navLabel><text>Act II</text></navLabel>
+  
+    <content src="main7.xml"/>
+  
+    
+    
+    
+      
 
 
-<navPoint class="chapter" id="chap325741" playOrder="14">
-  <navLabel><text>Chapter 10</text></navLabel> 
-  <content src="main11.xml"/>
+
+
+
+
+
+<navPoint class="section" id="sec77260" playOrder="12">
+  <navLabel><text>SCENE I. Court of Macbeth&#39;s castle.</text></navLabel>
+  
+    <content src="main7.xml#section_77260"/>
+  
+    
+    
+    
+  
+</navPoint>
+
     
   
     
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77262" playOrder="13">
+  <navLabel><text>SCENE II. The same.</text></navLabel>
+  
+    <content src="main8.xml#section_77262"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77264" playOrder="14">
+  <navLabel><text>SCENE III. The same.</text></navLabel>
+  
+    <content src="main9.xml#section_77264"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77266" playOrder="15">
+  <navLabel><text>SCENE IV. Outside Macbeth&#39;s castle.</text></navLabel>
+  
+    <content src="main10.xml#section_77266"/>
+  
+    
+    
+    
+  
+</navPoint>
+
     
   
 </navPoint>
@@ -287,14 +354,158 @@
 
 
 
+<navPoint class="section" id="sec77268" playOrder="16">
+  <navLabel><text>Act III</text></navLabel>
+  
+    <content src="main11.xml"/>
+  
+    
+    
+    
+      
 
 
-<navPoint class="chapter" id="chap325743" playOrder="15">
-  <navLabel><text>Chapter 11</text></navLabel> 
-  <content src="main12.xml"/>
+
+
+
+
+
+<navPoint class="section" id="sec77269" playOrder="17">
+  <navLabel><text>SCENE I. Forres. The palace.</text></navLabel>
+  
+    <content src="main11.xml#section_77269"/>
+  
+    
+    
+    
+  
+</navPoint>
+
     
   
     
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77271" playOrder="18">
+  <navLabel><text>SCENE II. The palace.</text></navLabel>
+  
+    <content src="main12.xml#section_77271"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77273" playOrder="19">
+  <navLabel><text>SCENE III. A park near the palace.</text></navLabel>
+  
+    <content src="main13.xml#section_77273"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77275" playOrder="20">
+  <navLabel><text>SCENE IV. The same. Hall in the palace.</text></navLabel>
+  
+    <content src="main14.xml#section_77275"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77277" playOrder="21">
+  <navLabel><text>SCENE V. A Heath.</text></navLabel>
+  
+    <content src="main15.xml#section_77277"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77279" playOrder="22">
+  <navLabel><text>SCENE VI. Forres. The palace.</text></navLabel>
+  
+    <content src="main16.xml#section_77279"/>
+  
+    
+    
+    
+  
+</navPoint>
+
     
   
 </navPoint>
@@ -307,14 +518,83 @@
 
 
 
+<navPoint class="section" id="sec77281" playOrder="23">
+  <navLabel><text>Act IV</text></navLabel>
+  
+    <content src="main17.xml"/>
+  
+    
+    
+    
+      
 
 
-<navPoint class="chapter" id="chap325745" playOrder="16">
-  <navLabel><text>Chapter 12</text></navLabel> 
-  <content src="main13.xml"/>
+
+
+
+
+
+<navPoint class="section" id="sec77282" playOrder="24">
+  <navLabel><text>SCENE I. A cavern. In the middle, a boiling cauldron.</text></navLabel>
+  
+    <content src="main17.xml#section_77282"/>
+  
+    
+    
+    
+  
+</navPoint>
+
     
   
     
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77284" playOrder="25">
+  <navLabel><text>SCENE II. Fife. Macduff&#39;s castle.</text></navLabel>
+  
+    <content src="main18.xml#section_77284"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77286" playOrder="26">
+  <navLabel><text>SCENE III. England. Before the King&#39;s palace.</text></navLabel>
+  
+    <content src="main19.xml#section_77286"/>
+  
+    
+    
+    
+  
+</navPoint>
+
     
   
 </navPoint>
@@ -327,516 +607,183 @@
 
 
 
-
-
-<navPoint class="chapter" id="chap325747" playOrder="17">
-  <navLabel><text>Chapter 13</text></navLabel> 
-  <content src="main14.xml"/>
-    
+<navPoint class="section" id="sec77288" playOrder="27">
+  <navLabel><text>Act V</text></navLabel>
+  
+    <content src="main20.xml"/>
   
     
     
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325749" playOrder="18">
-  <navLabel><text>Chapter 14</text></navLabel> 
-  <content src="main15.xml"/>
     
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77289" playOrder="28">
+  <navLabel><text>SCENE I. Dunsinane. Ante-room in the castle.</text></navLabel>
   
+    <content src="main20.xml#section_77289"/>
+  
+    
     
     
   
 </navPoint>
 
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325751" playOrder="19">
-  <navLabel><text>Chapter 15</text></navLabel> 
-  <content src="main16.xml"/>
     
   
     
+      
     
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325753" playOrder="20">
-  <navLabel><text>Chapter 16</text></navLabel> 
-  <content src="main17.xml"/>
     
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77291" playOrder="29">
+  <navLabel><text>SCENE II. The country near Dunsinane.</text></navLabel>
   
+    <content src="main21.xml#section_77291"/>
+  
+    
     
     
   
 </navPoint>
 
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325755" playOrder="21">
-  <navLabel><text>Chapter 17</text></navLabel> 
-  <content src="main18.xml"/>
     
   
     
+      
     
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325757" playOrder="22">
-  <navLabel><text>Chapter 18</text></navLabel> 
-  <content src="main19.xml"/>
     
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77293" playOrder="30">
+  <navLabel><text>SCENE III. Dunsinane. A room in the castle.</text></navLabel>
   
+    <content src="main22.xml#section_77293"/>
+  
+    
     
     
   
 </navPoint>
 
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325759" playOrder="23">
-  <navLabel><text>Chapter 19</text></navLabel> 
-  <content src="main20.xml"/>
     
   
     
+      
     
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325761" playOrder="24">
-  <navLabel><text>Chapter 20</text></navLabel> 
-  <content src="main21.xml"/>
     
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77295" playOrder="31">
+  <navLabel><text>SCENE IV. Country near Birnam wood.</text></navLabel>
   
+    <content src="main23.xml#section_77295"/>
+  
+    
     
     
   
 </navPoint>
 
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325763" playOrder="25">
-  <navLabel><text>Chapter 21</text></navLabel> 
-  <content src="main22.xml"/>
     
   
     
+      
     
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325765" playOrder="26">
-  <navLabel><text>Chapter 22</text></navLabel> 
-  <content src="main23.xml"/>
     
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77297" playOrder="32">
+  <navLabel><text>SCENE V. Dunsinane. Within the castle.</text></navLabel>
   
+    <content src="main24.xml#section_77297"/>
+  
+    
     
     
   
 </navPoint>
 
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325767" playOrder="27">
-  <navLabel><text>Chapter 23</text></navLabel> 
-  <content src="main24.xml"/>
     
   
     
+      
     
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325769" playOrder="28">
-  <navLabel><text>Chapter 24</text></navLabel> 
-  <content src="main25.xml"/>
     
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77299" playOrder="33">
+  <navLabel><text>SCENE VI. Dunsinane. Before the castle.</text></navLabel>
   
+    <content src="main25.xml#section_77299"/>
+  
+    
     
     
   
 </navPoint>
 
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325771" playOrder="29">
-  <navLabel><text>Chapter 25</text></navLabel> 
-  <content src="main26.xml"/>
     
   
     
+      
     
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325773" playOrder="30">
-  <navLabel><text>Chapter 26</text></navLabel> 
-  <content src="main27.xml"/>
     
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec77301" playOrder="34">
+  <navLabel><text>SCENE VIII. Another part of the field.</text></navLabel>
   
+    <content src="main26.xml#section_77301"/>
+  
+    
     
     
   
 </navPoint>
 
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325775" playOrder="31">
-  <navLabel><text>Chapter 27</text></navLabel> 
-  <content src="main28.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325777" playOrder="32">
-  <navLabel><text>Chapter 28</text></navLabel> 
-  <content src="main29.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325779" playOrder="33">
-  <navLabel><text>Chapter 29</text></navLabel> 
-  <content src="main30.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325781" playOrder="34">
-  <navLabel><text>Chapter 30</text></navLabel> 
-  <content src="main31.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325783" playOrder="35">
-  <navLabel><text>Chapter 31</text></navLabel> 
-  <content src="main32.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325785" playOrder="36">
-  <navLabel><text>Chapter 32</text></navLabel> 
-  <content src="main33.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325787" playOrder="37">
-  <navLabel><text>Chapter 33</text></navLabel> 
-  <content src="main34.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325789" playOrder="38">
-  <navLabel><text>Chapter 34</text></navLabel> 
-  <content src="main35.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325791" playOrder="39">
-  <navLabel><text>Chapter 35</text></navLabel> 
-  <content src="main36.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325793" playOrder="40">
-  <navLabel><text>Chapter 36</text></navLabel> 
-  <content src="main37.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-
-<navPoint class="chapter" id="chap325795" playOrder="41">
-  <navLabel><text>Chapter 37</text></navLabel> 
-  <content src="main38.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-        
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap325797" playOrder="42">
-  <navLabel><text>Chapter 38 - CONCLUSION</text></navLabel> 
-  <content src="main39.xml"/>
-    
-  
-    
     
   
 </navPoint>

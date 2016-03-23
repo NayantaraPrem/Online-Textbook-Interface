@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<entry xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns="http://www.w3.org/2005/Atom" xmlns:dcterms="http://purl.org/dc/terms/">
-<title>The War of the Worlds</title>
-<id>http://www.feedbooks.com/book/35</id>
+<entry xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:dcterms="http://purl.org/dc/terms/" xmlns="http://www.w3.org/2005/Atom">
+<title>The Einstein Theory of Relativity</title>
+<id>http://www.feedbooks.com/book/3591</id>
 <author>
-  <name>H. G. Wells</name>
-  <uri>http://www.feedbooks.com/author/14</uri>
+  <name>Hendrik Antoon Lorentz</name>
+  <uri>http://www.feedbooks.com/author/910</uri>
 </author>
-<published>2006-12-21T17:40:18Z</published>
-<updated>2012-08-20T20:26:12Z</updated>
+<published>2009-01-16T16:22:36Z</published>
+<updated>2015-03-18T10:15:50Z</updated>
 <dcterms:language>en</dcterms:language>
-<dcterms:issued>1898</dcterms:issued>
-<category label="Fiction" term="FBFIC000000"/>
-<category label="Science Fiction" term="FBFIC028000"/>
-<category label="War &amp; Military" term="FBFIC032000"/>
-<summary>The War of the Worlds (1898), by H. G. Wells, is an early science fiction novel which describes an invasion of England by aliens from Mars. It is one of the earliest and best-known depictions of an alien invasion of Earth, and has influenced many ...</summary>
-<dcterms:extent>59,796 words</dcterms:extent>
-<dcterms:source>Project Gutenberg</dcterms:source>
-<rights>This work is available for countries where copyright is Life+50 or in the USA (published before 1923).</rights>
-<link type="text/html" title="View on Feedbooks" rel="alternate" href="http://generation.feedbooks.com/book/35"/>
-<link type="application/epub+zip" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/35.epub"/>
-<link type="application/x-mobipocket-ebook" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/35.mobi"/>
-<link type="application/pdf" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/35.pdf"/>
-<link type="image/jpeg" rel="http://opds-spec.org/image" href="http://covers.feedbooks.net/book/35.jpg?t=1345494372"/>
-<link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="http://covers.feedbooks.net/book/35.jpg?size=thumbnail&amp;t=1345494372"/>
-<link type="application/atom+xml;profile=opds-catalog;kind=acquisition" title="From the same author" rel="related" href="http://generation.feedbooks.com/author/14/books/top.atom?lang=en"/>
-<link type="application/atom+xml;profile=opds-catalog;kind=acquisition" title="People also downloaded..." rel="related" href="http://generation.feedbooks.com/book/35/similar.atom"/>
-<link type="application/atom+xml;profile=opds-catalog;kind=navigation" title="Reading lists for this book" rel="related" href="http://generation.feedbooks.com/book/35/lists.atom"/>
-<link type="application/atom+xml;profile=opds-catalog;kind=navigation" title="Categories for this book" rel="related" href="http://generation.feedbooks.com/book/35/categories.atom"/>
-<link type="application/atom+xml" title="Comments for this book (1)" rel="replies" href="http://generation.feedbooks.com/book/35/comments.atom" thr:count="1" thr:updated="2009-08-18T01:17:00Z"/>
-<link type="text/html" title="Comments for this book (1)" rel="replies" href="http://generation.feedbooks.com/book/35/comments" thr:count="1" thr:updated="2009-08-18T01:17:00Z"/>
-<link type="text/html" title="View on Goodreads" rel="related" href="http://www.goodreads.com/mobile/book/isbn/0812505158"/>
-<content type="html">&lt;p&gt;The War of the Worlds (1898), by H. G. Wells, is an early science fiction novel which describes an invasion of England by aliens from Mars. It is one of the earliest and best-known depictions of an alien invasion of Earth, and has influenced many others, as well as spawning several films, radio dramas, comic book adaptations, and a television series based on the story. The 1938 radio broadcast caused public outcry against the episode, as many listeners believed that an actual Martian invasion was in progress, a notable example of mass hysteria.&lt;/p&gt;</content>
-  <link type="application/atom+xml" rel="contents" href="http://generation.feedbooks.com/book/35/contents.atom"/>
+<dcterms:issued>1920</dcterms:issued>
+<category term="FBNFC000000" label="Non-Fiction" scheme="http://www.feedbooks.com/categories"/>
+<category term="FBSCI000000N" label="Science and Technics" scheme="http://www.feedbooks.com/categories"/>
+<category term="FBSCI000000" label="Science" scheme="http://www.feedbooks.com/categories"/>
+<summary>Whether it is true or not that not more than twelve persons in all the world are able to understand Einstein's Theory, it is nevertheless a fact that there is a constant demand for information about this much-debated topic of relativity. The books...</summary>
+<dcterms:extent>6,687 words</dcterms:extent>
+<dcterms:source>http://www.gutenberg.org</dcterms:source>
+<rights>This work is available for countries where copyright is Life+70 and in the USA.</rights>
+<link type="text/html" rel="alternate" href="http://generation.feedbooks.com/book/3591" title="View on Feedbooks"/>
+<link type="application/epub+zip" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/3591.epub"/>
+<link type="application/x-mobipocket-ebook" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/3591.mobi"/>
+<link type="application/pdf" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/3591.pdf"/>
+<link type="image/jpeg" rel="http://opds-spec.org/image" href="http://covers.feedbooks.net/book/3591.jpg?size=large&amp;t=1426673750"/>
+<link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="http://covers.feedbooks.net/book/3591.jpg?t=1426673750"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=navigation" rel="related" href="http://generation.feedbooks.com/book/3591/categories.atom" title="Categories for this book"/>
+<link type="application/atom+xml" rel="replies" thr:count="0" thr:updated="2009-08-18T01:18:10Z" href="http://generation.feedbooks.com/book/3591/comments.atom" title="Comments for this book (0)"/>
+<content type="html">&lt;p&gt;Whether it is true or not that not more than twelve persons in all the world are able to understand Einstein's Theory, it is nevertheless a fact that there is a constant demand for information about this much-debated topic of relativity. The books published on the subject are so technical that only a person trained in pure physics and higher mathematics is able to fully understand them. In order to make a popular explanation of this far-reaching theory available, the present book is published.&lt;/p&gt;</content>
+<link type="application/atom+xml;type=entry;profile=opds-catalog" rel="self" href="http://generation.feedbooks.com/book/3591.atom"/>
+  <link type="application/atom+xml" rel="contents" href="http://generation.feedbooks.com/book/3591/contents.atom"/>
 </entry>

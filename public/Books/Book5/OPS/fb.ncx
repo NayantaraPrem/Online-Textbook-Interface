@@ -13,9 +13,9 @@
         NCX documents, including those conforming to the relaxed
         constraints of OPS 2.0 -->
 
-    <meta name="dtb:uid" content="85c96d8e-d9f3-11e5-ac88-4c72b9252ec6"/>
+    <meta name="dtb:uid" content="1fd19d12-e655-11e5-b73e-4c72b9252ec6"/>
 
-    <meta name="dtb:depth" content="2"/>
+    <meta name="dtb:depth" content="1"/>
 
     <meta name="dtb:totalPageCount" content="0"/>
 
@@ -23,11 +23,11 @@
   </head>
 
  <docTitle>
-   <text>A Midsummer Night&#39;s Dream</text>
+   <text>Dream Psychology</text>
  </docTitle>
 
  <docAuthor>
-   <text>Shakespeare, William</text>
+   <text>Freud, Sigmund</text>
  </docAuthor>
 
     <navMap>
@@ -49,60 +49,35 @@
 
 
 
-<navPoint class="section" id="sec78609" playOrder="3">
-  <navLabel><text>Act I</text></navLabel>
+<navPoint class="section" id="sec6977" playOrder="3">
+  <navLabel><text>Introduction</text></navLabel>
   
     <content src="main0.xml"/>
   
     
     
     
-      
-
-
-
-
-  
-
-
-
-
-<navPoint class="section" id="sec78610" playOrder="4">
-  <navLabel><text>SCENE I. Athens. The palace of THESEUS.</text></navLabel>
-  
-    <content src="main0.xml#section_78610"/>
-  
-    
-    
-    
   
 </navPoint>
 
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap6979" playOrder="4">
+  <navLabel><text>Chapter 1 - Dreams have a meaning</text></navLabel> 
+  <content src="main1.xml"/>
     
   
     
-      
-    
-    
-      
-
-
-
-
-
-
-
-<navPoint class="section" id="sec78612" playOrder="5">
-  <navLabel><text>SCENE II. Athens. QUINCE&#39;S house.</text></navLabel>
-  
-    <content src="main1.xml#section_78612"/>
-  
-    
-    
-    
-  
-</navPoint>
-
     
   
 </navPoint>
@@ -115,58 +90,16 @@
 
 
 
-<navPoint class="section" id="sec78614" playOrder="6">
-  <navLabel><text>Act II</text></navLabel>
+
   
-    <content src="main2.xml"/>
-  
-    
-    
-    
-      
 
 
-
-
-
-
-
-<navPoint class="section" id="sec78615" playOrder="7">
-  <navLabel><text>SCENE I. A wood near Athens.</text></navLabel>
-  
-    <content src="main2.xml#section_78615"/>
-  
-    
-    
-    
-  
-</navPoint>
-
+<navPoint class="chapter" id="chap6981" playOrder="5">
+  <navLabel><text>Chapter 2 - The Dream mechanism</text></navLabel> 
+  <content src="main2.xml"/>
     
   
     
-      
-    
-    
-      
-
-
-
-
-
-
-
-<navPoint class="section" id="sec78617" playOrder="8">
-  <navLabel><text>SCENE II. Another part of the wood.</text></navLabel>
-  
-    <content src="main3.xml#section_78617"/>
-  
-    
-    
-    
-  
-</navPoint>
-
     
   
 </navPoint>
@@ -179,58 +112,16 @@
 
 
 
-<navPoint class="section" id="sec78619" playOrder="9">
-  <navLabel><text>Act III</text></navLabel>
+
   
-    <content src="main4.xml"/>
-  
-    
-    
-    
-      
 
 
-
-
-
-
-
-<navPoint class="section" id="sec78620" playOrder="10">
-  <navLabel><text>SCENE I. The wood. TITANIA lying asleep.</text></navLabel>
-  
-    <content src="main4.xml#section_78620"/>
-  
-    
-    
-    
-  
-</navPoint>
-
+<navPoint class="chapter" id="chap6983" playOrder="6">
+  <navLabel><text>Chapter 3 - Why the dream diguises the desire</text></navLabel> 
+  <content src="main3.xml"/>
     
   
     
-      
-    
-    
-      
-
-
-
-
-
-
-
-<navPoint class="section" id="sec78622" playOrder="11">
-  <navLabel><text>SCENE II. Another part of the wood.</text></navLabel>
-  
-    <content src="main5.xml#section_78622"/>
-  
-    
-    
-    
-  
-</navPoint>
-
     
   
 </navPoint>
@@ -243,58 +134,16 @@
 
 
 
-<navPoint class="section" id="sec78624" playOrder="12">
-  <navLabel><text>Act IV</text></navLabel>
+
   
-    <content src="main6.xml"/>
-  
-    
-    
-    
-      
 
 
-
-
-
-
-
-<navPoint class="section" id="sec78625" playOrder="13">
-  <navLabel><text>SCENE I. The same. LYSANDER, DEMETRIUS, HELENA, and HERMIA lying asleep.</text></navLabel>
-  
-    <content src="main6.xml#section_78625"/>
-  
-    
-    
-    
-  
-</navPoint>
-
+<navPoint class="chapter" id="chap6985" playOrder="7">
+  <navLabel><text>Chapter 4 - Dream analysis</text></navLabel> 
+  <content src="main4.xml"/>
     
   
     
-      
-    
-    
-      
-
-
-
-
-
-
-
-<navPoint class="section" id="sec78627" playOrder="14">
-  <navLabel><text>SCENE II. Athens. QUINCE&#39;S house.</text></navLabel>
-  
-    <content src="main7.xml#section_78627"/>
-  
-    
-    
-    
-  
-</navPoint>
-
     
   
 </navPoint>
@@ -307,38 +156,113 @@
 
 
 
-<navPoint class="section" id="sec78629" playOrder="15">
-  <navLabel><text>Act V</text></navLabel>
+
   
-    <content src="main8.xml"/>
+
+
+<navPoint class="chapter" id="chap6987" playOrder="8">
+  <navLabel><text>Chapter 5 - Sex in dreams</text></navLabel> 
+  <content src="main5.xml"/>
+    
   
-    
-    
-    
-      
-
-
-
-
-
-
-
-<navPoint class="section" id="sec78630" playOrder="16">
-  <navLabel><text>SCENE I. Athens. The palace of THESEUS.</text></navLabel>
-  
-    <content src="main8.xml#section_78630"/>
-  
-    
     
     
   
 </navPoint>
 
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap6989" playOrder="9">
+  <navLabel><text>Chapter 6 - The Wish in dreams</text></navLabel> 
+  <content src="main6.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap6991" playOrder="10">
+  <navLabel><text>Chapter 7 - The Function of the dream</text></navLabel> 
+  <content src="main7.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap6993" playOrder="11">
+  <navLabel><text>Chapter 8 - The Primary and Secondary process - Regression</text></navLabel> 
+  <content src="main8.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap6995" playOrder="12">
+  <navLabel><text>Chapter 9 - The Unconscious and Consciousness - Reality</text></navLabel> 
+  <content src="main9.xml"/>
+    
+  
+    
     
   
 </navPoint>
 
 
+    <navPoint class="similar" id="level1-footnotes" playOrder="13">
+      <navLabel><text>Footnotes</text></navLabel>
+      <content src="footnotes.xml"/>
+    </navPoint>
 
   </navMap>
 

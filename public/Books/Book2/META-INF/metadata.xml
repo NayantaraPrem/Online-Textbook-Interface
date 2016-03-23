@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<entry xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:dcterms="http://purl.org/dc/terms/" xmlns="http://www.w3.org/2005/Atom">
-<title>The Einstein Theory of Relativity</title>
-<id>http://www.feedbooks.com/book/3591</id>
+<entry xmlns:dcterms="http://purl.org/dc/terms/" xmlns="http://www.w3.org/2005/Atom" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<title>On the Origin of Species, 6th Edition</title>
+<id>http://www.feedbooks.com/book/3015</id>
 <author>
-  <name>Hendrik Antoon Lorentz</name>
-  <uri>http://www.feedbooks.com/author/910</uri>
+  <name>Charles Darwin</name>
+  <uri>http://www.feedbooks.com/author/94</uri>
 </author>
-<published>2009-01-16T16:22:36Z</published>
-<updated>2015-03-18T10:15:50Z</updated>
+<published>2008-09-27T14:08:55Z</published>
+<updated>2015-08-09T22:20:19Z</updated>
 <dcterms:language>en</dcterms:language>
-<dcterms:issued>1920</dcterms:issued>
+<dcterms:issued>1872</dcterms:issued>
 <category term="FBNFC000000" label="Non-Fiction" scheme="http://www.feedbooks.com/categories"/>
 <category term="FBSCI000000N" label="Science and Technics" scheme="http://www.feedbooks.com/categories"/>
 <category term="FBSCI000000" label="Science" scheme="http://www.feedbooks.com/categories"/>
-<summary>Whether it is true or not that not more than twelve persons in all the world are able to understand Einstein's Theory, it is nevertheless a fact that there is a constant demand for information about this much-debated topic of relativity. The books...</summary>
-<dcterms:extent>6,687 words</dcterms:extent>
-<dcterms:source>http://www.gutenberg.org</dcterms:source>
-<rights>This work is available for countries where copyright is Life+70 and in the USA.</rights>
-<link type="text/html" rel="alternate" href="http://generation.feedbooks.com/book/3591" title="View on Feedbooks"/>
-<link type="application/epub+zip" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/3591.epub"/>
-<link type="application/x-mobipocket-ebook" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/3591.mobi"/>
-<link type="application/pdf" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/3591.pdf"/>
-<link type="image/jpeg" rel="http://opds-spec.org/image" href="http://covers.feedbooks.net/book/3591.jpg?size=large&amp;t=1426673750"/>
-<link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="http://covers.feedbooks.net/book/3591.jpg?t=1426673750"/>
-<link type="application/atom+xml;profile=opds-catalog;kind=navigation" rel="related" href="http://generation.feedbooks.com/book/3591/categories.atom" title="Categories for this book"/>
-<link type="application/atom+xml" rel="replies" thr:count="0" thr:updated="2009-08-18T01:18:10Z" href="http://generation.feedbooks.com/book/3591/comments.atom" title="Comments for this book (0)"/>
-<content type="html">&lt;p&gt;Whether it is true or not that not more than twelve persons in all the world are able to understand Einstein's Theory, it is nevertheless a fact that there is a constant demand for information about this much-debated topic of relativity. The books published on the subject are so technical that only a person trained in pure physics and higher mathematics is able to fully understand them. In order to make a popular explanation of this far-reaching theory available, the present book is published.&lt;/p&gt;</content>
-<link type="application/atom+xml;type=entry;profile=opds-catalog" rel="self" href="http://generation.feedbooks.com/book/3591.atom"/>
-  <link type="application/atom+xml" rel="contents" href="http://generation.feedbooks.com/book/3591/contents.atom"/>
+<summary>Charles Darwin's On the Origin of Species, in which he writes of his theories of evolution by natural selection, is one of the most important works of scientific study ever published.</summary>
+<dcterms:extent>200,470 words</dcterms:extent>
+<link type="text/html" rel="alternate" href="http://generation.feedbooks.com/book/3015" title="View on Feedbooks"/>
+<link type="application/epub+zip" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/3015.epub"/>
+<link type="application/x-mobipocket-ebook" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/3015.mobi"/>
+<link type="application/pdf" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/3015.pdf"/>
+<link type="image/jpeg" rel="http://opds-spec.org/image" href="http://covers.feedbooks.net/book/3015.jpg?size=large&amp;t=1439158819"/>
+<link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="http://covers.feedbooks.net/book/3015.jpg?t=1439158819"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=acquisition" rel="http://www.feedbooks.com/opds/same_author" href="http://generation.feedbooks.com/author/94/books/top.atom?lang=en" title="From the same author"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=navigation" rel="related" href="http://generation.feedbooks.com/book/3015/categories.atom" title="Categories for this book"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=navigation" rel="related" href="http://generation.feedbooks.com/book/3015/lists.atom" title="Reading lists for this book"/>
+<link type="application/atom+xml" thr:count="1" rel="replies" thr:updated="2010-08-15T22:17:18Z" href="http://generation.feedbooks.com/book/3015/comments.atom" title="Comments for this book (1)"/>
+<link type="text/html" thr:count="1" rel="replies" thr:updated="2010-08-15T22:17:18Z" href="http://generation.feedbooks.com/book/3015/comments" title="Comments for this book (1)"/>
+<content type="html">&lt;p&gt;Charles Darwin's On the Origin of Species, in which he writes of his theories of evolution by natural selection, is one of the most important works of scientific study ever published.&lt;/p&gt;</content>
+<link type="application/atom+xml;type=entry;profile=opds-catalog" rel="self" href="http://generation.feedbooks.com/book/3015.atom"/>
+  <link type="application/atom+xml" rel="contents" href="http://generation.feedbooks.com/book/3015/contents.atom"/>
 </entry>

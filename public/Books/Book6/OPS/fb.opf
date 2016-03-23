@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <package version="2.0" unique-identifier="PrimaryID" xmlns="http://www.idpf.org/2007/opf">
   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dcterms="http://purl.org/dc/terms/">
-    <dc:title>Jane Eyre</dc:title>
-    <dc:identifier id="PrimaryID" opf:scheme="URN">urn:uuid:3b1180e6-c487-11e5-ab52-4c72b9252ec6</dc:identifier>
-      <dc:identifier opf:scheme="URI">http://www.feedbooks.com/book/144</dc:identifier>
+    <dc:title>Macbeth</dc:title>
+    <dc:identifier id="PrimaryID" opf:scheme="URN">urn:uuid:7e7ababa-dea3-11e5-8ad5-4c72b9252ec6</dc:identifier>
+      <dc:identifier opf:scheme="URI">http://www.feedbooks.com/book/2935</dc:identifier>
 
     <dc:language xsi:type="dcterms:RFC4646">en</dc:language>
 
-    <dc:creator opf:role="aut" opf:file-as="Brontë, Charlotte">Charlotte Brontë</dc:creator>
+    <dc:creator opf:role="aut" opf:file-as="Shakespeare, William">William Shakespeare</dc:creator>
 
     <dc:publisher>Feedbooks</dc:publisher>
-    <dc:description>Jane Eyre, the story of a young girl and her passage into adulthood, was an immediate commercial success at the time of its original publication in 1847. Its representation of the underside of domestic life and the hypocrisy behind religious enthusiasm drew both praise and bitter criticism, while Charlotte Brontë&#39;s striking expose of poor living conditions for children in charity schools as well as her poignant portrayal of the limitations faced by women who worked as governesses sparked great controversy and social debate. Jane Eyre, Brontë&#39;s best-known novel, remains an extraordinary coming-of-age narrative, and one of the great classics of literature.</dc:description>
+    <dc:description>Macbeth is among the best-known of William Shakespeare&#39;s plays, and is his shortest tragedy, believed to have been written between 1603 and 1606. It is frequently performed at both amateur and professional levels, and has been adapted for opera, film, books, stage and screen. Often regarded as archetypal, the play tells of the dangers of the lust for power and the betrayal of friends. For the plot Shakespeare drew loosely on the historical account of King Macbeth of Scotland by Raphael Holinshed and that by the Scottish philosopher Hector Boece. There are many superstitions centred on the belief the play is somehow &quot;cursed&quot;, and many actors will not mention the name of the play aloud, referring to it instead as &quot;The Scottish play&quot;. (From Wikipedia)</dc:description>
     <dc:coverage></dc:coverage>
-    <dc:source>http://www.gutenberg.org/etext/1260</dc:source>
-    <dc:date opf:event="original-publication">1847</dc:date>
-    <dc:date opf:event="ops-publication">2007-01-06</dc:date>
+    <dc:source>http://shakespeare.mit.edu/</dc:source>
+    <dc:date opf:event="original-publication">1606</dc:date>
+    <dc:date opf:event="ops-publication">2008-09-18</dc:date>
 <dc:rights></dc:rights>
           <dc:subject>Fiction</dc:subject>
-          <dc:subject>Romance</dc:subject>
+          <dc:subject>Drama</dc:subject>
 
 	    <meta name="cover" content="book-cover"/>
   </metadata>
@@ -144,58 +144,6 @@
       href="main26.xml"
       media-type="application/xhtml+xml"/>
 
-    <item id="main27"
-      href="main27.xml"
-      media-type="application/xhtml+xml"/>
-
-    <item id="main28"
-      href="main28.xml"
-      media-type="application/xhtml+xml"/>
-
-    <item id="main29"
-      href="main29.xml"
-      media-type="application/xhtml+xml"/>
-
-    <item id="main30"
-      href="main30.xml"
-      media-type="application/xhtml+xml"/>
-
-    <item id="main31"
-      href="main31.xml"
-      media-type="application/xhtml+xml"/>
-
-    <item id="main32"
-      href="main32.xml"
-      media-type="application/xhtml+xml"/>
-
-    <item id="main33"
-      href="main33.xml"
-      media-type="application/xhtml+xml"/>
-
-    <item id="main34"
-      href="main34.xml"
-      media-type="application/xhtml+xml"/>
-
-    <item id="main35"
-      href="main35.xml"
-      media-type="application/xhtml+xml"/>
-
-    <item id="main36"
-      href="main36.xml"
-      media-type="application/xhtml+xml"/>
-
-    <item id="main37"
-      href="main37.xml"
-      media-type="application/xhtml+xml"/>
-
-    <item id="main38"
-      href="main38.xml"
-      media-type="application/xhtml+xml"/>
-
-    <item id="main39"
-      href="main39.xml"
-      media-type="application/xhtml+xml"/>
-
     <item id="feedbooks"
       href="feedbooks.xml"
       media-type="application/xhtml+xml"/>
@@ -311,32 +259,6 @@
 
   <itemref idref="main26" linear="yes"/>
 
-  <itemref idref="main27" linear="yes"/>
-
-  <itemref idref="main28" linear="yes"/>
-
-  <itemref idref="main29" linear="yes"/>
-
-  <itemref idref="main30" linear="yes"/>
-
-  <itemref idref="main31" linear="yes"/>
-
-  <itemref idref="main32" linear="yes"/>
-
-  <itemref idref="main33" linear="yes"/>
-
-  <itemref idref="main34" linear="yes"/>
-
-  <itemref idref="main35" linear="yes"/>
-
-  <itemref idref="main36" linear="yes"/>
-
-  <itemref idref="main37" linear="yes"/>
-
-  <itemref idref="main38" linear="yes"/>
-
-  <itemref idref="main39" linear="yes"/>
-
 
   <itemref idref="feedbooks" linear="yes"/>
 
@@ -403,32 +325,6 @@
   <reference type="text" title="Main25" href="main25.xml"/>
 
   <reference type="text" title="Main26" href="main26.xml"/>
-
-  <reference type="text" title="Main27" href="main27.xml"/>
-
-  <reference type="text" title="Main28" href="main28.xml"/>
-
-  <reference type="text" title="Main29" href="main29.xml"/>
-
-  <reference type="text" title="Main30" href="main30.xml"/>
-
-  <reference type="text" title="Main31" href="main31.xml"/>
-
-  <reference type="text" title="Main32" href="main32.xml"/>
-
-  <reference type="text" title="Main33" href="main33.xml"/>
-
-  <reference type="text" title="Main34" href="main34.xml"/>
-
-  <reference type="text" title="Main35" href="main35.xml"/>
-
-  <reference type="text" title="Main36" href="main36.xml"/>
-
-  <reference type="text" title="Main37" href="main37.xml"/>
-
-  <reference type="text" title="Main38" href="main38.xml"/>
-
-  <reference type="text" title="Main39" href="main39.xml"/>
 
 
   <reference type="copyright-page" title="Feedbooks" href="feedbooks.xml"/>

@@ -144,7 +144,7 @@ function replace_url(from, to) {
 
 function get_bookname(bookid) {
 	var bookname = 'ERR_BOOK_NOT_FOUND';
-	if (bookid < books.length || bookid < 0)
+	if (bookid < books.length && bookid > -1)
 		bookname = books[bookid].title.split(' ').join('_');
 	return bookname;
 }
