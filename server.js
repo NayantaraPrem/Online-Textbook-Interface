@@ -17,9 +17,13 @@ var phantom = require('phantom');
 var AWS = require("aws-sdk");
 var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 var books = [ 
-				{title:'The War of The Worlds', epub:'testbook'},
-				{title:'The Einstein Theory of Relativity', epub:'relativity'},
-				{title:'Structure and Interpretation of Computer Programs', epub:'SCMP'}
+				{title:'The War of The Worlds', epub:'The_War_of_The_Worlds'},
+				{title:'The Einstein Theory of Relativity', epub:'The_Einstein_Theory_of_Relativity'},
+				{title:'On The Origin of Species', epub:'On_The_Origin_of_Species'},
+				{title:'A Midsummer Nights Dream', epub:'A_Midsummer_Nights_Dream'},
+				{title:'Jane Eyre', epub:'Jane_Eyre'},
+				{title:'Dream Psychology', epub:'Dream_Psychology'},
+				{title:'Macbeth', epub:'Macbeth'}
 			];
 
 var Autolinker = require('autolinker');
@@ -139,35 +143,9 @@ function replace_url(from, to) {
 }
 
 function get_bookname(bookid) {
-	var bookname = 'UNINIT';
-	switch(bookid) {
-		case '1':
-			bookname = 'The_War_of_The_Worlds';
-			break;
-		case '2':
-			bookname = 'The_Einstein_Theory_of_Relativity';
-			break;
-		case '3':
-			bookname = 'Computing';
-			break;
-		case '4':
-			bookname = 'On_The_Origin_Of_Species';
-			break;
-		case '5':
-			bookname = 'A_Midsummer_Nights_Dream';
-			break;
-		case '6':
-			bookname = 'Jane_Eyre';
-			break;
-		case '7':
-			bookname = 'Dream_Psychology';
-			break;
-		case '8':
-			bookname = 'Macbeth';
-			break;
-		default:
-			bookname = 'ERR_BOOK_NOT_FOUND';
-	}
+	var bookname = 'ERR_BOOK_NOT_FOUND';
+	if (bookid < books.length || bookid < 0)
+		bookname = books[bookid].title.split(' ').join('_');
 	return bookname;
 }
 
@@ -457,9 +435,14 @@ app.get('/home', requireLogin, function(req,res) {
 	var welcome_msg = "Hello " + username;
 	//res.sendF/ile( __dirname + "/home.html");
 	//var path = "Books/Images/";
-	var img_paths = ["http://ecx.images-amazon.com/images/I/518k1D%2BJZHL._SX331_BO1,204,203,200_.jpg",
-    "http://ecx.images-amazon.com/images/I/51r9QQVSRNL._SX331_BO1,204,203,200_.jpg",
-    "http://ecx.images-amazon.com/images/I/71cWa92TMyL.jpg"];
+	var img_paths = [
+		"http://ecx.images-amazon.com/images/I/518k1D%2BJZHL._SX331_BO1,204,203,200_.jpg",
+		"http://ecx.images-amazon.com/images/I/51r9QQVSRNL._SX331_BO1,204,203,200_.jpg",
+		"",
+		"",
+		"http://covers.feedbooks.net/item/692631.jpg?size=large&t=1404617232",
+		"http://covers.feedbooks.net/item/1556442.jpg?size=large&t=1447555429",
+		""];
 	res.render('dashboard', { welcome_msg: welcome_msg, books: books, imgs:img_paths});
 });
 
@@ -534,6 +517,9 @@ app.get('/book:bookId-:bookName/:chapterName', requireLogin, function(req, res){
 			if (titles.length < 1 || links.length < 1 || titles.length != links.length)
 				console.log("ERR: parsing TOC");
 			
+			var wstream = fs.createWriteStream("views/.includes/Book" + bookid + "Sections.jade");
+			wstream.write("case pagetodisplay\n");
+			
 			for (var i = 0; i < titles.length; i++) {
 				var t = titles[i];
 				t = t.replace("\">","");
@@ -541,11 +527,16 @@ app.get('/book:bookId-:bookName/:chapterName', requireLogin, function(req, res){
 				var l = links[i];
 				l = l.replace("href=\"OPS","");
 				l = l.replace("\.xml\"","");
+				l = l.replace("/","");
 						
 				currTOC.push([t, l]);
+				wstream.write("  when \"" + l + "\": include ../../Public/Books/Book" + bookid + "/OPS/" + l + ".xml\n");
 			}
 			
 			//console.log("TOC("+currTOC.length+"): "+currTOC);
+			
+			wstream.write("  default: include ../../Public/Books/Book" + bookid + "/OPS/title.xml");
+			wstream.end();
 		});
 	}
 	
@@ -757,7 +748,7 @@ app.post('/update_annt_filter', function(req, res){
 app.post('/setprivacy', function(req, res){
   var username = req.session.user;
   var textID = req.body.textbookid;
-  var textname= books[textID].title.split(' ').join('_');
+  var textname = get_bookname(textID);
   var privacy_val = req.body.privacy;
   
  // console.log("SET PRIVACY " + privacy_val + " for " + textname + " for user " + username);

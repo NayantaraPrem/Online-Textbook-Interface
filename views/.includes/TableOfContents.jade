@@ -2,6 +2,6 @@ ul.book_nav_buttons
   each chap in TOC
     li.book_nav
       a(
-         href='/book' + locals.bookid + '-' + locals.bookname + chap[1]
+         href='/book' + locals.bookid + '-' + locals.bookname + '/' + chap[1]
       )
         =chap[0]
