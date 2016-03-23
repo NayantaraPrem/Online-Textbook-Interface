@@ -1,0 +1,2623 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE ncx PUBLIC
+     "-//NISO//DTD ncx 2005-1//EN"
+     "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+
+<ncx version="2005-1"
+     xml:lang="en"
+     xmlns="http://www.daisy.org/z3986/2005/ncx/">
+
+  <head>
+    <!-- The following four metadata items are required for all
+        NCX documents, including those conforming to the relaxed
+        constraints of OPS 2.0 -->
+
+    <meta name="dtb:uid" content="a0aaf5c0-eee6-11e5-98f4-4c72b9252ec6"/>
+
+    <meta name="dtb:depth" content="1"/>
+
+    <meta name="dtb:totalPageCount" content="0"/>
+
+    <meta name="dtb:maxPageNumber" content="0"/>
+  </head>
+
+ <docTitle>
+   <text>The Count of Monte Cristo</text>
+ </docTitle>
+
+ <docAuthor>
+   <text>Dumas, Alexandre</text>
+ </docAuthor>
+
+    <navMap>
+
+    <navPoint class="titlepage" id="level1-titlepage" playOrder="1">
+      <navLabel><text>Title</text></navLabel>
+      <content src="title.xml"/>
+    </navPoint>
+
+    <navPoint class="about" id="level1-about" playOrder="2">
+      <navLabel><text>About</text></navLabel>
+      <content src="about.xml"/>
+    </navPoint>
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2881" playOrder="3">
+  <navLabel><text>Chapter 1 - Marseilles — The Arrival.</text></navLabel> 
+  <content src="main1.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2883" playOrder="4">
+  <navLabel><text>Chapter 2 - Father and Son</text></navLabel> 
+  <content src="main2.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2885" playOrder="5">
+  <navLabel><text>Chapter 3 - The Catalans.</text></navLabel> 
+  <content src="main3.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2887" playOrder="6">
+  <navLabel><text>Chapter 4 - Conspiracy.</text></navLabel> 
+  <content src="main4.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2889" playOrder="7">
+  <navLabel><text>Chapter 5 - The Marriage-Feast.</text></navLabel> 
+  <content src="main5.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2891" playOrder="8">
+  <navLabel><text>Chapter 6 - The Deputy Procureur du Roi.</text></navLabel> 
+  <content src="main6.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2893" playOrder="9">
+  <navLabel><text>Chapter 7 - The Examination.</text></navLabel> 
+  <content src="main7.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2895" playOrder="10">
+  <navLabel><text>Chapter 8 - The Chateau D&#39;If.</text></navLabel> 
+  <content src="main8.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2897" playOrder="11">
+  <navLabel><text>Chapter 9 - The Evening of the Betrothal.</text></navLabel> 
+  <content src="main9.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2899" playOrder="12">
+  <navLabel><text>Chapter 10 - The King&#39;s Closet at the Tuileries.</text></navLabel> 
+  <content src="main10.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2901" playOrder="13">
+  <navLabel><text>Chapter 11 - The Corsican Ogre.</text></navLabel> 
+  <content src="main11.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2903" playOrder="14">
+  <navLabel><text>Chapter 12 - Father and Son.</text></navLabel> 
+  <content src="main12.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2905" playOrder="15">
+  <navLabel><text>Chapter 13 - The Hundred Days.</text></navLabel> 
+  <content src="main13.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2907" playOrder="16">
+  <navLabel><text>Chapter 14 - The Two Prisoners.</text></navLabel> 
+  <content src="main14.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2909" playOrder="17">
+  <navLabel><text>Chapter 15 - Number 34 and Number 27.</text></navLabel> 
+  <content src="main15.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2911" playOrder="18">
+  <navLabel><text>Chapter 16 - A Learned Italian.</text></navLabel> 
+  <content src="main16.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2913" playOrder="19">
+  <navLabel><text>Chapter 17 - The Abbe&#39;s Chamber.</text></navLabel> 
+  <content src="main17.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2915" playOrder="20">
+  <navLabel><text>Chapter 18 - The Treasure.</text></navLabel> 
+  <content src="main18.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2917" playOrder="21">
+  <navLabel><text>Chapter 19 - The Third Attack.</text></navLabel> 
+  <content src="main19.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2919" playOrder="22">
+  <navLabel><text>Chapter 20 - The Cemetery of the Chateau D&#39;If.</text></navLabel> 
+  <content src="main20.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2921" playOrder="23">
+  <navLabel><text>Chapter 21 - The Island of Tiboulen.</text></navLabel> 
+  <content src="main21.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2923" playOrder="24">
+  <navLabel><text>Chapter 22 - The Smugglers.</text></navLabel> 
+  <content src="main22.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2925" playOrder="25">
+  <navLabel><text>Chapter 23 - The Island of Monte Cristo.</text></navLabel> 
+  <content src="main23.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2927" playOrder="26">
+  <navLabel><text>Chapter 24 - The Secret Cave.</text></navLabel> 
+  <content src="main24.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2929" playOrder="27">
+  <navLabel><text>Chapter 25 - The Unknown.</text></navLabel> 
+  <content src="main25.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2931" playOrder="28">
+  <navLabel><text>Chapter 26 - The Pont du Gard Inn.</text></navLabel> 
+  <content src="main26.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2933" playOrder="29">
+  <navLabel><text>Chapter 27 - The Story.</text></navLabel> 
+  <content src="main27.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2935" playOrder="30">
+  <navLabel><text>Chapter 28 - The Prison Register.</text></navLabel> 
+  <content src="main28.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2937" playOrder="31">
+  <navLabel><text>Chapter 29 - The House of Morrel and Son.</text></navLabel> 
+  <content src="main29.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2939" playOrder="32">
+  <navLabel><text>Chapter 30 - The Fifth of September.</text></navLabel> 
+  <content src="main30.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2941" playOrder="33">
+  <navLabel><text>Chapter 31 - Italy: Sinbad the Sailor.</text></navLabel> 
+  <content src="main31.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2943" playOrder="34">
+  <navLabel><text>Chapter 32 - The Waking.</text></navLabel> 
+  <content src="main32.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2945" playOrder="35">
+  <navLabel><text>Chapter 33 - Roman Bandits.</text></navLabel> 
+  <content src="main33.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2947" playOrder="36">
+  <navLabel><text>Chapter 34 - The Colosseum.</text></navLabel> 
+  <content src="main34.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2949" playOrder="37">
+  <navLabel><text>Chapter 35 - La Mazzolata.</text></navLabel> 
+  <content src="main35.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2951" playOrder="38">
+  <navLabel><text>Chapter 36 - The Carnival at Rome.</text></navLabel> 
+  <content src="main36.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2953" playOrder="39">
+  <navLabel><text>Chapter 37 - The Catacombs of Saint Sebastian.</text></navLabel> 
+  <content src="main37.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2955" playOrder="40">
+  <navLabel><text>Chapter 38 - The Compact.</text></navLabel> 
+  <content src="main38.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2957" playOrder="41">
+  <navLabel><text>Chapter 39 - The Guests.</text></navLabel> 
+  <content src="main39.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2959" playOrder="42">
+  <navLabel><text>Chapter 40 - The Breakfast.</text></navLabel> 
+  <content src="main40.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2961" playOrder="43">
+  <navLabel><text>Chapter 41 - The Presentation.</text></navLabel> 
+  <content src="main41.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2963" playOrder="44">
+  <navLabel><text>Chapter 42 - Monsieur Bertuccio.</text></navLabel> 
+  <content src="main42.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2965" playOrder="45">
+  <navLabel><text>Chapter 43 - The House at Auteuil.</text></navLabel> 
+  <content src="main43.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2967" playOrder="46">
+  <navLabel><text>Chapter 44 - The Vendetta.</text></navLabel> 
+  <content src="main44.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2969" playOrder="47">
+  <navLabel><text>Chapter 45 - The Rain of Blood.</text></navLabel> 
+  <content src="main45.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2971" playOrder="48">
+  <navLabel><text>Chapter 46 - Unlimited Credit</text></navLabel> 
+  <content src="main46.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2973" playOrder="49">
+  <navLabel><text>Chapter 47 - The Dappled Grays.</text></navLabel> 
+  <content src="main47.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2975" playOrder="50">
+  <navLabel><text>Chapter 48 - Ideology.</text></navLabel> 
+  <content src="main48.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2977" playOrder="51">
+  <navLabel><text>Chapter 49 - Haidee.</text></navLabel> 
+  <content src="main49.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2979" playOrder="52">
+  <navLabel><text>Chapter 50 - The Morrel Family.</text></navLabel> 
+  <content src="main50.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2981" playOrder="53">
+  <navLabel><text>Chapter 51 - Pyramus and Thisbe.</text></navLabel> 
+  <content src="main51.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2983" playOrder="54">
+  <navLabel><text>Chapter 52 - Toxicology.</text></navLabel> 
+  <content src="main52.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2985" playOrder="55">
+  <navLabel><text>Chapter 53 - Robert le Diable.</text></navLabel> 
+  <content src="main53.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2987" playOrder="56">
+  <navLabel><text>Chapter 54 - A Flurry in Stocks.</text></navLabel> 
+  <content src="main54.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2989" playOrder="57">
+  <navLabel><text>Chapter 55 - Major Cavalcanti.</text></navLabel> 
+  <content src="main55.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2991" playOrder="58">
+  <navLabel><text>Chapter 56 - Andrea Cavalcanti.</text></navLabel> 
+  <content src="main56.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2993" playOrder="59">
+  <navLabel><text>Chapter 57 - In the Lucerne Patch.</text></navLabel> 
+  <content src="main57.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2995" playOrder="60">
+  <navLabel><text>Chapter 58 - M. Noirtier de Villefort.</text></navLabel> 
+  <content src="main58.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2997" playOrder="61">
+  <navLabel><text>Chapter 59 - The Will.</text></navLabel> 
+  <content src="main59.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap2999" playOrder="62">
+  <navLabel><text>Chapter 60 - The Telegraph</text></navLabel> 
+  <content src="main60.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3001" playOrder="63">
+  <navLabel><text>Chapter 61 - How a Gardener may get rid of the Dormice that eat His Peaches.</text></navLabel> 
+  <content src="main61.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3003" playOrder="64">
+  <navLabel><text>Chapter 62 - Ghosts.</text></navLabel> 
+  <content src="main62.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3005" playOrder="65">
+  <navLabel><text>Chapter 63 - The Dinner.</text></navLabel> 
+  <content src="main63.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3007" playOrder="66">
+  <navLabel><text>Chapter 64 - The Beggar.</text></navLabel> 
+  <content src="main64.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3009" playOrder="67">
+  <navLabel><text>Chapter 65 - A Conjugal Scene.</text></navLabel> 
+  <content src="main65.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3011" playOrder="68">
+  <navLabel><text>Chapter 66 - Matrimonial Projects.</text></navLabel> 
+  <content src="main66.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3013" playOrder="69">
+  <navLabel><text>Chapter 67 - At the Office of the King&#39;s Attorney.</text></navLabel> 
+  <content src="main67.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3015" playOrder="70">
+  <navLabel><text>Chapter 68 - A Summer Ball.</text></navLabel> 
+  <content src="main68.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3017" playOrder="71">
+  <navLabel><text>Chapter 69 - The Inquiry.</text></navLabel> 
+  <content src="main69.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3019" playOrder="72">
+  <navLabel><text>Chapter 70 - The Ball.</text></navLabel> 
+  <content src="main70.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3021" playOrder="73">
+  <navLabel><text>Chapter 71 - Bread and Salt.</text></navLabel> 
+  <content src="main71.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3023" playOrder="74">
+  <navLabel><text>Chapter 72 - Madame de Saint-Meran.</text></navLabel> 
+  <content src="main72.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3025" playOrder="75">
+  <navLabel><text>Chapter 73 - The Promise.</text></navLabel> 
+  <content src="main73.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3027" playOrder="76">
+  <navLabel><text>Chapter 74 - The Villefort Family Vault.</text></navLabel> 
+  <content src="main74.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3029" playOrder="77">
+  <navLabel><text>Chapter 75 - A Signed Statement.</text></navLabel> 
+  <content src="main75.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3031" playOrder="78">
+  <navLabel><text>Chapter 76 - Progress of Cavalcanti the Younger.</text></navLabel> 
+  <content src="main76.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3033" playOrder="79">
+  <navLabel><text>Chapter 77 - Haidee.</text></navLabel> 
+  <content src="main77.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3035" playOrder="80">
+  <navLabel><text>Chapter 78 - We hear from Yanina.</text></navLabel> 
+  <content src="main78.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3037" playOrder="81">
+  <navLabel><text>Chapter 79 - The Lemonade.</text></navLabel> 
+  <content src="main79.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3039" playOrder="82">
+  <navLabel><text>Chapter 80 - The Accusation.</text></navLabel> 
+  <content src="main80.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3041" playOrder="83">
+  <navLabel><text>Chapter 81 - The Room of the Retired Baker.</text></navLabel> 
+  <content src="main81.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3043" playOrder="84">
+  <navLabel><text>Chapter 82 - The Burglary.</text></navLabel> 
+  <content src="main82.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3045" playOrder="85">
+  <navLabel><text>Chapter 83 - The Hand of God.</text></navLabel> 
+  <content src="main83.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3047" playOrder="86">
+  <navLabel><text>Chapter 84 - Beauchamp.</text></navLabel> 
+  <content src="main84.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3049" playOrder="87">
+  <navLabel><text>Chapter 85 - The Journey.</text></navLabel> 
+  <content src="main85.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3051" playOrder="88">
+  <navLabel><text>Chapter 86 - The Trial.</text></navLabel> 
+  <content src="main86.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3053" playOrder="89">
+  <navLabel><text>Chapter 87 - The Challenge.</text></navLabel> 
+  <content src="main87.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3055" playOrder="90">
+  <navLabel><text>Chapter 88 - The Insult.</text></navLabel> 
+  <content src="main88.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3057" playOrder="91">
+  <navLabel><text>Chapter 89 - A Nocturnal Interview.</text></navLabel> 
+  <content src="main89.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3059" playOrder="92">
+  <navLabel><text>Chapter 90 - The Meeting.</text></navLabel> 
+  <content src="main90.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3061" playOrder="93">
+  <navLabel><text>Chapter 91 - Mother and Son.</text></navLabel> 
+  <content src="main91.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3063" playOrder="94">
+  <navLabel><text>Chapter 92 - The Suicide.</text></navLabel> 
+  <content src="main92.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3065" playOrder="95">
+  <navLabel><text>Chapter 93 - Valentine.</text></navLabel> 
+  <content src="main93.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3067" playOrder="96">
+  <navLabel><text>Chapter 94 - Maximilian&#39;s Avowal.</text></navLabel> 
+  <content src="main94.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3069" playOrder="97">
+  <navLabel><text>Chapter 95 - Father and Daughter.</text></navLabel> 
+  <content src="main95.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3071" playOrder="98">
+  <navLabel><text>Chapter 96 - The Contract.</text></navLabel> 
+  <content src="main96.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3073" playOrder="99">
+  <navLabel><text>Chapter 97 - The Departure for Belgium.</text></navLabel> 
+  <content src="main97.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3075" playOrder="100">
+  <navLabel><text>Chapter 98 - The Bell and Bottle Tavern.</text></navLabel> 
+  <content src="main98.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3077" playOrder="101">
+  <navLabel><text>Chapter 99 - The Law.</text></navLabel> 
+  <content src="main99.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3079" playOrder="102">
+  <navLabel><text>Chapter 100 - The Apparition.</text></navLabel> 
+  <content src="main100.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3081" playOrder="103">
+  <navLabel><text>Chapter 101 - Locusta.</text></navLabel> 
+  <content src="main101.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3083" playOrder="104">
+  <navLabel><text>Chapter 102 - Valentine.</text></navLabel> 
+  <content src="main102.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3085" playOrder="105">
+  <navLabel><text>Chapter 103 - Maximilian.</text></navLabel> 
+  <content src="main103.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3087" playOrder="106">
+  <navLabel><text>Chapter 104 - Danglars Signature.</text></navLabel> 
+  <content src="main104.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3089" playOrder="107">
+  <navLabel><text>Chapter 105 - The Cemetery of Pere-la-Chaise.</text></navLabel> 
+  <content src="main105.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3091" playOrder="108">
+  <navLabel><text>Chapter 106 - Dividing the Proceeds.</text></navLabel> 
+  <content src="main106.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3093" playOrder="109">
+  <navLabel><text>Chapter 107 - The Lions&#39; Den.</text></navLabel> 
+  <content src="main107.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3095" playOrder="110">
+  <navLabel><text>Chapter 108 - The Judge.</text></navLabel> 
+  <content src="main108.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3097" playOrder="111">
+  <navLabel><text>Chapter 109 - The Assizes.</text></navLabel> 
+  <content src="main109.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3099" playOrder="112">
+  <navLabel><text>Chapter 110 - The Indictment.</text></navLabel> 
+  <content src="main110.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3101" playOrder="113">
+  <navLabel><text>Chapter 111 - Expiation.</text></navLabel> 
+  <content src="main111.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3103" playOrder="114">
+  <navLabel><text>Chapter 112 - The Departure.</text></navLabel> 
+  <content src="main112.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3105" playOrder="115">
+  <navLabel><text>Chapter 113 - The Past.</text></navLabel> 
+  <content src="main113.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3107" playOrder="116">
+  <navLabel><text>Chapter 114 - Peppino.</text></navLabel> 
+  <content src="main114.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3109" playOrder="117">
+  <navLabel><text>Chapter 115 - Luigi Vampa&#39;s Bill of Fare.</text></navLabel> 
+  <content src="main115.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3111" playOrder="118">
+  <navLabel><text>Chapter 116 - The Pardon.</text></navLabel> 
+  <content src="main116.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap3113" playOrder="119">
+  <navLabel><text>Chapter 117 - The Fifth of October.</text></navLabel> 
+  <content src="main117.xml"/>
+    
+  
+    
+    
+  
+</navPoint>
+
+
+
+  </navMap>
+
+
+</ncx>
