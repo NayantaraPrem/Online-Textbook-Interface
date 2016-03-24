@@ -690,9 +690,11 @@ app.post('/api/photo/:page', uploading.single('pic'), function(req, res){
 	// ...
 	// add image to db
 	var page = req.params.page;
-	console.log("Uploading " + req.file.key + 'to page#' + page);
+	var splits = req.file.key.split('/');
+	var fname = splits[1];
+	console.log("Uploading " + fname + ' to page#' + page);
 	var img_item = {
-		"id": req.file.key,
+		"id": fname,
 		"type": "IMG",
 		"img_dest": "http://anothercollabbooks.s3.amazonaws.com/"+req.file.key
 		//add owner, timestamp, etc here

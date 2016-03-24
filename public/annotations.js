@@ -146,15 +146,17 @@ function delete_annt(e) {
 			window.console.log(data);
 		}
     });   
-   var annotation_row = e.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement; // annotation div row
+   var annotation_row = e.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement; // annotation div row
    annotation_row.remove();
    e.stopPropagation();
    return false;
 }
 
 function delete_img(e) {
+   alert("Deleting " + e.currentTarget.id); 
+   
    e.preventDefault();
-   var annotation_row = e.currentTarget.parentElement.parentElement; // annotation div row
+   var annotation_row = e.currentTarget.parentElement.parentElement.parentElement; // annotation div row
    var postData = e.currentTarget.id;
    postData = postData.replace("deleteButton", "");
    $.ajax({
