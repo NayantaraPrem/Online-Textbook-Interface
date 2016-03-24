@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns="http://www.w3.org/2005/Atom" xmlns:dcterms="http://purl.org/dc/terms/">
+<title>Macbeth</title>
+<id>http://www.feedbooks.com/book/2935</id>
+<author>
+  <name>William Shakespeare</name>
+  <uri>http://www.feedbooks.com/author/494</uri>
+</author>
+<published>2008-09-18T04:38:52Z</published>
+<updated>2015-03-06T16:52:44Z</updated>
+<dcterms:language>en</dcterms:language>
+<dcterms:issued>1606</dcterms:issued>
+<category term="FBFIC000000" label="Fiction" scheme="http://www.feedbooks.com/categories"/>
+<category term="FBDRA000000" label="Drama" scheme="http://www.feedbooks.com/categories"/>
+<summary>Macbeth is among the best-known of William Shakespeare's plays, and is his shortest tragedy, believed to have been written between 1603 and 1606. It is frequently performed at both amateur and professional levels, and has been adapted for opera, f...</summary>
+<dcterms:extent>17,925 words</dcterms:extent>
+<dcterms:source>http://shakespeare.mit.edu/</dcterms:source>
+<link type="text/html" rel="alternate" href="http://generation.feedbooks.com/book/2935" title="View on Feedbooks"/>
+<link type="application/epub+zip" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/2935.epub"/>
+<link type="application/x-mobipocket-ebook" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/2935.mobi"/>
+<link type="application/pdf" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/2935.pdf"/>
+<link type="image/jpeg" rel="http://opds-spec.org/image" href="http://covers.feedbooks.net/book/2935.jpg?size=large&amp;t=1425660764"/>
+<link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="http://covers.feedbooks.net/book/2935.jpg?t=1425660764"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=acquisition" rel="http://www.feedbooks.com/opds/same_author" href="http://generation.feedbooks.com/author/494/books/top.atom?lang=en" title="From the same author"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=navigation" rel="related" href="http://generation.feedbooks.com/book/2935/categories.atom" title="Categories for this book"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=navigation" rel="related" href="http://generation.feedbooks.com/book/2935/lists.atom" title="Reading lists for this book"/>
+<link type="application/atom+xml" rel="replies" href="http://generation.feedbooks.com/book/2935/comments.atom" thr:count="0" title="Comments for this book (0)" thr:updated="2015-11-23T13:18:58Z"/>
+<content type="html">&lt;p&gt;Macbeth is among the best-known of William Shakespeare's plays, and is his shortest tragedy, believed to have been written between 1603 and 1606. It is frequently performed at both amateur and professional levels, and has been adapted for opera, film, books, stage and screen. Often regarded as archetypal, the play tells of the dangers of the lust for power and the betrayal of friends. For the plot Shakespeare drew loosely on the historical account of King Macbeth of Scotland by Raphael Holinshed and that by the Scottish philosopher Hector Boece. There are many superstitions centred on the belief the play is somehow &quot;cursed&quot;, and many actors will not mention the name of the play aloud, referring to it instead as &quot;The Scottish play&quot;. (From Wikipedia)&lt;/p&gt;</content>
+<link type="application/atom+xml;type=entry;profile=opds-catalog" rel="self" href="http://generation.feedbooks.com/book/2935.atom"/>
+  <link type="application/atom+xml" rel="contents" href="http://generation.feedbooks.com/book/2935/contents.atom"/>
+</entry>

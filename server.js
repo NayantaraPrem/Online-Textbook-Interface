@@ -43,18 +43,21 @@ config = JSON.parse(config);
 var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 var books = [ 
 				{title:'The War of The Worlds', epub:'The_War_of_The_Worlds'},
-				{title:'The Einstein Theory of Relativity', epub:'The_Einstein_Theory_of_Relativity'},
 				{title:'On The Origin of Species', epub:'On_The_Origin_of_Species'},
+				{title:'The Einstein Theory of Relativity', epub:'The_Einstein_Theory_of_Relativity'},
 				{title:'A Midsummer Nights Dream', epub:'A_Midsummer_Nights_Dream'},
 				{title:'Jane Eyre', epub:'Jane_Eyre'},
 				{title:'Dream Psychology', epub:'Dream_Psychology'},
-				{title:'Macbeth', epub:'Macbeth'}
+				{title:'Great Expectations', epub:'Great_Expectations'},
+				{title:'Macbeth', epub:'Macbeth'},
+				{title:'The Count of Monte Cristo', epub:'The_Count_of_Monte_Cristo'}
 			];
 
 // Book Display variables
 var currBookID = '';
 var currChapter = '';
 var currTOC = [];
+var currBookmarks = [];
 var antupdated = [0,0,0,0];
 var tot_users = 4;
 
@@ -221,7 +224,8 @@ function generate_filtered_notes(username, bookid, chapter, filterparams, ret) {
 			if(preloaded_notes[i].owner == username){
 				filtered_notes.push(preloaded_notes[i]);
 				console.log(preloaded_notes[i].NoteID);
-			}else {
+			}
+			else {
 				for (var j = 0; j < filterparams.length; j++) {
 					if (preloaded_notes[i].owner == filterparams[j]) {
 						filtered_notes.push(preloaded_notes[i]);
@@ -242,9 +246,17 @@ function get_annt_filter_params(username, bookid, ret) {
 	var last_filter_settings = [];
 	var filterParams = [];
 	var new_filter_settings = [];
+	var bookname = get_bookname(bookid);
 
 	var UsersParams = {
-		TableName: 'PrivacySettings'
+		TableName: 'PrivacySettings',
+		FilterExpression: "#bkname = :i",
+		ExpressionAttributeNames: {
+			"#bkname": bookname
+		},
+		ExpressionAttributeValues: {
+			":i": "Everyone"			
+		}
 	};
 
 	var FilterParams = {
@@ -265,29 +277,9 @@ function get_annt_filter_params(username, bookid, ret) {
 	// (3) If user has set notes to "Public", add this user to "visible_users"	
 	db_interface.scanTable(UsersParams, function(err, all_users){
 
-		// now determine which users have public notes
-		//TODO: add this filter to scanTable params later
-
 		for (var i = 0; i < all_users.length; i++) {
-			if (all_users[i].userId != username) {			
-				switch (bookid) {
-					case '1':
-						if (all_users[i].The_War_of_The_Worlds == 'Everyone') {
-							visible_users.push(all_users[i].userId);
-						}
-						break;
-					case '2':
-						if (all_users[i].The_Einstein_Theory_of_Relativity == 'Everyone') {
-							visible_users.push(all_users[i].userId);
-						}
-						break;
-					case '3':
-						if (all_users[i].Computing == 'Everyone') {
-							visible_users.push(all_users[i].userId);
-						}
-						break;
-				}
-			}
+			if (all_users[i].userId != username) 
+				visible_users.push(all_users[i].userId);
 		}
 
 		// Now we must compare the current set of visible users to the last saved 
@@ -616,6 +608,17 @@ app.post('/update_annt_filter', function(req, res){
 	//TODO(fix): updating annt filter settings require page refresh by user to take effect
 	res.send(req.body);
 });
+
+//update bookmarks
+app.post('/update_bookmarks', function(req, res){
+	var action = req.body.action;
+	var chapter = req.body.chapter;
+	var page = req.body.page;
+	
+	currBookmarks.push([chapter, page]);
+	
+	res.send(req.body);
+});
 /*********************************************************************SET PRIVACY**************************************************************/
 
 app.post('/setprivacy', function(req, res){
@@ -702,9 +705,10 @@ app.get('/book:bookId-:bookName/:chapterName', requireLogin, function(req, res){
 		
 		currBookID = bookid;
 		currTOC = [];
+		currBookmarks = [];
 		fs.readFile(__dirname + "/" + "public/Books/Book" + bookid + "/TableOfContents.html", 'utf8', function(err, html){
 			var titles = html.match(/">.*?</g); //parse all >##chapterTitle##<
-			var links = html.match(/href=".*?"/g); //parse all href="##chapterLink##"
+			var links = html.match(/href=".*?.xml/g); //parse all href="##chapterLink##.xml
 			
 			if (titles.length < 1 || links.length < 1 || titles.length != links.length)
 				console.log("ERR: parsing TOC");
@@ -718,7 +722,7 @@ app.get('/book:bookId-:bookName/:chapterName', requireLogin, function(req, res){
 				t = t.replace("<","");
 				var l = links[i];
 				l = l.replace("href=\"OPS","");
-				l = l.replace("\.xml\"","");
+				l = l.replace("\.xml","");
 				l = l.replace("/","");
 						
 				currTOC.push([t, l]);
@@ -752,7 +756,7 @@ app.get('/book:bookId-:bookName/:chapterName', requireLogin, function(req, res){
 	get_annt_filter_params(username, bookid, function(visible_users, filter_settings){
 		generate_filtered_notes(username, bookid, currChapter, visible_users, function(filtered_notes){
 			//TODO: now save new_filter_settings
-			res.render('combinedDisplay', { title: bookname, notes: filtered_notes, notif_msg: notif_msg, bookid: bookid, bookname: bookname, pagetodisplay: currChapter, TOC: currTOC, username: username, visible_users: visible_users, filter_settings: filter_settings });
+			res.render('combinedDisplay', { title: bookname, notes: filtered_notes, notif_msg: notif_msg, bookid: bookid, bookname: bookname, pagetodisplay: currChapter, TOC: currTOC, username: username, visible_users: visible_users, filter_settings: filter_settings, bookmarks: currBookmarks });
 			
        	});
 	});
@@ -838,15 +842,15 @@ app.get('/home', requireLogin, function(req,res) {
 	//res.sendfile( __dirname + "/home.html");
 	//var path = "Books/Images/";
 	var img_paths = [		
-		"http://ecx.images-amazon.com/images/I/518k1D%2BJZHL._SX331_BO1,204,203,200_.jpg",
-		"http://ecx.images-amazon.com/images/I/51r9QQVSRNL._SX331_BO1,204,203,200_.jpg",
-		"",
-		"",
-		"http://covers.feedbooks.net/item/692631.jpg?size=large&t=1404617232",
-		"http://covers.feedbooks.net/item/1556442.jpg?size=large&t=1447555429",
-		""];
-	//var img_paths = ["https://bookshoptalk.files.wordpress.com/2011/10/generic-book-cover.jpg?w=190"]
-
+		"http://covers.feedbooks.net/item/8224.jpg?size=large&t=1404175382",
+		"http://covers.feedbooks.net/book/3015.jpg?size=large&t=1439158819",
+		"http://covers.feedbooks.net/book/3591.jpg?size=large&t=1426673750",
+		"http://covers.feedbooks.net/book/2990.jpg?size=large&t=1453264913",
+		"http://covers.feedbooks.net/book/144.jpg?size=large&t=1439153221",
+		"http://covers.feedbooks.net/book/176.jpg?size=large&t=1425660132",
+		"http://covers.feedbooks.net/book/70.jpg?size=large&t=1439163698",
+		"http://covers.feedbooks.net/book/2935.jpg?size=large&t=1425660764",
+		"http://covers.feedbooks.net/book/73.jpg?size=large&t=1439146587"];
 	res.render('dashboard', { welcome_msg: welcome_msg, books: books, imgs:img_paths});
 
 });

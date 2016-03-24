@@ -33,7 +33,7 @@ html, body {
 
 #section {
   float:left;
-  padding:30px;
+  padding:20px;
   #background-color:#ebebe0;
   background-color:#e6e6e6;
   width:67%;
@@ -49,20 +49,20 @@ html, body {
 
 #nav {
     line-height:30px;
-  background-color:#333333;
+    background-color:#333333;
     height:93%;
     width:13%;
     float:left;
-  text-align:right;
-  padding:0;
-  overflow: auto;
+    text-align:right;
+    padding:0;
+    overflow: auto;
 }
 
 #footer {
     background-color:#00cc99;
     color:white;
     text-align:center;
-  padding:5px;     
+    padding:5px;     
 }
 
 div.annt_body {
@@ -100,8 +100,9 @@ ul.book_nav_buttons {
     list-style-type: none;
     margin: 0;
     padding: 0;
-  #background-color: transparent;
-  background-color: #333333;
+	height: 100%;
+    #background-color: transparent;
+    background-color: #333333;
 }
 
 li.page_nav {
@@ -226,13 +227,36 @@ ul.annt-list {
 }
 
 
+############### Bookmarking ###############
+#bookmarking.bookmarking {
+	#height: 8%;
+	#overflow:hidden;
+}
+#Bookmark {
+	float: right;
+	padding: 2px;
+}
+ul#marked-pages {
+	list-style: none;
+	float: right;
+}
+ul#marked-pages li{
+	display: inline;
+	#border-style: outset;
+	border-style: groove;
+}
+ul#marked-pages li a {
+	text-decoration: none;
+}
+
+
 ############### Pagination ###############
 .custom-pages {
 list-style: none;
 }
 .textarea {
 font-size: 14px;
-height: 85%;
+height: 80%;
 line-height: 18px;
 margin: 18px 0;
 }

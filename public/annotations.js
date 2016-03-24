@@ -243,6 +243,62 @@ function update_annt_filter(e) {
 	return false;
 }
 
+function mark_page(e){
+	e.preventDefault();
+	
+	var curr_page = 0;
+	if ( $('ul.custom-pages li').length != 0 )
+		curr_page = $('ul.custom-pages').find('li.active').attr('data-page');
+	
+	var chapter = window.location.pathname;
+	chapter = chapter.replace(/.*\//, "");
+	
+	var bookpath = window.location.pathname;
+	bookpath = bookpath.replace(chapter, "");
+		
+	if (document.getElementById("marked-pages").querySelectorAll("[data-chapter='"+chapter+"'][data-page='"+curr_page+"']").length < 1){
+		var list = document.getElementById("marked-pages");
+		var li = document.createElement("li");
+		var box = document.createElement("a");
+		
+		var linkText = document.createTextNode(chapter + ":" + curr_page);
+		box.appendChild(linkText);
+		
+		box.setAttribute("href", bookpath + chapter);
+		box.setAttribute("data-chapter", chapter);
+		box.setAttribute("data-page", curr_page);
+		
+		li.className = "clickable";
+		
+		//alert("new bookmark");
+		
+		li.appendChild(box);
+		list.appendChild(li); 
+				
+		var action = "add";
+
+		$.ajax({
+			type: 'POST',
+			data: JSON.stringify({"chapter":chapter, "page":curr_page, "action":action}),
+			contentType: 'application/json',
+			url: eb_env + "/update_bookmarks",
+			success: function(data) {
+				//alert("Done " + data);
+			},
+			error: function(data){
+				window.console.log(data);
+			}
+		});
+	}	
+	else {
+		//alert("already marked");
+	}
+	
+	e.stopPropagation();
+
+	return false;
+}
+
 function centerModal() {
     $(this).css('display', 'block');
     var $dialog = $(this).find(".modal-dialog");

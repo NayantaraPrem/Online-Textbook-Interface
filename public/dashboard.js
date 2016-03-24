@@ -15,7 +15,7 @@ $( document ).ready(function() {
     $(".bookIcon").click(function(e) {
       if(e.target.tagName ==  "BUTTON")
         return;
-      var location = "/" + this.id + "-" + this.name + "/main";
+      var location = "/" + this.id + "-" + this.name + "/title";
       window.location.href = location;
     });
 });
