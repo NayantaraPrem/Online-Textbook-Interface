@@ -2,6 +2,12 @@ doctype html
 html(lang='en')
   head
     title Upload Image
+    script(type='text/javascript').
+      window.addEventListener("beforeunload", function (e) {
+        setTimeout(function(){
+          window.opener.location.reload(true);          
+        }, 1000);
+      });
   body
     form#uploadForm(enctype='multipart/form-data', action='/api/photo/'+page, method='post')
       input(type='file', name='pic')

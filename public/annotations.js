@@ -153,7 +153,6 @@ function delete_annt(e) {
 }
 
 function delete_img(e) {
-   alert("Deleting " + e.currentTarget.id); 
    
    e.preventDefault();
    var annotation_row = e.currentTarget.parentElement.parentElement.parentElement; // annotation div row
