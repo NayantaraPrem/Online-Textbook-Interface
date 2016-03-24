@@ -110,8 +110,8 @@ var uploading = multer({
 	storage:s3({
 		dirname: 'photos',
 		bucket: 'anothercollabbooks',
-		secretAccessKey: 'dW1Xjcj/htwkn9aCFlVwFU43X0NRHCAsQ5x6OsIe',
-		accessKeyId: 'AKIAIYQKET4VRIRVEBXQ',
+		secretAccessKey: AWS.config.credentials.secretAccessKey,
+		accessKeyId:  AWS.config.credentials.accessKeyId,	
 		region: "us-west-2",
 		endpoint:'s3.amazonaws.com/',
 		filename: function (req, file, cb) {
@@ -158,7 +158,6 @@ function get_bookname(bookid) {
 function generate_filtered_notes(username, bookid, chapter, filterparams, ret) {
 	var preloaded_notes = [];
 	var filtered_notes = [];
-	
 	// Can add more parameters here to filter results
 	var AnnotationsParams = {
 		TableName: 'Annotations',
