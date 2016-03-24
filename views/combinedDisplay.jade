@@ -4,10 +4,7 @@ html(lang='en')
     include .includes/page-nav-bar.jade
 
     #nav
-      case bookid
-        when "1": include .includes/Book1TableOfContents.jade
-        when "2": include .includes/Book2TableOfContents.jade
-        when "3": include .includes/Book3TableOfContents.jade
+      include .includes/TableOfContents.jade
 
     include paginate.jade
 

@@ -13,7 +13,7 @@
         NCX documents, including those conforming to the relaxed
         constraints of OPS 2.0 -->
 
-    <meta name="dtb:uid" content="d4eea036-2147-11e2-963f-001cc0a62c0b"/>
+    <meta name="dtb:uid" content="4dfe8856-e931-11e5-82b5-4c72b9252ec6"/>
 
     <meta name="dtb:depth" content="2"/>
 
@@ -23,25 +23,62 @@
   </head>
 
  <docTitle>
-   <text>The War of the Worlds</text>
+   <text>On the Origin of Species, 6th Edition</text>
  </docTitle>
 
  <docAuthor>
-   <text>Wells, H. G.</text>
+   <text>Darwin, Charles</text>
  </docAuthor>
 
     <navMap>
-    
+
     <navPoint class="titlepage" id="level1-titlepage" playOrder="1">
       <navLabel><text>Title</text></navLabel>
       <content src="title.xml"/>
     </navPoint>
-    
+
     <navPoint class="about" id="level1-about" playOrder="2">
       <navLabel><text>About</text></navLabel>
       <content src="about.xml"/>
     </navPoint>
- 
+        
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79464" playOrder="3">
+  <navLabel><text>An Historical Sketch Of The Progress Of Opinion On The Origin Of Species, Previously To The Publication Of The First Edition Of This Work</text></navLabel>
+  
+    <content src="main1.xml"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79466" playOrder="4">
+  <navLabel><text>Introduction</text></navLabel>
+  
+    <content src="main2.xml"/>
+  
+    
+    
+    
+  
+</navPoint>
+
         
 
 
@@ -54,460 +91,193 @@
   
 
 
-<navPoint class="part" id="part825" playOrder="3">
-  <navLabel><text>Part 1 - The Coming of the Martians</text></navLabel> 
-  <content src="main1.xml"/>
-   
-  
-   
-  
-    
-      
-
-
-
-
-
-  
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap826" playOrder="4">
-  <navLabel><text>Chapter 1 - The Eve of the War</text></navLabel> 
-  <content src="main2.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-      
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap828" playOrder="5">
-  <navLabel><text>Chapter 2 - The Falling Star</text></navLabel> 
+<navPoint class="chapter" id="chap79468" playOrder="5">
+  <navLabel><text>Chapter 1 - Variation Under Domestication</text></navLabel> 
   <content src="main3.xml"/>
     
   
     
     
   
-</navPoint>
-
+    
       
     
-  
     
       
 
 
 
 
-
-
-
-
   
 
 
-<navPoint class="chapter" id="chap830" playOrder="6">
-  <navLabel><text>Chapter 3 - On Horsell Common</text></navLabel> 
-  <content src="main4.xml"/>
+
+
+<navPoint class="section" id="sec79470" playOrder="6">
+  <navLabel><text>1. Causes of Variability</text></navLabel>
+  
+    <content src="main4.xml#section_79470"/>
+  
     
-  
     
     
   
 </navPoint>
 
-      
     
   
     
       
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap832" playOrder="7">
-  <navLabel><text>Chapter 4 - The Cylinder Opens</text></navLabel> 
-  <content src="main5.xml"/>
     
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79472" playOrder="7">
+  <navLabel><text>2. Effects Of Habit And Of The Use Or Disuse Of Parts; Correlated Variation; Inheritance</text></navLabel>
   
+    <content src="main5.xml#section_79472"/>
+  
+    
     
     
   
 </navPoint>
 
-      
     
   
     
       
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap834" playOrder="8">
-  <navLabel><text>Chapter 5 - The Heat Ray</text></navLabel> 
-  <content src="main6.xml"/>
     
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79474" playOrder="8">
+  <navLabel><text>3. Character Of Domestic Varieties; Difficulty Of Distinguishing Between Varieties And Species; Origin Of Domestic Varieties From One Or More Species</text></navLabel>
   
+    <content src="main6.xml#section_79474"/>
+  
+    
     
     
   
 </navPoint>
 
-      
     
   
     
       
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap836" playOrder="9">
-  <navLabel><text>Chapter 6 - The Heat-Ray in the Chobham Road</text></navLabel> 
-  <content src="main7.xml"/>
     
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79476" playOrder="9">
+  <navLabel><text>4. Breeds Of The Domestic Pigeon, Their Differences And Origin</text></navLabel>
   
+    <content src="main7.xml#section_79476"/>
+  
+    
     
     
   
 </navPoint>
 
-      
     
   
     
       
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap838" playOrder="10">
-  <navLabel><text>Chapter 7 - How I Reached Home</text></navLabel> 
-  <content src="main8.xml"/>
     
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79478" playOrder="10">
+  <navLabel><text>5. Principles Of Selection Anciently Followed, And Their Effects</text></navLabel>
   
+    <content src="main8.xml#section_79478"/>
+  
+    
     
     
   
 </navPoint>
 
-      
     
   
     
       
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap840" playOrder="11">
-  <navLabel><text>Chapter 8 - Friday Night</text></navLabel> 
-  <content src="main9.xml"/>
     
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79480" playOrder="11">
+  <navLabel><text>6. Unconscious Selection</text></navLabel>
   
+    <content src="main9.xml#section_79480"/>
+  
+    
     
     
   
 </navPoint>
 
-      
     
   
     
       
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap842" playOrder="12">
-  <navLabel><text>Chapter 9 - The Fighting Begins</text></navLabel> 
-  <content src="main10.xml"/>
     
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79482" playOrder="12">
+  <navLabel><text>7. Circumstances Favourable To Man&#39;s Power Of Selection</text></navLabel>
   
+    <content src="main10.xml#section_79482"/>
+  
+    
     
     
   
 </navPoint>
 
-      
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap844" playOrder="13">
-  <navLabel><text>Chapter 10 - In the Storm</text></navLabel> 
-  <content src="main11.xml"/>
-    
-  
-    
     
   
 </navPoint>
 
-      
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap846" playOrder="14">
-  <navLabel><text>Chapter 11 - At the Window</text></navLabel> 
-  <content src="main12.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-      
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap848" playOrder="15">
-  <navLabel><text>Chapter 12 - What I Saw of the Destruction of Weybridge and Shepperton</text></navLabel> 
-  <content src="main13.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-      
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap850" playOrder="16">
-  <navLabel><text>Chapter 13 - How I Fell in with the Curate</text></navLabel> 
-  <content src="main14.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-      
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap852" playOrder="17">
-  <navLabel><text>Chapter 14 - In London</text></navLabel> 
-  <content src="main15.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-      
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap854" playOrder="18">
-  <navLabel><text>Chapter 15 - What Had Happened in Surrey</text></navLabel> 
-  <content src="main16.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-      
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap856" playOrder="19">
-  <navLabel><text>Chapter 16 - The Exodus from London</text></navLabel> 
-  <content src="main17.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-      
-    
-  
-    
-      
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap858" playOrder="20">
-  <navLabel><text>Chapter 17 - The &quot;Thunder Child&quot;</text></navLabel> 
-  <content src="main18.xml"/>
-    
-  
-    
-    
-  
-</navPoint>
-
-      
-    
-  
-</navPoint>
-
- 
         
 
 
@@ -520,13 +290,214 @@
   
 
 
-<navPoint class="part" id="part860" playOrder="21">
-  <navLabel><text>Part 2 - The Earth Under the Martians</text></navLabel> 
+<navPoint class="chapter" id="chap79484" playOrder="13">
+  <navLabel><text>Chapter 2 - Variation Under Nature</text></navLabel> 
+  <content src="main11.xml"/>
+    
+  
+    
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79486" playOrder="14">
+  <navLabel><text>1. </text></navLabel>
+  
+    <content src="main12.xml#section_79486"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79488" playOrder="15">
+  <navLabel><text>2. Individual Differences</text></navLabel>
+  
+    <content src="main13.xml#section_79488"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79490" playOrder="16">
+  <navLabel><text>3. Doubtful Species</text></navLabel>
+  
+    <content src="main14.xml#section_79490"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79492" playOrder="17">
+  <navLabel><text>4. Wide-Ranging, Much Diffused, And Common Species Vary Most</text></navLabel>
+  
+    <content src="main15.xml#section_79492"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79494" playOrder="18">
+  <navLabel><text>5. Species Of The Larger Genera In Each Country Vary More Frequently Than The Species Of The Smaller Genera</text></navLabel>
+  
+    <content src="main16.xml#section_79494"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79496" playOrder="19">
+  <navLabel><text>6. Many Of The Species Included Within The Larger Genera Resemble Varieties In Being Very Closely, But Unequally, Related To Each Other, And In Having Restricted Ranges</text></navLabel>
+  
+    <content src="main17.xml#section_79496"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79498" playOrder="20">
+  <navLabel><text>7. Summary</text></navLabel>
+  
+    <content src="main18.xml#section_79498"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap79500" playOrder="21">
+  <navLabel><text>Chapter 3 - Struggle For Existence</text></navLabel> 
   <content src="main19.xml"/>
-   
+    
   
-   
+    
+    
   
+    
+      
+    
     
       
 
@@ -536,155 +507,147 @@
 
 
 
-
+<navPoint class="section" id="sec79502" playOrder="22">
+  <navLabel><text>1. </text></navLabel>
   
-
-
-<navPoint class="chapter" id="chap861" playOrder="22">
-  <navLabel><text>Chapter 1 - Under Foot</text></navLabel> 
-  <content src="main20.xml"/>
+    <content src="main20.xml#section_79502"/>
+  
     
-  
     
     
   
 </navPoint>
 
-      
     
   
     
       
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap863" playOrder="23">
-  <navLabel><text>Chapter 2 - What We Saw from the Ruined House</text></navLabel> 
-  <content src="main21.xml"/>
     
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79504" playOrder="23">
+  <navLabel><text>2. The Term, Struggle For Existence, Used In A Large Sense</text></navLabel>
   
+    <content src="main21.xml#section_79504"/>
+  
+    
     
     
   
 </navPoint>
 
-      
     
   
     
       
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap865" playOrder="24">
-  <navLabel><text>Chapter 3 - The Days of Imprisonment</text></navLabel> 
-  <content src="main22.xml"/>
     
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79506" playOrder="24">
+  <navLabel><text>3. Geometrical Ratio Of Increase</text></navLabel>
   
+    <content src="main22.xml#section_79506"/>
+  
+    
     
     
   
 </navPoint>
 
-      
     
   
     
       
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap867" playOrder="25">
-  <navLabel><text>Chapter 4 - The Death of the Curate</text></navLabel> 
-  <content src="main23.xml"/>
     
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79508" playOrder="25">
+  <navLabel><text>4. Nature Of The Checks To Increase</text></navLabel>
   
+    <content src="main23.xml#section_79508"/>
+  
+    
     
     
   
 </navPoint>
 
-      
     
   
     
       
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap869" playOrder="26">
-  <navLabel><text>Chapter 5 - The Stillness</text></navLabel> 
-  <content src="main24.xml"/>
     
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79510" playOrder="26">
+  <navLabel><text>5. Complex Relations Of All Animals And Plants To Each Other In The Struggle For Existence</text></navLabel>
   
+    <content src="main24.xml#section_79510"/>
+  
+    
     
     
   
 </navPoint>
 
-      
     
   
     
       
-
-
-
-
-
-
-
-
-  
-
-
-<navPoint class="chapter" id="chap871" playOrder="27">
-  <navLabel><text>Chapter 6 - The Work of Fifteen Days</text></navLabel> 
-  <content src="main25.xml"/>
     
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79512" playOrder="27">
+  <navLabel><text>6. Struggle For Life Most Severe Between Individuals And Varieties Of The Same Species</text></navLabel>
   
+    <content src="main25.xml#section_79512"/>
+  
+    
     
     
   
 </navPoint>
 
-      
     
   
-    
-      
+</navPoint>
+
+        
 
 
 
@@ -696,19 +659,17 @@
   
 
 
-<navPoint class="chapter" id="chap873" playOrder="28">
-  <navLabel><text>Chapter 7 - The Man on Putney Hill</text></navLabel> 
+<navPoint class="chapter" id="chap79514" playOrder="28">
+  <navLabel><text>Chapter 4 - Natural Selection; Or The Survival Of The Fittest</text></navLabel> 
   <content src="main26.xml"/>
     
   
     
     
   
-</navPoint>
-
+    
       
     
-  
     
       
 
@@ -718,25 +679,272 @@
 
 
 
-
+<navPoint class="section" id="sec79516" playOrder="29">
+  <navLabel><text>1. </text></navLabel>
   
-
-
-<navPoint class="chapter" id="chap875" playOrder="29">
-  <navLabel><text>Chapter 8 - Dead London</text></navLabel> 
-  <content src="main27.xml"/>
+    <content src="main27.xml#section_79516"/>
+  
     
-  
     
     
   
 </navPoint>
 
-      
     
   
     
       
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79518" playOrder="30">
+  <navLabel><text>2. Sexual Selection</text></navLabel>
+  
+    <content src="main28.xml#section_79518"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79520" playOrder="31">
+  <navLabel><text>3. Illustrations Of The Action Of Natural Selection, Or The Survival Of The Fittest</text></navLabel>
+  
+    <content src="main29.xml#section_79520"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79522" playOrder="32">
+  <navLabel><text>4. On The Intercrossing Of Individuals</text></navLabel>
+  
+    <content src="main30.xml#section_79522"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79524" playOrder="33">
+  <navLabel><text>5. Circumstances Favourable For The Production Of New Forms Through Natural Selection</text></navLabel>
+  
+    <content src="main31.xml#section_79524"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79526" playOrder="34">
+  <navLabel><text>6. Extinction Caused By Natural Selection</text></navLabel>
+  
+    <content src="main32.xml#section_79526"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79528" playOrder="35">
+  <navLabel><text>7. Divergence Of Character</text></navLabel>
+  
+    <content src="main33.xml#section_79528"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79530" playOrder="36">
+  <navLabel><text>8. The Probable Effects Of The Action Of Natural Selection Through Divergence Of Character And Extinction, On The Descendants Of A Common Ancestor</text></navLabel>
+  
+    <content src="main34.xml#section_79530"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79532" playOrder="37">
+  <navLabel><text>9. On The Degree To Which Organisation Tends To Advance</text></navLabel>
+  
+    <content src="main35.xml#section_79532"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79534" playOrder="38">
+  <navLabel><text>10. Convergence Of Character</text></navLabel>
+  
+    <content src="main36.xml#section_79534"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79536" playOrder="39">
+  <navLabel><text>11. Summary Of Chapter</text></navLabel>
+  
+    <content src="main37.xml#section_79536"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+</navPoint>
+
+        
 
 
 
@@ -748,9 +956,553 @@
   
 
 
-<navPoint class="chapter" id="chap877" playOrder="30">
-  <navLabel><text>Chapter 9 - Wreckage</text></navLabel> 
-  <content src="main28.xml"/>
+<navPoint class="chapter" id="chap79538" playOrder="40">
+  <navLabel><text>Chapter 5 - Laws Of Variation</text></navLabel> 
+  <content src="main38.xml"/>
+    
+  
+    
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79540" playOrder="41">
+  <navLabel><text>1. </text></navLabel>
+  
+    <content src="main39.xml#section_79540"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79542" playOrder="42">
+  <navLabel><text>2. Effects Of The Increased Use And Disuse Of Parts, As Controlled By Natural Selection</text></navLabel>
+  
+    <content src="main40.xml#section_79542"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79544" playOrder="43">
+  <navLabel><text>3. Acclimatisation</text></navLabel>
+  
+    <content src="main41.xml#section_79544"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79546" playOrder="44">
+  <navLabel><text>4. Correlated Variation</text></navLabel>
+  
+    <content src="main42.xml#section_79546"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79548" playOrder="45">
+  <navLabel><text>5. Compensation And Economy Of Growth</text></navLabel>
+  
+    <content src="main43.xml#section_79548"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79550" playOrder="46">
+  <navLabel><text>6. Multiple, Rudimentary, And Lowly-Organised Structures Are Variable</text></navLabel>
+  
+    <content src="main44.xml#section_79550"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79552" playOrder="47">
+  <navLabel><text>7. A Part Developed In Any Species In An Extraordinary Degree Or Manner, In Comparison With The Same Part In Allied Species, Tends To Be Highly Variable</text></navLabel>
+  
+    <content src="main45.xml#section_79552"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79554" playOrder="48">
+  <navLabel><text>8. Specific Characters More Variable Than Generic Characters</text></navLabel>
+  
+    <content src="main46.xml#section_79554"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79556" playOrder="49">
+  <navLabel><text>9. Secondary Sexual Characters Variable</text></navLabel>
+  
+    <content src="main47.xml#section_79556"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79558" playOrder="50">
+  <navLabel><text>10. Distinct Species Present Analogous Variations, So That A Variety Of One Species Often Assumes A Character Proper To An Allied Species, Or Reverts To Some Of The Characters Of An Early Progenitor</text></navLabel>
+  
+    <content src="main48.xml#section_79558"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79560" playOrder="51">
+  <navLabel><text>11. Summary</text></navLabel>
+  
+    <content src="main49.xml#section_79560"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap79562" playOrder="52">
+  <navLabel><text>Chapter 6 - Difficulties Of The Theory</text></navLabel> 
+  <content src="main50.xml"/>
+    
+  
+    
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79564" playOrder="53">
+  <navLabel><text>1. </text></navLabel>
+  
+    <content src="main51.xml#section_79564"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79566" playOrder="54">
+  <navLabel><text>2. On The Absence Or Rarity Of Transitional Varieties</text></navLabel>
+  
+    <content src="main52.xml#section_79566"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79568" playOrder="55">
+  <navLabel><text>3. On The Origin And Transition Of Organic Beings With Peculiar Habits And Structure</text></navLabel>
+  
+    <content src="main53.xml#section_79568"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79570" playOrder="56">
+  <navLabel><text>4. Organs Of Extreme Perfection And Complication</text></navLabel>
+  
+    <content src="main54.xml#section_79570"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79572" playOrder="57">
+  <navLabel><text>5. Modes Of Transition</text></navLabel>
+  
+    <content src="main55.xml#section_79572"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79574" playOrder="58">
+  <navLabel><text>6. Special Difficulties Of The Theory Of Natural Selection</text></navLabel>
+  
+    <content src="main56.xml#section_79574"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79576" playOrder="59">
+  <navLabel><text>7. Organs Of Little Apparent Importance, As Affected By Natural Selection</text></navLabel>
+  
+    <content src="main57.xml#section_79576"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79578" playOrder="60">
+  <navLabel><text>8. Utilitarian Doctrine, How Far True:  Beauty, How Acquired</text></navLabel>
+  
+    <content src="main58.xml#section_79578"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79580" playOrder="61">
+  <navLabel><text>9. Summary:  The Law Of Unity Of Type And Of The Conditions Of Existence Embraced By The Theory Of Natural Selection</text></navLabel>
+  
+    <content src="main59.xml#section_79580"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap79582" playOrder="62">
+  <navLabel><text>Chapter 7 - Miscellaneous Objections To The Theory Of Natural Selection</text></navLabel> 
+  <content src="main60.xml"/>
     
   
     
@@ -758,11 +1510,7 @@
   
 </navPoint>
 
-      
-    
-  
-    
-      
+        
 
 
 
@@ -774,9 +1522,1313 @@
   
 
 
-<navPoint class="chapter" id="chap879" playOrder="31">
-  <navLabel><text>Chapter 10 - The Epilogue</text></navLabel> 
-  <content src="main29.xml"/>
+<navPoint class="chapter" id="chap79585" playOrder="63">
+  <navLabel><text>Chapter 8 - Instinct</text></navLabel> 
+  <content src="main61.xml"/>
+    
+  
+    
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79587" playOrder="64">
+  <navLabel><text>1. </text></navLabel>
+  
+    <content src="main62.xml#section_79587"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79589" playOrder="65">
+  <navLabel><text>2. Inherited Changes Of Habit Or Instinct In Domesticated Animals</text></navLabel>
+  
+    <content src="main63.xml#section_79589"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79591" playOrder="66">
+  <navLabel><text>3. Special Instincts</text></navLabel>
+  
+    <content src="main64.xml#section_79591"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79593" playOrder="67">
+  <navLabel><text>4. Instincts Of The Cuckoo</text></navLabel>
+  
+    <content src="main65.xml#section_79593"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79595" playOrder="68">
+  <navLabel><text>5. Slave-Making Instinct</text></navLabel>
+  
+    <content src="main66.xml#section_79595"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79597" playOrder="69">
+  <navLabel><text>6. Cell-Making Instinct Of The Hive-Bee</text></navLabel>
+  
+    <content src="main67.xml#section_79597"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79599" playOrder="70">
+  <navLabel><text>7. Objections To The Theory Of Natural Selection As Applied To Instincts:  Neuter And Sterile Insects</text></navLabel>
+  
+    <content src="main68.xml#section_79599"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79601" playOrder="71">
+  <navLabel><text>8. Summary</text></navLabel>
+  
+    <content src="main69.xml#section_79601"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap79603" playOrder="72">
+  <navLabel><text>Chapter 9 - Hybridism</text></navLabel> 
+  <content src="main70.xml"/>
+    
+  
+    
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79605" playOrder="73">
+  <navLabel><text>1. </text></navLabel>
+  
+    <content src="main71.xml#section_79605"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79607" playOrder="74">
+  <navLabel><text>2. Degrees Of Sterility</text></navLabel>
+  
+    <content src="main72.xml#section_79607"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79609" playOrder="75">
+  <navLabel><text>3. Laws Governing The Sterility Of First Crosses And Of Hybrids</text></navLabel>
+  
+    <content src="main73.xml#section_79609"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79611" playOrder="76">
+  <navLabel><text>4. Origin And Causes Of The Sterility Of First Crosses And Of Hybrids</text></navLabel>
+  
+    <content src="main74.xml#section_79611"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79613" playOrder="77">
+  <navLabel><text>5. Reciprocal Dimorphism And Trimorphism</text></navLabel>
+  
+    <content src="main75.xml#section_79613"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79615" playOrder="78">
+  <navLabel><text>6. Fertility Of Varieties When Crossed, And Of Their Mongrel Offspring, Not Universal</text></navLabel>
+  
+    <content src="main76.xml#section_79615"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79617" playOrder="79">
+  <navLabel><text>7. Hybrids And Mongrels Compared, Independently Of Their Fertility</text></navLabel>
+  
+    <content src="main77.xml#section_79617"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79619" playOrder="80">
+  <navLabel><text>8. Summary Of Chapter</text></navLabel>
+  
+    <content src="main78.xml#section_79619"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap79621" playOrder="81">
+  <navLabel><text>Chapter 10 - On The Imperfection Of The Geological Record</text></navLabel> 
+  <content src="main79.xml"/>
+    
+  
+    
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79623" playOrder="82">
+  <navLabel><text>1. </text></navLabel>
+  
+    <content src="main80.xml#section_79623"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79625" playOrder="83">
+  <navLabel><text>2. On The Lapse Of Time, As Inferred From The Rate Of Deposition And Extent Of Denudation</text></navLabel>
+  
+    <content src="main81.xml#section_79625"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79627" playOrder="84">
+  <navLabel><text>3. On The Poorness Of Palaeontological Collections</text></navLabel>
+  
+    <content src="main82.xml#section_79627"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79629" playOrder="85">
+  <navLabel><text>4. On The Absence Of Numerous Intermediate Varieties In Any Single Formation</text></navLabel>
+  
+    <content src="main83.xml#section_79629"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79631" playOrder="86">
+  <navLabel><text>5. On The Sudden Appearance Of Whole Groups Of Allied Species</text></navLabel>
+  
+    <content src="main84.xml#section_79631"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79633" playOrder="87">
+  <navLabel><text>6. On The Sudden Appearance Of Groups Of Allied Species In The Lowest Known Fossiliferous Strata</text></navLabel>
+  
+    <content src="main85.xml#section_79633"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap79635" playOrder="88">
+  <navLabel><text>Chapter 11 - On The Geological Succession Of Organic Beings</text></navLabel> 
+  <content src="main86.xml"/>
+    
+  
+    
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79637" playOrder="89">
+  <navLabel><text>1. </text></navLabel>
+  
+    <content src="main87.xml#section_79637"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79639" playOrder="90">
+  <navLabel><text>2. On Extinction</text></navLabel>
+  
+    <content src="main88.xml#section_79639"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79641" playOrder="91">
+  <navLabel><text>3. On The Forms Of Life Changing Almost Simultaneously Throughout The World</text></navLabel>
+  
+    <content src="main89.xml#section_79641"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79643" playOrder="92">
+  <navLabel><text>4. On The Affinities Of Extinct Species To Each Other, And To Living Forms</text></navLabel>
+  
+    <content src="main90.xml#section_79643"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79645" playOrder="93">
+  <navLabel><text>5. On The State Of Development Of Ancient Compared With Living Forms</text></navLabel>
+  
+    <content src="main91.xml#section_79645"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79647" playOrder="94">
+  <navLabel><text>6. On The Succession Of The Same Types Within The Same Areas, During The Later Tertiary Periods</text></navLabel>
+  
+    <content src="main92.xml#section_79647"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79649" playOrder="95">
+  <navLabel><text>7. Summary Of The Preceding And Present Chapters</text></navLabel>
+  
+    <content src="main93.xml#section_79649"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap79651" playOrder="96">
+  <navLabel><text>Chapter 12 - Geographical Distribution</text></navLabel> 
+  <content src="main94.xml"/>
+    
+  
+    
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79653" playOrder="97">
+  <navLabel><text>1. </text></navLabel>
+  
+    <content src="main95.xml#section_79653"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79655" playOrder="98">
+  <navLabel><text>2. Single Centres Of Supposed Creation</text></navLabel>
+  
+    <content src="main96.xml#section_79655"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79657" playOrder="99">
+  <navLabel><text>3. Means Of Dispersal</text></navLabel>
+  
+    <content src="main97.xml#section_79657"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79659" playOrder="100">
+  <navLabel><text>4. Dispersal During The Glacial Period</text></navLabel>
+  
+    <content src="main98.xml#section_79659"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79661" playOrder="101">
+  <navLabel><text>5. Alternate Glacial Periods In The North And South</text></navLabel>
+  
+    <content src="main99.xml#section_79661"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap79663" playOrder="102">
+  <navLabel><text>Chapter 13 - Geographical Distribution--continued</text></navLabel> 
+  <content src="main100.xml"/>
+    
+  
+    
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79665" playOrder="103">
+  <navLabel><text>1. Fresh-Water Productions</text></navLabel>
+  
+    <content src="main101.xml#section_79665"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79667" playOrder="104">
+  <navLabel><text>2. On The Inhabitants Of Oceanic Islands</text></navLabel>
+  
+    <content src="main102.xml#section_79667"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79669" playOrder="105">
+  <navLabel><text>3. Absence Of Batrachians And Terrestrial Mammals On Oceanic Islands</text></navLabel>
+  
+    <content src="main103.xml#section_79669"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79671" playOrder="106">
+  <navLabel><text>4. On The Relations Of The Inhabitants Of Islands To Those Of The Nearest Mainland</text></navLabel>
+  
+    <content src="main104.xml#section_79671"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79673" playOrder="107">
+  <navLabel><text>5. Summary Of The Last And Present Chapters</text></navLabel>
+  
+    <content src="main105.xml#section_79673"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap79675" playOrder="108">
+  <navLabel><text>Chapter 14 - Mutual Affinities Of Organic Beings:  Morphology -- Embryology --  Rudimentary Organs</text></navLabel> 
+  <content src="main106.xml"/>
+    
+  
+    
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79677" playOrder="109">
+  <navLabel><text>1. Classification</text></navLabel>
+  
+    <content src="main107.xml#section_79677"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79679" playOrder="110">
+  <navLabel><text>2. Analogical Resemblances</text></navLabel>
+  
+    <content src="main108.xml#section_79679"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79681" playOrder="111">
+  <navLabel><text>3. On The Nature Of The Affinities Connecting Organic Beings</text></navLabel>
+  
+    <content src="main109.xml#section_79681"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79683" playOrder="112">
+  <navLabel><text>4. Morphology</text></navLabel>
+  
+    <content src="main110.xml#section_79683"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79685" playOrder="113">
+  <navLabel><text>5. Development And Embryology</text></navLabel>
+  
+    <content src="main111.xml#section_79685"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79687" playOrder="114">
+  <navLabel><text>6. Rudimentary, Atrophied, And Aborted Organs</text></navLabel>
+  
+    <content src="main112.xml#section_79687"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+    
+      
+    
+    
+      
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79689" playOrder="115">
+  <navLabel><text>7. Summary</text></navLabel>
+  
+    <content src="main113.xml#section_79689"/>
+  
+    
+    
+    
+  
+</navPoint>
+
+    
+  
+</navPoint>
+
+        
+
+
+
+
+
+
+
+
+  
+
+
+<navPoint class="chapter" id="chap79691" playOrder="116">
+  <navLabel><text>Chapter 15 - Recapitulation And Conclusion</text></navLabel> 
+  <content src="main114.xml"/>
     
   
     
@@ -784,19 +2836,27 @@
   
 </navPoint>
 
-      
+        
+
+
+
+
+
+
+
+<navPoint class="section" id="sec79694" playOrder="117">
+  <navLabel><text>Glossary Of The Principal Scientific Terms Used In The Present Volume</text></navLabel>
+  
+    <content src="main115.xml"/>
+  
+    
+    
     
   
 </navPoint>
 
- 
-    
-    <navPoint class="similar" id="level1-similar" playOrder="32">
-      <navLabel><text>Recommendations</text></navLabel>
-      <content src="similar.xml"/>
-    </navPoint>
-  
-    
+
+
   </navMap>
 
 

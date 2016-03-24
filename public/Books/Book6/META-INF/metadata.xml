@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:dcterms="http://purl.org/dc/terms/" xmlns="http://www.w3.org/2005/Atom">
+<title>Great Expectations</title>
+<id>http://www.feedbooks.com/book/70</id>
+<author>
+  <name>Charles Dickens</name>
+  <uri>http://www.feedbooks.com/author/21</uri>
+</author>
+<published>2006-12-30T18:51:12Z</published>
+<updated>2015-08-09T23:41:38Z</updated>
+<dcterms:language>en</dcterms:language>
+<dcterms:issued>1861</dcterms:issued>
+<category term="FBFIC000000" label="Fiction" scheme="http://www.feedbooks.com/categories"/>
+<summary>Great Expectations is a novel by Charles Dickens first serialised in All the Year Round from 1 December 1860 to August 1861. It is regarded as one of his greatest and most sophisticated novels, and is one of his most enduringly popular, having bee...</summary>
+<dcterms:extent>184,415 words</dcterms:extent>
+<dcterms:source>Wikisource</dcterms:source>
+<link type="text/html" rel="alternate" href="http://generation.feedbooks.com/book/70" title="View on Feedbooks"/>
+<link type="application/epub+zip" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/70.epub"/>
+<link type="application/x-mobipocket-ebook" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/70.mobi"/>
+<link type="application/pdf" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/70.pdf"/>
+<link type="image/jpeg" rel="http://opds-spec.org/image" href="http://covers.feedbooks.net/book/70.jpg?size=large&amp;t=1439163698"/>
+<link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="http://covers.feedbooks.net/book/70.jpg?t=1439163698"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=acquisition" rel="http://www.feedbooks.com/opds/same_author" href="http://generation.feedbooks.com/author/21/books/top.atom?lang=en" title="From the same author"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=navigation" rel="related" href="http://generation.feedbooks.com/book/70/categories.atom" title="Categories for this book"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=navigation" rel="related" href="http://generation.feedbooks.com/book/70/lists.atom" title="Reading lists for this book"/>
+<link type="application/atom+xml" rel="replies" thr:count="5" href="http://generation.feedbooks.com/book/70/comments.atom" thr:updated="2015-06-01T09:00:52Z" title="Comments for this book (5)"/>
+<link type="text/html" rel="replies" thr:count="5" href="http://generation.feedbooks.com/book/70/comments" thr:updated="2015-06-01T09:00:52Z" title="Comments for this book (5)"/>
+<content type="html">&lt;p&gt;Great Expectations is a novel by Charles Dickens first serialised in All the Year Round from 1 December 1860 to August 1861. It is regarded as one of his greatest and most sophisticated novels, and is one of his most enduringly popular, having been adapted for stage and screen over 250 times.
+&lt;br /&gt;Great Expectations is written in a semi-autobiographical style, and is the story of the orphan Pip, writing his life from his early days of childhood until adulthood. The story can also be considered semi-autobiographical of Dickens, like much of his work, drawing on his experiences of life and people.
+&lt;br /&gt;The action of the story takes place from Christmas Eve, 1812, when the protagonist is about seven years old, to the winter of 1840.&lt;/p&gt;</content>
+<link type="application/atom+xml;type=entry;profile=opds-catalog" rel="self" href="http://generation.feedbooks.com/book/70.atom"/>
+  <link type="application/atom+xml" rel="contents" href="http://generation.feedbooks.com/book/70/contents.atom"/>
+</entry>

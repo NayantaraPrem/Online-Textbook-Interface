@@ -18,9 +18,15 @@ var phantom = require('phantom');
 var AWS = require("aws-sdk");
 var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 var books = [ 
-				{title:'The War of The Worlds', epub:'testbook'},
-				{title:'The Einstein Theory of Relativity', epub:'relativity'},
-				{title:'Structure and Interpretation of Computer Programs', epub:'SCMP'}
+				{title:'The War of The Worlds', epub:'The_War_of_The_Worlds'},
+				{title:'On The Origin of Species', epub:'On_The_Origin_of_Species'},
+				{title:'The Einstein Theory of Relativity', epub:'The_Einstein_Theory_of_Relativity'},
+				{title:'A Midsummer Nights Dream', epub:'A_Midsummer_Nights_Dream'},
+				{title:'Jane Eyre', epub:'Jane_Eyre'},
+				{title:'Dream Psychology', epub:'Dream_Psychology'},
+				{title:'Great Expectations', epub:'Great_Expectations'},
+				{title:'Macbeth', epub:'Macbeth'},
+				{title:'The Count of Monte Cristo', epub:'The_Count_of_Monte_Cristo'},
 			];
 var Autolinker = require('autolinker');
 AWS.config.update({
@@ -43,6 +49,8 @@ var app = express();
 // Book Display variables
 var currBookID = '';
 var currChapter = '';
+var currTOC = [];
+var currBookmarks = [];
 
 // app.use(express.static(__dirname + '/public'));
 
@@ -141,20 +149,9 @@ function replace_url(from, to) {
 }
 
 function get_bookname(bookid) {
-	var bookname = 'UNINIT';
-	switch(bookid) {
-		case '1':
-			bookname = 'The_War_of_The_Worlds';
-			break;
-		case '2':
-			bookname = 'The_Einstein_Theory_of_Relativity';
-			break;
-		case '3':
-			bookname = 'Computing';
-			break;
-		default:
-			bookname = 'ERR_BOOK_NOT_FOUND';
-	}
+	var bookname = 'ERR_BOOK_NOT_FOUND';
+	if (bookid < books.length && bookid > -1)
+		bookname = books[bookid].title.split(' ').join('_');
 	return bookname;
 }
 
@@ -187,7 +184,8 @@ function generate_filtered_notes(username, bookid, chapter, filterparams, ret) {
 			if(preloaded_notes[i].owner == username){
 				filtered_notes.push(preloaded_notes[i]);
 				console.log(preloaded_notes[i].NoteID);
-			}else {
+			}
+			else {
 				for (var j = 0; j < filterparams.length; j++) {
 					if (preloaded_notes[i].owner == filterparams[j]) {
 						filtered_notes.push(preloaded_notes[i]);
@@ -208,9 +206,17 @@ function get_annt_filter_params(username, bookid, ret) {
 	var last_filter_settings = [];
 	var filterParams = [];
 	var new_filter_settings = [];
+	var bookname = get_bookname(bookid);
 
 	var UsersParams = {
-		TableName: 'PrivacySettings'
+		TableName: 'PrivacySettings',
+		FilterExpression: "#bkname = :i",
+		ExpressionAttributeNames: {
+			"#bkname": bookname
+		},
+		ExpressionAttributeValues: {
+			":i": "Everyone"			
+		}
 	};
 
 	var FilterParams = {
@@ -227,33 +233,13 @@ function get_annt_filter_params(username, bookid, ret) {
 	// Here we compare Privacy Settings for all registered users
 	// Users with "Public" notes are added to the "visble_users" list
 	// (1) Get list of all users
-	// (2) For each aaaauser, check saved Privacy Setting for current book 
+	// (2) For each user, check saved Privacy Setting for current book 
 	// (3) If user has set notes to "Public", add this user to "visible_users"	
 	db_interface.scanTable(UsersParams, function(err, all_users){
 
-		// now determine which users have public notes
-		//TODO: add this filter to scanTable params later
-
 		for (var i = 0; i < all_users.length; i++) {
-			if (all_users[i].userId != username) {			
-				switch (bookid) {
-					case '1':
-						if (all_users[i].The_War_of_The_Worlds == 'Everyone') {
-							visible_users.push(all_users[i].userId);
-						}
-						break;
-					case '2':
-						if (all_users[i].The_Einstein_Theory_of_Relativity == 'Everyone') {
-							visible_users.push(all_users[i].userId);
-						}
-						break;
-					case '3':
-						if (all_users[i].Computing == 'Everyone') {
-							visible_users.push(all_users[i].userId);
-						}
-						break;
-				}
-			}
+			if (all_users[i].userId != username) 
+				visible_users.push(all_users[i].userId);
 		}
 
 		// Now we must compare the current set of visible users to the last saved 
@@ -443,9 +429,16 @@ app.get('/home', requireLogin, function(req,res) {
 	var welcome_msg = "Hello " + username;
 	//res.sendF/ile( __dirname + "/home.html");
 	//var path = "Books/Images/";
-	var img_paths = ["http://ecx.images-amazon.com/images/I/518k1D%2BJZHL._SX331_BO1,204,203,200_.jpg",
-    "http://ecx.images-amazon.com/images/I/51r9QQVSRNL._SX331_BO1,204,203,200_.jpg",
-    "http://ecx.images-amazon.com/images/I/71cWa92TMyL.jpg"];
+	var img_paths = [
+		"http://covers.feedbooks.net/item/8224.jpg?size=large&t=1404175382",	//The_War_of_The_Worlds
+		"http://covers.feedbooks.net/book/3015.jpg?size=large&t=1439158819",	//On_The_Origin_of_Species
+		"http://covers.feedbooks.net/book/3591.jpg?size=large&t=1426673750",	//The_Einstein_Theory_of_Relativity
+		"http://covers.feedbooks.net/book/2990.jpg?size=large&t=1453264913",	//A_Midsummer_Nights_Dream
+		"http://covers.feedbooks.net/book/144.jpg?size=large&t=1439153221",		//Jane_Eyre
+		"http://covers.feedbooks.net/book/176.jpg?size=large&t=1425660132",		//Dream_Psychology
+		"http://covers.feedbooks.net/book/70.jpg?size=large&t=1439163698",		//Great_Expectations
+		"http://covers.feedbooks.net/book/2935.jpg?size=large&t=1425660764",	//Macbeth
+		"http://covers.feedbooks.net/book/73.jpg?size=large&t=1439146587"];		//The_Count_of_Monte_Cristo
 	res.render('dashboard', { welcome_msg: welcome_msg, books: books, imgs:img_paths});
 });
 
@@ -511,6 +504,37 @@ app.get('/book:bookId-:bookName/:chapterName', requireLogin, function(req, res){
 		});
 		
 		currBookID = bookid;
+		currBookmarks = [];
+		currTOC = [];
+
+		fs.readFile("Public/Books/Book" + bookid + "/TableOfContents.html", 'utf8', function(err, html){
+			var titles = html.match(/">.*?</g); //parse all >##chapterTitle##<
+			var links = html.match(/href=".*?.xml/g); //parse all href="##chapterLink##.xml
+			
+			if (titles.length < 1 || links.length < 1 || titles.length != links.length)
+				console.log("ERR: parsing TOC");
+			
+			var wstream = fs.createWriteStream("views/.includes/Book" + bookid + "Sections.jade");
+			wstream.write("case pagetodisplay\n");
+			
+			for (var i = 0; i < titles.length; i++) {
+				var t = titles[i];
+				t = t.replace("\">","");
+				t = t.replace("<","");
+				var l = links[i];
+				l = l.replace("href=\"OPS","");
+				l = l.replace("\.xml","");
+				l = l.replace("/","");
+
+				currTOC.push([t, l]);
+				wstream.write("  when \"" + l + "\": include ../../Public/Books/Book" + bookid + "/OPS/" + l + ".xml\n");
+			}
+			
+			//console.log("TOC("+currTOC.length+"): "+currTOC);
+			
+			wstream.write("  default: include ../../Public/Books/Book" + bookid + "/OPS/title.xml");
+			wstream.end();
+		});
 	}
 	
 	console.log("Displaying book: " + bookid + " - " + bookname + " - " + currChapter);
@@ -523,7 +547,7 @@ app.get('/book:bookId-:bookName/:chapterName', requireLogin, function(req, res){
 	get_annt_filter_params(username, bookid, function(visible_users, filter_settings){
 		generate_filtered_notes(username, bookid, currChapter, visible_users, function(filtered_notes){
 			//TODO: now save new_filter_settings
-			res.render('combinedDisplay', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: currChapter, username: username, visible_users: visible_users, filter_settings: filter_settings });
+			res.render('combinedDisplay', { title: bookname, notes: filtered_notes, bookid: bookid, bookname: bookname, pagetodisplay: currChapter, TOC: currTOC, username: username, visible_users: visible_users, filter_settings: filter_settings, bookmarks: currBookmarks });
 		});
 	});
 });
@@ -711,16 +735,25 @@ app.post('/update_annt_filter', function(req, res){
 		db_interface.updateAnntFilterParams(req.session.user, currBookID, filter_settings);
 	});
 	
-	//TODO(fix): updating annt filter settings require page refresh by user to take effect
 	res.send(req.body);
 });
 
+//update bookmarks
+app.post('/update_bookmarks', function(req, res){
+	var action = req.body.action;
+	var chapter = req.body.chapter;
+	var page = req.body.page;
+	
+	currBookmarks.push([chapter, page]);
+	
+	res.send(req.body);
+});
 
 /*********************************************************************SET PRIVACY**************************************************************/
 app.post('/setprivacy', function(req, res){
   var username = req.session.user;
   var textID = req.body.textbookid;
-  var textname= books[textID].title.split(' ').join('_');
+  var textname = get_bookname(textID);
   var privacy_val = req.body.privacy;
   
  // console.log("SET PRIVACY " + privacy_val + " for " + textname + " for user " + username);

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:dcterms="http://purl.org/dc/terms/" xmlns="http://www.w3.org/2005/Atom">
+<title>The Count of Monte Cristo</title>
+<id>http://www.feedbooks.com/book/73</id>
+<author>
+  <name>Alexandre Dumas</name>
+  <uri>http://www.feedbooks.com/author/25</uri>
+</author>
+<published>2006-12-31T13:04:36Z</published>
+<updated>2015-08-09T18:56:27Z</updated>
+<dcterms:language>en</dcterms:language>
+<dcterms:issued>1845</dcterms:issued>
+<category term="FBFIC000000" label="Fiction" scheme="http://www.feedbooks.com/categories"/>
+<category term="FBFIC002000" label="Action &amp; Adventure" scheme="http://www.feedbooks.com/categories"/>
+<summary>The Count of Monte Cristo (French: Le Comte de Monte-Cristo) is an adventure novel by Alexandre Dumas, p&#232;re. It is often considered, along with The Three Musketeers, as Dumas' most popular work. It is also among the highest selling books of all ti...</summary>
+<dcterms:extent>463,958 words</dcterms:extent>
+<link type="text/html" rel="alternate" href="http://generation.feedbooks.com/book/73" title="View on Feedbooks"/>
+<link type="application/epub+zip" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/73.epub"/>
+<link type="application/x-mobipocket-ebook" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/73.mobi"/>
+<link type="application/pdf" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/73.pdf"/>
+<link type="image/jpeg" rel="http://opds-spec.org/image" href="http://covers.feedbooks.net/book/73.jpg?size=large&amp;t=1439146587"/>
+<link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="http://covers.feedbooks.net/book/73.jpg?t=1439146587"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=acquisition" rel="http://www.feedbooks.com/opds/same_author" href="http://generation.feedbooks.com/author/25/books/top.atom?lang=en" title="From the same author"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=navigation" rel="related" href="http://generation.feedbooks.com/book/73/categories.atom" title="Categories for this book"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=navigation" rel="related" href="http://generation.feedbooks.com/book/73/lists.atom" title="Reading lists for this book"/>
+<link type="application/atom+xml" thr:count="9" rel="replies" thr:updated="2015-07-01T14:28:44Z" href="http://generation.feedbooks.com/book/73/comments.atom" title="Comments for this book (9)"/>
+<link type="text/html" thr:count="9" rel="replies" thr:updated="2015-07-01T14:28:44Z" href="http://generation.feedbooks.com/book/73/comments" title="Comments for this book (9)"/>
+<content type="html">&lt;p&gt;The Count of Monte Cristo (French: Le Comte de Monte-Cristo) is an adventure novel by Alexandre Dumas, p&#232;re. It is often considered, along with The Three Musketeers, as Dumas' most popular work. It is also among the highest selling books of all time. The writing of the work was completed in 1844. Like many of his novels, it is expanded from the plot outlines suggested by his collaborating ghostwriter Auguste Maquet.
+&lt;br /&gt;The story takes place in France, Italy, islands in the Mediterranean and the Levant during the historical events of 1815&#8211;1838 (from just before the Hundred Days through the reign of Louis-Philippe of France). The historical setting is a fundamental element of the book. It is primarily concerned with themes of hope, justice, vengeance, mercy, forgiveness and death, and is told in the style of an adventure story.
+&lt;/p&gt;</content>
+<link type="application/atom+xml;type=entry;profile=opds-catalog" rel="self" href="http://generation.feedbooks.com/book/73.atom"/>
+  <link type="application/atom+xml" rel="contents" href="http://generation.feedbooks.com/book/73/contents.atom"/>
+</entry>
