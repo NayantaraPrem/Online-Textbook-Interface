@@ -33,7 +33,7 @@ html, body {
 
 #section {
 	float:left;
-	padding:30px;
+	padding:20px;
 	#background-color:#ebebe0;
 	background-color:#ffffe5;
 	width:67%;
@@ -100,6 +100,7 @@ ul.book_nav_buttons {
     list-style-type: none;
     margin: 0;
     padding: 0;
+	height: 100%;
 	background-color: transparent;
 }
 
@@ -189,13 +190,36 @@ ul.annt-list {
 }
 
 
+############### Bookmarking ###############
+#bookmarking.bookmarking {
+	#height: 8%;
+	#overflow:hidden;
+}
+#Bookmark {
+	float: right;
+	padding: 2px;
+}
+ul#marked-pages {
+	list-style: none;
+	float: right;
+}
+ul#marked-pages li{
+	display: inline;
+	#border-style: outset;
+	border-style: groove;
+}
+ul#marked-pages li a {
+	text-decoration: none;
+}
+
+
 ############### Pagination ###############
 .custom-pages {
 list-style: none;
 }
 .textarea {
 font-size: 14px;
-height: 85%;
+height: 80%;
 line-height: 18px;
 margin: 18px 0;
 }

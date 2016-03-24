@@ -19,7 +19,7 @@
 //          | Someone else here
 
 .dropdown
-    a(data-toggle="dropdown").dropdown-toggle View Annotations From:
+    a(data-toggle="dropdown").dropdown-toggle.clickable View Annotations From:
     ul.dropdown-menu.annt-filter-menu(role='menu', aria-labelledby='dropdownMenu')
         each user in visible_users
           if (filter_settings.indexOf(user) > -1)
