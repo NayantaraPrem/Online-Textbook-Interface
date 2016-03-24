@@ -7,6 +7,7 @@ var converter = require('epub2html');
 var replace = require("replace");
 var path = require('path');
 var multer = require('multer');
+var s3 = require('multer-s3');
 var db_interface = require('./db_interface.js');
 var config = require('./app_config');
 var fs = require('fs');
@@ -21,7 +22,6 @@ var books = [
 				{title:'The Einstein Theory of Relativity', epub:'relativity'},
 				{title:'Structure and Interpretation of Computer Programs', epub:'SCMP'}
 			];
-
 var Autolinker = require('autolinker');
 AWS.config.update({
 	region: "us-east-1",
@@ -98,18 +98,21 @@ function requireLogin(req, res, next) {
   }
 };
 
-
-var storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		cb(null, './public/uploads/')
-	},
-	filename: function (req, file, cb) {
-		cb(null, 'IMG_' + Date.now())
-	}
-});
 var uploading = multer({
-	storage:storage
+	storage:s3({
+		dirname: 'photos',
+		bucket: 'anothercollabbooks',
+		secretAccessKey: 'dW1Xjcj/htwkn9aCFlVwFU43X0NRHCAsQ5x6OsIe',
+		accessKeyId: 'AKIAIYQKET4VRIRVEBXQ',
+		region: "us-west-2",
+		endpoint:'s3.amazonaws.com/',
+		filename: function (req, file, cb) {
+			cb(null, 'IMG_' + Date.now())
+		}
+
+	})
 });
+
 
 function replace_url(from, to) {
 	console.log("Going to open file!");
@@ -660,16 +663,15 @@ app.post('/delete_annt', function(req, res){
 
 //Uploading images
 app.post('/api/photo/:page', uploading.single('pic'), function(req, res){
-	
 	// refresh the '/annotations' html page here
 	// ...
 	// add image to db
 	var page = req.params.page;
-	console.log("Uploading " + req.file.filename + 'to page#' + page);
+	console.log("Uploading " + req.file.key + 'to page#' + page);
 	var img_item = {
-		"id": req.file.filename,
+		"id": req.file.key,
 		"type": "IMG",
-		"img_dest": "./uploads/"+req.file.filename
+		"img_dest": "http://anothercollabbooks.s3.amazonaws.com/"+req.file.key
 		//add owner, timestamp, etc here
 	}
 	//db_interface.addNote(note_item, req.session.user, currBookID, currChapter, page);
