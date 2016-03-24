@@ -10,7 +10,7 @@ http://i.imgur.com/6UNQ3PZ.jpg
 http://i.imgur.com/b4h7oAX.jpg
 */
 body{
-  background: url('http://i.imgur.com/b4h7oAX.jpg') no-repeat center center fixed;
+	background: url('http://i.imgur.com/b4h7oAX.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -19,44 +19,66 @@ body{
 }
 
 .caption {
-    position:absolute;
-    top:0;
-    right:0;
-    background:rgba(41, 32, 40, 0.8);
-    width:100%;
-    height:100%;
-    padding:2%;
-    display: none;
-    text-align:center;
-    color:#fff !important;
-    z-index:2;
+	position:absolute;
+	top:0;
+	right:0;
+ 	background:rgba(41, 32, 40, 0.8);
+    	width:100%;
+    	height:100%;
+    	padding:2%;
+    	display: none;
+    	text-align:center;
+    	color:#fff !important;
+ 	z-index:2;
 }
 #caption{
-  top:0;
+        top:0;
 }
 
 #thumbimages{
-  width:200px;
-  height:250px;
+	width:200px;
+	height:250px;
 }
 
 .header {
-	background-color:#330033;
-	color:white;
-	text-align:center;
-	padding:0px;
-  margin:0px;
+	background-color:#00cc99;
+	color:white !important; 
+	//text-align:center;
+	//padding:0px;
+//  margin:0px;
+}
+
+.logo {
+	width:50px;
+   	height:50px;
 }
 
 .footer{
-  background-color: rgba(rgba(199, 200, 204, 0.50);
-  color:white !important;
-  text-align: center;
-  font-size: 10px;
-  position:fixed;
- left:0px;
- bottom:0px;
- height:30px;
- width:100%;
+ 	background-color: rgba(rgba(199, 200, 204, 0.50);
+  	color:white !important;
+  	text-align: center;
+  	font-size: 10px;
+  	position:fixed;
+ 	left:0px;
+ 	bottom:0px;
+ 	height:30px;
+ 	width:100%;
 }
 
+.navbar-brand{
+  padding: 0px;
+}
+
+.navbar-brand>img{
+  height: 100%;
+  padding: 15px;
+  width:auto;
+}
+
+.bar .navbar-brand {
+  display: flex;
+  align-items: centre;
+}
+
+.bar .navbar-brand>img {
+  padding: 7px 14px;

@@ -20,9 +20,23 @@ html(lang='en')
       background-color: #f9f9f9;
       }
   body
-    nav.navbar.navbar-dark.bg-inverse
-      h3.header
-        | BookShelf
+    .container.bar
+      div.navbar.navbar-inverse.navbar-fixed-top
+        .container-fluid
+          .navbar-header
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#nbar')            
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand.header(href="#")
+              | Bookshelf
+          #nbar.navbar-collapse.collapse
+            ul.nav.navbar-nav.navbar-right
+              li
+                a(href='#') About
+              li
+                a(href="/logout") Logout  
     .container
       .row
         each book, index in books
@@ -33,7 +47,7 @@ html(lang='en')
                   .blur
                     h3(style="border-top:2px solid white; border-bottom:2px solid white; padding:10px;")=book.title
                     p
-                      button#myBtn.glyphicon.glyphicon-cog.btn.btn-default(data-toggle='modal', data-target="#mymod#{index}", rel='tooltip', title='View Privacy Settings') 
+                      button#myBtn.glyphicon.glyphicon-cog.btn.btn-default(data-toggle='modal', data-target="#mymod#{index}", rel='tooltip', title='View Privacy Settings')
                 img#thumbimages(src=imgs[index], alt="Image not found", class="bookcover")
               // Modal
               div(id='mymod#{index}' class="modal fade" tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true')
@@ -55,9 +69,3 @@ html(lang='en')
                       button.btn.btn-danger.btn-default.pull-left(type='submit', data-dismiss='modal')
                         span.glyphicon.glyphicon-remove
                         |  Cancel
-              // End of settings button
-//      .row
- //       .col-md-12
-  //        p
-   //         input(type='button', value)
-
