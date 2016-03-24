@@ -1,0 +1,63 @@
+doctype html
+html(lang='en')
+  head
+    title My Bookshelf
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
+    link(rel='stylesheet', type='text/css', href='dashboard.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+    script(src='dashboard.js')
+    style.
+      .modal-header, .close {
+      background-color: #c7c8cc;
+      color:white !important;
+      text-align: center;
+      font-size: 19px;
+      }
+      .modal-footer {
+      background-color: #f9f9f9;
+      }
+  body
+    nav.navbar.navbar-dark.bg-inverse
+      h3.header
+        | BookShelf
+    .container
+      .row
+        each book, index in books
+          .col-md-4
+            p(style="padding-top: 1.5cm")
+              .thumbnail(class="bookIcon", value="#{book.title}", name="#{book.epub}", id="book#{index}", style="cursor:pointer")
+                .caption
+                  .blur
+                    h3(style="border-top:2px solid white; border-bottom:2px solid white; padding:10px;")=book.title
+                    p
+                      button#myBtn.glyphicon.glyphicon-cog.btn.btn-default(data-toggle='modal', data-target="#mymod#{index}", rel='tooltip', title='View Privacy Settings') 
+                img#thumbimages(src=imgs[index], alt="Image not found", class="bookcover")
+              // Modal
+              div(id='mymod#{index}' class="modal fade" tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true')
+                .modal-dialog.modal-sm
+                  // Modal content
+                  .modal-content
+                    .modal-header(style='padding:35px 50px;')
+                      button.close(type='button', data-dismiss='modal') ×
+                      h4
+                        span.glyphicon.glyphicon-cog
+                        |  Privacy Settings
+                    .modal-body(style='padding:40px 50px;')
+                      .btn-group-vertical(role='group', aria-label='...')
+                        h5
+                          | My notes for #{book.title} are visible to:
+                        button.btn.btn-default.btn(type='button', id='None_#{index}', onclick="set_privacy(event)") No one
+                        button.btn.btn-default.btn(type='button', id='Everyone_#{index}', onclick="set_privacy(event)") Everyone
+                    .modal-footer
+                      button.btn.btn-danger.btn-default.pull-left(type='submit', data-dismiss='modal')
+                        span.glyphicon.glyphicon-remove
+                        |  Cancel
+              // End of settings button
+//      .row
+ //       .col-md-12
+  //        p
+   //         input(type='button', value)
+

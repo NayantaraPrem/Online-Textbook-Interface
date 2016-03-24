@@ -1,0 +1,9 @@
+doctype html
+html(lang='en')
+  head
+    title Upload Image
+  body
+    form#uploadForm(enctype='multipart/form-data', action='/api/photo/'+page, method='post')
+      input(type='file', name='pic')
+      input(type='submit', value='Upload Image', name='submit')
+      span#status

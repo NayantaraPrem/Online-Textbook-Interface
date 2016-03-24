@@ -1,0 +1,39 @@
+doctype html
+html(lang='en')
+ head
+    title Summary Page
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
+    link(rel='stylesheet', type='text/css', href='summary.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+    script(src='summary.js', type='text/javascript')
+    script.
+      var annotations = !{JSON.stringify(notes)};
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+ body
+  h1.text-center.heading 
+      | Chapter Summary 
+  h1.text-center.heading
+      | #{title}
+  h2.text-center.heading
+      | #{chapter}
+  // button#summarize.btn.btn-info.btn-md(type='submit' onclick='download_summary(event)')
+  //  span.text-right.glyphicon.glyphicon-download-alt
+  //    | Download
+  ul.list-group
+    each note, index in notes
+      li.list-group-item#sortable
+        if(note.info.type == "TXT") 
+          panel.panel-primary
+            .panel-heading.clickable
+              | #{note.info.title}
+            .panel-body.clickable
+                .note_body(name='body', id="textbody#{note.NoteID}", contentEditable='false')
+        if(note.info.type == "IMG")
+          .panel.panel-primary
+            .panel-body
+              li.list-group-item 
+                img.img-thumbnail.thumbnail(src=note.info.img_dest width=160 height=100)
+   

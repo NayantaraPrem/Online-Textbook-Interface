@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns:dcterms="http://purl.org/dc/terms/" xmlns="http://www.w3.org/2005/Atom" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<title>Dream Psychology</title>
+<id>http://www.feedbooks.com/book/176</id>
+<author>
+  <name>Sigmund Freud</name>
+  <uri>http://www.feedbooks.com/author/83</uri>
+</author>
+<published>2007-01-11T14:44:15Z</published>
+<updated>2015-03-06T16:42:12Z</updated>
+<dcterms:language>en</dcterms:language>
+<dcterms:issued>1920</dcterms:issued>
+<category term="FBNFC000000" label="Non-Fiction" scheme="http://www.feedbooks.com/categories"/>
+<category term="FSHUM000000N" label="Human Science" scheme="http://www.feedbooks.com/categories"/>
+<category term="FBPSY000000" label="Psychology" scheme="http://www.feedbooks.com/categories"/>
+<summary>The Interpretation of Dreams is a book by Sigmund Freud. The first edition was first published in German in November 1899 as Die Traumdeutung (though post-dated as 1900 by the publisher). The publication inaugurated the theory of Freudian dream an...</summary>
+<dcterms:extent>53,473 words</dcterms:extent>
+<dcterms:source>http://www.gutenberg.org</dcterms:source>
+<rights>This work is available for countries where copyright is Life+70 and in the USA.</rights>
+<link type="text/html" rel="alternate" href="http://generation.feedbooks.com/book/176" title="View on Feedbooks"/>
+<link type="application/epub+zip" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/176.epub"/>
+<link type="application/x-mobipocket-ebook" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/176.mobi"/>
+<link type="application/pdf" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/176.pdf"/>
+<link type="image/jpeg" rel="http://opds-spec.org/image" href="http://covers.feedbooks.net/book/176.jpg?size=large&amp;t=1425660132"/>
+<link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="http://covers.feedbooks.net/book/176.jpg?t=1425660132"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=acquisition" rel="http://www.feedbooks.com/opds/same_author" href="http://generation.feedbooks.com/author/83/books/top.atom?lang=en" title="From the same author"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=navigation" rel="related" href="http://generation.feedbooks.com/book/176/categories.atom" title="Categories for this book"/>
+<link type="application/atom+xml" rel="replies" thr:count="0" thr:updated="2009-08-18T01:17:02Z" href="http://generation.feedbooks.com/book/176/comments.atom" title="Comments for this book (0)"/>
+<content type="html">&lt;p&gt;The Interpretation of Dreams is a book by Sigmund Freud. The first edition was first published in German in November 1899 as Die Traumdeutung (though post-dated as 1900 by the publisher). The publication inaugurated the theory of Freudian dream analysis, which activity Freud famously described as &quot;the royal road to the understanding of unconscious mental processes&quot;.&lt;/p&gt;</content>
+<link type="application/atom+xml;type=entry;profile=opds-catalog" rel="self" href="http://generation.feedbooks.com/book/176.atom"/>
+  <link type="application/atom+xml" rel="contents" href="http://generation.feedbooks.com/book/176/contents.atom"/>
+</entry>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns:dcterms="http://purl.org/dc/terms/" xmlns="http://www.w3.org/2005/Atom" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<title>Jane Eyre</title>
+<id>http://www.feedbooks.com/book/144</id>
+<author>
+  <name>Charlotte Bront&#235;</name>
+  <uri>http://www.feedbooks.com/author/52</uri>
+</author>
+<published>2007-01-06T02:26:44Z</published>
+<updated>2015-08-09T20:47:01Z</updated>
+<dcterms:language>en</dcterms:language>
+<dcterms:issued>1847</dcterms:issued>
+<category term="FBFIC000000" label="Fiction" scheme="http://www.feedbooks.com/categories"/>
+<category term="FBFIC027000" label="Romance" scheme="http://www.feedbooks.com/categories"/>
+<summary>Jane Eyre, the story of a young girl and her passage into adulthood, was an immediate commercial success at the time of its original publication in 1847. Its representation of the underside of domestic life and the hypocrisy behind religious enthu...</summary>
+<dcterms:extent>178,404 words</dcterms:extent>
+<dcterms:source>http://www.gutenberg.org/etext/1260</dcterms:source>
+<link type="text/html" rel="alternate" href="http://generation.feedbooks.com/book/144" title="View on Feedbooks"/>
+<link type="application/epub+zip" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/144.epub"/>
+<link type="application/x-mobipocket-ebook" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/144.mobi"/>
+<link type="application/pdf" rel="http://opds-spec.org/acquisition" href="http://generation.feedbooks.com/book/144.pdf"/>
+<link type="image/jpeg" rel="http://opds-spec.org/image" href="http://covers.feedbooks.net/book/144.jpg?size=large&amp;t=1439153221"/>
+<link type="image/jpeg" rel="http://opds-spec.org/image/thumbnail" href="http://covers.feedbooks.net/book/144.jpg?t=1439153221"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=acquisition" rel="http://www.feedbooks.com/opds/same_author" href="http://generation.feedbooks.com/author/52/books/top.atom?lang=en" title="From the same author"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=navigation" rel="related" href="http://generation.feedbooks.com/book/144/categories.atom" title="Categories for this book"/>
+<link type="application/atom+xml;profile=opds-catalog;kind=navigation" rel="related" href="http://generation.feedbooks.com/book/144/lists.atom" title="Reading lists for this book"/>
+<link type="application/atom+xml" rel="replies" thr:count="2" href="http://generation.feedbooks.com/book/144/comments.atom" thr:updated="2015-06-01T08:55:43Z" title="Comments for this book (2)"/>
+<link type="text/html" rel="replies" thr:count="2" href="http://generation.feedbooks.com/book/144/comments" thr:updated="2015-06-01T08:55:43Z" title="Comments for this book (2)"/>
+<content type="html">&lt;p&gt;Jane Eyre, the story of a young girl and her passage into adulthood, was an immediate commercial success at the time of its original publication in 1847. Its representation of the underside of domestic life and the hypocrisy behind religious enthusiasm drew both praise and bitter criticism, while Charlotte Bront&#235;'s striking expose of poor living conditions for children in charity schools as well as her poignant portrayal of the limitations faced by women who worked as governesses sparked great controversy and social debate. Jane Eyre, Bront&#235;'s best-known novel, remains an extraordinary coming-of-age narrative, and one of the great classics of literature.&lt;/p&gt;</content>
+<link type="application/atom+xml;type=entry;profile=opds-catalog" rel="self" href="http://generation.feedbooks.com/book/144.atom"/>
+  <link type="application/atom+xml" rel="contents" href="http://generation.feedbooks.com/book/144/contents.atom"/>
+</entry>

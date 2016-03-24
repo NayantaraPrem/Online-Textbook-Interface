@@ -1,0 +1,11 @@
+html(lang='en')
+  include .includes/head.jade
+  body
+    include .includes/page-nav-bar.jade
+
+    #nav
+      include .includes/TableOfContents.jade
+
+    include paginate.jade
+
+    include annotations.jade

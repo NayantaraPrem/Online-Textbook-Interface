@@ -1,0 +1,43 @@
+//doctype html
+//html(lang='en')
+//  include .includes/head.jade
+  
+//  body
+//.dropdown
+//      button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+//        | View Notes From: 
+//        span.caret
+//      ul.dropdown-menu
+//        li
+//          input(type='checkbox')
+//          | Some User
+//        li
+//          input(type='checkbox')
+//          | Another User
+//        li
+//          input(type='checkbox')
+//          | Someone else here
+
+.dropdown
+    a(data-toggle="dropdown").dropdown-toggle Filter Annotations
+    ul.dropdown-menu.annt-filter-menu(role='menu', aria-labelledby='dropdownMenu')
+        each user in visible_users
+          if (filter_settings.indexOf(user) > -1)
+            li
+              input(
+			    type='checkbox' 
+			    name=user
+			    checked
+                onchange='update_annt_filter(event)'
+              )
+              = user
+          else
+            li
+              input(
+			    type='checkbox' 
+			    name=user
+                onchange='update_annt_filter(event)'
+              )
+              = user
+script.
+    $('.dropdown-toggle').dropdown()

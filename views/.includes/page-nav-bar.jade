@@ -1,0 +1,43 @@
+doctype html
+html(lang='en')
+  head
+    script(src='https://code.jquery.com/jquery-1.11.0.min.js')
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
+    link(rel='stylesheet', href='http://collabbooks-env.us-east-1.elasticbeanstalk.com/panels.css')
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+  body
+    //- var use_content = "<li></li><li></li></ul>"
+    - var use_content = "<ul><li>Initiate jetzt speed reading by selecting this button and clicking on the block of text you wish to read. Alternatively, select this button and then highlight the text.</li>"
+    -use_content+= "<li>Change window size with +/-.</li>"
+    -use_content+= "<li>Go faster/slower with up/down arrow keys.</li>"
+    -use_content+= "<li>Go back/forward a sentence with left/right arrow keys (hold alt to navigate by paragraphs).</li>"
+    -use_content+= "<li>Click outside the window to close.</li>"
+    -use_content+= "<li>Switch between light/dark themes with 0.</li>"
+    -use_content+= "<li>View/toggle summary stats with / or ? at the end of a run</li></ul>"
+    div.page_nav
+      ul.page_nav_buttons
+        li.page_nav
+          a.active(href='/book' + locals.bookid + '-' + locals.bookname + '/main') #{locals.bookname}
+        li.page_nav
+          a(href='/home') Bookshelf
+        li.page_nav
+          a#bm-adder Speed Read      
+            #pop1.glyphicon.glyphicon-question-sign(style="padding-left: 10px;" data-html="true" title="Use" data-toggle="popover" data-trigger="hover" data-content=use_content)
+        li.page_nav
+          include ../annotationsFilter.jade
+        li.page_nav
+          |  &nbsp &nbsp &nbsp
+        li.page_nav
+          a.btn.btn-primary.btn-lg(href="/logout")
+            span.glyphicon.glyphicon-log-out   Logout
+  script(type='text/javascript').
+    $(function() {
+    $.get( "bookmarklet.js", function( data ) {
+    $("#bm-adder").attr("href",data);
+    },"text");
+    });
+  script(type='text/javascript').
+    $(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+    });
+    
