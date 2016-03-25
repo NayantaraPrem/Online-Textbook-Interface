@@ -1,0 +1,84 @@
+html(lang='en')
+  head
+    link(rel='stylesheet', type='text/css', href='http://collabbooks-env.us-east-1.elasticbeanstalk.com/panels.css')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+    script(src='http://collabbooks-env.us-east-1.elasticbeanstalk.com/jquery.textpager.js')
+
+  body
+    #section
+      #bookmarking.bookmarking
+        button#Bookmark.btn.btn-primary.btn-md(onclick='mark_page(event)')
+          span
+          | Mark
+        ul#marked-pages
+          each bookmark in bookmarks
+            li.clickable
+              a(
+               href = '/book' + locals.bookid + '-' + locals.bookname + '/' + bookmark[0]
+               data-chapter = bookmark[0]
+               data-page = bookmark[1]
+              ) #{bookmark[0] + ":" + bookmark[1]}
+        | |
+      #text-pager.demo
+        #textarea.textarea
+          div
+            case bookid
+              when "0": include .includes/Book0Sections.jade
+              when "1": include .includes/Book1Sections.jade
+              when "2": include .includes/Book2Sections.jade
+              when "3": include .includes/Book3Sections.jade
+              when "4": include .includes/Book4Sections.jade
+              when "5": include .includes/Book5Sections.jade
+              when "6": include .includes/Book6Sections.jade
+              when "7": include .includes/Book7Sections.jade
+              when "8": include .includes/Book8Sections.jade
+        .control
+          a.tp-control-arrow-left.unactive
+            span <
+          a.tp-control-arrow-right
+            span >
+          ul.custom-pages
+
+    script.
+      $(document).ready(function() {
+        if ( $('ul.custom-pages li').length == 0 ) {
+          $('.tp-control-arrow-left').hide();
+          $('.tp-control-arrow-right').hide();
+        }
+
+        update_visible_annt_list();
+      });
+
+      $('#textarea').textpager({
+        controlArrows: ".control",
+        controlPages: ".control .custom-pages",
+        controlPagesContent: "li"
+      });
+  
+      $('ul.custom-pages li, .tp-control-arrow-left, .tp-control-arrow-right').on('click', function(){
+        update_visible_annt_list();
+      });
+
+
+      function update_visible_annt_list(){
+        var curr_page = 0;
+        if ( $('ul.custom-pages li').length != 0 )
+          curr_page = $('ul.custom-pages').find('li.active').attr('data-page');
+
+        var show_users_list = [];
+        show_users_list.push(userId);
+        var annt_filter_menu_selected = $('ul.annt-filter-menu li :checkbox:checked');
+        for(var i=0; i<annt_filter_menu_selected.length; i++){
+          show_users_list.push($(annt_filter_menu_selected[i]).attr('name'));
+        }
+
+        var annt_list = $('ul.annt-list li');
+
+        annt_list.each(function(){
+          if ( $(this).attr('data-page') == curr_page && 
+               show_users_list.indexOf($(this).attr('data-owner')) > -1 )
+            $(this).show();
+          else
+            $(this).hide();
+        });		  
+      }
