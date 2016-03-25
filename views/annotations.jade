@@ -10,14 +10,18 @@
       .row
         .col-sm-6
           p
-            button#add_annotation.btn.btn-info.btn-md
+            button#add_annotation.btn.btn-primary.btn-md
               span.glyphicon.glyphicon-plus-sign
               |  Note
         .col-sm-6
           p
-            button#add_image.btn.btn-info.btn-md(onclick='upload_img_prompt(event)')
+            button#add_image.btn.btn-primary.btn-md(onclick='upload_img_prompt(event)')
               span.glyphicon.glyphicon-plus-sign
               |  Image
+        .col-sm-12
+          p
+            i.fa.fa-map-pin(style='font-size:24px; color:#00cc99')
+            |    &nbsp #{notif_msg}
       each note, index in notes
         if(note.info.type == "TXT")
           .row(data-owner="#{note.owner}", data-page="#{note.page}")
@@ -26,22 +30,28 @@
                 form.form(id="ajaxform#{note.NoteID}", name='ajaxform')
                   .panel-heading.clickable(id="panel-heading#{note.NoteID}")
                     em
-                      span.ownerName(id="ownername#{note.NoteID}")=note.owner
+                     span.ownerName(id="ownername#{note.NoteID}")=note.owner
                     h3.panel-title
                       input.annt_title(name='title', id="texttitle#{note.NoteID}", type='text', value=note.info.title, readonly)
-                    span.pull-right
-                      button.btn.btn-primary.btn-sm(name='edit' id="editButton#{note.NoteID}" onclick='edit_annt(event)')
-                        span.glyphicon.glyphicon-pencil
-                      button.btn.btn-primary.btn-sm(name='delete' id="deleteButton#{note.NoteID}" onclick='delete_annt(event)')
-                        span.glyphicon.glyphicon-trash
-                  .panel-body.writable(id="panel-body#{note.NoteID}")
-                    .annt_body(name='body', id="textbody#{note.NoteID}", contentEditable='false')
-                  input(type='submit' name='submit' value='Submit' id="#{note.NoteID}")
+                    //span.pull-right
+                    .row
+                      .col-md-6(style='left:100px')
+                        | &nbsp
+                        button.btn.btn-primary.btn-sm(name='edit' id="editButton#{note.NoteID}" onclick='edit_annt(event)')
+                          span.glyphicon.glyphicon-pencil(style='vertical-align:bottom')
+                      .col-md-6
+                        | &nbsp &nbsp
+                        button.btn.btn-primary.btn-sm(name='delete' id="deleteButton#{note.NoteID}" onclick='delete_annt(event)')
+                          span.glyphicon.glyphicon-trash(style='vertical-align:bottom')
+                    .row
+                      .panel-body.writable(id="panel-body#{note.NoteID}")
+                        .annt_body(name='body', id="textbody#{note.NoteID}", contentEditable='false')
+                      input(type='submit' name='submit' value='Submit' id="#{note.NoteID}")
         if(note.info.type == "IMG")
             .row(data-owner="#{note.owner}", data-page="#{note.page}")
               .col-md-9
                 em
-                  span.ownerName=note.owner	
+                  span.ownerName=note.owner
                 img.img-thumbnail.thumbnail(src=note.info.img_dest width=160 height=100)
               .col-md-3
                 .row
@@ -62,6 +72,6 @@
       .row
         .col-sm-6
           p
-            button#summarize.btn.btn-info.btn-md(type='submit' onclick='generate_summary(event)')
+            button#summarize.btn.btn-primary.btn-md(type='submit' onclick='generate_summary(event)')
               span.glyphicon.glyphicon-list-alt
               |  Summarize Chapter Notes
