@@ -26,6 +26,7 @@ var replace = require('./node_modules/replace');
 var extract = require('./node_modules/extract-zip');
 var bodyParser = require('./node_modules/body-parser');
 var multer = require('./node_modules/multer');
+var s3 = require('./node_modules/multer-s3');
 var Autolinker = require('./node_modules/autolinker');
 var snsclient = require('./node_modules/aws-snsclient');
 var util = require('./node_modules/util');
@@ -44,7 +45,7 @@ var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
 var books = [ 
 				{title:'The War of The Worlds', epub:'The_War_of_The_Worlds'},
 				{title:'On The Origin of Species', epub:'On_The_Origin_of_Species'},
-				{title:'The Einstein Theory of Relativity', epub:'The_Einstein_Theory_of_Relativity'},
+				{title:'Theory of Relativity', epub:'The_Einstein_Theory_of_Relativity'},
 				{title:'A Midsummer Nights Dream', epub:'A_Midsummer_Nights_Dream'},
 				{title:'Jane Eyre', epub:'Jane_Eyre'},
 				{title:'Dream Psychology', epub:'Dream_Psychology'},
@@ -101,6 +102,7 @@ var storage = multer.diskStorage({
 var uploading = multer({
     storage:storage
 });
+
 
 
 /*****************************************************************DEFINE CUSTOM FUNCTIONS*****************************************************************/
@@ -512,7 +514,7 @@ app.post('/annt_submit_or_edit', function(req, res){
 		}
 		db_interface.addNote(note_item, req.session.user, currBookID, currChapter, page);
 
-		notif_send = "Book ," + currBookID + ", Chapter ," + currChapter + ", annotation added by ," + req.session.user;
+		notif_send = "Book " + currBookID + " | Chapter " + currChapter + " | Annotation added by: " + req.session.user;
 		console.log(notif_send);		
 		snspub(notif_send, currBookID);
 		res.send(linkedBody);
@@ -520,7 +522,7 @@ app.post('/annt_submit_or_edit', function(req, res){
 		console.log("Editing");
 		var note;
 		db_interface.updateNote(id, title, body);
-		notif_send = "Book ," + currBookID + ", Chapter ," + currChapter + ", annotation edited by ," + req.session.user;
+		notif_send = "Book " + currBookID + " | Chapter " + currChapter + " | Annotation edited by: " + req.session.user;
 		console.log(notif_send);		
 		snspub(notif_send, currBookID);
 
@@ -540,7 +542,7 @@ app.post('/delete_annt', function(req, res){
 	
 	console.log('------------------------------------------');
 
-	notif_send = "Book ," + currBookID + ", Chapter ," + currChapter + ", annotation deleted by ," + req.session.user;
+	notif_send = "Book " + currBookID + " | Chapter " + currChapter + " | Annotation deleted by: " + req.session.user;
 	console.log(notif_send);		
 	snspub(notif_send, currBookID);
 	db_interface.deleteItem(noteID);
@@ -553,8 +555,6 @@ app.post('/delete_annt', function(req, res){
 app.post('/api/photo/:page', uploading.single('pic'), function(req, res){
 	
 	console.log("/api/photo/:page");
-	console.log("Req file: " + JSON.stringify(req.file,null));
-	console.log("\nReq params: \n" + JSON.stringify(req.params,null));
 	// refresh the '/annotations' html page here
 	// ...
 	// add image to db
@@ -569,7 +569,7 @@ app.post('/api/photo/:page', uploading.single('pic'), function(req, res){
 	//db_interface.addNote(note_item, req.session.user, currBookID, currChapter, page);
 	//commented out for testing purposes
 	db_interface.addNote(img_item, req.session.user, currBookID, currChapter, page);
-	notif_send = "Book ," + currBookID + ", Chapter ," + currChapter + ", image added by ," + req.session.user;
+	notif_send = "Book " + currBookID + " | Chapter " + currChapter + " | Image added by: " + req.session.user;
 	console.log(notif_send);		
 	snspub(notif_send, currBookID);
 	res.end("Image has uploaded.");
@@ -781,7 +781,7 @@ app.get(['/book:bookId-:bookName/:chapterName/summary', '/book:bookId-:bookName/
 
 		get_annt_filter_params(username, bookid, function(visible_users, filter_settings){
 				generate_filtered_notes(username, bookid, currChapter, visible_users, function(filtered_notes){
-					res.render('Summary', { title: bookname, chapter: currChapter, notes: filtered_notes});
+					res.render('summary', { title: bookname, chapter: currChapter, notes: filtered_notes});
 			});
 		});
 });

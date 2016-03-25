@@ -1,0 +1,314 @@
+html, body {
+   margin: 0px;
+   width: 100%;
+   height: 100%;
+}
+
+.clickable
+{
+  cursor: pointer;
+}
+
+.panel-heading span
+{
+  margin-top: -23px;
+  font-size: 15px;
+  margin-right: -9px;
+}
+
+#container {
+  margin-left: 0px;
+  background-color: #ebebe0;
+  height:100%;
+  #width: 20%;
+  #float:left;
+}
+
+#header {
+  background-color:#00cc99;
+  color:white;
+  text-align:center;
+  padding:5px;
+}
+
+#section {
+  float:left;
+  padding:20px;
+  #background-color:#ebebe0;
+  background-color:#e6e6e6;
+  width:67%;
+  height:93%;
+  overflow: hidden;
+}
+
+#aside {
+  width:20%;
+  float:right;
+  padding:10px;
+}
+
+#nav {
+    line-height:30px;
+    background-color:#333333;
+    height:93%;
+    width:13%;
+    float:left;
+    text-align:right;
+    padding:0;
+    overflow: auto;
+}
+
+#footer {
+    background-color:#00cc99;
+    color:white;
+    text-align:center;
+    padding:5px;     
+}
+
+div.annt_body {
+    -moz-appearance: textfield-multiline;
+    -webkit-appearance: textarea;
+    border: 1px solid gray;
+    font: medium -moz-fixed;
+    font: -webkit-small-control;
+    height: 28px;
+    overflow: auto;
+    padding: 2px;
+    resize: both;
+    width: 100%;
+}
+
+div.annt_panel {
+  height: 93%;
+  width: 20%;
+  overflow: auto;
+  float: left;
+  background-color: #ebebe0;
+}
+
+ul.page_nav_buttons {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    #overflow: hidden;
+    #background-color: #333333;
+  height: 100%;
+}
+
+
+ul.book_nav_buttons {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+	height: 100%;
+    #background-color: transparent;
+    background-color: #333333;
+}
+
+li.page_nav {
+    float: left;
+  width: 16%;
+  height: 100%;
+}
+
+li.page_nav a {
+    display: block;
+    color: white;
+    font-size: 19px;
+    text-align: center;
+    padding: 16px 0px;
+    text-decoration: none;
+  height: 100%;
+}
+
+
+li.page_nav a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+li.page_nav a:hover:not(.active) {
+    background-color: #000000;
+}
+
+li.right { 
+    float:right; 
+}
+
+.active {
+    background-color: #00cc99;
+}
+
+div.page_nav {
+  background-color: #333333;
+  height: 7%;
+}
+
+li.book_nav a {
+    display: block;
+    color: #FFFFFF;
+    text-align: right;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+li.book_nav a:hover:not(.active) {
+    background-color: #000000;
+}
+
+ul.white-txt {
+  color: white;
+}
+
+h3 {
+  font-family: "Helvetica";
+  margin-bottom: 30px;
+}
+
+p {
+  background-color:transparent;
+  margin-bottom: 50px;
+}
+
+input {
+  background-color : rgba(0,0,0,0.1);
+  color: black;
+  border: none;
+}
+button .btn {
+    padding: 14px 24px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #ff0000;
+}
+ 
+
+button .btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+ 
+.btn-primary {
+  background-image: -webkit-linear-gradient(top, #00cc99 0%, #00cc99 100%);
+  background-image:      -o-linear-gradient(top, #00cc99 0%, #00cc99 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#00cc99), to(#00cc99));
+  background-image:         linear-gradient(to bottom, #00cc99 0%, #00cc99 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff00cc99', endColorstr='#ff00cc99', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  background-repeat: repeat-x;
+  border-color: #00cc99;
+}
+
+button .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #ff0000;
+}
+ 
+button .btn-primary:active, .btn-primary.active {
+    background: #ff0000;
+    box-shadow: none;
+}
+
+.btn-sm {
+  border: 0px solid transparent;
+  height:6%;
+  width:30%;
+}
+
+a.clickable { color: inherit; }
+a.clickable:hover { text-decoration:none; }
+.popover{
+    color: rgb(31, 31, 20);
+}
+
+ul.annt-list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+
+############### Bookmarking ###############
+#bookmarking.bookmarking {
+	#height: 8%;
+	#overflow:hidden;
+}
+#Bookmark {
+	float: right;
+	padding: 2px;
+}
+ul#marked-pages {
+	list-style: none;
+	float: right;
+}
+ul#marked-pages li{
+	display: inline;
+	#border-style: outset;
+	border-style: groove;
+}
+ul#marked-pages li a {
+	text-decoration: none;
+}
+
+
+############### Pagination ###############
+.custom-pages {
+list-style: none;
+}
+.textarea {
+font-size: 14px;
+height: 80%;
+line-height: 18px;
+margin: 18px 0;
+}
+.tp-control-arrows {
+height: 10%;
+float: left;
+}
+.tp-control-pages {
+height: 10%;
+}
+.tp-control-arrow-left:hover { 
+text-decoration:none;
+color: white;
+}
+.tp-control-arrow-right:hover { 
+text-decoration:none;
+color: white;
+}
+.tp-control-arrow-left {
+background: #777777;
+color: #FFFFFF;
+cursor: pointer;
+float: left;
+margin: 0 5px;
+padding: 10px;
+}
+.tp-control-arrow-right {
+background: #777777;
+color: #FFFFFF;
+cursor: pointer;
+float: left;
+margin: 0 5px;
+padding: 10px;
+}
+.tp-control-arrow-left.unactive {
+background: #eee;
+cursor: default;
+}
+.tp-control-arrow-right.unactive {
+background: #eee;
+cursor: default;
+}
+.tp-page {
+background: #777777;
+color: #FFFFFF;
+cursor: pointer;
+float: left;
+margin: 0 5px;
+padding: 10px;
+}
+.tp-page.active {
+background: #00cc99;
+color: #FFFFFF;
+}
