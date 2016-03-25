@@ -209,10 +209,12 @@ button .btn-primary:active, .btn-primary.active {
     box-shadow: none;
 }
 
-button .btn-primary, .btn-sm {
+.btn-sm {
   border: 0px solid transparent;
-  height:7%;
+  height:6%;
+  width:30%;
 }
+
 
 a.clickable { color: inherit; }
 a.clickable:hover { text-decoration:none; }
