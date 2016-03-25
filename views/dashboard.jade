@@ -29,12 +29,13 @@ html(lang='en')
               span.icon-bar
               span.icon-bar
               span.icon-bar
-            a.navbar-brand.header(href="#")
-              | Bookshelf
-          #nbar.navbar-collapse.collapse
-            ul.nav.navbar-nav.navbar-right
+            a.navbar-brand.header(href="#") CollabBooks
+            img.logo(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrZ2JxIq-rZSKG3j4N9maKYnj-dDdsEa-K_dWudMK80GqJyoEs" alt='Collabbooks')
+          #nbar.navbar-collapse.collapse           
+            ul.nav.navbar-nav.navbar-center
               li
-                a(href='#') About
+                a(href='#') #{welcome_msg}! Welcome to your bookshelf
+            ul.nav.navbar-nav.navbar-right
               li
                 a(href="/logout") Logout  
     .container
@@ -54,7 +55,7 @@ html(lang='en')
                 .modal-dialog.modal-sm
                   // Modal content
                   .modal-content
-                    .modal-header(style='padding:35px 50px;')
+                    .modal-header(style='padding:35px 50px;background-color:#00cc99;')
                       button.close(type='button', data-dismiss='modal') ×
                       h4
                         span.glyphicon.glyphicon-cog

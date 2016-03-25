@@ -65,20 +65,29 @@ body{
  	width:100%;
 }
 
-.navbar-brand{
+.navbar-brand .header{
   padding: 0px;
 }
 
-.navbar-brand>img{
+.navbar-brand.header>img{
   height: 100%;
   padding: 15px;
   width:auto;
 }
 
-.bar .navbar-brand {
+.bar .navbar-brand .header {
   display: flex;
   align-items: centre;
 }
 
-.bar .navbar-brand>img {
+.bar .navbar-brand.header>img {
   padding: 7px 14px;
+}
+
+.welcome {
+  position: absolute;
+    width: 100%;
+    padding-left: 50px;
+    text-align: center important!;
+    margin: auto;
+}
