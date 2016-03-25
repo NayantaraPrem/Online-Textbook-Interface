@@ -30,17 +30,23 @@
                 form.form(id="ajaxform#{note.NoteID}", name='ajaxform')
                   .panel-heading.clickable(id="panel-heading#{note.NoteID}")
                     em
-                      span.ownerName(id="ownername#{note.NoteID}")=note.owner
+                     span.ownerName(id="ownername#{note.NoteID}")=note.owner
                     h3.panel-title
                       input.annt_title(name='title', id="texttitle#{note.NoteID}", type='text', value=note.info.title, readonly)
-                    span.pull-right
-                      button.btn.btn-primary.btn-sm(name='edit' id="editButton#{note.NoteID}" onclick='edit_annt(event)')
-                        span.glyphicon.glyphicon-pencil
-                      button.btn.btn-primary.btn-sm(name='delete' id="deleteButton#{note.NoteID}" onclick='delete_annt(event)')
-                        span.glyphicon.glyphicon-trash
-                  .panel-body.writable(id="panel-body#{note.NoteID}")
-                    .annt_body(name='body', id="textbody#{note.NoteID}", contentEditable='false')
-                  input(type='submit' name='submit' value='Submit' id="#{note.NoteID}")
+                    //span.pull-right
+                    .row
+                      .col-md-6(style='left:100px')
+                        | &nbsp
+                        button.btn.btn-primary.btn-sm(name='edit' id="editButton#{note.NoteID}" onclick='edit_annt(event)')
+                          span.glyphicon.glyphicon-pencil(style='vertical-align:bottom')
+                      .col-md-6
+                        | &nbsp &nbsp
+                        button.btn.btn-primary.btn-sm(name='delete' id="deleteButton#{note.NoteID}" onclick='delete_annt(event)')
+                          span.glyphicon.glyphicon-trash(style='vertical-align:bottom')
+                    .row
+                      .panel-body.writable(id="panel-body#{note.NoteID}")
+                        .annt_body(name='body', id="textbody#{note.NoteID}", contentEditable='false')
+                      input(type='submit' name='submit' value='Submit' id="#{note.NoteID}")
         if(note.info.type == "IMG")
             .row(data-owner="#{note.owner}", data-page="#{note.page}")
               .col-md-9
@@ -48,17 +54,19 @@
                   span.ownerName=note.owner
                 img.img-thumbnail.thumbnail(src=note.info.img_dest width=160 height=100)
               .col-md-3
-                button.btn.btn-primary.btn-sm(type='button', data-toggle='modal', data-target="#mymod#{index}")
-                  span.glyphicon.glyphicon-zoom-in
-                div(id='mymod#{index}' class="modal fade" tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true')
-                  .modal-dialog
-                    .modal-content
-                      .modal-body
-                        img.img-responsive(src=note.info.img_dest)
-                p
-                button.btn.btn-primary.btn-sm(name='delete' id="deleteButton#{note.NoteID}" onclick='delete_img(event)')
+                .row
+                  button.btn.btn-primary.btn-sm(type='button', data-toggle='modal', data-target="#mymod#{index}")
+                    span.glyphicon.glyphicon-zoom-in
+                  div(id='mymod#{index}' class="modal fade" tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true')
+                    .modal-dialog
+                      .modal-content
+                        .modal-body
+                          img.img-responsive(src=note.info.img_dest)
+                    p
+                .row
+                  button.btn.btn-primary.btn-sm(name='delete' id="deleteButton#{note.NoteID}" onclick='delete_img(event)')
                   span.glyphicon.glyphicon-trash
-                p
+                    p
 
   #ChSummary.div
       .row
