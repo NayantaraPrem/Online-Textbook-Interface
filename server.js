@@ -6,14 +6,14 @@ var bodyParser = require('body-parser');
 var converter = require('epub2html');
 var replace = require("replace");
 var path = require('path');
-var multer = require('multer');
-var s3 = require('multer-s3');
 var db_interface = require('./db_interface.js');
 var config = require('./app_config');
 var fs = require('fs');
 // var screenshot = require('url-to-screenshot');
 var webpage = require('webpage');
+const crypto = require('crypto');
 var phantom = require('phantom');
+
 
 var AWS = require("aws-sdk");
 var dynamodbDoc = new AWS.DynamoDB.DocumentClient();
@@ -105,21 +105,6 @@ function requireLogin(req, res, next) {
     next();
   }
 };
-
-var uploading = multer({
-	storage:s3({
-		dirname: 'photos',
-		bucket: 'anothercollabbooks',
-		secretAccessKey: AWS.config.credentials.secretAccessKey,
-		accessKeyId:  AWS.config.credentials.accessKeyId,	
-		region: "us-west-2",
-		endpoint:'s3.amazonaws.com/',
-		filename: function (req, file, cb) {
-			cb(null, 'IMG_' + Date.now())
-		}
-
-	})
-});
 
 
 function replace_url(from, to) {
@@ -626,10 +611,33 @@ app.get(['/book:bookId-:bookName/:chapterName/summary', '/book:bookId-:bookName/
 
 //send image upload file
 app.get('/upload_img/page=:page', requireLogin, function(req, res){
-		var page = req.params.page;
-		console.log("Going to upload");
+  	var page = req.params.page;
+    var redirect_URL = "http://localhost/api/photo/"+page;
+  var policy = {
+    "expiration": "2017-01-01T00:00:00Z",
+    "conditions": [ 
+      {"bucket": "anothercollabbooks"}, 
+      ["starts-with", "$key", "photos/"],
+      {"acl": "public-read-write"},
+      {"success_action_redirect": redirect_URL},
+      ["starts-with", "$Content-Type", ""],
+      ["content-length-range", 0, 104857600]
+    ]
+  };
+  var strPolicy = JSON.stringify(policy);
+  var enc64_policy = Buffer(strPolicy, "utf-8").toString('base64');
+
+  const hmac = crypto.createHmac("sha1", AWS.config.credentials.secretAccessKey);
+  hmac.update(new Buffer(enc64_policy, "utf-8"));
+  var sign = hmac.digest("base64");
+
+
+	console.log("Going to upload");
 	//	res.sendFile( __dirname + "/" + "upload_img.html" );
-	        res.render('upload_img', { page:page});
+  console.log("Policy: "+enc64_policy);
+  var fname = 'IMG_' + Date.now();
+  console.log("Cred: "+ sign);
+	        res.render('upload_img', { page:page, policy:enc64_policy, sign:sign, fname: fname});
 });
 
 // that `req.body` will be filled in with the form elements
@@ -684,27 +692,24 @@ app.post('/delete_annt', function(req, res){
 });
 
 
-//Uploading images
-app.post('/api/photo/:page', uploading.single('pic'), function(req, res){
-	// refresh the '/annotations' html page here
-	// ...
-	// add image to db
-	var page = req.params.page;
-	var splits = req.file.key.split('/');
-	var fname = splits[1];
-	console.log("Uploading " + fname + ' to page#' + page);
-	var img_item = {
-		"id": fname,
+app.get('/api/photo/:page?',function(req, res){
+  //0?bucket=anothercollabbooks&key=photos%2FIMG_1459008400097&etag="2b8dfd0b4f949903fb39e421abe1c9f9"
+
+  var page = req.params.page;
+  var fname = req.query.key.split("/");
+  console.log("Uploading " + fname[1] + " on page "+ page);
+  var img_item = {
+		"id": fname[1],
 		"type": "IMG",
-		"img_dest": "http://anothercollabbooks.s3.amazonaws.com/"+req.file.key
+		"img_dest": "http://anothercollabbooks.s3.amazonaws.com/photos/"+fname[1]
 		//add owner, timestamp, etc here
 	}
 	//db_interface.addNote(note_item, req.session.user, currBookID, currChapter, page);
 	//commented out for testing purposes
 	db_interface.addNote(img_item, req.session.user, currBookID, currChapter, page);
 	res.end("Image has uploaded.");
-});
 
+});
 
 //Update annotation filter settings
 app.post('/update_annt_filter', function(req, res){

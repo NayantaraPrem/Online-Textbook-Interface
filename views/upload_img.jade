@@ -2,6 +2,7 @@ doctype html
 html(lang='en')
   head
     title Upload Image
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
     script(type='text/javascript').
       window.addEventListener("beforeunload", function (e) {
         setTimeout(function(){
@@ -9,7 +10,14 @@ html(lang='en')
         }, 1000);
       });
   body
-    form#uploadForm(enctype='multipart/form-data', action='/api/photo/'+page, method='post')
-      input(type='file', name='pic')
+    form#uploadForm(enctype='multipart/form-data', action='http://anothercollabbooks.s3.amazonaws.com/', method='post')
+      input(type="hidden" name="key" value="photos/#{fname}")
+      input(type="hidden" name="AWSAccessKeyId" value="AKIAJXWPQKQAIP5FLSVA")
+      input(type="hidden" name="acl" value="public-read-write")
+      input(type="hidden" name="success_action_redirect" value="http://localhost/api/photo/#{page}")
+      input(type="hidden" name="policy" value="#{policy}")
+      input(type="hidden" name="signature" value="#{sign}")
+      input(type="hidden" name="Content-Type" value="image/jpeg")
+      input(type='file', name='file')
       input(type='submit', value='Upload Image', name='submit')
       span#status
