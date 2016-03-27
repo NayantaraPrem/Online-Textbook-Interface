@@ -412,8 +412,12 @@ app.get('/uploads/:image', requireLogin, function(req, res){
 
 
 /* Get CSS files */
-app.get('/login.css', function(req, res){
-	res.sendfile( __dirname + "/public/login.css");
+app.get('/animate.css', function(req, res){
+	res.sendFile( __dirname + "/public/animate.css");
+});
+
+app.get('/style.css', function(req, res){
+	res.sendFile( __dirname + "/public/style.css");
 });
 
 

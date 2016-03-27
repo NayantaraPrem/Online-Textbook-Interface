@@ -2,25 +2,63 @@
 <html lang="en">
 
 <head>
-  <title>E-Textbook Reader</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="login.css"/>
+	<meta charset="utf-8">
+	<title>CollabBooks Login</title>
+
+	<!-- Bootstrap -->
+
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" type="text/css" href="animate.css">
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 
 <body>
-	
 	<div class="container">
 		<form action="/login" method="post" class="form-signin">
-			<label for="userId" class="sr-only"><b>User ID</b></label>
-			<input type="text" name="userId" id="userId" class="form-control" placeholder="User Id" required/>
-			<label for="inputPassword" class="sr-only">Password</label>
-	        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required/>
-			<button type="submit" value="Submit" class="btn btn-lg btn-primary btn-block">Login</button>
+
+			<div class="top">
+				<h1 id="title" class="hidden"><span id="logo">CollabBooks</span></span></h1>
+			</div>
+			<div class="login-box animated fadeInUp">
+				<div class="box-header">
+					<h2>Log In</h2>
+				</div>
+				<label for="userId" class="sr-only"><b>Username</b></label>
+				<br/>
+				<input type="text" name="userId" id="userId" class="form-control" placeholder="User Id" required/>
+	 			<br/>
+				<label for="inputPassword" class="sr-only">Password</label>
+				<br/>
+		        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required/>
+				<br/>
+				<button type="submit" value="Submit" class="btn btn-lg btn-primary btn-block">Login</button>
+			</div>
 		</form>
 	</div>
-
 </body>
+
+<script>
+	$(document).ready(function () {
+    	$('#logo').addClass('animated fadeInDown');
+    	$("input:text:visible:first").focus();
+	});
+	$('#username').focus(function() {
+		$('label[for="username"]').addClass('selected');
+	});
+	$('#username').blur(function() {
+		$('label[for="username"]').removeClass('selected');
+	});
+	$('#password').focus(function() {
+		$('label[for="password"]').addClass('selected');
+	});
+	$('#password').blur(function() {
+		$('label[for="password"]').removeClass('selected');
+	});
+</script>
 
 </html>
