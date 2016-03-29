@@ -7,7 +7,7 @@ html(lang='en')
       window.addEventListener("beforeunload", function (e) {
         setTimeout(function(){
           window.opener.location.reload(true);          
-        }, 1000);
+        }, 10);
       });
   body
     form#uploadForm(enctype='multipart/form-data', action='http://anothercollabbooks.s3.amazonaws.com/', method='post')
